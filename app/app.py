@@ -215,8 +215,8 @@ def post_broadCasting_aliniar():
 
         data["call_open"] = body.get("call_open", data.get("call_open"))
         data["put_open"] = body.get("put_open", data.get("put_open"))
-        data["flag_r2c"] = body.get("flag_r2c", data.get("flag_r2c"))
-        data["flag_r2p"] = body.get("flag_r2p", data.get("flag_r2p"))
+        data["flag_Call_R2"] = body.get("flag_Call_R2", data.get("flag_Call_R2"))
+        data["flag_Put_R2"] = body.get("flag_Put_R2", data.get("flag_Put_R2"))
 
         data["aliniar"] = True
 

@@ -1,0 +1,27 @@
+services:
+  python_script:
+    build:
+      context: .
+      dockerfile: Dockerfile.python_script
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - shared_network
+
+  python_app:
+    build:
+      context: .
+      dockerfile: Dockerfile.python_app
+    volumes:
+      - ./app/app.py:/usr/src/app.py
+      - ./data/vars.json:/usr/src/vars.json
+      - ./dataBase.db:/usr/src/dataBase.db
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8001:8001"
+    networks:
+      - shared_network
+
+networks:
+  shared_network:
+    external: true

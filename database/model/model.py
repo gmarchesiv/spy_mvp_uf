@@ -1,0 +1,116 @@
+# ====================
+#  - Librerias -
+# ====================
+import os
+from sqlalchemy import (
+    DateTime,
+    create_engine,
+    Column,
+    Integer,
+    Float,
+    Date,
+    Boolean,
+    String,
+    ForeignKey,
+)
+from sqlalchemy.orm import declarative_base
+
+# Obtener el directorio actual del script
+
+db_path = "dataBase.db"
+
+# Definir la clase base para las clases de modelo
+Base = declarative_base()
+
+
+class register(Base):
+    __tablename__ = "register"
+    id = Column(Integer, primary_key=True)
+    start = Column(DateTime)
+    user = Column(String)
+
+
+class wallet(Base):
+    __tablename__ = "wallet"
+    id = Column(Integer, primary_key=True)
+    date = Column(DateTime)
+    TotalCashValue = Column(Float)
+    SettledCash = Column(Float)
+    NetLiquidation = Column(Float)
+    UnrealizedPnL = Column(Float)
+    AvailableFunds = Column(Float)
+
+
+class transactions(Base):
+    __tablename__ = "transactions"
+    id = Column(Integer, primary_key=True)
+    date = Column(DateTime)
+    action = Column(String)
+    tiker = Column(String)
+    symbol = Column(String)
+    type = Column(String)
+    price = Column(Float)
+    shares = Column(Float)
+    commission = Column(Float)
+    cash = Column(Float)
+    regla = Column(String)
+
+
+class dayTrade(Base):
+    __tablename__ = "dayTrade"
+    id = Column(Integer, primary_key=True)
+    date = Column(DateTime)
+    etf = Column(String)
+    underlying = Column(Float)
+    vix = Column(Float)
+    cStrike = Column(Float)
+    pStrike = Column(Float)
+    exp = Column(String)
+    cask = Column(Float)
+    cbid = Column(Float)
+    pask = Column(Float)
+    pbid = Column(Float)
+    cask_Size = Column(Integer)
+    cbid_Size = Column(Integer)
+    pask_Size = Column(Integer)
+    pbid_Size = Column(Integer)
+    cAskBid = Column(Float)
+    pAskBid = Column(Float)
+    dCall = Column(Float)
+    dPut = Column(Float)
+    doCall = Column(Float)
+    doPut = Column(Float)
+    label= Column(Integer)
+    rentabilidad = Column(Float)
+    pico = Column(Float)
+    caida = Column(Float)
+    rule = Column(String)
+
+class label(Base):
+    __tablename__ = "label"
+    id = Column(Integer, primary_key=True)
+    date = Column(DateTime)
+    underlying = Column(Float)
+    retorno = Column(Float)
+    signo = Column(Integer)
+    varianza = Column(Float)
+    label = Column(Integer)
+     
+
+class routineFault(Base):
+    __tablename__ = "routineFault"
+    id = Column(Integer, primary_key=True)
+
+    date = Column(DateTime)
+    typeFault = Column(String)
+    code = Column(Float)
+    idIB = Column(Float)
+    message = Column(String)
+
+ 
+
+# Crear la conexión a la base de datos
+engine = create_engine(f"sqlite:///{db_path}")
+
+# Crear la tabla en la base de datos
+Base.metadata.create_all(engine)

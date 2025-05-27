@@ -34,8 +34,8 @@ def broadcasting_Aliniar(vars):
                     vars.put_close = data["put_close"]
                     vars.call_open = data["call_open"]
                     vars.put_open = data["put_open"]
-                    vars.flag_r2c = data["flag_r2c"]
-                    vars.flag_r2p = data["flag_r2p"]
+                    vars.flag_Call_R2 = data["flag_r2c"]
+                    vars.flag_Put_R2 = data["flag_r2p"]
 
 def broadcasting_sell(vars,params,app):
     from rules.sell import sell

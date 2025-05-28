@@ -83,7 +83,7 @@ def clusterizar(params, vars,app):
 
         {
             "VIX_CLOSE":[app.etfs[6]['price']],
-            "QQQ_GARCH":[vars.garch],
+            "SPY_GARCH":[vars.garch],
             "ret_1H_back":[(app.etfs[5]['price']/ vars.ret_1H_back[0] -1)],
             "ret_3H_back":[(app.etfs[5]['price']/ vars.ret_3H_back[0] -1)],
             "ret_6H_back":[(app.etfs[5]['price']/ vars.ret_6H_back[0] -1)],

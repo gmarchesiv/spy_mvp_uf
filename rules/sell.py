@@ -37,14 +37,14 @@ def sellOptions(app, vars, params):
 
 
 def sell_obligatoria(app, vars, params,tipo):
-    params.max_askbid_venta=params.max_askbid_venta_forzada
+    params.max_askbid_venta_abs=params.max_askbid_venta_forzada
     if tipo == "C":
         val = 1
-        if vars.askbid_call > params.max_askbid_venta or vars.cbid <= 0:
+        if vars.askbid_call > params.max_askbid_venta_abs or vars.cbid <= 0:
             return False
     elif tipo == "P":
         val = 2
-        if vars.askbid_put > params.max_askbid_venta or vars.pbid <= 0:
+        if vars.askbid_put > params.max_askbid_venta_abs or vars.pbid <= 0:
             return False
     else:
         print("-ERROR SELL OBLIGATORIO-")
@@ -67,7 +67,7 @@ def sellCall(app, params, vars):
     timeNow = datetime.now(params.zone).time()
 
     # CALCULAR RENTABILIDAD
-    if vars.askbid_call > params.max_askbid_venta:
+    if vars.askbid_call > params.max_askbid_venta_abs:
         vars.rentabilidad = vars.cbid / vars.priceBuy - 1
         read_rentabilidad(vars)
         return
@@ -462,7 +462,7 @@ def sellPut(app, params, vars):
     timeNow = datetime.now(params.zone).time()
 
     # CALCULAR RENTABILIDAD
-    if vars.askbid_put > params.max_askbid_venta:
+    if vars.askbid_put > params.max_askbid_venta_abs:
         vars.rentabilidad = vars.pbid / vars.priceBuy - 1
         read_rentabilidad(vars)
         return

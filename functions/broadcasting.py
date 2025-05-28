@@ -56,12 +56,12 @@ def broadcasting_sell(vars,params,app):
                     if vars.call:
                         val = 1
                         tipo="C"
-                        if vars.askbid_call > params.max_askbid_venta or vars.cbid <= 0:
+                        if vars.askbid_call > params.max_askbid_venta_abs or vars.cbid <= 0:
                             return False
                     elif vars.put:
                         val = 2
                         tipo="P"
-                        if vars.askbid_put > params.max_askbid_venta or vars.pbid <= 0:
+                        if vars.askbid_put > params.max_askbid_venta_abs or vars.pbid <= 0:
                             return False
                     else:
                         printStamp("-ERROR VENTA BROADCASTING-")
@@ -103,12 +103,12 @@ def broadcasting_buy(vars,params,app):
                     vars.user_broadcasting = data["user_broadcasting"]
                     if vars.buy_tipo_broadcasting == "C":
                         val = 1
-                        if vars.askbid_call > params.max_askbid_compra or vars.cask <= 0:
+                        if vars.askbid_call > params.max_askbid_compra_abs or vars.cask <= 0:
                             return False
                         precio=vars.cask
                     elif vars.buy_tipo_broadcasting == "P":
                         val = 2
-                        if vars.askbid_put > params.max_askbid_compra or vars.pask <= 0:
+                        if vars.askbid_put > params.max_askbid_compra_abs or vars.pask <= 0:
                             return False
                         precio=vars.pask
                     else:

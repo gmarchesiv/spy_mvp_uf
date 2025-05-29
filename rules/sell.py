@@ -869,22 +869,50 @@ def sellPut(app, params, vars):
     ####################      PUT  R2 E       ###############
     #########################################################
     elif vars.tipo == "R2-E":
-        # MANIFESTO
-        if vars.pico >= params.target_pR2_e:
-            sell(
+        # MANIFIESTA
+        if vars.manifesto:
+
+            # DIAMANTE
+            for y in range(vars.ugs_n, len(params.diamante_pr2_e)):
+                if round(vars.pico, 3) > params.diamante_pr2_e[y]:
+                    vars.ugs_n = y
+                    if vars.ugs_n != vars.ugs_n_ant:
+                        vars.minutos = 0
+                        vars.ugs_n_ant = vars.ugs_n
+                else:
+                    break
+
+            # RETROCESO
+            if vars.rentabilidad <= (vars.pico - params.resta_pr2_e[vars.ugs_n]):
+
+                name = f"T{vars.ugs_n}"
+                sell(
                     app,
                     vars,
                     params,
                     "P",
-                    "TARGET",
+                    name,
                     app.options[2]["contract"],
                     app.options[2]["symbol"],
                 )
 
-            return
+                return
 
-        elif vars.rentabilidad <= params.sl_pr2_e:
-            sell(
+            else:
+                pass
+
+        else:
+            # vars.manifesto
+            if vars.rentabilidad >= params.umbral_manifestacion_pR2_e:
+                vars.manifesto = True
+                vars.minutos = 0
+
+ 
+
+            # SL
+            elif vars.rentabilidad <= params.sl_pr2_e:
+
+                sell(
                     app,
                     vars,
                     params,
@@ -894,10 +922,7 @@ def sellPut(app, params, vars):
                     app.options[2]["symbol"],
                 )
 
-            return
-
-        else:
-            pass
+                return
 
 
     else:pass
@@ -907,6 +932,7 @@ def sell(app, vars, params, tipo, regla, contract, symbol):
     from rules.routine import calculations
     if vars.rentabilidad<0:
         vars.regla_broadcasting = regla
+        saveJson(vars, app, params, False)
         respuesta=verificar_regla(params)
         if respuesta==False: return
 

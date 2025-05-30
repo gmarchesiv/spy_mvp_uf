@@ -171,7 +171,7 @@ def writeLabel(app, vars,params):
             retorno = vars.retorno,
             signo = vars.signo,
             varianza = vars.varianza,
-            label = vars.label
+            label = int(vars.label)
         )
 
         session.add(new_data)

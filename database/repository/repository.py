@@ -117,7 +117,7 @@ def writeDayTrade(app, vars, params):
             dPut=vars.dput,
             doCall=vars.docall,
             doPut=vars.doput,
-            label=vars.label,
+            label=int(vars.label),
             rentabilidad=vars.rentabilidad,
             pico=vars.pico,
             caida=vars.caida,
@@ -168,9 +168,25 @@ def writeLabel(app, vars,params):
         new_data = label(
             date=datetime_now,
             underlying = app.etfs[5]["price"],
+            vix =app.etfs[6]['price'],
+            
+            mu =  float(vars.mu),
+            mu_conteo = int(vars.mu_conteo),
             retorno = vars.retorno,
             signo = vars.signo,
             varianza = vars.varianza,
+            garch=vars.garch,
+
+            ret_1H_back= float(app.etfs[5]['price']/ vars.ret_1H_back[0] -1),
+            ret_3H_back=float(app.etfs[5]['price']/ vars.ret_3H_back[0] -1),
+            ret_6H_back= float(app.etfs[5]['price']/ vars.ret_6H_back[0] -1),
+            ret_12H_back= float(app.etfs[5]['price']/ vars.ret_12H_back[0] -1),
+            ret_24H_back= float(app.etfs[5]['price']/ vars.ret_24H_back[0] -1),
+            ret_96H_back= float(app.etfs[5]['price']/ vars.ret_96H_back[0] -1),
+
+            rsi_prom= vars.rsi,
+            d_pico= float(vars.d_pico),
+
             label = int(vars.label)
         )
 

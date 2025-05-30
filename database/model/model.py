@@ -91,9 +91,26 @@ class label(Base):
     id = Column(Integer, primary_key=True)
     date = Column(DateTime)
     underlying = Column(Float)
+    vix = Column(Float)
+
+    mu = Column(Float)
+    mu_conteo = Column(Integer)
     retorno = Column(Float)
     signo = Column(Integer)
     varianza = Column(Float)
+    garch=Column(Float)
+
+
+    ret_1H_back=Column(Float)
+    ret_3H_back=Column(Float)
+    ret_6H_back=Column(Float)
+    ret_12H_back=Column(Float)
+    ret_24H_back=Column(Float)
+    ret_96H_back=Column(Float)
+
+    rsi_prom=Column(Float)
+    d_pico=Column(Float)
+
     label = Column(Integer)
      
 

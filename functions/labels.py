@@ -79,6 +79,9 @@ def generar_d_pico(params, vars,app):
 
 
 def clusterizar(params, vars,app):
+    import pandas as pd  
+    import joblib
+    from sklearn.cluster import KMeans
     scaler = joblib.load('/usr/src/app/functions/scaler.joblib')
     km = joblib.load('/usr/src/app/functions/model.joblib')
 

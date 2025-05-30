@@ -1,0 +1,28 @@
+{
+    "red": [
+        {
+            "ip": "10.8.0.35:8002",
+            "user": "Carlos Labarthe"
+        },
+        {
+            "ip": "10.8.0.36:8002",
+            "user": "Gloria Velasco"
+        },
+        {
+            "ip": "10.8.0.37:8002",
+            "user": "Jackie Andren"
+        },
+        {
+            "ip": "10.8.0.38:8002",
+            "user": "Karin Granda"
+        },
+        {
+            "ip": "10.8.0.39:8002",
+            "user": "Raul Gutierrez"
+        },
+        {
+            "ip": "10.8.0.44:8002",
+            "user": "David Fuchang"
+        }
+    ]
+}

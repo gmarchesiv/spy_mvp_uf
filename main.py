@@ -145,10 +145,10 @@ def main():
                     # ==================================
                     #  -        BROADCASTING           -
                     # ==================================
-                    # if vars.call or vars.put:
-                    #     broadcasting_sell(vars,params,app)
-                    # if vars.compra:
-                    #     broadcasting_buy(vars,params,app)
+                    if vars.call or vars.put:
+                        broadcasting_sell(vars,params,app)
+                    if vars.compra:
+                        broadcasting_buy(vars,params,app)
                     # ==================================
                     #  - Notificacion de Transacciones -
                     # ==================================
@@ -162,13 +162,13 @@ def main():
                         # ================================
                         #  -VENTA-
                         # ================================
-                        # if vars.call or vars.put:
-                        #     sellOptions(app, vars, params)
+                        if vars.call or vars.put:
+                            sellOptions(app, vars, params)
                         # ================================
                         #  -COMPRA-
                         # ================================
-                        # if vars.compra:
-                        #     buyOptions(app, vars, params)
+                        if vars.compra:
+                            buyOptions(app, vars, params)
                         pass
                     
                     # ================================

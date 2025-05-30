@@ -1,22 +1,12 @@
 {
     "red": [
-        {
-            "ip": "10.8.0.45:8002",
-            "user": "Antonio Garcia"
-        },
-        {
-            "ip": "10.8.0.40:8002",
-            "user": "Augusto Reyna"
-        },
+       
         {
             "ip": "10.8.0.35:8002",
             "user": "Carlos Labarthe"
         },
       
-        {
-            "ip": "10.8.0.44:8002",
-            "user": "David Fuchang"
-        },
+        
         {
             "ip": "10.8.0.36:8002",
             "user": "Gloria Velasco"

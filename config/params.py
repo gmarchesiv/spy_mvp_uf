@@ -105,6 +105,7 @@ class parameters:
         # ==================================
         self.umbral_no_perdida_c = 0.016
         self.perdida_maxima_c = 0.05
+        self.perdida_maxima_c_abs = -0.017
         
         # ==================================
         # =========== CALL - R1 ============
@@ -217,6 +218,7 @@ class parameters:
 
         self.umbral_no_perdida_p = 0.016
         self.perdida_maxima_p = 0.05
+        self.perdida_maxima_p_abs = -0.017
 
         # ==================================
         # =========== PUT R1================

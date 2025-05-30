@@ -190,6 +190,8 @@ def saveJson(vars, app,  params, estado):
         "ret_96H_back": [float(x) for x in vars.ret_96H_back],
         "etf_price_lista":[float(x) for x in vars.etf_price_lista],
         "rsi": vars.rsi,
+        "mu": vars.mu,
+        "mu_conteo": vars.mu_conteo 
     
     }
 

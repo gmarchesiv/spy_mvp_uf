@@ -170,7 +170,7 @@ class variables:
         self.ret_12H_back= deque(self.ret_12H_back, maxlen=12)
         self.ret_24H_back= deque(self.ret_24H_back, maxlen=24)
         self.ret_96H_back= deque(self.ret_96H_back, maxlen=96)
-        self.etf_price_lista=deque(self.etf_price_lista, maxlen=96)
+        self.etf_price_lista=deque(self.etf_price_lista, maxlen=200)
 
 
         self.mu=self.data.get("mu", 0.000371948)

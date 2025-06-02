@@ -85,6 +85,8 @@ class dayTrade(Base):
     pico = Column(Float)
     caida = Column(Float)
     rule = Column(String)
+    cAskBid_prom = Column(Float)
+    pAskBid_prom = Column(Float)
 
 class label(Base):
     __tablename__ = "label"

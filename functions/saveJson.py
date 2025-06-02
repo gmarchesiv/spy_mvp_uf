@@ -191,7 +191,9 @@ def saveJson(vars, app,  params, estado):
         "etf_price_lista":[float(x) for x in vars.etf_price_lista],
         "rsi": vars.rsi,
         "mu": vars.mu,
-        "mu_conteo": vars.mu_conteo 
+        "mu_conteo": vars.mu_conteo ,
+        "promedio_call": vars.promedio_call,
+        "promedio_put": vars.promedio_put 
     
     }
 

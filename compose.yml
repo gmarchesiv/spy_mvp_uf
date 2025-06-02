@@ -18,7 +18,7 @@ services:
       - ./dataBase.db:/usr/src/dataBase.db
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - "8002:8002"
+      - "8001:8001"
     networks:
       - shared_network
 

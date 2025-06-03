@@ -16,6 +16,11 @@
         {
             "ip": "10.8.0.39:8002",
             "user": "Raul Gutierrez"
+        },
+ 
+        {
+            "ip": "10.8.0.44:8002",
+            "user": "David Fu Chang"
         }
     ]
 }

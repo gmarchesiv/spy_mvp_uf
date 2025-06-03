@@ -111,7 +111,7 @@ class parameters:
         # =========== CALL - R1 ============
         # ==================================
         
-        self.dcall_r1 = [0.11, 0.24]
+        self.dcall_r1 = [0.126, 0.24]
         self.docall_r1 = [0.035, 0.06]
         self.timeCall_r1 = [dt_time(9, 43), dt_time(9, 55)]
         self.labelCall_r1 =0
@@ -161,7 +161,7 @@ class parameters:
         
         self.dcall_r1_i =[-0.33, 0]
         self.docall_r1_i =  [0.106, 0.12]
-        self.timeCall_r1_i = [dt_time(9, 35), dt_time(10, 30)]
+        self.timeCall_r1_i = [dt_time(9, 35), dt_time(9, 55)]
         self.labelCall_r1_i=1
         
         # VENTA

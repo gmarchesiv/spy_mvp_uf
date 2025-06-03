@@ -21,12 +21,12 @@ from functions.saveJson import saveJson
 # INICIO DE LAS REGLAS DE COMPRA
 def buyOptions(app, vars, params):
     vars.promedio_call  = sum(vars.askbid_call_prom) / len(vars.askbid_call_prom) if len(vars.askbid_call_prom)!=0 else 0
-    if vars.askbid_call < params.max_askbid_compra_abs and vars.cask > 0 and promedio_call < params.max_askbid_compra_prom :
+    if vars.askbid_call < params.max_askbid_compra_abs and vars.cask > 0 and vars.promedio_call < params.max_askbid_compra_prom :
         calculos_call(vars, params)
         buy_Call(app, vars, params)
 
     vars.promedio_put  = sum(vars.askbid_put_prom) / len(vars.askbid_put_prom) if len(vars.askbid_put_prom)!=0 else 0
-    if vars.askbid_put < params.max_askbid_compra_abs and vars.pask > 0 and  promedio_put < params.max_askbid_compra_prom :
+    if vars.askbid_put < params.max_askbid_compra_abs and vars.pask > 0 and  vars.promedio_put < params.max_askbid_compra_prom :
         calculos_put(vars, params)
         buy_Put(app, vars, params)
  

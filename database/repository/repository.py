@@ -179,12 +179,12 @@ def writeLabel(app, vars,params):
             varianza = vars.varianza,
             garch=vars.garch,
 
-            ret_1H_back= float(app.etfs[5]['price']/ vars.ret_1H_back[0] -1),
-            ret_3H_back=float(app.etfs[5]['price']/ vars.ret_3H_back[0] -1),
-            ret_6H_back= float(app.etfs[5]['price']/ vars.ret_6H_back[0] -1),
-            ret_12H_back= float(app.etfs[5]['price']/ vars.ret_12H_back[0] -1),
-            ret_24H_back= float(app.etfs[5]['price']/ vars.ret_24H_back[0] -1),
-            ret_96H_back= float(app.etfs[5]['price']/ vars.ret_96H_back[0] -1),
+            ret_1H_back= float(app.etfs[5]['price']/ vars.ret_1H_back[0] -1)*100,
+            ret_3H_back=float(app.etfs[5]['price']/ vars.ret_3H_back[0] -1)*100,
+            ret_6H_back= float(app.etfs[5]['price']/ vars.ret_6H_back[0] -1)*100,
+            ret_12H_back= float(app.etfs[5]['price']/ vars.ret_12H_back[0] -1)*100,
+            ret_24H_back= float(app.etfs[5]['price']/ vars.ret_24H_back[0] -1)*100,
+            ret_96H_back= float(app.etfs[5]['price']/ vars.ret_96H_back[0] -1)*100,
 
             rsi_prom= vars.rsi,
             d_pico= float(vars.d_pico),

@@ -145,8 +145,8 @@ class variables:
         self.varianza  = self.data.get("varianza", 0)
 
 
-        # self.pico_etf=self.data.get("pico_etf", 608.48)
-        self.pico_etf=608.48 # TODO REGRESAR AL ANTERIOR
+        self.pico_etf=self.data.get("pico_etf", 608.48)
+        
         self.d_pico  = self.data.get("d_pico", 0)   
 
         self.ret_1H_back= self.data.get("ret_1H_back", [])

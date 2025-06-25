@@ -36,7 +36,7 @@ def generar_garch(params, vars,app):
     vars.garch=round(100* math.sqrt(  params.days_year*vars.varianza),4)
    
     
-    vars.signo=1 if (vars.retorno-vars.mu)>0 else 0
+    vars.signo=0 if (vars.retorno-vars.mu)>0 else 1
  
     vars.retorno_lista.append(app.etfs[5]['price'])
  

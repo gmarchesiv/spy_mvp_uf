@@ -83,6 +83,13 @@ def sellCall(app, params, vars):
 
     vars.caida = vars.rentabilidad - vars.pico
 
+    if vars.askbid_call > params.max_askbid_venta_abs or vars.cbid <= 0 or vars.askbid_call<0 :
+        proteccion_askbid_flag=False
+        for hora in params.proteccion_ask_bid:
+            if (timeNow >= hora[0] and timeNow<= hora[1]):
+                proteccion_askbid_flag=True
+        if proteccion_askbid_flag:
+            return
    
     
     if timeNow >= params.fd:
@@ -250,7 +257,65 @@ def sellCall(app, params, vars):
                 )
 
                 return
-            
+
+
+    #########################################################
+    ################      CALL  R1  E2      ##################
+    #########################################################
+    elif vars.tipo == "R1-E2"  :
+
+        # MANIFIESTA
+        if vars.manifesto:
+            # DIAMANTE
+            for y in range(vars.ugs_n, len(params.diamante_cr1_e2)):
+                if round(vars.pico, 3) > params.diamante_cr1_e2[y]:
+                    vars.ugs_n = y
+                    if vars.ugs_n != vars.ugs_n_ant:
+                        vars.minutos = 0
+                        vars.ugs_n_ant = vars.ugs_n
+                else:
+                    break
+            # MAXIMA RENTABILIDAD
+            if vars.rentabilidad <= (vars.pico - params.resta_cr1_e2[vars.ugs_n]):
+
+                name = f"T{vars.ugs_n}"
+                sell(
+                    app,
+                    vars,
+                    params,
+                    "C",
+                    name,
+                    app.options[1]["contract"],
+                    app.options[1]["symbol"],
+                )
+
+                return
+
+            else:
+                pass
+
+        # AUN NO MANIFIESTA
+        else:
+
+            # vars.manifesto
+            if vars.rentabilidad >= params.umbral_manifestacion_cR1_e2:
+                vars.manifesto = True
+                vars.minutos = 0
+
+            # STOP LOSS
+            elif vars.rentabilidad <= params.sl_cr1_e2:
+                sell(
+                    app,
+                    vars,
+                    params,
+                    "C",
+                    "SL",
+                    app.options[1]["contract"],
+                    app.options[1]["symbol"],
+                )
+
+                return
+                 
     
     #########################################################
     ################      CALL  R1  FAST   ##################
@@ -315,11 +380,19 @@ def sellCall(app, params, vars):
 
         # MANIFIESTA
         if vars.manifesto:
-            
+            # DIAMANTE
+            for y in range(vars.ugs_n, len(params.diamante_cr2)):
+                if round(vars.pico, 3) > params.diamante_cr2[y]:
+                    vars.ugs_n = y
+                    if vars.ugs_n != vars.ugs_n_ant:
+                        vars.minutos = 0
+                        vars.ugs_n_ant = vars.ugs_n
+                else:
+                    break
             # MAXIMA RENTABILIDAD
-            if vars.rentabilidad <  (vars.pico  ):
+            if vars.rentabilidad <= (vars.pico - params.resta_cr2[vars.ugs_n]):
 
-                name = f"TARGET"
+                name = f"T{vars.ugs_n}"
                 sell(
                     app,
                     vars,
@@ -339,7 +412,7 @@ def sellCall(app, params, vars):
         else:
 
             # vars.manifesto
-            if vars.rentabilidad >= params.target_cr2:
+            if vars.rentabilidad >= params.umbral_manifestacion_cR2:
                 vars.manifesto = True
                 vars.minutos = 0
 
@@ -495,6 +568,14 @@ def sellPut(app, params, vars):
 
     vars.caida = vars.rentabilidad - vars.pico
 
+    if vars.askbid_put > params.max_askbid_venta_abs or vars.pbid <= 0 or vars.askbid_put<0 :
+        proteccion_askbid_flag=False
+        for hora in params.proteccion_ask_bid:
+            if (timeNow >= hora[0] and timeNow<= hora[1]):
+                proteccion_askbid_flag=True
+        if proteccion_askbid_flag:
+            return
+        
     # # FIN DE DIA DE TRADE
  
     

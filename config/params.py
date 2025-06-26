@@ -186,7 +186,7 @@ class parameters:
         # min_desicion_cr1_i  = 60
         self.umbral_manifestacion_cR1_i =0.0379
         self.diamante_cr1_i = [self.umbral_manifestacion_cR1_i , 0.079,0.11,0.15 ] # DIAMANTE DE COMPRA
-        self.resta_cr1_i = [0.01, 0.02 ,0.015,inf_n] # RETROCESO DEL DIAMANTE 
+        self.resta_cr1_i = [0.01, 0.02 ,0.015,self.inf_n] # RETROCESO DEL DIAMANTE 
         
 
         # ==================================
@@ -202,7 +202,7 @@ class parameters:
         # min_desicion_cr1_c   = 60
         self.umbral_manifestacion_cR1_c =0.0379
         self.diamante_cr1_c = [self.umbral_manifestacion_cR1_c, 0.08 ] # DIAMANTE DE COMPRA
-        self.resta_cr1_c= [0.01,inf_n] # RETROCESO DEL DIAMANTE 
+        self.resta_cr1_c= [0.01,self.inf_n] # RETROCESO DEL DIAMANTE 
 
         # ==================================
         # =========== CALL - R2 ============

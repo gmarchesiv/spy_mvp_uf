@@ -1,13 +1,7 @@
 {
     "red": [
        
-        {
-            "ip": "10.8.0.35:8001",
-            "user": "Carlos Labarthe"
-        },
       
-        
- 
         {
             "ip": "10.8.0.37:8001",
             "user": "Jackie Andren"
@@ -16,26 +10,11 @@
         {
             "ip": "10.8.0.39:8001",
             "user": "Raul Gutierrez"
-        },
- 
-        {
-            "ip": "10.8.0.44:8001",
-            "user": "David Fu Chang"
-        },
- 
-        {
-            "ip": "10.8.0.40:8001",
-            "user": "Augusto Reyna"
-        },
+        }, 
  
         {
             "ip": "10.8.0.36:8001",
             "user": "Gloria Velasco"
-        },
- 
-        {
-            "ip": "10.8.0.45:8001",
-            "user": "Antonio Garcia "
-        }
+        } 
     ]
 }

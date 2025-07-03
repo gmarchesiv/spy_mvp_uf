@@ -58,8 +58,8 @@ def es_fecha_especial(fecha):
         return "Año Nuevo", False
     elif (mes, dia) == fechas_especiales["24 de diciembre"]:
         return "Visperas de Navidad", True
-    elif (mes, dia) == fechas_especiales["3 de julio"]:
-        return "3 de julio", False  # Nueva condición para 3 de julio
+    # elif (mes, dia) == fechas_especiales["3 de julio"]:
+    #     return "3 de julio", False  # Nueva condición para 3 de julio
 
     if mes == 1:
         primer_dia_enero = datetime(fecha.year, 1, 1)

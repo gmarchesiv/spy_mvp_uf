@@ -88,7 +88,7 @@ class parameters:
         self.max_askbid_venta_forzada = 0.04
 
         self.slippage=1.075
-        self.fd = dt_time(15, 45)
+        self.fd =  dt_time(15, 30)
 
         self.rutina = [dt_time(7, 0), dt_time(16, 0)]
         self.frecuencia_muestra =[i for i in range(0, 60, 2)]
@@ -200,9 +200,9 @@ class parameters:
         # VENTA
         self.sl_cr1_c =-0.05  # STOP LOSS
         # min_desicion_cr1_c   = 60
-        self.umbral_manifestacion_cR1_c =0.0379
-        self.diamante_cr1_c = [self.umbral_manifestacion_cR1_c, 0.08 ] # DIAMANTE DE COMPRA
-        self.resta_cr1_c= [0.01,self.inf_n] # RETROCESO DEL DIAMANTE 
+        self.umbral_manifestacion_cR1_c =0.0285
+        self.diamante_cr1_c = [self.umbral_manifestacion_cR1_c,0.0379, 0.08 ] # DIAMANTE DE COMPRA
+        self.resta_cr1_c= [0.0295,0.01,self.inf_n] # RETROCESO DEL DIAMANTE 
 
         # ==================================
         # =========== CALL - R2 ============
@@ -217,7 +217,7 @@ class parameters:
         
 
         # VENTA
-        self.sl_cr2 =-0.05  # STOP LOSS
+        self.sl_cr2 =-0.039   # STOP LOSS
         # min_desicion_cr2  = 60
         self.umbral_manifestacion_cR2 =0.0285
         self.diamante_cr2 = [self.umbral_manifestacion_cR2,0.0379 ]  # DIAMANTE DE COMPRA
@@ -330,14 +330,14 @@ class parameters:
         # ==================================
 
         # COMPRA
-        self.umbral_pr2=0.156
+        self.umbral_pr2=0.2
         self.dput_r2 = [0.25, 0.40]  
         self.doput_r2 = [0.057, 0.065]  
         self.timePut_r2 = [dt_time(9, 45), dt_time(10, 0)]
         self.labelPut_r2=1
 
         # VENTA
-        self.sl_pr2 = -0.057 
+        self.sl_pr2 = -0.039
         self.umbral_manifestacion_pR2=0.0285
         self.diamante_pr2 = [ self.umbral_manifestacion_pR2,   0.035 ]  # DIAMANTE DE COMPRA
         self.resta_pr2 =[0.003, self.inf_n ]  # RETROCESO DEL DIAMANTE
@@ -355,7 +355,7 @@ class parameters:
         
         # VENTA
         
-        self.sl_pr2_e = -0.051  # STOP LOSS
+        self.sl_pr2_e = -0.039   # STOP LOSS
         
 
         self.umbral_manifestacion_pR2_e=0.019

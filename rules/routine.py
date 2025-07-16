@@ -55,6 +55,8 @@ def update_status(app, vars,params):
 
         elif vars.call == False and vars.put == False and vars.compra == False:
             vars.status = "SLEEP"
+        elif  vars.flag_bloqueo_tiempo :
+            vars.status = "BLOQUEO T."
         else:
             pass
     timeNow = datetime.now(params.zone).time()

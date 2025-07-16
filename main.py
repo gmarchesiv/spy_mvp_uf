@@ -116,6 +116,11 @@ def main():
             vars.call_open = app.options[1]["BID"]
             vars.put_open = app.options[2]["BID"]
             generar_label(params, vars,app)
+
+            timeNow = datetime.now(params.zone).time()
+            if (timeNow.hour == 9 and timeNow.minute >= 33):
+               vars.flag_bloqueo_tiempo=True
+    
         else:
             load_app_vars(app, vars)
 
@@ -124,6 +129,7 @@ def main():
         sendStart(app, params)
 
         printStamp(" - INICIO DE RUTINA - ")
+        
         # # ====================
         # #  - Rutina -
         # # ====================
@@ -141,7 +147,7 @@ def main():
                 else:
                     vars.flag_minuto_label=True
            
-                if vars.bloqueo == False: 
+                if vars.bloqueo == False and vars.flag_bloqueo_tiempo==False:
                     # ==================================
                     #  -        BROADCASTING           -
                     # ==================================
@@ -158,7 +164,7 @@ def main():
                 if int(timeNow.second) in params.frecuencia_accion:
                     calculations(app, vars, params)  # CALCULOS DE RUTINA
                     readIBData(app, vars)  # LOGS DE LOS CALCULOS
-                    if vars.bloqueo == False:
+                    if vars.bloqueo == False and vars.flag_bloqueo_tiempo==False:
                         # ================================
                         #  -VENTA-
                         # ================================

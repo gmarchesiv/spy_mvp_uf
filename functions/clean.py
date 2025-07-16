@@ -29,6 +29,7 @@ def clean_vars(vars):
     vars.status = "ON"
     vars.tipo=""
     vars.venta_intentos=0
+    vars.flag_bloqueo_tiempo=False
 
 
 

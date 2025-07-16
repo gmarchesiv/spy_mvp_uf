@@ -33,6 +33,7 @@ class variables:
         self.sendError = self.data.get("sendError", False)
         self.Error = self.data.get("Error", False)
         self.Error_buy = self.data.get("Error_buy", False)
+        self.flag_bloqueo_tiempo= self.data.get("flag_bloqueo_tiempo", False)
         ###############################################
         # VARIABLES DE TIEMPO
         ###############################################

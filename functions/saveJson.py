@@ -88,6 +88,7 @@ def saveJson(vars, app,  params, estado):
         "wallet": app.wallet,
         "call_option": call_dic,
         "put_option": put_dic,
+        "flag_bloqueo_tiempo":vars.flag_bloqueo_tiempo,
         ###############################################
         # VARIABLES DE TIEMPO
         ###############################################

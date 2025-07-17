@@ -144,7 +144,7 @@ class parameters:
         # =========== CALL - R1-E2 ========== 
         # ==================================
         
-        self.dcall_r1_e2 = [0.045, 0.2]
+        self.dcall_r1_e2 = [0.13, 0.2]
         self.docall_r1_e2 = [0.105, 0.115]
         self.timeCall_r1_e2 = [dt_time(10, 15), dt_time(11, 5)]
         self.labelCall_r1_e2 =0

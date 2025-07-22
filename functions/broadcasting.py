@@ -88,49 +88,49 @@ def broadcasting_buy(vars,params,app):
     # Lectura del Archivo
     file_name = "/usr/src/app/data/vars.json"
  
-
-    if os.path.exists(file_name):
- 
-        with open(file_name, "r") as json_file:
-            data = json.load(json_file)
- 
-            if 'buy_broadcasting' in data:
-                if data["buy_broadcasting"] == True or vars.buy_broadcasting == True:
-                    vars.buy_broadcasting = True
-            
-                    vars.buy_tipo_broadcasting = data["buy_tipo_broadcasting"]
-                    vars.buy_regla_broadcasting = data["buy_regla_broadcasting"]
-                    vars.user_broadcasting = data["user_broadcasting"]
-                    if vars.buy_tipo_broadcasting == "C":
-                        val = 1
-                        if vars.askbid_call > params.max_askbid_compra_abs or vars.cask <= 0:
+    try:
+        if os.path.exists(file_name):
+    
+            with open(file_name, "r") as json_file:
+                data = json.load(json_file)
+    
+                if 'buy_broadcasting' in data:
+                    if data["buy_broadcasting"] == True or vars.buy_broadcasting == True:
+                        vars.buy_broadcasting = True
+                
+                        vars.buy_tipo_broadcasting = data["buy_tipo_broadcasting"]
+                        vars.buy_regla_broadcasting = data["buy_regla_broadcasting"]
+                        vars.user_broadcasting = data["user_broadcasting"]
+                        if vars.buy_tipo_broadcasting == "C":
+                            val = 1
+                            if vars.askbid_call > params.max_askbid_compra_abs or vars.cask <= 0:
+                                return False
+                            precio=vars.cask
+                        elif vars.buy_tipo_broadcasting == "P":
+                            val = 2
+                            if vars.askbid_put > params.max_askbid_compra_abs or vars.pask <= 0:
+                                return False
+                            precio=vars.pask
+                        else:
+                            printStamp("-ERROR COMPRA BROADCASTING-")
                             return False
-                        precio=vars.cask
-                    elif vars.buy_tipo_broadcasting == "P":
-                        val = 2
-                        if vars.askbid_put > params.max_askbid_compra_abs or vars.pask <= 0:
-                            return False
-                        precio=vars.pask
-                    else:
-                        printStamp("-ERROR COMPRA BROADCASTING-")
-                        return False
-                    printStamp(f"-COMPRA BROADCASTING POR :{vars.user_broadcasting } - {vars.buy_tipo_broadcasting} - {vars.buy_regla_broadcasting}")
-                    flag_buy = buy(
-                        params,
-                        app,
-                        vars,
-                        vars.buy_tipo_broadcasting ,
-                        vars.buy_regla_broadcasting,
-                        precio,
-                        app.options[val]["contract"],
-                        app.options[val]["symbol"],
-                    )
+                        printStamp(f"-COMPRA BROADCASTING POR :{vars.user_broadcasting } - {vars.buy_tipo_broadcasting} - {vars.buy_regla_broadcasting}")
+                        flag_buy = buy(
+                            params,
+                            app,
+                            vars,
+                            vars.buy_tipo_broadcasting ,
+                            vars.buy_regla_broadcasting,
+                            precio,
+                            app.options[val]["contract"],
+                            app.options[val]["symbol"],
+                        )
 
-                    if flag_buy == False:
+                        if flag_buy == False:
+                            return
+                        vars.buy_broadcasting=False
                         return
-                    vars.buy_broadcasting=False
-                    return
-                  
+    except:pass             
 async def send_request(session, url, data, user):
     try:
         async with session.post(url, json=data, timeout=2) as response:

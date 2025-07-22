@@ -198,6 +198,30 @@ def buy_Call(app, vars, params):
 
         if flag_buy == False:
             return
+        
+    #########################################################
+    ####################      CALL R1  F  ###################
+    #########################################################
+
+    elif (
+        (timeNow >= params.timecall_r1_f[0] and timeNow < params.timecall_r1_f[1])
+        and (vars.dcall >= params.dcall_r1_f[0] and vars.dcall < params.dcall_r1_f[1])
+        and (vars.docall >= params.docall_r1_f[0] and vars.docall <= params.docall_r1_f[1])
+        and  (vars.label==params.labelcall_r1_f ) 
+    ):
+        flag_buy = buy(
+            params,
+            app,
+            vars,
+            "C",
+            "F",
+            vars.cask,
+            app.options[1]["contract"],
+            app.options[1]["symbol"],
+        )
+
+        if flag_buy == False:
+            return
 def buy_Put(app, vars, params):
     timeNow = datetime.now(params.zone).time()
     #########################################################
@@ -367,6 +391,32 @@ def buy_Put(app, vars, params):
 
         if flag_buy == False:
             return
+        
+    
+
+    #########################################################
+    ####################       PUT R1 F   ###################
+    #########################################################
+    # elif (
+    #     (timeNow >= params.timePut_r1_f[0] and timeNow < params.timePut_r1_f[1])
+    #     and (vars.dput >= params.dput_r1_f[0] and vars.dput < params.dput_r1_f[1])
+    #     and (vars.doput >= params.doput_r1_f[0] and vars.doput < params.doput_r1_f[1])
+    #     and (vars.label==params.labelPut_r1_f ) 
+
+    # ):
+    #     flag_buy = buy(
+    #         params,
+    #         app,
+    #         vars,
+    #         "P",
+    #         "F",
+    #         vars.pask,
+    #         app.options[2]["contract"],
+    #         app.options[2]["symbol"],
+    #     )
+
+    #     if flag_buy == False:
+    #         return
         
     
 

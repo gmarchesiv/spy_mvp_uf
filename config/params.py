@@ -226,6 +226,28 @@ class parameters:
         
         # retroceso_cr2=0.05 
         
+        # ==================================
+        # =========== CALL R1 F =============
+        # ==================================
+        # COMPRA
+        
+        self.dcall_r1_f = [0.02, 0.15]
+        self.docall_r1_f = [0.095, 0.11]
+        self.timecall_r1_f = [dt_time(12, 30), dt_time(12, 33)]
+        self.labelcall_r1_f=0
+
+        # VENTA
+        self.sl_cr1_f=-0.05  # STOP LOSS
+        # self.min_desicion_pr1_f  = 60
+        # self.target_pR1_f =0.04
+
+        self.umbral_manifestacion_cR1_f=0.0285
+        self.diamante_cr1_f = [
+        self.umbral_manifestacion_cR1_f,
+        0.04
+        ]  # DIAMANTE DE COMPRA
+        resta_cr1_f = [0.0295, self.inf_n]   # RETROCESO DEL DIAMANTE
+
 
         #######################
         #########################################################
@@ -331,7 +353,7 @@ class parameters:
 
         # COMPRA
         self.umbral_pr2=0.2
-        self.dput_r2 = [0.25, 0.40]  
+        self.dput_r2 = [0.27, 0.40]  
         self.doput_r2 = [0.057, 0.065]  
         self.timePut_r2 = [dt_time(9, 45), dt_time(10, 0)]
         self.labelPut_r2=1
@@ -363,7 +385,27 @@ class parameters:
         self.diamante_pr2_e = [ self.umbral_manifestacion_pR2_e ] # DIAMANTE DE COMPRA
         self.resta_pr2_e = [self.inf_n ] # RETROCESO DEL DIAMANTE  
 
+        # ==================================
+        # =========== PUT R1 F =============
+        # ==================================
+        # COMPRA
+        
+        self.dput_r1_f = [-0.05, 0.08]
+        self.doput_r1_f = [0.07, 0.115]
+        self.timePut_r1_f = [dt_time(14, 0), dt_time(14, 10)]
+        self.labelPut_r1_f=1
 
+        # VENTA
+        self.sl_pr1_f=-0.05  # STOP LOSS
+        # min_desicion_pr1_f  = 60
+        # target_pR1_f =0.04
+
+        self.umbral_manifestacion_pR1_f=0.0285
+        self.diamante_pr1_f = [
+        self.umbral_manifestacion_pR1_f,
+        0.04
+        ]  # DIAMANTE DE COMPRA
+        self.resta_pr1_f = [0.0295, self.inf_n]   # RETROCESO DEL DIAMANTE
         #########################################################
         ####################      LABELS      ###################
         #########################################################

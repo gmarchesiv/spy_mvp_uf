@@ -246,7 +246,7 @@ class parameters:
         self.umbral_manifestacion_cR1_f,
         0.04
         ]  # DIAMANTE DE COMPRA
-        resta_cr1_f = [0.0295, self.inf_n]   # RETROCESO DEL DIAMANTE
+        self.resta_cr1_f = [0.0295, self.inf_n]   # RETROCESO DEL DIAMANTE
 
 
         #######################

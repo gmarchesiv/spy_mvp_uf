@@ -110,8 +110,8 @@ def saveJson(vars, app,  params, estado):
         ###############################################
         # VARIABLES DE RUTINA
         ###############################################
-        "min_extras": vars.min_extras,
-        "min_desicion": vars.min_desicion,
+        # "min_extras": vars.min_extras,
+        # "min_desicion": vars.min_desicion,
         "ugs_n": vars.ugs_n,
         "ugs_n_ant": vars.ugs_n_ant,
         "pico": vars.pico,
@@ -139,8 +139,8 @@ def saveJson(vars, app,  params, estado):
         "fecha": vars.fecha,
         "dif_exp": vars.dif_exp,
         "strikes": vars.strikes,
-        "dic_strike": vars.dic_strike,
-        "dic_exp_strike": vars.dic_exp_strike,
+        # "dic_strike": vars.dic_strike,
+        # "dic_exp_strike": vars.dic_exp_strike,
         "rule": vars.rule,
         "accion_mensaje": vars.accion_mensaje,
         "bloqueo": vars.bloqueo,

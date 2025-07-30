@@ -1103,6 +1103,125 @@ def sellPut(app, params, vars):
                 return
 
 
+
+    #########################################################
+    ####################      PUT  R1  F      ###############
+    #########################################################
+    elif vars.tipo =="F":
+        # MANIFIESTA
+        if vars.manifesto:
+
+            # DIAMANTE
+            for y in range(vars.ugs_n, len(params.diamante_pr1_f)):
+                if round(vars.pico, 3) > params.diamante_pr1_f[y]:
+                    vars.ugs_n = y
+                    if vars.ugs_n != vars.ugs_n_ant:
+                        vars.minutos = 0
+                        vars.ugs_n_ant = vars.ugs_n
+                else:
+                    break
+
+            # RETROCESO
+            if vars.rentabilidad <= (vars.pico - params.resta_pr1_f[vars.ugs_n]):
+
+                name = f"T{vars.ugs_n}"
+                sell(
+                    app,
+                    vars,
+                    params,
+                    "P",
+                    name,
+                    app.options[2]["contract"],
+                    app.options[2]["symbol"],
+                )
+
+                return
+
+            else:
+                pass
+
+        else:
+            # vars.manifesto
+            if vars.rentabilidad >= params.umbral_manifestacion_pR1_f:
+                vars.manifesto = True
+                vars.minutos = 0
+
+ 
+
+            # SL
+            elif vars.rentabilidad <= params.sl_pr1_f:
+
+                sell(
+                    app,
+                    vars,
+                    params,
+                    "P",
+                    "SL",
+                    app.options[2]["contract"],
+                    app.options[2]["symbol"],
+                )
+
+                return
+            
+    #########################################################
+    ####################      PUT  R1  F2      ###############
+    #########################################################
+    elif vars.tipo =="F2":
+        # MANIFIESTA
+        if vars.manifesto:
+
+            # DIAMANTE
+            for y in range(vars.ugs_n, len(params.diamante_pr1_f2)):
+                if round(vars.pico, 3) > params.diamante_pr1_f2[y]:
+                    vars.ugs_n = y
+                    if vars.ugs_n != vars.ugs_n_ant:
+                        vars.minutos = 0
+                        vars.ugs_n_ant = vars.ugs_n
+                else:
+                    break
+
+            # RETROCESO
+            if vars.rentabilidad <= (vars.pico - params.resta_pr1_f2[vars.ugs_n]):
+
+                name = f"T{vars.ugs_n}"
+                sell(
+                    app,
+                    vars,
+                    params,
+                    "P",
+                    name,
+                    app.options[2]["contract"],
+                    app.options[2]["symbol"],
+                )
+
+                return
+
+            else:
+                pass
+
+        else:
+            # vars.manifesto
+            if vars.rentabilidad >= params.umbral_manifestacion_pR1_f2:
+                vars.manifesto = True
+                vars.minutos = 0
+
+ 
+
+            # SL
+            elif vars.rentabilidad <= params.sl_pr1_f2:
+
+                sell(
+                    app,
+                    vars,
+                    params,
+                    "P",
+                    "SL",
+                    app.options[2]["contract"],
+                    app.options[2]["symbol"],
+                )
+
+                return
+            
     else:pass
     vars.regla_broadcasting=""
      

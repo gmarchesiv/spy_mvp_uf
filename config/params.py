@@ -406,6 +406,27 @@ class parameters:
         0.04
         ]  # DIAMANTE DE COMPRA
         self.resta_pr1_f = [0.0295, self.inf_n]   # RETROCESO DEL DIAMANTE
+
+        # ==================================
+        # =========== PUT R1 F2 =============
+        # ==================================
+        # COMPRA
+        
+        self.dput_r1_f2 = [0, 0.2]
+        self.doput_r1_f2 = [0.08, 0.115]
+        self.timePut_r1_f2 = [dt_time(14, 45), dt_time(15, 5)]
+        self.labelPut_r1_f2=1
+
+        # VENTA
+        self.sl_pr1_f2=-0.035  # STOP LOSS
+        # min_desicion_pr1_f  = 60
+        # target_pR1_f =0.04
+
+        self.umbral_manifestacion_pR1_f2=0.03
+        self.diamante_pr1_f2 = [
+        self.umbral_manifestacion_pR1_f2 
+        ]  # DIAMANTE DE COMPRA
+        self.resta_pr1_f2 = [  self.inf_n]   # RETROCESO DEL DIAMANTE
         #########################################################
         ####################      LABELS      ###################
         #########################################################

@@ -397,28 +397,50 @@ def buy_Put(app, vars, params):
     #########################################################
     ####################       PUT R1 F   ###################
     #########################################################
-    # elif (
-    #     (timeNow >= params.timePut_r1_f[0] and timeNow < params.timePut_r1_f[1])
-    #     and (vars.dput >= params.dput_r1_f[0] and vars.dput < params.dput_r1_f[1])
-    #     and (vars.doput >= params.doput_r1_f[0] and vars.doput < params.doput_r1_f[1])
-    #     and (vars.label==params.labelPut_r1_f ) 
+    elif (
+        (timeNow >= params.timePut_r1_f[0] and timeNow < params.timePut_r1_f[1])
+        and (vars.dput >= params.dput_r1_f[0] and vars.dput < params.dput_r1_f[1])
+        and (vars.doput >= params.doput_r1_f[0] and vars.doput < params.doput_r1_f[1])
+        and (vars.label==params.labelPut_r1_f ) 
 
-    # ):
-    #     flag_buy = buy(
-    #         params,
-    #         app,
-    #         vars,
-    #         "P",
-    #         "F",
-    #         vars.pask,
-    #         app.options[2]["contract"],
-    #         app.options[2]["symbol"],
-    #     )
+    ):
+        flag_buy = buy(
+            params,
+            app,
+            vars,
+            "P",
+            "F",
+            vars.pask,
+            app.options[2]["contract"],
+            app.options[2]["symbol"],
+        )
 
-    #     if flag_buy == False:
-    #         return
+        if flag_buy == False:
+            return
         
-    
+    #########################################################
+    ####################       PUT R1 F2   ###################
+    #########################################################
+    elif (
+        (timeNow >= params.timePut_r1_f2[0] and timeNow < params.timePut_r1_f2[1])
+        and (vars.dput >= params.dput_r1_f2[0] and vars.dput < params.dput_r1_f2[1])
+        and (vars.doput >= params.doput_r1_f2[0] and vars.doput < params.doput_r1_f2[1])
+        and (vars.label==params.labelPut_r1_f2 ) 
+
+    ):
+        flag_buy = buy(
+            params,
+            app,
+            vars,
+            "P",
+            "F2",
+            vars.pask,
+            app.options[2]["contract"],
+            app.options[2]["symbol"],
+        )
+
+        if flag_buy == False:
+            return
 
 def buy(params, app, vars, tipo, regla, ask, contract, symbol):
     from rules.routine import calculations

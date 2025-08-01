@@ -120,9 +120,9 @@ class parameters:
         # VENTA
         self.sl_cr1=-0.04 # STOP LOSS
         # min_desicion_cr1  = 60
-        self.umbral_manifestacion_cR1=0.04
-        self.diamante_cr1 = [self.umbral_manifestacion_cR1  ] # DIAMANTE DE COMPRA
-        self.resta_cr1 = [self.inf_n ] # RETROCESO DEL DIAMANTE 
+        self.umbral_manifestacion_cR1=0.023
+        self.diamante_cr1 = [self.umbral_manifestacion_cR1  ,0.04  ]  # DIAMANTE DE COMPRA
+        self.resta_cr1 = [0.0295,self.inf_n ] # RETROCESO DEL DIAMANTE 
 
         # ==================================
         # =========== CALL - R1-E ========== 
@@ -134,11 +134,11 @@ class parameters:
         self.labelCall_r1_e =0
         
         # VENTA
-        self.sl_cr1_e=-0.045  # STOP LOSS
+        self.sl_cr1_e=-0.042  # STOP LOSS
         # min_desicion_cr1_e  = 60
-        self.umbral_manifestacion_cR1_e=0.039
-        self.diamante_cr1_e = [self.umbral_manifestacion_cR1_e ] # DIAMANTE DE COMPRA
-        self.resta_cr1_e = [ 0.005 ] # RETROCESO DEL DIAMANTE 
+        self.umbral_manifestacion_cR1_e=0.023
+        self.diamante_cr1_e = [self.umbral_manifestacion_cR1_e  ,0.039] # DIAMANTE DE COMPRA
+        self.resta_cr1_e = [0.043, 0.005 ] # RETROCESO DEL DIAMANTE 
 
         # ==================================
         # =========== CALL - R1-E2 ========== 
@@ -150,11 +150,11 @@ class parameters:
         self.labelCall_r1_e2 =0
         
         # VENTA
-        self.sl_cr1_e2=-0.04  # STOP LOSS
+        self.sl_cr1_e2=-0.035   # STOP LOSS
         # min_desicion_cr1_e2  = 60
-        self.umbral_manifestacion_cR1_e2=0.039
-        self.diamante_cr1_e2 = [self.umbral_manifestacion_cR1_e2,0.08  ] # DIAMANTE DE COMPRA
-        self.resta_cr1_e2 = [  0.01,self.inf_n ] # RETROCESO DEL DIAMANTE 
+        self.umbral_manifestacion_cR1_e2=0.023
+        self.diamante_cr1_e2 = [self.umbral_manifestacion_cR1_e2,0.039,0.08  ] # DIAMANTE DE COMPRA
+        self.resta_cr1_e2 =[ 0.0295, 0.01,self.inf_n ] # RETROCESO DEL DIAMANTE 
 
         # ==================================
         # =========== CALL - R1-FAST =======
@@ -184,9 +184,9 @@ class parameters:
         # VENTA
         self.sl_cr1_i =-0.04  # STOP LOSS
         # min_desicion_cr1_i  = 60
-        self.umbral_manifestacion_cR1_i =0.0379
-        self.diamante_cr1_i = [self.umbral_manifestacion_cR1_i , 0.079,0.11,0.15 ] # DIAMANTE DE COMPRA
-        self.resta_cr1_i = [0.01, 0.02 ,0.015,self.inf_n] # RETROCESO DEL DIAMANTE 
+        self.umbral_manifestacion_cR1_i =0.023
+        self.diamante_cr1_i = [self.umbral_manifestacion_cR1_i  ,0.0379, 0.079,0.11,0.15 ] # DIAMANTE DE COMPRA
+        self.resta_cr1_i = [0.0295,0.01, 0.02 ,0.015,self.inf_n] # RETROCESO DEL DIAMANTE 
         
 
         # ==================================
@@ -237,7 +237,7 @@ class parameters:
         self.labelcall_r1_f=0
 
         # VENTA
-        self.sl_cr1_f=-0.035  # STOP LOSS
+        self.sl_cr1_f=-0.03  # STOP LOSS
         # self.min_desicion_pr1_f  = 60
         # self.target_pR1_f =0.04
 
@@ -273,7 +273,7 @@ class parameters:
         self.labelPut_r1=1
 
         # VENTA
-        self.sl_pr1=-0.035  # STOP LOSS
+        self.sl_pr1=-0.03  # STOP LOSS
         # min_desicion_pr1  = 60
         self.umbral_manifestacion_pR1=0.029
         self.diamante_pr1 = [self.umbral_manifestacion_pR1, 0.036,0.079 ,0.109] # DIAMANTE DE COMPRA
@@ -418,15 +418,15 @@ class parameters:
         self.labelPut_r1_f2=1
 
         # VENTA
-        self.sl_pr1_f2=-0.035  # STOP LOSS
+        self.sl_pr1_f2=-0.03  # STOP LOSS
         # min_desicion_pr1_f  = 60
         # target_pR1_f =0.04
 
-        self.umbral_manifestacion_pR1_f2=0.03
+        self.umbral_manifestacion_pR1_f2=00.023
         self.diamante_pr1_f2 = [
-        self.umbral_manifestacion_pR1_f2 
+        self.umbral_manifestacion_pR1_f2 ,0.03
         ]  # DIAMANTE DE COMPRA
-        self.resta_pr1_f2 = [  self.inf_n]   # RETROCESO DEL DIAMANTE
+        self.resta_pr1_f2 = [  0.0295, self.inf_n]   # RETROCESO DEL DIAMANTE
         #########################################################
         ####################      LABELS      ###################
         #########################################################

@@ -13,7 +13,7 @@ from config.IB.connection import test_ibkr_connection, ibkr_connection, load_app
 from config.IB.wallet import wallet_config 
 from config.params import parameters
 from config.vars import variables
-
+from config.broadcasting import broadcasting
 # DataBase
 from database.repository.repository import writeRegister
 
@@ -60,6 +60,7 @@ def main():
 
         # VARIABLES
         vars = variables()
+        bc = broadcasting()
 
         # PARAMETROS
         params = parameters()
@@ -70,6 +71,7 @@ def main():
 
         # PRUEBA DE CONEXION A IBKR AL ARRANQUE
         timeNow = datetime.now(params.zone).time()
+
         if timeNow < params.rutina[0] or timeNow >= params.rutina[1]:
             test_ibkr_connection(params)
             return
@@ -100,6 +102,7 @@ def main():
         #  - SUSCRIPCIONES A DATOS -
         # ==========================
         data_susciption(app, params, vars)
+
         # ====================
         #  -   AL INICIAR    -
         # ====================
@@ -107,7 +110,7 @@ def main():
         # ====================
         #  - LIMPIEZA -
         # ====================
-        clean_broadcasting(vars)  # NO PUEDE INICIAR CON DATOS BROADCASTING
+        clean_broadcasting(vars )  # NO PUEDE INICIAR CON DATOS BROADCASTING
 
         now = datetime.now(params.zone).strftime("%Y-%m-%d")
 
@@ -120,7 +123,6 @@ def main():
             timeNow = datetime.now(params.zone).time()
             if (timeNow.hour >= 9 and timeNow.minute >= 33):
                vars.flag_bloqueo_tiempo=True
-    
         else:
             load_app_vars(app, vars)
 
@@ -129,7 +131,6 @@ def main():
         sendStart(app, params)
 
         printStamp(" - INICIO DE RUTINA - ")
-        
         # # ====================
         # #  - Rutina -
         # # ====================
@@ -147,35 +148,37 @@ def main():
                 else:
                     vars.flag_minuto_label=True
            
-                # if vars.bloqueo == False and vars.flag_bloqueo_tiempo==False:
-                #     # ==================================
-                #     #  -        BROADCASTING           -
-                #     # ==================================
-                #     if vars.call or vars.put:
-                #         broadcasting_sell(vars,params,app)
-                #     if vars.compra:
-                #         broadcasting_buy(vars,params,app)
-                #     # ==================================
-                #     #  - Notificacion de Transacciones -
-                #     # ==================================
+                if vars.bloqueo == False and vars.flag_bloqueo_tiempo==False:
+                    # ==================================
+                    #  -        BROADCASTING           -
+                    # ==================================
+                    if vars.call or vars.put:
+                        broadcasting_sell(vars,params,app)
+            
+                        broadcasting_sell_auto(vars,params,app,bc)
+                    if vars.compra:
+                        broadcasting_buy(vars,params,app)
+                    # ==================================
+                    #  - Notificacion de Transacciones -
+                    # ==================================
 
                 saveTransaction(app, params, vars)  # VERIFICADOR DE TRANSACCIONES
 
                 if int(timeNow.second) in params.frecuencia_accion:
                     calculations(app, vars, params)  # CALCULOS DE RUTINA
                     readIBData(app, vars)  # LOGS DE LOS CALCULOS
-                    # if vars.bloqueo == False and vars.flag_bloqueo_tiempo==False:
-                    #     # ================================
-                    #     #  -VENTA-
-                    #     # ================================
-                    #     if vars.call or vars.put:
-                    #         sellOptions(app, vars, params)
-                    #     # ================================
-                    #     #  -COMPRA-
-                    #     # ================================
-                    #     if vars.compra:
-                    #         buyOptions(app, vars, params)
-                    #     pass
+                    if vars.bloqueo == False and vars.flag_bloqueo_tiempo==False:
+                        # ================================
+                        #  -VENTA-
+                        # ================================
+                        if vars.call or vars.put:
+                            sellOptions(app, vars, params)
+                        # ================================
+                        #  -COMPRA-
+                        # ================================
+                        if vars.compra:
+                            buyOptions(app, vars, params)
+                        pass
                     
                     # ================================
                     #  - Registro -

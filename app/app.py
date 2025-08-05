@@ -29,6 +29,7 @@ CORS(
         r"/broadCasting-aliniar": origin,
         r"/broadCasting-strike": origin,
         r"/broadCasting-sell": origin,
+        r"/broadCasting-sell-auto": origin,
         r"/broadCasting-buy": origin,
         r"/get-price": origin,
         r"/get-regla": origin,
@@ -292,7 +293,28 @@ def post_broadCasting_sell():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route("/broadCasting-sell-auto", methods=["GET"])
+def post_broadCasting_sell_auto():
+    file_name = "/usr/src/broadcasting.json"
+    try:
+ 
+        # Leer los datos existentes en el archivo JSON
+        with open(file_name, "r") as f:
+            data = json.load(f)
+ 
+ 
+        data["sell"] = True
 
+        # Guardar los datos actualizados de nuevo en el archivo
+        with open(file_name, "w") as file:
+            json.dump(data, file, indent=4)
+
+        # Devolver los datos actualizados como respuesta
+        return jsonify({"status": "ok"}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
 @app.route("/broadCasting-buy", methods=["POST"])
 def post_broadCasting_buy():
     file_name = "/usr/src/vars.json"

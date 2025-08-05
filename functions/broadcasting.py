@@ -7,6 +7,7 @@ import os
 
 import requests
  
+
 from functions.logs import printStamp
 
 
@@ -82,6 +83,57 @@ def broadcasting_sell(vars,params,app):
                         return
                   
                     return
+def broadcasting_sell_auto(vars,params,app,bc):
+    
+    # Lectura del Archivo
+    file_name = "/usr/src/app/data/broadcasting.json"
+ 
+
+    if os.path.exists(file_name):
+ 
+        with open(file_name, "r") as json_file:
+            data = json.load(json_file)
+ 
+            if 'sell' in data:
+                if data["sell"] == True  :
+         
+                    if vars.call:
+                        val = 1
+                        tipo="C"
+                        if vars.askbid_call > params.max_askbid_venta_abs or vars.cbid <= 0:
+                            return False
+                    elif vars.put:
+                        val = 2
+                        tipo="P"
+                        if vars.askbid_put > params.max_askbid_venta_abs or vars.pbid <= 0:
+                            return False
+                    else:
+                        printStamp("-ERROR VENTA BROADCASTING-")
+                        return False
+                    printStamp(f"-VENTA BROADCASTING POR : ALPHALYTICS - FORZADA")
+                    
+                    from rules.sell import sell_forzada
+                    
+                    venta=sell_forzada(
+                            app,
+                            vars,
+                            params,
+                            tipo,
+                            "FORZADA",
+                            app.options[val]["contract"],
+                            app.options[val]["symbol"],
+                        )
+                    if venta:
+                        bc.sell=False
+                        data["sell"] =  False 
+
+                        with open(file_name, "w") as file:
+                            json.dump(data, file, indent=4)
+                        return
+                  
+                    return
+
+
 
 def broadcasting_buy(vars,params,app):
     from rules.buy import buy

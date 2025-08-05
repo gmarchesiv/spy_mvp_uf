@@ -1290,3 +1290,58 @@ def sell(app, vars, params, tipo, regla, contract, symbol):
     vars.status = "SLEEP"
     read_sell(vars, tipo)
     return True
+
+def sell_forzada(app, vars, params, tipo, regla, contract, symbol):
+    from rules.routine import calculations
+ 
+    # LECTURA PREVIA
+    readIBData_action(app, vars, tipo, regla)
+
+    # ENVIO DE ORDEN DE VENTA
+    flag = sellOptionContract(params, app, vars, tipo, contract, symbol)
+    if flag == False:
+        printStamp("-NO SE PUDO CONCRETAR LA VENTA-")
+        return False
+
+    # ESPERA DE LA ORDEN DE VENTA
+    app.statusIB = False
+    app.Error = False
+
+    printStamp("-wait Status-")
+
+    while app.statusIB == False:
+
+        timeNow = datetime.now(params.zone).time()
+        if (timeNow.minute % 10 == 0 or timeNow.minute % 10 == 5):
+            if vars.flag_minuto_label:
+                generar_label(params, vars,app)
+                vars.flag_minuto_label=False
+                time.sleep(0.5)
+        else:
+            vars.flag_minuto_label=True
+        if int(timeNow.second) in params.frecuencia_muestra:
+            calculations(app, vars, params)
+            # ESPERANDO Y REGISTRANDO
+            vars.status = "SELLING"
+            saveJson(vars, app, params, False)
+            writeDayTrade(app, vars, params)
+
+        if app.Error:
+            break
+        time.sleep(1)
+    if app.Error:
+        printStamp(f"-VENTA NO PROCESADA-")
+        sendError(params, "VENTA NO PROCESADA")
+        return False
+
+    # SET DE VARIABLES
+    vars.regla = regla
+    vars.regla_ant = vars.regla
+    if tipo == "C":
+        vars.call = False
+    elif tipo == "P":
+        vars.put = False
+
+    vars.status = "SLEEP"
+    read_sell(vars, tipo)
+    return True

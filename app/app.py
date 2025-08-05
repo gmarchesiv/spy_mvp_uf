@@ -293,10 +293,11 @@ def post_broadCasting_sell():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.route("/broadCasting-sell-auto", methods=["GET"])
+@app.route("/broadCasting-sell-auto", methods=["POST"])
 def post_broadCasting_sell_auto():
     file_name = "/usr/src/broadcasting.json"
     try:
+        body = request.json
  
         # Leer los datos existentes en el archivo JSON
         with open(file_name, "r") as f:
@@ -304,6 +305,10 @@ def post_broadCasting_sell_auto():
  
  
         data["sell"] = True
+        data["max_askbid_venta_abs"] = body.get(
+            "max_askbid_venta_abs", data.get("max_askbid_venta_abs")
+        )
+ 
 
         # Guardar los datos actualizados de nuevo en el archivo
         with open(file_name, "w") as file:
@@ -314,7 +319,7 @@ def post_broadCasting_sell_auto():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    
+
 @app.route("/broadCasting-buy", methods=["POST"])
 def post_broadCasting_buy():
     file_name = "/usr/src/vars.json"

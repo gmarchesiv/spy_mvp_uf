@@ -18,6 +18,7 @@ class broadcasting:
 
         
         self.sell= False
+        self.max_askbid_venta_abs = self.data.get("max_askbid_venta_abs",0.0275)
         # self.sell_tipo = self.data.get("sell_tipo", "")
         # self.sell_regla = self.data.get("sell_regla", "")
         # self.buy  = self.data.get("buy", False)

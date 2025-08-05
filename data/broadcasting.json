@@ -1,4 +1,4 @@
 {
-"sell":false
-
+"sell":false,
+"max_askbid_venta_abs":0.0275
 }

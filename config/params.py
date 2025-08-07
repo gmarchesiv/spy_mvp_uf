@@ -296,21 +296,21 @@ class parameters:
         self.resta_pr1_i =[0.0295,0.01, 0.02,0.015,self.inf_n ]# RETROCESO DEL DIAMANTE 
 
         # ==================================
-        # =========== PUT R1 C =============  COMENTADA
+        # =========== PUT R1 C =============   
         # ==================================
         # COMPRA
         
-        self.dput_r1_c = [self.inf_n, 0.2]
-        self.doput_r1_c = [0.13, 0.145]
-        self.timePut_r1_c = [dt_time(11, 0), dt_time(13,15)]
+        self.dput_r1_c =[-0.135, -0.02]
+        self.doput_r1_c = [0.105, 0.112]
+        self.timePut_r1_c = [dt_time(10, 25), dt_time(11,10)]
+        self.labelPut_r1_c=0
         
-
         # VENTA
-        self.sl_pr1_c=-0.05  # STOP LOSS
-        # min_desicion_pr1_c  = 60
-        self.umbral_manifestacion_pR1_c=0.0379
-        self.diamante_pr1_c = [self.umbral_manifestacion_pR1_c, 0.079 ] # DIAMANTE DE COMPRA
-        self.resta_pr1_c = [0.01, 0.02 ] # RETROCESO DEL DIAMANTE 
+        self.sl_pr1_c=-0.03  # STOP LOSS
+        # min_desicion_pr1_i  = 60
+        self.umbral_manifestacion_pR1_c=0.023
+        self.diamante_pr1_c = [self.umbral_manifestacion_pR1_i, 0.0379 ] # DIAMANTE DE COMPRA
+        self.resta_pr1_c =[0.0295,self.inf_n ]# RETROCESO DEL DIAMANTE 
 
         # ==================================
         # =======   PUT - R1-E    ==========  COMENTADA

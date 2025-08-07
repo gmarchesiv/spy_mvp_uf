@@ -33,21 +33,21 @@ def req_ETFs(app, etf):
 
     for i, contract in enumerate(contracts, start=5):
         app.reqMktData(i, contract, "", False, False, [])
-        time.sleep(2)
+        # time.sleep(2)
         app.etfs[i] = {
             "symbol": contract.symbol,
             "price": 0,
             "contract": contract,
         }
 
-    loadData = True
+    # loadData = True
 
-    while loadData:
-        readyEtf = 0
+    # while loadData:
+    #     readyEtf = 0
 
-        for i in app.etfs:
-            if app.etfs[i]["price"] > 0:
-                readyEtf += 1
-        if readyEtf == len(app.etfs):
-            loadData = False
-        time.sleep(0.5)
+    #     for i in app.etfs:
+    #         if app.etfs[i]["price"] > 0:
+    #             readyEtf += 1
+    #     if readyEtf == len(app.etfs):
+    #         loadData = False
+    #     time.sleep(0.5)

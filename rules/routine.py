@@ -34,11 +34,32 @@ def data_susciption(app, params, vars):
 
     printStamp(" - Cargando Data de ETFs - ")
     req_ETFs(app, params.etf)
-    printStamp(" - FIN de Cargando Data de ETFs - ")
+    # printStamp(" - FIN de Cargando Data de ETFs - ")
 
     printStamp(" - Cargando Data de Opciones - ")
     req_Options(app, params, vars, params.etf)
-    printStamp(" - FIN de Cargando Data de Opciones - ")
+    # printStamp(" - FIN de Cargando Data de Opciones - ")
+
+    printStamp(" - Esperando Datos - ")
+
+    while True:
+        ready  = 0
+        if app.etfs[5]["price"] > 0:
+            ready += 1
+        if app.etfs[6]["price"] > 0:
+            ready += 1
+        if app.options[1]["ASK"] > 0 and app.options[1]["BID"] > 0:
+            ready += 1
+
+        if app.options[2]["ASK"] > 0 and app.options[2]["BID"] > 0:
+            ready += 1
+ 
+        if ready == 4:
+            break
+
+        time.sleep(0.5)
+
+    printStamp(" - Datos Recibidos - ")
 
 
 # ACTUALIZA LOS STATUS

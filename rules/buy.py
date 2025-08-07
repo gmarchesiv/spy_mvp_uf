@@ -325,24 +325,25 @@ def buy_Put(app, vars, params):
     #########################################################
     ###################    PUT R1 C       ###################
     #########################################################
-    # elif (
-    #     (timeNow >= params.timePut_r1_c[0] and timeNow < params.timePut_r1_c[1])
-    #     and (vars.dput >= params.dput_r1_c[0] and vars.dput < params.dput_r1_c[1])
-    #     and (vars.doput >= params.doput_r1_c[0] and vars.doput < params.doput_r1_c[1])
-    # ):
-    #     flag_buy = buy(
-    #         params,
-    #         app,
-    #         vars,
-    #         "P",
-    #         "R1-C",
-    #         vars.pask,
-    #         app.options[2]["contract"],
-    #         app.options[2]["symbol"],
-    #     )
+    elif (
+        (timeNow >= params.timePut_r1_c[0] and timeNow < params.timePut_r1_c[1])
+        and (vars.dput >= params.dput_r1_c[0] and vars.dput < params.dput_r1_c[1])
+        and (vars.doput >= params.doput_r1_c[0] and vars.doput < params.doput_r1_c[1])
+        and (vars.label==params.labelPut_r1_c ) 
+    ):
+        flag_buy = buy(
+            params,
+            app,
+            vars,
+            "P",
+            "R1-C",
+            vars.pask,
+            app.options[2]["contract"],
+            app.options[2]["symbol"],
+        )
 
-    #     if flag_buy == False:
-    #         return
+        if flag_buy == False:
+            return
     #    
     #########################################################
     ###################    PUT R1 FAST    ###################
@@ -552,10 +553,10 @@ def calculos_put(vars, params):
     else:
         pass
 
-    # RESET PUT R1-E
-    # if vars.doput >= params.doput_r1_e[1]:
-    #     vars.flag_Put_reset_r1_e = False
-    # elif vars.doput < params.doput_r1_e[0]:
-    #     vars.flag_Put_reset_r1_e = True
-    # else:
-    #     pass
+    # RESET PUT R1-C
+    if vars.doput >= params.doput_r1_c[1]:
+        vars.flag_Put_reset_r1_c = False
+    elif vars.doput < params.doput_r1_c[0]:
+        vars.flag_Put_reset_r1_c = True
+    else:
+        pass

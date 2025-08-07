@@ -27,14 +27,40 @@ def sellOptions(app, vars, params):
         asyncio.run(comparar_precios(vars, params))
  
     if vars.call:
+        # sell_obligatoria(app, vars, params,"C")
         sellCall(app, params, vars)
         return
     elif vars.put:
+        # sell_obligatoria(app, vars, params,"P")
         sellPut(app, params, vars)
         return
     else:
         return
 
+def sell_obligatoria(app, vars, params,tipo):
+    params.max_askbid_venta_abs=params.max_askbid_venta_forzada
+    if tipo == "C":
+        val = 1
+        if vars.askbid_call > params.max_askbid_venta_abs or vars.cbid <= 0:
+            return False
+    elif tipo == "P":
+        val = 2
+        if vars.askbid_put > params.max_askbid_venta_abs or vars.pbid <= 0:
+            return False
+    else:
+        print("-ERROR SELL OBLIGATORIO-")
+        return
+    vars.venta_intentos=params.intentos
+    sell_forzada(
+            app,
+            vars,
+            params,
+            tipo,
+            "FORZADO",
+            app.options[val]["contract"],
+            app.options[val]["symbol"],
+        )
+    return
  
 
 def sellCall(app, params, vars):
@@ -48,6 +74,9 @@ def sellCall(app, params, vars):
         return
     if vars.cbid <= 0:
         return
+    
+ 
+
     vars.rentabilidad = vars.cbid / vars.priceBuy - 1
 
     read_rentabilidad(vars)
@@ -595,6 +624,9 @@ def sellPut(app, params, vars):
         return
     if vars.pbid <= 0:
         return
+    
+ 
+
     vars.rentabilidad = vars.pbid / vars.priceBuy - 1
     read_rentabilidad(vars)
     # CALCULAR RENTABILIDAD vars.pico

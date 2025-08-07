@@ -31,7 +31,7 @@ TRADING MODE: {params.typeIB}
 ======================
 """
     try:
-        sleep_time = random.uniform(1, 10)
+        sleep_time = random.uniform(1, 7)
         time.sleep(sleep_time)
         sendTelegram(params, msg)
     except:

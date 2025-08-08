@@ -37,4 +37,15 @@ class broadcasting:
         
  
  
+        file_name = "/usr/src/app/data/broadcasting.json"
+        with open(file_name, "r") as file:
+            datos = json.load(file)
+     
+        
+            datos["sell"] = self.sell
+            datos["max_askbid_venta_abs"] = self.max_askbid_venta_abs
+
+        with open(file_name, "w") as file:
+            json.dump(datos, file, indent=4)
+ 
 

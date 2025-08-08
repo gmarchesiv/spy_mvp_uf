@@ -13,6 +13,8 @@ async def send_message(text, chat_id, bot):
 
 async def main(msg, chat_id, bot):
     # Sending a message
+    sleep_time = random.uniform(1, 15)
+    time.sleep(sleep_time)
     await send_message(text=msg, chat_id=chat_id, bot=bot)
 
 
@@ -31,8 +33,7 @@ TRADING MODE: {params.typeIB}
 ======================
 """
     try:
-        sleep_time = random.uniform(1, 7)
-        time.sleep(sleep_time)
+      
         sendTelegram(params, msg)
     except:
         printStamp("-ERROR AL ENVIAR TELEGRAM: sendStart-")
@@ -48,8 +49,7 @@ TOTAL CASH : $ {app.wallet["TotalCashValue"]}
 ======================
 """
     try:
-        sleep_time = random.uniform(1, 10)
-        time.sleep(sleep_time)
+        
         sendTelegram(params, msg)
     except:
         printStamp("-ERROR AL ENVIAR TELEGRAM: sendEnd-")
@@ -69,8 +69,7 @@ REGLA : {vars.regla_ant}
 ======================
 """
     try:
-        sleep_time = random.uniform(1, 10)
-        time.sleep(sleep_time)
+  
         sendTelegram(params, msg)
     except:
         printStamp("-ERROR AL ENVIAR TELEGRAM: sendBuy-")
@@ -89,8 +88,7 @@ REGLA : {vars.regla_ant}
 ======================
 """
     try:
-        sleep_time = random.uniform(1, 10)
-        time.sleep(sleep_time)
+        
         sendTelegram(params, msg)
     except:
         printStamp("-ERROR AL ENVIAR TELEGRAM: sendSell-")
@@ -106,8 +104,7 @@ TIPO: {razon}
 ======================
 """
     try:
-        sleep_time = random.uniform(1, 5)
-        time.sleep(sleep_time)
+         
         sendTelegram(params, msg)
     except:
         printStamp("-ERROR AL ENVIAR TELEGRAM: sendError-")

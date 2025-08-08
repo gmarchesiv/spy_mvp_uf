@@ -121,7 +121,7 @@ class parameters:
         self.sl_cr1=-0.04 # STOP LOSS
         # min_desicion_cr1  = 60
         self.umbral_manifestacion_cR1=0.023
-        self.diamante_cr1 = [self.umbral_manifestacion_cR1  ,0.04  ]  # DIAMANTE DE COMPRA
+        self.diamante_cr1 = [self.umbral_manifestacion_cR1  ,0.039  ]  # DIAMANTE DE COMPRA
         self.resta_cr1 = [0.0295,self.inf_n ] # RETROCESO DEL DIAMANTE 
 
         # ==================================

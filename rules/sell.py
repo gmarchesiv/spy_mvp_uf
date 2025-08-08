@@ -27,8 +27,8 @@ def sellOptions(app, vars, params):
         asyncio.run(comparar_precios(vars, params))
  
     if vars.call:
-        # sell_obligatoria(app, vars, params,"C")
-        sellCall(app, params, vars)
+        sell_obligatoria(app, vars, params,"C")
+        # sellCall(app, params, vars)
         return
     elif vars.put:
         # sell_obligatoria(app, vars, params,"P")

@@ -98,6 +98,11 @@ class parameters:
         self.tiempo_contulta=5
 
         self.proteccion_ask_bid=[[dt_time(9, 45,0), dt_time(9, 45,18)],[dt_time(10, 0,0), dt_time(10,0,18 )]]
+
+
+        self.proteccion_compra=[ dt_time(9, 44,0), dt_time(9, 45,30) ]
+        self.proteccion_compra_2=[ dt_time(9, 59,0), dt_time(10, 0,15) ]
+        self.proteccion_compra_call_r1=[ dt_time(9, 43,0), dt_time(9, 45,30)  ]
         #########################################################
         ####################      CALL        ###################
         #########################################################
@@ -121,7 +126,7 @@ class parameters:
         self.sl_cr1=-0.04 # STOP LOSS
         # min_desicion_cr1  = 60
         self.umbral_manifestacion_cR1=0.023
-        self.diamante_cr1 = [self.umbral_manifestacion_cR1  ,0.039  ]  # DIAMANTE DE COMPRA
+        self.diamante_cr1 = [self.umbral_manifestacion_cR1  ,0.0379  ]  # DIAMANTE DE COMPRA
         self.resta_cr1 = [0.0295,self.inf_n ] # RETROCESO DEL DIAMANTE 
 
         # ==================================
@@ -137,7 +142,7 @@ class parameters:
         self.sl_cr1_e=-0.042  # STOP LOSS
         # min_desicion_cr1_e  = 60
         self.umbral_manifestacion_cR1_e=0.023
-        self.diamante_cr1_e = [self.umbral_manifestacion_cR1_e  ,0.039] # DIAMANTE DE COMPRA
+        self.diamante_cr1_e = [self.umbral_manifestacion_cR1_e  ,0.0379] # DIAMANTE DE COMPRA
         self.resta_cr1_e = [0.043, 0.005 ] # RETROCESO DEL DIAMANTE 
 
         # ==================================
@@ -153,7 +158,7 @@ class parameters:
         self.sl_cr1_e2=-0.035   # STOP LOSS
         # min_desicion_cr1_e2  = 60
         self.umbral_manifestacion_cR1_e2=0.023
-        self.diamante_cr1_e2 = [self.umbral_manifestacion_cR1_e2,0.039,0.08  ] # DIAMANTE DE COMPRA
+        self.diamante_cr1_e2 = [self.umbral_manifestacion_cR1_e2,0.0379,0.08  ] # DIAMANTE DE COMPRA
         self.resta_cr1_e2 =[ 0.0295, 0.01,self.inf_n ] # RETROCESO DEL DIAMANTE 
 
         # ==================================

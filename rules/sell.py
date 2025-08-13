@@ -262,6 +262,62 @@ def sellCall(app, params, vars):
 
                 return
 
+    #########################################################
+    ################      CALL  R3         ##################
+    #########################################################
+    elif vars.tipo == "R3"  :
+
+        # MANIFIESTA
+        if vars.manifesto:
+            # DIAMANTE
+            for y in range(vars.ugs_n, len(params.diamante_cr3)):
+                if round(vars.pico, 3) > params.diamante_cr3[y]:
+                    vars.ugs_n = y
+                    if vars.ugs_n != vars.ugs_n_ant:
+                        vars.minutos = 0
+                        vars.ugs_n_ant = vars.ugs_n
+                else:
+                    break
+            # MAXIMA RENTABILIDAD
+            if vars.rentabilidad <= (vars.pico - params.resta_cr3[vars.ugs_n]):
+
+                name = f"T{vars.ugs_n}"
+                sell(
+                    app,
+                    vars,
+                    params,
+                    "C",
+                    name,
+                    app.options[1]["contract"],
+                    app.options[1]["symbol"],
+                )
+
+                return
+
+            else:
+                pass
+
+        # AUN NO MANIFIESTA
+        else:
+
+            # vars.manifesto
+            if vars.rentabilidad >= params.umbral_manifestacion_cR3:
+                vars.manifesto = True
+                vars.minutos = 0
+
+            # STOP LOSS
+            elif vars.rentabilidad <= params.sl_cr3:
+                sell(
+                    app,
+                    vars,
+                    params,
+                    "C",
+                    "SL",
+                    app.options[1]["contract"],
+                    app.options[1]["symbol"],
+                )
+
+                return
 
     #########################################################
     ################      CALL  R1  E2      ##################

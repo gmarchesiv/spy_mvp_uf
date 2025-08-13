@@ -85,6 +85,30 @@ def buy_Call(app, vars, params):
             return
         
     #########################################################
+    ####################      CALL R3     ###################
+    #########################################################
+
+    elif (not (timeNow >= params.proteccion_compra_call_r1[0] and timeNow < params.proteccion_compra_call_r1[1]) and 
+                        not (timeNow >= params.proteccion_compra_2[0] and timeNow < params.proteccion_compra_2[1]) )and(
+        (timeNow >= params.timeCall_r3[0] and timeNow < params.timeCall_r3[1])
+        and (vars.dcall >= params.dcall_r3[0] and vars.dcall < params.dcall_r3[1])
+        and (vars.docall >= params.docall_r3[0] and vars.docall <= params.docall_r3[1])
+        and  (vars.label==params.labelCall_r3 )and vars.flag_Call_R2==False
+    ):
+        flag_buy = buy(
+            params,
+            app,
+            vars,
+            "C",
+            "R3",
+            vars.cask,
+            app.options[1]["contract"],
+            app.options[1]["symbol"],
+        )
+
+        if flag_buy == False:
+            return
+    #########################################################
     ###################    CALL R1 FAST   ###################
     #########################################################
 

@@ -102,7 +102,7 @@ class parameters:
 
         self.proteccion_compra=[ dt_time(9, 44,0), dt_time(9, 45,30) ]
         self.proteccion_compra_2=[ dt_time(9, 59,0), dt_time(10, 0,15) ]
-        self.proteccion_compra_call_r1=[ dt_time(9, 43,0), dt_time(9, 45,30)  ]
+        self.proteccion_compra_call_r1=[ dt_time(9, 44,0), dt_time(9, 45,30)  ]
         #########################################################
         ####################      CALL        ###################
         #########################################################
@@ -117,9 +117,9 @@ class parameters:
         # =========== CALL - R1 ============
         # ==================================
         
-        self.dcall_r1 =  [0.125, 0.2]
-        self.docall_r1 =  [0.035, 0.0595]
-        self.timeCall_r1 = [dt_time(9, 43), dt_time(9, 55)]
+        self.dcall_r1 =  [0.125, 0.18]
+        self.docall_r1 =  [0.036, 0.0595]
+        self.timeCall_r1 = [dt_time(9, 45), dt_time(9, 55)]
         self.labelCall_r1 =0
         
         # VENTA
@@ -134,7 +134,7 @@ class parameters:
         
         self.dcall_r3 =  [ 0.21, 0.25]
         self.docall_r3 =   [0.035, 0.0595]
-        self.timeCall_r3 =  [dt_time(9, 35), dt_time(9, 55)]
+        self.timeCall_r3 =  [dt_time(9, 35), dt_time(9, 50)]
         self.labelCall_r3=0
         
         # VENTA
@@ -148,8 +148,8 @@ class parameters:
         # ==================================
         
         self.dcall_r1_e = [-0.17, 0]
-        self.docall_r1_e = [0.105, 0.115]
-        self.timeCall_r1_e = [dt_time(10, 15), dt_time(11, 15)]
+        self.docall_r1_e = [0.105, 0.11]
+        self.timeCall_r1_e = [dt_time(10, 25), dt_time(11, 15)]
         self.labelCall_r1_e =0
         
         # VENTA
@@ -196,7 +196,7 @@ class parameters:
         # ==================================
         
         self.dcall_r1_i =[-0.175, 0]
-        self.docall_r1_i =  [0.106, 0.115]
+        self.docall_r1_i =  [0.106, 0.111]
         self.timeCall_r1_i = [dt_time(9, 35), dt_time(9, 45)]
         self.labelCall_r1_i=1
         
@@ -213,7 +213,7 @@ class parameters:
         # ==================================
         
         self.dcall_r1_c =[-0.14, 0]
-        self.docall_r1_c = [0.05, 0.085]
+        self.docall_r1_c = [0.05, 0.06]
         self.timeCall_r1_c = [dt_time(11, 35), dt_time(11, 50)]
         self.labelCall_r1_c=0
         # VENTA
@@ -230,7 +230,7 @@ class parameters:
         # COMPRA
         self.dcall_r2 = [0.3, 0.61]
         self.docall_r2 = [0.042, 0.057]  
-        self.timeCall_r2 = [dt_time(9, 35), dt_time(10, 45)]
+        self.timeCall_r2 = [dt_time(9, 35), dt_time(10, 40)]
         self.labelCall_r2=0
         self.umbral_cr2=0.2
         
@@ -250,7 +250,7 @@ class parameters:
         # ==================================
         # COMPRA
         
-        self.dcall_r1_f = [0.02, 0.15]
+        self.dcall_r1_f = [0.02, 0.13]
         self.docall_r1_f = [0.095, 0.11]
         self.timecall_r1_f = [dt_time(12, 30), dt_time(12, 33)]
         self.labelcall_r1_f=0

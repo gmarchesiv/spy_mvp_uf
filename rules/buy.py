@@ -166,7 +166,7 @@ def buy_Call(app, vars, params):
     #     (timeNow >= params.timeCall_r1_e2[0] and timeNow < params.timeCall_r1_e2[1])
     #     and (vars.dcall >= params.dcall_r1_e2[0] and vars.dcall < params.dcall_r1_e2[1])
     #     and (vars.docall >= params.docall_r1_e2[0] and vars.docall <= params.docall_r1_e2[1])
-    #     and  (vars.label==params.labelCall_r1_e2 ) 
+    #     and  (vars.label==params.labelCall_r1_e2 ) and flag_Call_reset_r1_e2
     # ):
     #     flag_buy = buy(
     #         params,
@@ -415,7 +415,7 @@ def buy_Put(app, vars, params):
         (timeNow >= params.timePut_r1_i[0] and timeNow < params.timePut_r1_i[1])
         and (vars.dput >= params.dput_r1_i[0] and vars.dput < params.dput_r1_i[1])
         and (vars.doput >= params.doput_r1_i[0] and vars.doput < params.doput_r1_i[1])
-        and (vars.label==params.labelPut_r1_i ) and vars.flag_Call_R2 ==False
+        and (vars.label==params.labelPut_r1_i ) and vars.flag_Call_R2 ==False and vars.flag_Put_reset_r1_i
 
     ):
         flag_buy = buy(
@@ -577,6 +577,13 @@ def calculos_call(vars, params):
     else:
         pass
 
+    # RESET CALL E2
+    if vars.docall>= params.docall_r1_e2[1]:
+        vars.flag_Call_reset_r1_e2 = False
+    elif vars.docall < params.docall_r1_e2[0]:
+        vars.flag_Call_reset_r1_e2 = True
+    else:
+        pass
  
 
 def calculos_put(vars, params):
@@ -608,5 +615,13 @@ def calculos_put(vars, params):
         vars.flag_Put_reset_r1_c = False
     elif vars.doput < params.doput_r1_c[0]:
         vars.flag_Put_reset_r1_c = True
+    else:
+        pass
+
+     # RESET PUT inv
+    if vars.doput >= params.doput_r1_i[1]:
+        vars.flag_Put_reset_r1_i = False
+    elif vars.doput < params.doput_r1_i[0]:
+        vars.flag_Put_reset_r1_i = True
     else:
         pass

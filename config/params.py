@@ -94,7 +94,7 @@ class parameters:
         self.frecuencia_muestra =[i for i in range(0, 60, 2)]
         self.frecuencia_accion = [i for i in range(0, 60, 2)]
  
-        self.intentos=4
+        self.intentos=1
         self.tiempo_contulta=5
 
         self.proteccion_ask_bid=[[dt_time(9, 45,0), dt_time(9, 45,18)],[dt_time(10, 0,0), dt_time(10,0,18 )]]

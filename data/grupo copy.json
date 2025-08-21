@@ -32,7 +32,14 @@
             "ip": "10.8.0.36:8001",
             "user": "Gloria Velasco"
         },
- 
+        {
+            "ip": "10.8.0.38:8001",
+            "user": "Karin Granda"
+        },
+        {
+            "ip": "10.8.0.34:8001",
+            "user": "Marissa Chiappe"
+        },
         {
             "ip": "10.8.0.45:8001",
             "user": "Antonio Garcia "

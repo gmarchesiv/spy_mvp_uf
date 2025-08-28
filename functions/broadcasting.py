@@ -83,7 +83,7 @@ def broadcasting_sell(vars,params,app):
                         return
                   
                     return
-def broadcasting_sell_auto(vars,params,app,bc):
+def broadcasting_sell_auto(vars,params,app,varsBc,varsLb):
     
     # Lectura del Archivo
     file_name = "/usr/src/app/data/broadcasting.json"
@@ -114,7 +114,7 @@ def broadcasting_sell_auto(vars,params,app,bc):
                     
                     from rules.sell import sell_forzada
 
-                    venta=sell_forzada(
+                    venta=sell_forzada(varsLb,
                             app,
                             vars,
                             params,
@@ -124,7 +124,7 @@ def broadcasting_sell_auto(vars,params,app,bc):
                             app.options[val]["symbol"],
                         )
                     if venta:
-                        bc.sell=False
+                        varsBc.sell=False
                         data["sell"] =  False 
 
                         with open(file_name, "w") as file:

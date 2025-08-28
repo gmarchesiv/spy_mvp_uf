@@ -21,14 +21,14 @@ from functions.saveJson import saveJson
 
 
 # INICIO DE LAS REGLAS DE VENTA
-def sellOptions(app, vars, params):
+def sellOptions(app, vars, params,varsLb):
     if vars.minutos_trade <=params.tiempo_contulta :
 
         asyncio.run(comparar_precios(vars, params))
  
     if vars.call:
         # sell_obligatoria(app, vars, params,"C")
-        sellCall(app, params, vars)
+        sellCall(app, params, vars,varsLb)
         return
     elif vars.put:
         # sell_obligatoria(app, vars, params,"P")
@@ -37,7 +37,7 @@ def sellOptions(app, vars, params):
     else:
         return
 
-def sell_obligatoria(app, vars, params,tipo):
+def sell_obligatoria(app, vars, params,tipo,varsLb):
     params.max_askbid_venta_abs=params.max_askbid_venta_forzada
     if tipo == "C":
         val = 1
@@ -51,7 +51,7 @@ def sell_obligatoria(app, vars, params,tipo):
         print("-ERROR SELL OBLIGATORIO-")
         return
     vars.venta_intentos=params.intentos
-    sell_forzada(
+    sell_forzada(varsLb,
             app,
             vars,
             params,
@@ -63,7 +63,7 @@ def sell_obligatoria(app, vars, params,tipo):
     return
  
 
-def sellCall(app, params, vars):
+def sellCall(app, params, vars,varsLb):
 
     timeNow = datetime.now(params.zone).time()
 
@@ -100,7 +100,7 @@ def sellCall(app, params, vars):
         
       
         name = "FD"
-        sell(
+        sell(varsLb,
             app,
             vars,
             params,
@@ -117,7 +117,7 @@ def sellCall(app, params, vars):
         and vars.rentabilidad < (vars.pico - params.perdida_maxima_c)
         and vars.manifesto == False and vars.tipo == "R2" 
     ):
-        sell(
+        sell(varsLb,
             app,
             vars,
             params,
@@ -136,7 +136,7 @@ def sellCall(app, params, vars):
         and vars.rentabilidad < params.perdida_maxima_c_abs
         and vars.manifesto == False and vars.tipo != "R2" 
     ):
-        sell(
+        sell(varsLb,
             app,
             vars,
             params,
@@ -168,7 +168,7 @@ def sellCall(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_cr1[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -193,7 +193,7 @@ def sellCall(app, params, vars):
 
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr1:
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -225,7 +225,7 @@ def sellCall(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_cr1_e[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -250,7 +250,7 @@ def sellCall(app, params, vars):
 
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr1_e:
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -282,7 +282,7 @@ def sellCall(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_cr3[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -307,7 +307,7 @@ def sellCall(app, params, vars):
 
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr3:
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -339,7 +339,7 @@ def sellCall(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_cr1_e2[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -364,7 +364,7 @@ def sellCall(app, params, vars):
 
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr1_e2:
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -397,7 +397,7 @@ def sellCall(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_cr1_fast[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -422,7 +422,7 @@ def sellCall(app, params, vars):
 
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr1_fast:
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -453,7 +453,7 @@ def sellCall(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_cr2[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -478,7 +478,7 @@ def sellCall(app, params, vars):
 
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr2:
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -511,7 +511,7 @@ def sellCall(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_cr1_i[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -536,7 +536,7 @@ def sellCall(app, params, vars):
 
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr1_fast:
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -568,7 +568,7 @@ def sellCall(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_cr1_c[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -593,7 +593,7 @@ def sellCall(app, params, vars):
 
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr1_c:
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -627,7 +627,7 @@ def sellCall(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_cr1_f[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -652,7 +652,7 @@ def sellCall(app, params, vars):
 
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr1_f:
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -671,7 +671,7 @@ def sellCall(app, params, vars):
     vars.venta_intentos=0
     vars.regla_broadcasting=""
 
-def sellPut(app, params, vars):
+def sellPut(app, params, vars,varsLb):
 
     timeNow = datetime.now(params.zone).time()
 
@@ -706,7 +706,7 @@ def sellPut(app, params, vars):
     
     if timeNow >= params.fd:
          
-        sell(
+        sell(varsLb,
             app,
             vars,
             params,
@@ -724,7 +724,7 @@ def sellPut(app, params, vars):
         and vars.rentabilidad < (vars.pico - params.perdida_maxima_p)
         and vars.manifesto == False and vars.tipo == "R2"
     ):
-        sell(
+        sell(varsLb,
             app,
             vars,
             params,
@@ -742,7 +742,7 @@ def sellPut(app, params, vars):
         and vars.rentabilidad < params.perdida_maxima_p_abs
         and vars.manifesto == False and vars.tipo != "R2"
     ):
-        sell(
+        sell(varsLb,
             app,
             vars,
             params,
@@ -775,7 +775,7 @@ def sellPut(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_pr1[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -801,7 +801,7 @@ def sellPut(app, params, vars):
             # SL
             elif vars.rentabilidad <= params.sl_pr1:
 
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -833,7 +833,7 @@ def sellPut(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_pr1_i[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -859,7 +859,7 @@ def sellPut(app, params, vars):
             # SL
             elif vars.rentabilidad <= params.sl_pr1_i:
 
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -892,7 +892,7 @@ def sellPut(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_pr1_c[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -918,7 +918,7 @@ def sellPut(app, params, vars):
             # SL
             elif vars.rentabilidad <= params.sl_pr1_c:
 
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -951,7 +951,7 @@ def sellPut(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_pr1_e[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -977,7 +977,7 @@ def sellPut(app, params, vars):
             # SL
             elif vars.rentabilidad <= params.sl_pr1_e:
 
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -1010,7 +1010,7 @@ def sellPut(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_pr1_fast[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -1036,7 +1036,7 @@ def sellPut(app, params, vars):
             # SL
             elif vars.rentabilidad <= params.sl_pr1_fast:
 
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -1069,7 +1069,7 @@ def sellPut(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_pr2[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -1096,7 +1096,7 @@ def sellPut(app, params, vars):
             # SL
             elif vars.rentabilidad <= params.sl_pr2:
 
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -1129,7 +1129,7 @@ def sellPut(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_pr2_e[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -1155,7 +1155,7 @@ def sellPut(app, params, vars):
             # SL
             elif vars.rentabilidad <= params.sl_pr2_e:
 
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -1190,7 +1190,7 @@ def sellPut(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_pr1_f[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -1216,7 +1216,7 @@ def sellPut(app, params, vars):
             # SL
             elif vars.rentabilidad <= params.sl_pr1_f:
 
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -1249,7 +1249,7 @@ def sellPut(app, params, vars):
             if vars.rentabilidad <= (vars.pico - params.resta_pr1_f2[vars.ugs_n]):
 
                 name = f"T{vars.ugs_n}"
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -1275,7 +1275,7 @@ def sellPut(app, params, vars):
             # SL
             elif vars.rentabilidad <= params.sl_pr1_f2:
 
-                sell(
+                sell(varsLb,
                     app,
                     vars,
                     params,
@@ -1291,7 +1291,7 @@ def sellPut(app, params, vars):
     vars.venta_intentos=0
     vars.regla_broadcasting=""
      
-def sell(app, vars, params, tipo, regla, contract, symbol):
+def sell( varsLb,app, vars, params, tipo, regla, contract, symbol):
     from rules.routine import calculations
     
     if vars.rentabilidad<0:
@@ -1329,7 +1329,7 @@ def sell(app, vars, params, tipo, regla, contract, symbol):
         timeNow = datetime.now(params.zone).time()
         if (timeNow.minute % 10 == 0 or timeNow.minute % 10 == 5):
             if vars.flag_minuto_label:
-                generar_label(params, vars,app)
+                generar_label(params, varsLb,app)
                 vars.flag_minuto_label=False
                 time.sleep(0.5)
         else:
@@ -1361,7 +1361,7 @@ def sell(app, vars, params, tipo, regla, contract, symbol):
     read_sell(vars, tipo)
     return True
 
-def sell_forzada(app, vars, params, tipo, regla, contract, symbol):
+def sell_forzada(varsLb,app, vars, params, tipo, regla, contract, symbol):
     from rules.routine import calculations
  
     # LECTURA PREVIA
@@ -1384,7 +1384,7 @@ def sell_forzada(app, vars, params, tipo, regla, contract, symbol):
         timeNow = datetime.now(params.zone).time()
         if (timeNow.minute % 10 == 0 or timeNow.minute % 10 == 5):
             if vars.flag_minuto_label:
-                generar_label(params, vars,app)
+                generar_label(params, varsLb,app)
                 vars.flag_minuto_label=False
                 time.sleep(0.5)
         else:

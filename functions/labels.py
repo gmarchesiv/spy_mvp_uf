@@ -9,78 +9,78 @@ import joblib
 
 from database.repository.repository import writeLabel      
 
-def generar_label(params, vars,app):
+def generar_label(params, varsLb,app):
    
-    generar_garch(params, vars,app)
+    generar_garch(params, varsLb,app)
    
  
     
-    generar_rsi(params, vars,app)
+    generar_rsi(params, varsLb,app)
   
-    generar_d_pico(params, vars,app)
+    generar_d_pico(params, varsLb,app)
  
 
 
 
-    clusterizar(params, vars,app)
+    clusterizar(params, varsLb,app)
 
-    generar_hour_back(params, vars,app)
+    generar_hour_back(params, varsLb,app)
     
     pass
 
 
 
-def generar_garch(params, vars,app):
-    vars.varianza=params.omega+(params.alpha+params.gamma*vars.signo)*  math.pow(vars.retorno-vars.mu, 2) +params.beta*vars.varianza
+def generar_garch(params, varsLb,app):
+    varsLb.varianza=params.omega+(params.alpha+params.gamma*varsLb.signo)*  math.pow(varsLb.retorno-varsLb.mu, 2) +params.beta*varsLb.varianza
     
-    vars.garch=round(100* math.sqrt(  params.days_year*vars.varianza),4)
+    varsLb.garch=round(100* math.sqrt(  params.days_year*varsLb.varianza),4)
    
     
-    vars.signo=0 if (vars.retorno-vars.mu)>0 else 1
+    varsLb.signo=0 if (varsLb.retorno-varsLb.mu)>0 else 1
  
-    vars.retorno_lista.append(app.etfs[5]['price'])
+    varsLb.retorno_lista.append(app.etfs[5]['price'])
  
-    vars.retorno=app.etfs[5]['price'] / vars.retorno_lista[0] -1
+    varsLb.retorno=app.etfs[5]['price'] / varsLb.retorno_lista[0] -1
     
 
-    vars.mu= ((vars.mu*vars.mu_conteo) + vars.retorno)/(vars.mu_conteo+1)
-    vars.mu_conteo=vars.mu_conteo+1
+    varsLb.mu= ((varsLb.mu*varsLb.mu_conteo) + varsLb.retorno)/(varsLb.mu_conteo+1)
+    varsLb.mu_conteo=varsLb.mu_conteo+1
 
  
 
-def generar_hour_back(params, vars,app):
-    vars.ret_1H_back.append(app.etfs[5]['price'])
-    vars.ret_3H_back.append(app.etfs[5]['price'])
-    vars.ret_6H_back.append(app.etfs[5]['price'])
-    vars.ret_12H_back.append(app.etfs[5]['price'])
-    vars.ret_24H_back.append(app.etfs[5]['price'])
-    vars.ret_96H_back.append(app.etfs[5]['price'])
+def generar_hour_back(params, varsLb,app):
+    varsLb.ret_1H_back.append(app.etfs[5]['price'])
+    varsLb.ret_3H_back.append(app.etfs[5]['price'])
+    varsLb.ret_6H_back.append(app.etfs[5]['price'])
+    varsLb.ret_12H_back.append(app.etfs[5]['price'])
+    varsLb.ret_24H_back.append(app.etfs[5]['price'])
+    varsLb.ret_96H_back.append(app.etfs[5]['price'])
     pass
 
-def generar_rsi(params, vars,app):
-    vars.etf_price_lista.append(app.etfs[5]['price'])
-    print()
-    if len(vars.etf_price_lista)<4:
-        vars.rsi=0
+def generar_rsi(params, varsLb,app):
+    varsLb.etf_price_lista.append(app.etfs[5]['price'])
+   
+    if len(varsLb.etf_price_lista)<4:
+        varsLb.rsi=0
 
     else:
-        df=pd.DataFrame({"price":vars.etf_price_lista})
+        df=pd.DataFrame({"price":varsLb.etf_price_lista})
         df["rsi"]=ta.rsi(df["price"])
         df["rsi_prom_3"]=df["rsi"]*0.5+df["rsi"].shift(1)*0.25+df["rsi"].shift(2)*0.25
  
-        vars.rsi=float(df["rsi_prom_3"].iloc[-1])
+        varsLb.rsi=float(df["rsi_prom_3"].iloc[-1])
     pass
 
-def generar_d_pico(params, vars,app):
-    if app.etfs[5]['price'] > vars.pico_etf:
-        vars.pico_etf=app.etfs[5]['price']
+def generar_d_pico(params, varsLb,app):
+    if app.etfs[5]['price'] > varsLb.pico_etf:
+        varsLb.pico_etf=app.etfs[5]['price']
 
-    vars.d_pico=app.etfs[5]['price']/vars.pico_etf -1
+    varsLb.d_pico=app.etfs[5]['price']/varsLb.pico_etf -1
 
     pass
 
 
-def clusterizar(params, vars,app):
+def clusterizar(params, varsLb,app):
     import pandas as pd  
     import joblib
     from sklearn.cluster import KMeans
@@ -91,15 +91,15 @@ def clusterizar(params, vars,app):
 
         {
             "VIX_CLOSE":[app.etfs[6]['price']],
-            "SPY_GARCH":[vars.garch],
-            "ret_1H_back":[(app.etfs[5]['price']/ vars.ret_1H_back[0] -1)*100],
-            "ret_3H_back":[(app.etfs[5]['price']/ vars.ret_3H_back[0] -1)*100],
-            "ret_6H_back":[(app.etfs[5]['price']/ vars.ret_6H_back[0] -1)*100],
-            "ret_12H_back":[(app.etfs[5]['price']/ vars.ret_12H_back[0] -1)*100],
-            "ret_24H_back":[(app.etfs[5]['price']/ vars.ret_24H_back[0] -1)*100],
-            "ret_96H_back":[(app.etfs[5]['price']/ vars.ret_96H_back[0] -1)*100],
-            "rsi_prom_3":[vars.rsi],
-            "D_PICO":[vars.d_pico]
+            "SPY_GARCH":[varsLb.garch],
+            "ret_1H_back":[(app.etfs[5]['price']/ varsLb.ret_1H_back[0] -1)*100],
+            "ret_3H_back":[(app.etfs[5]['price']/ varsLb.ret_3H_back[0] -1)*100],
+            "ret_6H_back":[(app.etfs[5]['price']/ varsLb.ret_6H_back[0] -1)*100],
+            "ret_12H_back":[(app.etfs[5]['price']/ varsLb.ret_12H_back[0] -1)*100],
+            "ret_24H_back":[(app.etfs[5]['price']/ varsLb.ret_24H_back[0] -1)*100],
+            "ret_96H_back":[(app.etfs[5]['price']/ varsLb.ret_96H_back[0] -1)*100],
+            "rsi_prom_3":[varsLb.rsi],
+            "D_PICO":[varsLb.d_pico]
         }
     )
  
@@ -110,6 +110,6 @@ def clusterizar(params, vars,app):
     labels = km.predict(X_s)
     df_final["LABELS"] = labels
     df_final.reset_index(drop=True,inplace=True)
-    vars.label=df_final["LABELS"][0]
+    varsLb.label=df_final["LABELS"][0]
  
-    writeLabel(app, vars,params)
+    writeLabel(app, varsLb,params)

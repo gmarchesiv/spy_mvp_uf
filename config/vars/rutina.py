@@ -9,7 +9,7 @@ from collections import deque
 ###############################################
 #                  VARIABLES
 ###############################################
-class variables:
+class varsRutina:
     def __init__(self):
 
         file_name = "/usr/src/app/data/vars.json"
@@ -76,7 +76,7 @@ class variables:
         self.ugs_n_ant = self.data.get("ugs_n_ant", 0)
         self.pico = self.data.get("pico", 0)
         self.tipo = self.data.get("tipo", "")
-
+        self.hora_inicio = self.data.get("hora_inicio", "")
         ###############################################
         # VARIABLES DE TRADING
         ###############################################
@@ -118,69 +118,7 @@ class variables:
         self.bloqueo = self.data.get("bloqueo", True)
         self.exchange = self.data.get("exchange", "CBOE")
         self.status = self.data.get("status", "ON")
-
-        ###############################################
-        # BROADCASTING
-        ###############################################
-        self.hora_inicio = self.data.get("hora_inicio", "")
-        self.aliniar = self.data.get("aliniar", False)
-        self.sell_broadcasting = self.data.get("sell_broadcasting", False)
-        self.sell_tipo_broadcasting = self.data.get("sell_tipo_broadcasting", "")
-        self.sell_regla_broadcasting = self.data.get("sell_regla_broadcasting", "")
-        self.buy_broadcasting = self.data.get("buy_broadcasting", False)
-        self.buy_tipo_broadcasting = self.data.get("buy_tipo_broadcasting", "")
-        self.buy_regla_broadcasting = self.data.get("buy_regla_broadcasting", "")
-        self.buy = self.data.get("buy", False)
-        self.sell = self.data.get("sell", False)
-        self.user_broadcasting = self.data.get("user_broadcasting", "")
-        self.conexion = self.data.get("conexion", True)
-        self.venta_intentos= self.data.get("venta_intentos", 0)
-        self.regla_broadcasting = self.data.get("regla_broadcasting", "")
-
-
-
-        ###############################################
-        # LABEL
-        ###############################################
-        self.flag_minuto_label=self.data.get("flag_minuto_label", False)
-        self.label = self.data.get("label", 0)
-        self.retorno_lista = self.data.get("retorno_lista", [])
-        self.retorno = self.data.get("retorno", 0)
-        self.signo  = self.data.get("signo", 0)
-        self.varianza  = self.data.get("varianza", 0)
-
-
-        self.pico_etf=self.data.get("pico_etf", 608.48)
-        
-        self.d_pico  = self.data.get("d_pico", 0)   
-
-        self.ret_1H_back= self.data.get("ret_1H_back", [])
-        self.ret_3H_back= self.data.get("ret_3H_back", [])
-        self.ret_6H_back= self.data.get("ret_6H_back", [])
-        self.ret_12H_back= self.data.get("ret_12H_back", [])
-        self.ret_24H_back= self.data.get("ret_24H_back", [])
-        self.ret_96H_back= self.data.get("ret_96H_back", [])
-
-        self.etf_price_lista=self.data.get("etf_price_lista", [])
-
-        self.rsi=self.data.get("rsi",0)
-        # DEQUES
-        self.askbid_call_prom=deque(self.askbid_call_prom, maxlen=90)
-        self.askbid_put_prom=deque(self.askbid_put_prom, maxlen=90)
-
-        self.retorno_lista =  deque(self.retorno_lista, maxlen=79)
-
-        self.ret_1H_back= deque(self.ret_1H_back, maxlen=1)
-        self.ret_3H_back= deque(self.ret_3H_back, maxlen=3)
-        self.ret_6H_back= deque(self.ret_6H_back, maxlen=6)
-        self.ret_12H_back= deque(self.ret_12H_back, maxlen=12)
-        self.ret_24H_back= deque(self.ret_24H_back, maxlen=24)
-        self.ret_96H_back= deque(self.ret_96H_back, maxlen=96)
-        self.etf_price_lista=deque(self.etf_price_lista, maxlen=200)
-
-
-        self.mu=self.data.get("mu", 0.000371948)
-        self.mu_conteo=self.data.get("mu_conteo", 358124)
+  
 
         self.promedio_call=self.data.get("promedio_call",0)
         self.promedio_put=self.data.get("promedio_put",0)

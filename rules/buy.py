@@ -484,7 +484,7 @@ def buy_Put(app, vars, params):
         if flag_buy == False:
             return
 
-def buy(params, app, vars, tipo, regla, ask, contract, symbol):
+def buy(varsLb,params, app, vars, tipo, regla, ask, contract, symbol):
     from rules.routine import calculations
     #BROADCASTING
     if vars.buy_broadcasting ==False:
@@ -510,7 +510,7 @@ def buy(params, app, vars, tipo, regla, ask, contract, symbol):
 
         if (timeNow.minute % 10 == 0 or timeNow.minute % 10 == 5):
             if vars.flag_minuto_label:
-                generar_label(params, vars,app)
+                generar_label(params, varsLb,app)
                 vars.flag_minuto_label=False
                 time.sleep(0.5)
         else:

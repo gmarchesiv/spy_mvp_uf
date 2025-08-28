@@ -12,8 +12,10 @@ from config.IB.connection import test_ibkr_connection, ibkr_connection, load_app
 
 from config.IB.wallet import wallet_config 
 from config.params import parameters
-from config.vars import variables
-from config.broadcasting import broadcasting
+from config.vars.rutina import varsRutina
+from config.vars.broadcasting import varsBroadcasting
+from config.vars.app import varsApp
+from config.vars.label import varsLabel
 # DataBase
 from database.repository.repository import writeRegister
 
@@ -59,8 +61,10 @@ def main():
         # ================================
 
         # VARIABLES
-        vars = variables()
-        bc = broadcasting()
+        vars = varsRutina()
+        varsBc = varsBroadcasting()
+        varsLb=varsLabel()
+        varsApp=varsApp()
 
         # PARAMETROS
         params = parameters()
@@ -110,7 +114,7 @@ def main():
         # ====================
         #  - LIMPIEZA -
         # ====================
-        clean_broadcasting(vars )  # NO PUEDE INICIAR CON DATOS BROADCASTING
+ 
 
         now = datetime.now(params.zone).strftime("%Y-%m-%d")
 
@@ -118,7 +122,7 @@ def main():
             clean_vars(vars)
             vars.call_open = app.options[1]["BID"]
             vars.put_open = app.options[2]["BID"]
-            generar_label(params, vars,app)
+            generar_label(params, varsLb,app)
 
             timeNow = datetime.now(params.zone).time()
             if (timeNow.hour >= 9 and timeNow.minute >= 33):
@@ -142,7 +146,7 @@ def main():
             if params.fd >= timeNow:
                 if (timeNow.minute % 10 == 0 or timeNow.minute % 10 == 5):
                     if vars.flag_minuto_label:
-                        generar_label(params, vars,app)
+                        generar_label(params, varsLb,app)
                         vars.flag_minuto_label=False
                         time.sleep(0.5)
                 else:
@@ -155,7 +159,7 @@ def main():
                     if vars.call or vars.put:
                         broadcasting_sell(vars,params,app)
             
-                        broadcasting_sell_auto(vars,params,app,bc)
+                        broadcasting_sell_auto(vars,params,app,varsBc,varsLb)
                     if vars.compra:
                         broadcasting_buy(vars,params,app)
                     pass
@@ -199,7 +203,7 @@ def main():
                     timeNow = datetime.now(params.zone).time()
                     if (timeNow.minute % 10 == 0 or timeNow.minute % 10 == 5):
                         if vars.flag_minuto_label:
-                            generar_label(params, vars,app)
+                            generar_label(params, varsLb,app)
                             vars.flag_minuto_label=False
                             time.sleep(0.5)
                     else:
@@ -229,7 +233,7 @@ def main():
             timeNow = datetime.now(params.zone).time()
             if (timeNow.minute % 10 == 0 or timeNow.minute % 10 == 5):
                 if vars.flag_minuto_label:
-                    generar_label(params, vars,app)
+                    generar_label(params, varsLb,app)
                     vars.flag_minuto_label=False
                     time.sleep(0.5)
             else:

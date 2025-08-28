@@ -4,9 +4,8 @@ import json
 def clean_vars(vars):
     vars.compra = True
 
-    vars.flag_desicion = True
-    vars.flag_pos = False
-    vars.flag_neg = False
+ 
+ 
     vars.manifesto = False
 
     vars.ugs_n = 0
@@ -38,21 +37,21 @@ def clean_vars(vars):
 
 
 
-def clean_broadcasting(vars):
+def clean_broadcasting(varsBc):
     # LIMPIEZA DE LAS VARIBALES BROADCASTING
-    vars.aliniar = False
-    vars.sell_broadcasting = False
-    vars.sell_tipo_broadcasting = ""
-    vars.sell_regla_broadcasting = ""
-    vars.buy_broadcasting = False
-    vars.buy_tipo_broadcasting = ""
-    vars.buy_regla_broadcasting = ""
-    vars.buy = False
-    vars.sell = False
-    vars.regla_broadcasting = ""
-    vars.user_broadcasting = ""
+    varsBc.aliniar = False
+    varsBc.sell_broadcasting = False
+    varsBc.sell_tipo_broadcasting = ""
+    varsBc.sell_regla_broadcasting = ""
+    varsBc.buy_broadcasting = False
+    varsBc.buy_tipo_broadcasting = ""
+    varsBc.buy_regla_broadcasting = ""
+    varsBc.buy = False
+    varsBc.sell = False
+    varsBc.regla_broadcasting = ""
+    varsBc.user_broadcasting = ""
 
-    file_name = "/usr/src/app/data/vars.json"
+    file_name = "/usr/src/app/data/broadcasting.json"
     with open(file_name, "r") as file:
         datos = json.load(file)
 

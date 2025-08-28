@@ -17,37 +17,32 @@ from functions.logs import printStamp
 
 
 # Logica de Peticion de Data de opciones
-def req_Options(app, params, vars, etf):
+def req_Options(app, vars, etf):
+
+    #---------------------------------------------------
+    '''
+    Suscripcion de datos de contratos de opciones de 
+    tipo CALL y PUT.
+    '''
+    #---------------------------------------------------
 
     requestContract(app, etf, vars.strike_c, vars.exp, "C", vars.exchange)
-    # while True:
-    #     readyOpt = 0
-    #     if app.options[id]["ASK"] > 0:
-    #         readyOpt += 1
-    #     if app.options[id]["BID"] > 0:
-    #         readyOpt += 1
-    #     if readyOpt == 2:
-    #         break
-
-    #     time.sleep(0.5)
-
+  
     requestContract(app, etf, vars.strike_p, vars.exp, "P", vars.exchange)
-    # while True:
-    #     readyOpt = 0
-    #     if app.options[id]["ASK"] > 0:
-    #         readyOpt += 1
-    #     if app.options[id]["BID"] > 0:
-    #         readyOpt += 1
-    #     if readyOpt == 2:
-    #         break
-
-    #     time.sleep(0.5)
+    
 
 
 # Creacion de contratos de Opciones
 def create_contract_OPT(
     symbol, secType, exchange, currency, strike, expirations, typeOpt
 ):
+    
+    #---------------------------------------------------
+    '''
+    Genera la estructura del contrato de Opciones.
+    '''
+    #---------------------------------------------------
+
 
     contract = Contract()
     contract.symbol = symbol  # Símbolo del subyacente
@@ -108,6 +103,15 @@ def checkStrike(app, exp, etf, tipo, exchange):
 
 # peticion de data de un contrato
 def requestContract(app, etf, strikes, expirations, tipo, exchange):
+
+    #---------------------------------------------------
+    '''
+    Suscripcion de datos de contratos de opciones, 
+    genera un id y un diccionario para poder ser llamado,
+    este cuenta con informacion del contrato( precios,
+    id, tipo , exp).
+    '''
+    #---------------------------------------------------
 
     contracts = [
         create_contract_OPT(etf, "OPT", exchange, "USD", strikes, expirations, tipo)

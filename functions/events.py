@@ -13,27 +13,18 @@ from functions.logs import printStamp
 # ====================
 #  - Funciones -
 # ====================
-def isHoliday(zone):
-
-    # ====================
-    #  - Feriados -
-    # ====================
-
-    """
-    Revisamos si es Feriado antes de comenzar la rutina, si es el caso no continuara .
-    """
-    now = datetime.now(zone)
-    date_now = now.date()
-    feriados = holidays.CountryHoliday("US", prov="NY")
-    # ========================
-    #  - Logica del Feriado -
-    # ========================
-    if date_now in feriados:
-        return True
-    return False
+ 
 
 
 def es_fecha_especial(fecha):
+    
+    #---------------------------------------------------
+    '''
+    Analiza los feriados programados y devuelve si es 
+    Trading de medio dia , feriado o dia normal.
+    '''
+    #---------------------------------------------------
+
     # Fechas específicas
     fechas_especiales = {
         "4 de julio": (7, 4),
@@ -103,9 +94,14 @@ def isTradingDay(params):
     #  - Feriados -
     # ====================
 
-    """
-    Revisamos si es Feriado antes de comenzar la rutina, si es el caso no continuara .
-    """
+    #---------------------------------------------------
+    '''
+        Revisamos si es Feriado antes de comenzar 
+        la rutina, si es el caso no continuara ,
+        en caso sea trading day parcial va cambiar 
+        el parametro de FD a medio dia.
+    '''
+    #---------------------------------------------------
     now = datetime.now(params.zone)
 
     # Llamar a la función con la fecha actual
@@ -125,6 +121,13 @@ def isTradingDay(params):
 
 
 def countdown(zone):
+
+    #---------------------------------------------------
+    '''
+    Genera una cuenta regresiva (minutos)
+    antes de entrar al Trading Day.
+    '''
+    #---------------------------------------------------
     # ====================
     # - Cuenta Regresiva -
     # ====================

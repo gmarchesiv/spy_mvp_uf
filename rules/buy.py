@@ -19,20 +19,33 @@ from functions.saveJson import saveJson
 
 
 # INICIO DE LAS REGLAS DE COMPRA
-def buyOptions(app, vars, params):
+def buyOptions(app,varsBc,varsLb,vars,params):
+
+    #---------------------------------------------------
+    '''
+    En la compra de opciones, realizamos calculos y
+    verificamos si esta en parametros de compra.
+    '''
+    #---------------------------------------------------
+
+
     vars.promedio_call  = sum(vars.askbid_call_prom) / len(vars.askbid_call_prom) if len(vars.askbid_call_prom)!=0 else 0
     if vars.askbid_call < params.max_askbid_compra_abs and vars.cask > 0 and vars.promedio_call < params.max_askbid_compra_prom :
         calculos_call(vars, params)
-        buy_Call(app, vars, params)
+        buy_Call(app,varsBc,varsLb,vars,params)
 
     vars.promedio_put  = sum(vars.askbid_put_prom) / len(vars.askbid_put_prom) if len(vars.askbid_put_prom)!=0 else 0
     if vars.askbid_put < params.max_askbid_compra_abs and vars.pask > 0 and  vars.promedio_put < params.max_askbid_compra_prom :
         calculos_put(vars, params)
-        buy_Put(app, vars, params)
- 
+        buy_Put(app,varsBc,varsLb,vars,params)
+  
+def buy_Call(app,varsBc,varsLb,vars,params):
+    #---------------------------------------------------
+    '''
+    Reglas de compras de CALL.
+    '''
+    #---------------------------------------------------
 
-
-def buy_Call(app, vars, params):
     timeNow = datetime.now(params.zone).time()
     #########################################################
     ####################      CALL R2     ###################
@@ -46,9 +59,7 @@ def buy_Call(app, vars, params):
         and  (vars.label==params.labelCall_r2 ) #and vars.flag_Call_R2
     ):
         flag_buy = buy(
-            params,
-            app,
-            vars,
+            app,varsBc,varsLb,vars,params,
             "C",
             "R2",
             vars.cask,
@@ -71,9 +82,7 @@ def buy_Call(app, vars, params):
         and  (vars.label==params.labelCall_r1 )and vars.flag_Call_reset_r1
     ):
         flag_buy = buy(
-            params,
-            app,
-            vars,
+            app,varsBc,varsLb,vars,params,
             "C",
             "R1",
             vars.cask,
@@ -96,9 +105,7 @@ def buy_Call(app, vars, params):
         and  (vars.label==params.labelCall_r3 )and vars.flag_Call_R2==False
     ):
         flag_buy = buy(
-            params,
-            app,
-            vars,
+            app,varsBc,varsLb,vars,params,
             "C",
             "R3",
             vars.cask,
@@ -120,9 +127,7 @@ def buy_Call(app, vars, params):
     #     and  (vars.label==params.labelCall_r1_fast ) 
     # ):
     #     flag_buy = buy(
-    #         params,
-    #         app,
-    #         vars,
+    #         app,varsBc,varsLb,vars,params,
     #         "C",
     #         "R1-FAST",
     #         vars.cask,
@@ -144,9 +149,7 @@ def buy_Call(app, vars, params):
         and  (vars.label==params.labelCall_r1_e ) and vars.flag_Call_reset_r1_e
     ):
         flag_buy = buy(
-            params,
-            app,
-            vars,
+            app,varsBc,varsLb,vars,params,
             "C",
             "R1-E",
             vars.cask,
@@ -169,9 +172,7 @@ def buy_Call(app, vars, params):
     #     and  (vars.label==params.labelCall_r1_e2 ) and flag_Call_reset_r1_e2
     # ):
     #     flag_buy = buy(
-    #         params,
-    #         app,
-    #         vars,
+    #         app,varsBc,varsLb,vars,params,
     #         "C",
     #         "R1-E2",
     #         vars.cask,
@@ -193,9 +194,7 @@ def buy_Call(app, vars, params):
         and  (vars.label==params.labelCall_r1_i ) 
     ):
         flag_buy = buy(
-            params,
-            app,
-            vars,
+            app,varsBc,varsLb,vars,params,
             "C",
             "R1-I",
             vars.cask,
@@ -217,9 +216,7 @@ def buy_Call(app, vars, params):
         and  (vars.label==params.labelCall_r1_c ) 
     ):
         flag_buy = buy(
-            params,
-            app,
-            vars,
+            app,varsBc,varsLb,vars,params,
             "C",
             "R1-C",
             vars.cask,
@@ -242,9 +239,7 @@ def buy_Call(app, vars, params):
         and  (vars.label==params.labelcall_r1_f ) 
     ):
         flag_buy = buy(
-            params,
-            app,
-            vars,
+            app,varsBc,varsLb,vars,params,
             "C",
             "F",
             vars.cask,
@@ -254,7 +249,15 @@ def buy_Call(app, vars, params):
 
         if flag_buy == False:
             return
-def buy_Put(app, vars, params):
+
+def buy_Put(app,varsBc,varsLb,vars,params):
+
+    #---------------------------------------------------
+    '''
+    Reglas de compras de PUT.
+    '''
+    #---------------------------------------------------
+
     timeNow = datetime.now(params.zone).time()
     #########################################################
     ####################       PUT R2     ###################
@@ -268,9 +271,7 @@ def buy_Put(app, vars, params):
 
     ):
         flag_buy = buy(
-            params,
-            app,
-            vars,
+            app,varsBc,varsLb,vars,params,
             "P",
             "R2",
             vars.pask,
@@ -293,9 +294,7 @@ def buy_Put(app, vars, params):
 
     ):
         flag_buy = buy(
-            params,
-            app,
-            vars,
+            app,varsBc,varsLb,vars,params,
             "P",
             "R2-E",
             vars.pask,
@@ -318,9 +317,7 @@ def buy_Put(app, vars, params):
 
     ):
         flag_buy = buy(
-            params,
-            app,
-            vars,
+            app,varsBc,varsLb,vars,params,
             "P",
             "R1",
             vars.pask,
@@ -343,9 +340,7 @@ def buy_Put(app, vars, params):
 
     # ):
     #     flag_buy = buy(
-    #         params,
-    #         app,
-    #         vars,
+    #         app,varsBc,varsLb,vars,params,
     #         "P",
     #         "R1-E",
     #         vars.pask,
@@ -369,9 +364,7 @@ def buy_Put(app, vars, params):
         and (vars.label==params.labelPut_r1_c ) 
     ):
         flag_buy = buy(
-            params,
-            app,
-            vars,
+            app,varsBc,varsLb,vars,params,
             "P",
             "R1-C",
             vars.pask,
@@ -394,9 +387,7 @@ def buy_Put(app, vars, params):
 
     # ):
     #     flag_buy = buy(
-    #         params,
-    #         app,
-    #         vars,
+    #         app,varsBc,varsLb,vars,params,
     #         "P",
     #         "R1-FAST",
     #         vars.pask,
@@ -419,9 +410,7 @@ def buy_Put(app, vars, params):
 
     ):
         flag_buy = buy(
-            params,
-            app,
-            vars,
+            app,varsBc,varsLb,vars,params,
             "P",
             "R1-I",
             vars.pask,
@@ -446,9 +435,7 @@ def buy_Put(app, vars, params):
 
     ):
         flag_buy = buy(
-            params,
-            app,
-            vars,
+            app,varsBc,varsLb,vars,params,
             "P",
             "F",
             vars.pask,
@@ -471,9 +458,7 @@ def buy_Put(app, vars, params):
 
     ):
         flag_buy = buy(
-            params,
-            app,
-            vars,
+            app,varsBc,varsLb,vars,params,
             "P",
             "F2",
             vars.pask,
@@ -484,11 +469,27 @@ def buy_Put(app, vars, params):
         if flag_buy == False:
             return
 
-def buy(varsLb,params, app, vars, tipo, regla, ask, contract, symbol):
+def buy(app,varsBc,varsLb,vars,params, tipo, regla, ask, contract, symbol):
+
+    #---------------------------------------------------
+    '''
+    Compra de la opcion, La rutina consta de lo siguiente:
+ 
+        1) Realiza Broadcasting de compra.
+        2) Verifica que la compra se pueda dar sin 
+           problemas de ASKBID.
+        3) Ejecuta la orden de compra.
+        4)Espera que la transaccion se complete,mientras
+          sigue calculando variables.
+        5) Al finalizar modifica variables de estado de 
+           compra.
+    '''
+    #---------------------------------------------------
+
     from rules.routine import calculations
     #BROADCASTING
     if vars.buy_broadcasting ==False:
-        asyncio.run(send_buy(app, vars, params, tipo,regla))
+        asyncio.run(send_buy(app, varsBc, params, tipo,regla))
     # LECTURA PREVIA
     readIBData_action(app, vars, tipo, regla)
 
@@ -509,12 +510,12 @@ def buy(varsLb,params, app, vars, tipo, regla, ask, contract, symbol):
         timeNow = datetime.now(params.zone).time()
 
         if (timeNow.minute % 10 == 0 or timeNow.minute % 10 == 5):
-            if vars.flag_minuto_label:
+            if varsLb.flag_minuto_label:
                 generar_label(params, varsLb,app)
-                vars.flag_minuto_label=False
+                varsLb.flag_minuto_label=False
                 time.sleep(0.5)
         else:
-            vars.flag_minuto_label=True
+            varsLb.flag_minuto_label=True
 
         if int(timeNow.second) in params.frecuencia_muestra:
             calculations(app, vars, params)
@@ -554,6 +555,12 @@ def buy(varsLb,params, app, vars, tipo, regla, ask, contract, symbol):
     return True
 
 def calculos_call(vars, params):
+    #---------------------------------------------------
+    '''
+    Calculos de call para bloquear o habilitar reglas 
+    de compra.
+    '''
+    #---------------------------------------------------
     #########################################################
     ###################      CALCULOS      ##################
     #########################################################
@@ -587,7 +594,12 @@ def calculos_call(vars, params):
  
 
 def calculos_put(vars, params):
-
+    #---------------------------------------------------
+    '''
+    Calculos de put para bloquear o habilitar reglas 
+    de compra.
+    '''
+    #---------------------------------------------------
     #########################################################
     ###################      CALCULOS      ##################
     #########################################################

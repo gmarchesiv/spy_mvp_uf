@@ -4,24 +4,29 @@
 import math
 from collections import deque
 import pandas_ta as ta 
-import pandas as pd  
+import pandas as pd   
 import joblib
-
-from database.repository.repository import writeLabel      
+from sklearn.cluster import KMeans
+import asyncio
+from database.repository.repository import writeLabel
+from functions.saveJson import saveLabel      
 
 def generar_label(params, varsLb,app):
    
+    #---------------------------------------------------
+    '''
+    Generamos todas las variables involucradas en la
+    preddicon del Label para finalmente generar
+    el Label.
+    '''
+    #---------------------------------------------------
+
     generar_garch(params, varsLb,app)
-   
- 
     
     generar_rsi(params, varsLb,app)
   
     generar_d_pico(params, varsLb,app)
- 
-
-
-
+  
     clusterizar(params, varsLb,app)
 
     generar_hour_back(params, varsLb,app)
@@ -31,6 +36,8 @@ def generar_label(params, varsLb,app):
 
 
 def generar_garch(params, varsLb,app):
+
+
     varsLb.varianza=params.omega+(params.alpha+params.gamma*varsLb.signo)*  math.pow(varsLb.retorno-varsLb.mu, 2) +params.beta*varsLb.varianza
     
     varsLb.garch=round(100* math.sqrt(  params.days_year*varsLb.varianza),4)
@@ -81,9 +88,8 @@ def generar_d_pico(params, varsLb,app):
 
 
 def clusterizar(params, varsLb,app):
-    import pandas as pd  
-    import joblib
-    from sklearn.cluster import KMeans
+    
+    
     scaler = joblib.load('/usr/src/app/functions/scaler.joblib')
     km = joblib.load('/usr/src/app/functions/model.joblib')
 
@@ -113,3 +119,6 @@ def clusterizar(params, varsLb,app):
     varsLb.label=df_final["LABELS"][0]
  
     writeLabel(app, varsLb,params)
+
+    asyncio.run(saveLabel(varsLb))
+    

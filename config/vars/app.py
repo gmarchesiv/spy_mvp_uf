@@ -9,8 +9,16 @@ from collections import deque
 ###############################################
 #                  VARIABLES
 ###############################################
-class varsApp:
+class varsApps:
     def __init__(self):
+        
+        #---------------------------------------------------
+        '''
+        Abriremos el archivo json Correspondientes (app.json)
+        y en caso no exista la variable la genera ,finalmente 
+        la carga en memoria.
+        '''
+        #---------------------------------------------------
 
         file_name = "/usr/src/app/data/app.json"
 

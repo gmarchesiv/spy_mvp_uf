@@ -15,6 +15,13 @@ engine = create_engine("sqlite:////usr/src/app/dataBase.db", echo=False)
 
 
 def writeRegister(name, zone):
+    
+    #---------------------------------------------------
+    '''
+    Registro de sesion en la DB.
+    '''
+    #---------------------------------------------------
+
     Session = sessionmaker(bind=engine)
     session = Session()
     try:

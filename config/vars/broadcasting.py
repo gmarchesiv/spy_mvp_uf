@@ -11,6 +11,14 @@ from collections import deque
 ###############################################
 class varsBroadcasting:
     def __init__(self):
+ 
+        #---------------------------------------------------
+        '''
+        Carga en memoria las variables y las guarda limpias 
+        en su respectivo json (broadcasting.json).
+        '''
+        #---------------------------------------------------
+
         ###############################################
         # LECTURA DEL ARCHIVO DE VARIABLES
         ###############################################

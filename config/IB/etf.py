@@ -12,6 +12,13 @@ import time
 
 # Creacion de contratos ETFs
 def create_contract(symbol, secType, exchange, currency):
+
+    #---------------------------------------------------
+    '''
+    Genera la estructura del contrato de ETFs.
+    '''
+    #---------------------------------------------------
+
     contract = Contract()
     contract.symbol = symbol
     contract.secType = secType
@@ -22,6 +29,14 @@ def create_contract(symbol, secType, exchange, currency):
 
 # Peticion de Data ETFs
 def req_ETFs(app, etf):
+
+    #---------------------------------------------------
+    '''
+    Suscripcion de datos de ETFs, genera un id y un 
+    diccionario para poder ser llamado,
+    este cuenta con informacion del ETF.
+    '''
+    #---------------------------------------------------
 
     # Contratos iniciales
 
@@ -39,15 +54,4 @@ def req_ETFs(app, etf):
             "price": 0,
             "contract": contract,
         }
-
-    # loadData = True
-
-    # while loadData:
-    #     readyEtf = 0
-
-    #     for i in app.etfs:
-    #         if app.etfs[i]["price"] > 0:
-    #             readyEtf += 1
-    #     if readyEtf == len(app.etfs):
-    #         loadData = False
-    #     time.sleep(0.5)
+ 

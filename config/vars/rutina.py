@@ -12,6 +12,14 @@ from collections import deque
 class varsRutina:
     def __init__(self):
 
+        #---------------------------------------------------
+        '''
+        Abriremos el archivo json Correspondientes 
+        (vars.json) y en caso no exista la variable la genera,
+        finalmente la carga en memoria.
+        '''
+        #---------------------------------------------------
+
         file_name = "/usr/src/app/data/vars.json"
 
         if os.path.exists(file_name):
@@ -22,18 +30,7 @@ class varsRutina:
         else:
             printStamp(" - No se encuentra archivo de variables - ")
             exit()
-        ###############################################
-        # VARIABLES DE APP
-        ###############################################
-
-        self.cash = self.data.get("cash", 0)
-        self.statusIB = self.data.get("statusIB", False)
-        self.execution_details = self.data.get("execution_details", {})
-        self.commissions = self.data.get("commissions", {})
-        self.sendError = self.data.get("sendError", False)
-        self.Error = self.data.get("Error", False)
-        self.Error_buy = self.data.get("Error_buy", False)
-        self.flag_bloqueo_tiempo= self.data.get("flag_bloqueo_tiempo", False)
+       
         ###############################################
         # VARIABLES DE TIEMPO
         ###############################################
@@ -64,7 +61,6 @@ class varsRutina:
         self.flag_Put_reset_r1=self.data.get("flag_Put_reset_r1", False)
         self.flag_Put_reset_r1_c =self.data.get("flag_Put_reset_r1_c", False)
         self.flag_Call_reset_r1_e =self.data.get("flag_Call_reset_r1_e", False)
-
         self.flag_Call_reset_r1_e2 =self.data.get("flag_Call_reset_r1_e2", False)
         self.flag_Put_reset_r1_i =self.data.get("flag_Put_reset_r1_i", False)
         ###############################################
@@ -121,4 +117,7 @@ class varsRutina:
   
 
         self.promedio_call=self.data.get("promedio_call",0)
-        self.promedio_put=self.data.get("promedio_put",0)
+        self.promedio_put=self.data.get("promedio_put",0)   
+
+        self.askbid_call_prom=deque(self.askbid_call_prom, maxlen=90)
+        self.askbid_put_prom=deque(self.askbid_put_prom, maxlen=90)

@@ -1,19 +1,30 @@
 import json
 
 
-def clean_vars(vars):
-    vars.compra = True
+def clean_vars(vars,varsApp):
 
- 
- 
-    vars.manifesto = False
-
+    #---------------------------------------------------
+    '''
+    Limpieza de las variables de rutina y aplicacion.
+    '''
+    #---------------------------------------------------
+    
+    ###############################################
+    # VARIABLES DE RUTINA
+    ###############################################
     vars.ugs_n = 0
     vars.ugs_n_ant = 0
     vars.pico = 0
- 
     vars.priceBuy = 0
-    
+    vars.accion_mensaje = 0
+    vars.status = "ON"
+    vars.tipo=""
+    vars.venta_intentos=0
+    ###############################################
+    # VARIABLES DE FLAGS
+    ###############################################
+    vars.compra = True
+    vars.manifesto = False
     vars.flag_Call_R2 = False
     vars.flag_Put_R2 = False
     vars.flag_Put_reset_r2_e = False
@@ -21,19 +32,11 @@ def clean_vars(vars):
     vars.flag_Put_reset_r1 = False
     vars.flag_Put_reset_r1_c = False
     vars.flag_Call_reset_r1_e=False
-
     vars.flag_Call_reset_r1_e2 = False
     vars.flag_Put_reset_r1_i=False
-
-
     vars.rule = True
-
-    vars.accion_mensaje = 0
     vars.bloqueo = True
-    vars.status = "ON"
-    vars.tipo=""
-    vars.venta_intentos=0
-    vars.flag_bloqueo_tiempo=False
+    varsApp.flag_bloqueo_tiempo=False
 
 
 

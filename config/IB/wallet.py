@@ -1,23 +1,25 @@
 from datetime import datetime
 
 
-def trade_counter(vars, params):
 
-    now = datetime.now(params.zone).strftime("%Y-%m-%d")
-
-    # Verificar y actualizar la fecha
-    if vars.fecha != now:
-        vars.fecha = now
-        # Actualizar la lista de compras
-        for i in range(len(vars.trades)):
-            if vars.trades[i] > 0:
-                vars.trades[i] -= 1
-
-    # Eliminar todos los elementos que sean 0
-    vars.trades = [x for x in vars.trades if x != 0]
 
 
 def wallet_config(app, params, vars):
+
+    #---------------------------------------------------
+    '''
+    -Realizamos los siguientes analisis y configuraciones:
+
+        1) Guardamos el numero de cuenta por defecto o el
+            configurado en el archivo .env .
+        2) Realizamos un conteo de las transacciones. 
+        3) Extraemos la informacion del cash del clientes,
+            este puede ser cash paper o live.
+        4) Se Bloquea el trading por la cantidad de cash o 
+            por numero de transacciones hechas .
+
+    '''
+    #---------------------------------------------------
 
     wallet_load(app, params)
     trade_counter(vars, params)
@@ -36,6 +38,20 @@ def wallet_load(app, params):
     else:
         app.wallet = app.cuentas[app.num_cuenta]
 
+def trade_counter(vars, params):
+
+    now = datetime.now(params.zone).strftime("%Y-%m-%d")
+
+    # Verificar y actualizar la fecha
+    if vars.fecha != now:
+        vars.fecha = now
+        # Actualizar la lista de compras
+        for i in range(len(vars.trades)):
+            if vars.trades[i] > 0:
+                vars.trades[i] -= 1
+
+    # Eliminar todos los elementos que sean 0
+    vars.trades = [x for x in vars.trades if x != 0]
 
 def wallet_cash(app, params):
     if params.typeIB == "PAPER":

@@ -111,6 +111,8 @@ def saveJson(vars, app,  params, estado):
         "flag_Call_reset_r1_e":vars.flag_Call_reset_r1_e,
         "flag_Call_reset_r1_e2":vars.flag_Call_reset_r1_e2,
         "flag_Put_reset_r1_i":vars.flag_Put_reset_r1_i,
+        "flag_Call_reset_r3":vars.flag_Call_reset_r3,
+        "flag_Put_reset_r1_c":vars.flag_Put_reset_r1_c,
         ###############################################
         # VARIABLES DE RUTINA
         ###############################################

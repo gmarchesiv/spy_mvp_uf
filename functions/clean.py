@@ -25,6 +25,8 @@ def clean_vars(vars):
 
     vars.flag_Call_reset_r1_e2 = False
     vars.flag_Put_reset_r1_i=False
+    vars.flag_Call_reset_r3=False
+    vars.flag_Put_reset_r1_c=False
 
 
     vars.rule = True

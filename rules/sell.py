@@ -13,7 +13,7 @@ from functions.broadcasting import comparar_precios, send_sell, verificar_regla
 from functions.labels import generar_label
 from functions.logs import printStamp, read_rentabilidad, read_sell, readIBData_action
 from functions.notifications import sendError
-from functions.saveJson import saveJson
+from functions.saveVars import saveVars
 
 # ====================
 #  - Funciones -
@@ -1301,7 +1301,7 @@ def sell(app,varsBc,varsLb,vars,params, tipo, regla, contract, symbol):
             calculations(app, vars, params)
             # ESPERANDO Y REGISTRANDO
             vars.status = "SELLING"
-            saveJson(vars, app, params, False)
+            asyncio.run(saveVars(vars, app, params, False))
             writeDayTrade(app, vars, params)
 
         if app.Error:
@@ -1356,7 +1356,7 @@ def sell_forzada(app,varsBc,varsLb,vars,params, tipo, regla, contract, symbol):
             calculations(app, vars, params)
             # ESPERANDO Y REGISTRANDO
             vars.status = "SELLING"
-            saveJson(vars, app, params, False)
+            asyncio.run(saveVars(vars, app, params, False))
             writeDayTrade(app, vars, params)
 
         if app.Error:

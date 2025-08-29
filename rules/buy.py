@@ -15,7 +15,7 @@ from functions.broadcasting import send_buy
 from functions.labels import generar_label
 from functions.logs import printStamp, read_buy, readIBData_action
 from functions.notifications import sendError
-from functions.saveJson import saveJson
+from functions.saveVars import saveVars
 
 
 # INICIO DE LAS REGLAS DE COMPRA
@@ -521,7 +521,7 @@ def buy(app,varsBc,varsLb,vars,params, tipo, regla, ask, contract, symbol):
             calculations(app, vars, params)
             # ESPERANDO Y REGISTRANDO
             vars.status = "BUYING"
-            saveJson(vars, app, params, False)
+            asyncio.run(saveVars(vars, app, params, False))
             writeDayTrade(app, vars, params)
 
         if app.Error:

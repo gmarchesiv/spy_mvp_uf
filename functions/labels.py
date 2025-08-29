@@ -9,7 +9,7 @@ import joblib
 from sklearn.cluster import KMeans
 import asyncio
 from database.repository.repository import writeLabel
-from functions.saveJson import saveLabel      
+from functions.saveVars import saveLabel      
 
 def generar_label(params, varsLb,app):
    

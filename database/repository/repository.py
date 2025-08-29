@@ -97,6 +97,11 @@ def readWallet():
 
 
 def writeDayTrade(app, vars, params):
+    #---------------------------------------------------
+    '''
+    Registra del dia en la DB.
+    '''
+    #---------------------------------------------------
     Session = sessionmaker(bind=engine)
     session = Session()
     try:

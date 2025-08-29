@@ -2,6 +2,7 @@
 ################### LIBRERIAS  ####################
 ###################################################
  
+import asyncio
 import random
 from config.IB.etf import req_ETFs
 from config.IB.options import (
@@ -22,7 +23,7 @@ import random
 
 import time
 
-from functions.saveJson import saveJson
+from functions.saveVars import saveApp, saveVars
 
 # ====================
 #  - Funciones -
@@ -86,6 +87,12 @@ def data_susciption(app, params, vars):
 
 # ACTUALIZA LOS STATUS
 def update_status(app, vars,varsApp, params):
+    #---------------------------------------------------
+    '''
+    Actualiza la etiqueta de status en el dashboard
+    segun sea el caso.
+    '''
+    #---------------------------------------------------
     if app.alerta:
         vars.status = "DESCONEXION"
     else:
@@ -111,9 +118,17 @@ def update_status(app, vars,varsApp, params):
 
 # ACTUALIZACION Y y REGISTRO DE JSON Y DB
 def registration(app, vars,varsApp, params):
+    #---------------------------------------------------
+    '''
+    Registra y actualiza estados de la maquina.
+    '''
+    #---------------------------------------------------
+
     wallet_load(app, params)
     update_status(app, vars,varsApp, params)
-    saveJson(vars, app, params, False)
+    
+    asyncio.run(saveVars(vars, app, params, False))
+    asyncio.run(saveApp(varsApp, app,  params  ))
     writeDayTrade(app, vars, params)
     vars.regla = ""
     if vars.call == False and vars.put == False:
@@ -235,6 +250,13 @@ def saveTransaction(app, params, vars):
 
 # REGISTRO DE STRIKES
 def registro_strike(app, vars, params):
+
+    #---------------------------------------------------
+    '''
+    Registro de un nuevo strike para el dia siguiente.
+    '''
+    #---------------------------------------------------
+
 
     # PEDIMOS LA CADENA DE OPCIONES
     app.request_option_chain(app.etfs[5]["symbol"])

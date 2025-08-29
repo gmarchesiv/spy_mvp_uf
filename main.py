@@ -24,7 +24,7 @@ from functions.events import countdown, isTradingDay
 from functions.labels import generar_label
 from functions.logs import *
 from functions.notifications import sendError, sendStart
-from functions.saveJson import saveJson
+from functions.saveVars import saveVars
 
 # rules/
 from rules.buy import buyOptions
@@ -332,7 +332,8 @@ def main():
                 registro_strike(app, vars, params)
                 
                 vars.status = "OFF"
-                saveJson(vars, app, params, True)
+          
+                asyncio.run(saveVars(vars, app, params, True))
                 break
            
 
@@ -352,7 +353,8 @@ def main():
             # Corte de conexión con IB
             try:
                 vars.status = "ERROR"
-                saveJson(vars, app, params, False)
+                
+                asyncio.run(saveVars(vars, app, params, False))
             except:
                 pass
             app.stop()
@@ -385,7 +387,8 @@ def main():
         try:
             try:
                 vars.status = "ERROR"
-                saveJson(vars, app, params, False)
+              
+                asyncio.run(saveVars(vars, app, params, False))
                 error=f"{e}"
                 sendError(params, error)
             except:

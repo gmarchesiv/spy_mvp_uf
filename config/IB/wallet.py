@@ -28,6 +28,11 @@ def wallet_config(app, params, vars):
 
 
 def wallet_load(app, params):
+    #---------------------------------------------------
+    '''
+    Extrae la informacion de las billeteras del cliente.
+    '''
+    #---------------------------------------------------
 
     # SELECCION DE
     app.num_cuenta = params.cuenta
@@ -39,6 +44,12 @@ def wallet_load(app, params):
         app.wallet = app.cuentas[app.num_cuenta]
 
 def trade_counter(vars, params):
+    #---------------------------------------------------
+    '''
+    Hace un conteo de Trades , y al cambio de dia va 
+    eliminando un trade cada 5 dias.
+    '''
+    #---------------------------------------------------
 
     now = datetime.now(params.zone).strftime("%Y-%m-%d")
 
@@ -62,5 +73,11 @@ def wallet_cash(app, params):
 
 
 def block_Trades(vars, money):
+    #---------------------------------------------------
+    '''
+    Bloqueo por muchos Trades realizados o por cash
+    insuficiente.
+    '''
+    #---------------------------------------------------
     if len(vars.trades) < 3 or money >= 25000:
         vars.bloqueo = False

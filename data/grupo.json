@@ -1,20 +1,6 @@
 {
     "red": [
         
- 
-        {
-            "ip": "10.8.0.37:8001",
-            "user": "Jackie Andren"
-        },
- 
-        
-        {
-            "ip": "10.8.0.38:8001",
-            "user": "Karin Granda"
-        }, 
-        {
-            "ip": "10.8.0.45:8001",
-            "user": "Antonio Garcia "
-        }
+  
     ]
 }

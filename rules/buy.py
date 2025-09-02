@@ -40,7 +40,7 @@ def buy_Call(app, vars, params):
 
     if (not (timeNow >= params.proteccion_compra[0] and timeNow < params.proteccion_compra[1]) and 
                         not (timeNow >= params.proteccion_compra_2[0] and timeNow < params.proteccion_compra_2[1]) )and(
-        (timeNow >= params.timeCall_r2[0] and timeNow < params.timeCall_r2[1])
+        (timeNow >= params.timecall_r2[0] and timeNow < params.timecall_r2[1])
         and (vars.dcall >= params.dcall_r2[0] and vars.dcall < params.dcall_r2[1])
         and (vars.docall >= params.docall_r2[0] and vars.docall <= params.docall_r2[1])
         and  (vars.label==params.labelCall_r2 ) #and vars.flag_Call_R2

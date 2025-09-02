@@ -119,8 +119,8 @@ class parameters:
         
         self.dcall_r1 = [0.125, 0.18]
         self.docall_r1 = [0.036, 0.0595]
-        self.timecall_r1 = [ dt_time(9, 45,30) , dt_time(9, 55)]
-        self.labelcall_r1 =0
+        self.timeCall_r1 = [ dt_time(9, 45,30) , dt_time(9, 55)]
+        self.labelCall_r1 =0
         
         # VENTA
         self.sl_cr1=-0.03  # STOP LOSS
@@ -134,8 +134,8 @@ class parameters:
         
         self.dcall_r3 =  [ 0.18, 0.25]
         self.docall_r3 =   [0.035, 0.0595]
-        self.timecall_r3 =  [dt_time(9, 35), dt_time(10, 5)]
-        self.labelcall_r3=0
+        self.timeCall_r3 =  [dt_time(9, 35), dt_time(10, 5)]
+        self.labelCall_r3=0
         
         # VENTA
         self.sl_cr3 =-0.037  # STOP LOSS
@@ -149,8 +149,8 @@ class parameters:
         
         self.dcall_r1_e = [-0.17, 0]
         self.docall_r1_e = [0.105, 0.113]
-        self.timecall_r1_e = [dt_time(10, 25), dt_time(11, 15)]
-        self.labelcall_r1_e =0
+        self.timeCall_r1_e = [dt_time(10, 25), dt_time(11, 15)]
+        self.labelCall_r1_e =0
         
         # VENTA
         self.sl_cr1_e=-0.042  # STOP LOSS
@@ -165,8 +165,8 @@ class parameters:
         
         self.dcall_r1_e2 = [0, 0.2]
         self.docall_r1_e2 = [0.103, 0.115]
-        self.timecall_r1_e2 = [dt_time(10, 10), dt_time(11, 5)]
-        self.labelcall_r1_e2 =0
+        self.timeCall_r1_e2 = [dt_time(10, 10), dt_time(11, 5)]
+        self.labelCall_r1_e2 =0
         
         # VENTA
         self.sl_cr1_e2=-0.035  # STOP LOSS
@@ -181,8 +181,8 @@ class parameters:
         
         self.dcall_r1_fast =  [0, 0.05]
         self.docall_r1_fast =  [0.106, 0.115]
-        self.timecall_r1_fast = [dt_time(9, 35), dt_time(10, 0)]
-        self.labelcall_r1_fast =0
+        self.timeCall_r1_fast = [dt_time(9, 35), dt_time(10, 0)]
+        self.labelCall_r1_fast =0
         
         # VENTA
         self.sl_cr1_fast =-0.03  # STOP LOSS
@@ -197,8 +197,8 @@ class parameters:
         
         self.dcall_r1_i =[-0.31, 0]
         self.docall_r1_i =  [0.106, 0.111]
-        self.timecall_r1_i = [dt_time(9, 35), dt_time(9, 46)]
-        self.labelcall_r1_i=1
+        self.timeCall_r1_i = [dt_time(9, 35), dt_time(9, 46)]
+        self.labelCall_r1_i=1
         
         # VENTA
         self.sl_cr1_i =-0.04  # STOP LOSS
@@ -214,8 +214,8 @@ class parameters:
         
         self.dcall_r1_c =[-0.14, 0]
         self.docall_r1_c = [0.05, 0.0842]
-        self.timecall_r1_c = [dt_time(11, 35), dt_time(11, 50)]
-        self.labelcall_r1_c=0
+        self.timeCall_r1_c = [dt_time(11, 35), dt_time(11, 50)]
+        self.labelCall_r1_c=0
         # VENTA
         self.sl_cr1_c =-0.04  # STOP LOSS
         # self.min_desicion_cr1_c   = 60
@@ -230,8 +230,8 @@ class parameters:
         # COMPRA
         self.dcall_r2 = [0.3, 0.61]
         self.docall_r2 = [0.042, 0.057]  
-        self.timecall_r2 = [dt_time(9, 35), dt_time(10, 40)]
-        self.labelcall_r2=0
+        self.timeCall_r2 = [dt_time(9, 35), dt_time(10, 40)]
+        self.labelCall_r2=0
         self.umbral_cr2=0.25
         
 
@@ -252,8 +252,8 @@ class parameters:
         
         self.dcall_r1_f = [0.02, 0.13]
         self.docall_r1_f = [0.095, 0.11]
-        self.timecall_r1_f = [dt_time(12, 30), dt_time(12, 33)]
-        self.labelcall_r1_f=0
+        self.timeCall_r1_f = [dt_time(12, 30), dt_time(12, 33)]
+        self.labelCall_r1_f=0
 
         # VENTA
         self.sl_cr1_f=-0.03  # STOP LOSS
@@ -276,8 +276,8 @@ class parameters:
         
         self.dcall_r1_f2 = [0.158, 0.335]
         self.docall_r1_f2 = [0.1, 0.11]
-        self.timecall_r1_f2 = [dt_time(12, 0), dt_time(14, 0)]
-        self.labelcall_r1_f2=0
+        self.timeCall_r1_f2 = [dt_time(12, 0), dt_time(14, 0)]
+        self.labelCall_r1_f2=0
 
         # VENTA
         self.sl_cr1_f2=-0.03  # STOP LOSS
@@ -299,8 +299,8 @@ class parameters:
         
         self.dcall_r1_f3 = [-0.17, -0.02]
         self.docall_r1_f3 = [0.09, 0.1]
-        self.timecall_r1_f3 = [dt_time(12, 0), dt_time(14, 0)]
-        self.labelcall_r1_f3=0
+        self.timeCall_r1_f3 = [dt_time(12, 0), dt_time(14, 0)]
+        self.labelCall_r1_f3=0
 
         # VENTA
         self.sl_cr1_f3=-0.03  # STOP LOSS

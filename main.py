@@ -297,7 +297,7 @@ def main():
                     #          - Registro -
                     # ================================
  
-                    registration(app, vars,varsApp, params)
+                    registration(app, vars,varsApp, varsLb,params)
                 
                     time.sleep(0.5)
     

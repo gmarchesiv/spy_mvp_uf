@@ -117,7 +117,7 @@ def update_status(app, vars,varsApp, params):
 
 
 # ACTUALIZACION Y y REGISTRO DE JSON Y DB
-def registration(app, vars,varsApp, params):
+def registration(app, vars,varsApp, varsLb,params):
     #---------------------------------------------------
     '''
     Registra y actualiza estados de la maquina.

@@ -167,7 +167,7 @@ def calculations(app, vars,varsBc, params):
     vars.pask = app.options[2]["ASK"]
     vars.pbid = app.options[2]["BID"]
     vars.vix= app.etfs[6]['price']
-    broadcasting_Aliniar(varsBc)
+    broadcasting_Aliniar(varsBc,vars)
 
     # CALCULOS
     vars.askbid_call = vars.cask / vars.cbid - 1

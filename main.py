@@ -179,7 +179,7 @@ def main():
                         # # ================================
                         # if vars.compra:
                         #     buyOptions(app, vars, params)
-                        # pass
+                        pass
                     
                     # ================================
                     #  - Registro -

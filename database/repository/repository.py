@@ -96,7 +96,7 @@ def readWallet():
         session.close()
 
 
-def writeDayTrade(app, vars, params):
+def writeDayTrade(app, vars,varsLb, params):
     #---------------------------------------------------
     '''
     Registra del dia en la DB.
@@ -129,7 +129,7 @@ def writeDayTrade(app, vars, params):
             dPut=vars.dput,
             doCall=vars.docall,
             doPut=vars.doput,
-            label=int(vars.label),
+            label=int(varsLb.label),
             rentabilidad=vars.rentabilidad,
             pico=vars.pico,
             caida=vars.caida,
@@ -173,7 +173,7 @@ def writeTransactions(app, id, vars):
     finally:
         session.close()
 
-def writeLabel(app, vars,params):
+def writeLabel(app, varsLb,params):
     Session = sessionmaker(bind=engine)
     session = Session()
     try:
@@ -184,24 +184,24 @@ def writeLabel(app, vars,params):
             underlying = app.etfs[5]["price"],
             vix =app.etfs[6]['price'],
             
-            mu =  float(vars.mu),
-            mu_conteo = int(vars.mu_conteo),
-            retorno = vars.retorno,
-            signo = vars.signo,
-            varianza = vars.varianza,
-            garch=vars.garch,
+            mu =  float(varsLb.mu),
+            mu_conteo = int(varsLb.mu_conteo),
+            retorno = varsLb.retorno,
+            signo = varsLb.signo,
+            varianza = varsLb.varianza,
+            garch=varsLb.garch,
 
-            ret_1H_back= float(app.etfs[5]['price']/ vars.ret_1H_back[0] -1)*100,
-            ret_3H_back=float(app.etfs[5]['price']/ vars.ret_3H_back[0] -1)*100,
-            ret_6H_back= float(app.etfs[5]['price']/ vars.ret_6H_back[0] -1)*100,
-            ret_12H_back= float(app.etfs[5]['price']/ vars.ret_12H_back[0] -1)*100,
-            ret_24H_back= float(app.etfs[5]['price']/ vars.ret_24H_back[0] -1)*100,
-            ret_96H_back= float(app.etfs[5]['price']/ vars.ret_96H_back[0] -1)*100,
+            ret_1H_back= float(app.etfs[5]['price']/ varsLb.ret_1H_back[0] -1)*100,
+            ret_3H_back=float(app.etfs[5]['price']/ varsLb.ret_3H_back[0] -1)*100,
+            ret_6H_back= float(app.etfs[5]['price']/ varsLb.ret_6H_back[0] -1)*100,
+            ret_12H_back= float(app.etfs[5]['price']/ varsLb.ret_12H_back[0] -1)*100,
+            ret_24H_back= float(app.etfs[5]['price']/ varsLb.ret_24H_back[0] -1)*100,
+            ret_96H_back= float(app.etfs[5]['price']/ varsLb.ret_96H_back[0] -1)*100,
 
-            rsi_prom= vars.rsi,
-            d_pico= float(vars.d_pico),
+            rsi_prom= varsLb.rsi,
+            d_pico= float(varsLb.d_pico),
 
-            label = int(vars.label)
+            label = int(varsLb.label)
         )
 
         session.add(new_data)
@@ -211,7 +211,6 @@ def writeLabel(app, vars,params):
         printStamp("Error al escribir en Base de datos transactions")
     finally:
         session.close()
-
 
 def writeRoutineFault(Fault, codeIB, id, msg):
     Session = sessionmaker(bind=engine)

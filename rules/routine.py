@@ -129,7 +129,7 @@ def registration(app, vars,varsApp, params):
     
     asyncio.run(saveVars(vars, app, params, False))
     asyncio.run(saveApp(varsApp, app,  params  ))
-    writeDayTrade(app, vars, params)
+    writeDayTrade(app, vars,varsLb, params)
     vars.regla = ""
     if vars.call == False and vars.put == False:
         vars.pico = 0

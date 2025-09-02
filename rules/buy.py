@@ -522,7 +522,7 @@ def buy(app,varsBc,varsLb,vars,params, tipo, regla, ask, contract, symbol):
             # ESPERANDO Y REGISTRANDO
             vars.status = "BUYING"
             asyncio.run(saveVars(vars, app, params, False))
-            writeDayTrade(app, vars, params)
+            writeDayTrade(app, vars,varsLb, params)
 
         if app.Error:
             break

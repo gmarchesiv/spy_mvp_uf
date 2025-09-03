@@ -95,15 +95,15 @@ def strikeNear(numero, lista):
 
 
 # revision del strike disponible
-def checkStrike(app, exp, etf, tipo, exchange):
+# def checkStrike(app, exp, etf, tipo, exchange):
 
-    contract = create_contract_OPT(etf, "OPT", exchange, "USD", "", exp, tipo)
+#     contract = create_contract_OPT(etf, "OPT", exchange, "USD", "", exp, tipo)
 
-    app.listStrikes = []
-    app.reqContractDetails(10, contract)
-    time.sleep(10)
+#     app.listStrikes = []
+#     app.reqContractDetails(10, contract)
+#     time.sleep(10)
 
-    app.listStrikes.sort()
+#     app.listStrikes.sort()
 
 
 # peticion de data de un contrato
@@ -313,26 +313,26 @@ def snapshot(app, etf, strike, exp, exchange):
         }
 
 
-def list_checkExpirations(app, etf, params, exchange):
-    name = f"{exchange}_{etf}"
+# def list_checkExpirations(app, etf, params, exchange):
+#     name = f"{exchange}_{etf}"
 
-    listExpire = list(app.option_chains[name]["expirations"])
-    fecha_actual = datetime.now()
+#     listExpire = list(app.option_chains[name]["expirations"])
+#     fecha_actual = datetime.now()
 
-    format_str = "%Y%m%d"
-    listExpire_dates = [datetime.strptime(date, format_str) for date in listExpire]
+#     format_str = "%Y%m%d"
+#     listExpire_dates = [datetime.strptime(date, format_str) for date in listExpire]
 
-    # Ordenar la lista en orden descendente
-    listExpire_dates.sort(reverse=False)
+#     # Ordenar la lista en orden descendente
+#     listExpire_dates.sort(reverse=False)
 
-    lista_exp = []
-    for expiry_date in listExpire_dates:
-        if expiry_date >= (
-            fecha_actual + timedelta(days=params.days_max[0])
-        ) and expiry_date <= (fecha_actual + timedelta(days=params.days_max[1])):
-            lista_exp.append(expiry_date.strftime(format_str))
-            # return lista_exp
-    return lista_exp
+#     lista_exp = []
+#     for expiry_date in listExpire_dates:
+#         if expiry_date >= (
+#             fecha_actual + timedelta(days=params.days_max[0])
+#         ) and expiry_date <= (fecha_actual + timedelta(days=params.days_max[1])):
+#             lista_exp.append(expiry_date.strftime(format_str))
+#             # return lista_exp
+#     return lista_exp
 
 
 # revision del strike disponible
@@ -351,3 +351,40 @@ def dic_checkStrike(app, expiri, etf, tipo, exhange):
         app.listStrikes.sort()
         dic_strike[exp] = app.listStrikes
     return dic_strike
+
+
+
+def checkStrike(app, exp, etf, tipo, exchange):
+
+    contract = create_contract_OPT(etf, "OPT", exchange, "USD", "", exp, tipo)
+
+    app.listStrikes = []
+    app.reqContractDetails(10, contract)
+    time.sleep(10)
+
+    app.listStrikes.sort()
+    return app.listStrikes
+
+
+def list_checkExpirations(app, etf, params, exchange):
+    name = f"{exchange}_{etf}"
+
+    listExpire = list(app.option_chains[name]["expirations"])
+    fecha_actual = datetime.now()
+
+    format_str = "%Y%m%d"
+    listExpire_dates = [datetime.strptime(date, format_str) for date in listExpire]
+
+    # Ordenar la lista en orden descendente
+    listExpire_dates.sort(reverse=False)
+    n=0
+    lista_exp = []
+    for expiry_date in listExpire_dates:
+        if expiry_date >= (
+            fecha_actual + timedelta(days=params.days_max[0])
+        ) :
+            lista_exp.append(expiry_date.strftime(format_str))
+            if n>=5:
+                return lista_exp
+            n+=1
+    return lista_exp

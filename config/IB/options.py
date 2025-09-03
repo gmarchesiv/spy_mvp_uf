@@ -90,15 +90,15 @@ def strikeNear(numero, lista):
 
 
 # revision del strike disponible
-def checkStrike(app, exp, etf, tipo, exchange):
+# def checkStrike(app, exp, etf, tipo, exchange):
 
-    contract = create_contract_OPT(etf, "OPT", exchange, "USD", "", exp, tipo)
+#     contract = create_contract_OPT(etf, "OPT", exchange, "USD", "", exp, tipo)
 
-    app.listStrikes = []
-    app.reqContractDetails(10, contract)
-    time.sleep(10)
+#     app.listStrikes = []
+#     app.reqContractDetails(10, contract)
+#     time.sleep(10)
 
-    app.listStrikes.sort()
+#     app.listStrikes.sort()
 
 
 # peticion de data de un contrato

@@ -6,6 +6,7 @@ import asyncio
 import random
 from config.IB.etf import req_ETFs
 from config.IB.options import (
+    checkStrike,
     dic_checkStrike,
     list_checkExpirations,
     req_Options,
@@ -251,120 +252,53 @@ def saveTransaction(app, params, vars):
 # REGISTRO DE STRIKES
 def registro_strike(app, vars, params):
 
-    #---------------------------------------------------
-    '''
-    Registro de un nuevo strike para el dia siguiente.
-    '''
-    #---------------------------------------------------
-
-
     # PEDIMOS LA CADENA DE OPCIONES
     app.request_option_chain(app.etfs[5]["symbol"])
 
-    # PEDIMOS EL EXPERI QUE NOS TOCA
-    valor_aleatorio_exchange = random.randint(
-        0, len(params.exchange) - 1
-    )  # SELECCION DEL EXCEHANGE
-
-    vars.exchange = params.exchange[valor_aleatorio_exchange]  # SELECCION DEL EXCEHANGE
+ 
+    vars.exchange = params.exchange[0]  # SELECCION DEL EXCEHANGE
 
     list_exp = list_checkExpirations(app, app.etfs[5]["symbol"], params, vars.exchange)
 
-    # TOMAMOS ALEATORIAMENTE UNO
-
-    # valor_aleatorio = random.randint(0, len(list_exp) - 1)
-    valor_aleatorio = 0
-    vars.dic_strike = {}
-    vars.dic_strike = dic_checkStrike(
-        app, list_exp, app.etfs[5]["symbol"], "C", vars.exchange
-    )
-
-    exp_escogido = list_exp[valor_aleatorio]
-
-    printStamp(f"EXP: {exp_escogido}")
-
-    vars.strikes = {}
 
     precio = app.etfs[5]["price"]
     printStamp(f"PRECIO: {app.etfs[5]['price']} $")
 
-    strikes_dic = {}
-    n = 0
-    for exp in vars.dic_strike:
+    call = int(precio * ((100 + params.rangos_strikes[0][1]) / 100))
+    put = int(precio * ((100 - params.rangos_strikes[0][1]) / 100))
 
-        call = int(precio * ((100 + params.rangos_strikes[n][1]) / 100))
-        put = int(precio * ((100 - params.rangos_strikes[n][1]) / 100))
+    call_inf = int(precio * ((100 + params.rangos_strikes[0][0]) / 100))
+    put_inf = int(precio * ((100 - params.rangos_strikes[0][0]) / 100))
+    
+    printStamp(f"RANGOS --> PUT : {put} - {put_inf} | CALL :{call_inf} - {call}")
 
-        call_inf = int(precio * ((100 + params.rangos_strikes[n][0]) / 100))
-        put_inf = int(precio * ((100 - params.rangos_strikes[n][0]) / 100))
 
-        printStamp(f"{exp} - RANGOS --> PUT : {put} - {put_inf} | CALL :{call_inf} - {call}")
-
-        strikes_dic[exp] = {"call": [], "put": []}
-
+    for exp in list_exp:
+        strikes = checkStrike(
+        app, exp, app.etfs[5]["symbol"], "C", vars.exchange
+    )
         put_list = [
-            float(x) for x in vars.dic_strike[exp] if put <= float(x) <= put_inf
+            float(x) for x in strikes if put <= float(x) <= put_inf
         ]
         call_list = [
-            float(x) for x in vars.dic_strike[exp] if call_inf <= float(x) <= call
+            float(x) for x in strikes if call_inf <= float(x) <= call
         ]
-
-        if len(call_list) > 2:
-            call_list = call_list[:2]
-        if len(put_list) > 2:
-            put_list = put_list[-2:]
-        if len(call_list) == 0:
-            suma = 1
-            while True:
-                call_list = [
-                    float(x)
-                    for x in vars.dic_strike[exp]
-                    if (call_inf) <= float(x) <= (call + suma)
-                ]
-                if len(call_list) != 0:
-                    break
-                else:
-                    suma += 1
-
-        if len(put_list) == 0:
-            resta = 1
-            while True:
-                put_list = [
-                    float(x)
-                    for x in vars.dic_strike[exp]
-                    if (put - resta) <= float(x) <= (put_inf)
-                ]
-                if len(put_list) != 0:
-                    break
-                else:
-                    resta += 1
-        printStamp(f"{exp} - CALL : {call_list}  ")
-        printStamp(f"{exp} - PUT : {put_list}  ")
-
-        strikes_dic[exp]["put"] = put_list
-        strikes_dic[exp]["call"] = call_list
-
+        # Ordenar listas
+        put_list.sort()
+        call_list.sort()
+        printStamp(f"EXP: {exp} - PUTs:{put_list} / CALLs:{call_list}")
+        if len(put_list)==0 or len(call_list)==0:
+            continue 
+        put_strike = put_list[-1]  
+        call_strike = call_list[0] 
+        exp_escogido = exp
         break
-        # n += 1
-        # if len(strikes_dic[exp]["put"]) == 0 or len(strikes_dic[exp]["call"]) == 0:
-        #     del strikes_dic[exp]
-    vars.dic_exp_strike = strikes_dic
+     
+    
 
-    printStamp(f"RANGOS SELECCIONADOS --> {vars.dic_exp_strike}")
-    exp = exp_escogido
-
-    # ESCOGEMOS VALORES ALEATORIOS
-
-    call_list = vars.dic_exp_strike[exp]["call"]
-    # valor_aleatorio = random.randint(0, len(call_list) - 1)
-
-    call_strike =  min(call_list)
-    # call_strike = float(call_list[valor_aleatorio])
-
-    put_list = vars.dic_exp_strike[exp]["put"]
-    # valor_aleatorio = random.randint(0, len(put_list) - 1)
-
-    put_strike = max(put_list)
+    printStamp(f"EXP: {exp_escogido}")
+ 
+    printStamp(f"RANGOS SELECCIONADOS --> PUT: {put_strike} /  CALL: {call_strike}")
 
     app.cancelMarketData(1)
     time.sleep(1)
@@ -375,29 +309,35 @@ def registro_strike(app, vars, params):
     del app.options[2]
 
     snapshot(app, app.etfs[5]["symbol"], [put_strike, call_strike], exp, vars.exchange)
+    printStamp(f"EXTRAYENDO DATOS DE LA OPCION")
     while True:
         timeNow = datetime.now(params.zone).time()
         if dt_time(16, 30) < timeNow:
             break
         readyOpt = 0
-
+        if int(timeNow.second) in params.frecuencia_accion:
+            print("===============================================")
+            printStamp(f"CASK: {app.options[1]['ASK'] } | CBID: {app.options[1]['BID'] }")
+            printStamp(f"PASK: {app.options[2]['ASK'] } | PBID: {app.options[2]['BID'] }")
         if app.options[1]["BID"] > 0 and params.max_askbid_venta_abs > (app.options[1]["ASK"] / app.options[1]["BID"] - 1):
             readyOpt += 1
+     
         if app.options[2]["BID"] > 0 and params.max_askbid_venta_abs > (app.options[2]["ASK"] / app.options[2]["BID"] - 1):
             readyOpt += 1
+            
+   
         if readyOpt == 2:
             break
 
         time.sleep(0.5)
 
-    # if dt_time(16, 30) < timeNow:
-    #     return
+    
     vars.exp = exp
     vars.strike_p = put_strike
     vars.strike_c = call_strike
     vars.put_close = app.options[2]["BID"]
     vars.call_close = app.options[1]["BID"]
-
+    print("===============================================")
     printStamp(
         f"GUARDADO: {vars.exp} | PUT-STRIKE: {vars.strike_p} PUT-CLOSE: {vars.put_close} | CALL-STRIKE: {vars.strike_c} CALL-CLOSE: {vars.call_close}  "
     )

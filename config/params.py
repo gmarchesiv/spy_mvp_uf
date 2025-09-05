@@ -311,7 +311,7 @@ class parameters:
         
         self.dput_r1_i =[-0.06, 0.02]
         self.doput_r1_i = [0.11, 0.115]
-        self.timePut_r1_i = [dt_time(9, 40), dt_time(10,5)]
+        self.timePut_r1_i = [dt_time(9, 40), dt_time(10,7)]
         self.labelPut_r1_i=0
         
         # VENTA

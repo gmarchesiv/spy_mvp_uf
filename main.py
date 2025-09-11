@@ -248,11 +248,11 @@ def main():
                 # RUTINA DE COMPRA Y VENTA BROADCASTING
                 if vars.bloqueo == False and varsApp.flag_bloqueo_tiempo==False:
                     
-                    # if vars.call or vars.put:
-                    #     broadcasting_sell(varsBc,varsLb,vars,params,app)
-                    #     broadcasting_sell_auto(varsBc,varsLb,vars,params,app)
-                    # if vars.compra:
-                    #     broadcasting_buy(varsBc,varsLb,vars,params,app)
+                    if vars.call or vars.put:
+                        broadcasting_sell(varsBc,varsLb,vars,params,app)
+                        broadcasting_sell_auto(varsBc,varsLb,vars,params,app)
+                    if vars.compra:
+                        broadcasting_buy(varsBc,varsLb,vars,params,app)
                     pass
                 
                 
@@ -284,13 +284,13 @@ def main():
                         # ================================
                         #            -VENTA-
                         # ================================
-                        # if vars.call or vars.put:
-                        #     sellOptions(app,varsBc,varsLb,vars,params)
-                        # # ================================
-                        # #            -COMPRA-
-                        # # ================================
-                        # if vars.compra and params.fd >= timeNow:
-                        #     buyOptions(app,varsBc,varsLb,vars,params)
+                        if vars.call or vars.put:
+                            sellOptions(app,varsBc,varsLb,vars,params)
+                        # ================================
+                        #            -COMPRA-
+                        # ================================
+                        if vars.compra and params.fd >= timeNow:
+                            buyOptions(app,varsBc,varsLb,vars,params)
                         pass
                     
                     # ================================
@@ -333,7 +333,8 @@ def main():
                 
                 vars.status = "OFF"
           
-                asyncio.run(saveVars(vars, app, params, True))
+                saveVars(vars, app, params, True) 
+               
                 break
            
 

@@ -333,8 +333,8 @@ def main():
                 
                 vars.status = "OFF"
           
-                saveVars(vars, app, params, True) 
-               
+                asyncio.run(saveVars(vars, app, params, True))
+                time.sleep(60)
                 break
            
 

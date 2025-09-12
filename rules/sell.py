@@ -1301,7 +1301,7 @@ def sell(app,varsBc,varsLb,vars,params, tipo, regla, contract, symbol):
             calculations(app, vars, params)
             # ESPERANDO Y REGISTRANDO
             vars.status = "SELLING"
-            asyncio.run(saveVars(vars, app, params, False))
+            saveVars(vars, app, params, False)
             writeDayTrade(app, vars,varsLb, params)
 
         if app.Error:
@@ -1356,7 +1356,7 @@ def sell_forzada(app,varsBc,varsLb,vars,params, tipo, regla, contract, symbol):
             calculations(app, vars, params)
             # ESPERANDO Y REGISTRANDO
             vars.status = "SELLING"
-            asyncio.run(saveVars(vars, app, params, False))
+            saveVars(vars, app, params, False)
             writeDayTrade(app, vars,varsLb, params)
 
         if app.Error:

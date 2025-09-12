@@ -128,7 +128,7 @@ def registration(app, vars,varsApp, varsLb,params):
     wallet_load(app, params)
     update_status(app, vars,varsApp, params)
     
-    asyncio.run(saveVars(vars, app, params, False))
+    saveVars(vars, app, params, False)
     asyncio.run(saveApp(varsApp, app,  params  ))
     writeDayTrade(app, vars,varsLb, params)
     vars.regla = ""

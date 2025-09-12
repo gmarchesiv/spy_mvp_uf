@@ -333,8 +333,8 @@ def main():
                 
                 vars.status = "OFF"
           
-                asyncio.run(saveVars(vars, app, params, True))
-                time.sleep(60)
+                saveVars(vars, app, params, True) 
+         
                 break
            
 
@@ -355,7 +355,7 @@ def main():
             try:
                 vars.status = "ERROR"
                 
-                asyncio.run(saveVars(vars, app, params, False))
+                saveVars(vars, app, params, False)
             except:
                 pass
             app.stop()
@@ -389,7 +389,7 @@ def main():
             try:
                 vars.status = "ERROR"
               
-                asyncio.run(saveVars(vars, app, params, False))
+                saveVars(vars, app, params, False)
                 error=f"{e}"
                 sendError(params, error)
             except:

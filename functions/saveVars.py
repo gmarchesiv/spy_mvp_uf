@@ -10,7 +10,7 @@ import asyncio
 # =======================
 #  - GUARDAR VAIRBALES -
 # =======================
-async def saveVars(vars, app,  params, estado):
+def saveVars(vars, app,  params, estado):
     #---------------------------------------------------
     '''
     Guardado de los datos en json.

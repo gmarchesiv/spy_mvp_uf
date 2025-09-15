@@ -56,7 +56,7 @@ def buy_Call(app,varsBc,varsLb,vars,params):
         (timeNow >= params.timeCall_r2[0] and timeNow < params.timeCall_r2[1])
         and (vars.dcall >= params.dcall_r2[0] and vars.dcall < params.dcall_r2[1])
         and (vars.docall >= params.docall_r2[0] and vars.docall <= params.docall_r2[1])
-        and  (vars.label==params.labelCall_r2 ) #and vars.flag_Call_R2
+        and  (varsLb.label==params.labelCall_r2 ) #and vars.flag_Call_R2
     ):
         flag_buy = buy(
             app,varsBc,varsLb,vars,params,
@@ -79,7 +79,7 @@ def buy_Call(app,varsBc,varsLb,vars,params):
         (timeNow >= params.timeCall_r1[0] and timeNow < params.timeCall_r1[1])
         and (vars.dcall >= params.dcall_r1[0] and vars.dcall < params.dcall_r1[1])
         and (vars.docall >= params.docall_r1[0] and vars.docall <= params.docall_r1[1])
-        and  (vars.label==params.labelCall_r1 )and vars.flag_Call_reset_r1
+        and  (varsLb.label==params.labelCall_r1 )and vars.flag_Call_reset_r1
     ):
         flag_buy = buy(
             app,varsBc,varsLb,vars,params,
@@ -102,7 +102,7 @@ def buy_Call(app,varsBc,varsLb,vars,params):
         (timeNow >= params.timeCall_r3[0] and timeNow < params.timeCall_r3[1])
         and (vars.dcall >= params.dcall_r3[0] and vars.dcall < params.dcall_r3[1])
         and (vars.docall >= params.docall_r3[0] and vars.docall <= params.docall_r3[1])
-        and  (vars.label==params.labelCall_r3 )and vars.flag_Call_R2==False
+        and  (varsLb.label==params.labelCall_r3 )and vars.flag_Call_R2==False
     ):
         flag_buy = buy(
             app,varsBc,varsLb,vars,params,
@@ -124,7 +124,7 @@ def buy_Call(app,varsBc,varsLb,vars,params):
     #     (timeNow >= params.timeCall_r1_fast[0] and timeNow < params.timeCall_r1_fast[1])
     #     and (vars.dcall >= params.dcall_r1_fast[0] and vars.dcall < params.dcall_r1_fast[1])
     #     and (vars.docall >= params.docall_r1_fast[0] and vars.docall <= params.docall_r1_fast[1])
-    #     and  (vars.label==params.labelCall_r1_fast ) 
+    #     and  (varsLb.label==params.labelCall_r1_fast ) 
     # ):
     #     flag_buy = buy(
     #         app,varsBc,varsLb,vars,params,
@@ -146,7 +146,7 @@ def buy_Call(app,varsBc,varsLb,vars,params):
         (timeNow >= params.timeCall_r1_e[0] and timeNow < params.timeCall_r1_e[1])
         and (vars.dcall >= params.dcall_r1_e[0] and vars.dcall < params.dcall_r1_e[1])
         and (vars.docall >= params.docall_r1_e[0] and vars.docall <= params.docall_r1_e[1])
-        and  (vars.label==params.labelCall_r1_e ) and vars.flag_Call_reset_r1_e
+        and  (varsLb.label==params.labelCall_r1_e ) and vars.flag_Call_reset_r1_e
     ):
         flag_buy = buy(
             app,varsBc,varsLb,vars,params,
@@ -169,7 +169,7 @@ def buy_Call(app,varsBc,varsLb,vars,params):
     #     (timeNow >= params.timeCall_r1_e2[0] and timeNow < params.timeCall_r1_e2[1])
     #     and (vars.dcall >= params.dcall_r1_e2[0] and vars.dcall < params.dcall_r1_e2[1])
     #     and (vars.docall >= params.docall_r1_e2[0] and vars.docall <= params.docall_r1_e2[1])
-    #     and  (vars.label==params.labelCall_r1_e2 ) and flag_Call_reset_r1_e2
+    #     and  (varsLb.label==params.labelCall_r1_e2 ) and flag_Call_reset_r1_e2
     # ):
     #     flag_buy = buy(
     #         app,varsBc,varsLb,vars,params,
@@ -191,7 +191,7 @@ def buy_Call(app,varsBc,varsLb,vars,params):
         (timeNow >= params.timeCall_r1_i[0] and timeNow < params.timeCall_r1_i[1])
         and (vars.dcall >= params.dcall_r1_i[0] and vars.dcall < params.dcall_r1_i[1])
         and (vars.docall >= params.docall_r1_i[0] and vars.docall <= params.docall_r1_i[1])
-        and  (vars.label==params.labelCall_r1_i ) 
+        and  (varsLb.label==params.labelCall_r1_i ) 
     ):
         flag_buy = buy(
             app,varsBc,varsLb,vars,params,
@@ -213,7 +213,7 @@ def buy_Call(app,varsBc,varsLb,vars,params):
         (timeNow >= params.timeCall_r1_c[0] and timeNow < params.timeCall_r1_c[1])
         and (vars.dcall >= params.dcall_r1_c[0] and vars.dcall < params.dcall_r1_c[1])
         and (vars.docall >= params.docall_r1_c[0] and vars.docall <= params.docall_r1_c[1])
-        and  (vars.label==params.labelCall_r1_c ) 
+        and  (varsLb.label==params.labelCall_r1_c ) 
     ):
         flag_buy = buy(
             app,varsBc,varsLb,vars,params,
@@ -236,7 +236,7 @@ def buy_Call(app,varsBc,varsLb,vars,params):
         (timeNow >= params.timecall_r1_f[0] and timeNow < params.timecall_r1_f[1])
         and (vars.dcall >= params.dcall_r1_f[0] and vars.dcall < params.dcall_r1_f[1])
         and (vars.docall >= params.docall_r1_f[0] and vars.docall <= params.docall_r1_f[1])
-        and  (vars.label==params.labelcall_r1_f ) 
+        and  (varsLb.label==params.labelcall_r1_f ) 
     ):
         flag_buy = buy(
             app,varsBc,varsLb,vars,params,
@@ -267,7 +267,7 @@ def buy_Put(app,varsBc,varsLb,vars,params):
         (timeNow >= params.timePut_r2[0] and timeNow < params.timePut_r2[1])
         and (vars.dput >= params.dput_r2[0] and vars.dput < params.dput_r2[1])
         and (vars.doput >= params.doput_r2[0] and vars.doput < params.doput_r2[1])
-        and (vars.label==params.labelPut_r2 )and vars.flag_Put_R2
+        and (varsLb.label==params.labelPut_r2 )and vars.flag_Put_R2
 
     ):
         flag_buy = buy(
@@ -290,7 +290,7 @@ def buy_Put(app,varsBc,varsLb,vars,params):
         (timeNow >= params.timePut_r2_e[0] and timeNow < params.timePut_r2_e[1])
         and (vars.dput >= params.dput_r2_e[0] and vars.dput < params.dput_r2_e[1])
         and (vars.doput >= params.doput_r2_e[0] and vars.doput < params.doput_r2_e[1])
-        and (vars.label==params.labelPut_r2_e )and vars.flag_Put_R2 and vars.flag_Put_reset_r2_e
+        and (varsLb.label==params.labelPut_r2_e )and vars.flag_Put_R2 and vars.flag_Put_reset_r2_e
 
     ):
         flag_buy = buy(
@@ -313,7 +313,7 @@ def buy_Put(app,varsBc,varsLb,vars,params):
         (timeNow >= params.timePut_r1[0] and timeNow < params.timePut_r1[1])
         and (vars.dput >= params.dput_r1[0] and vars.dput < params.dput_r1[1])
         and (vars.doput >= params.doput_r1[0] and vars.doput < params.doput_r1[1])
-        and (vars.label==params.labelPut_r1 )and vars.flag_Put_reset_r1
+        and (varsLb.label==params.labelPut_r1 )and vars.flag_Put_reset_r1
 
     ):
         flag_buy = buy(
@@ -336,7 +336,7 @@ def buy_Put(app,varsBc,varsLb,vars,params):
     #     (timeNow >= params.timePut_r1_e[0] and timeNow < params.timePut_r1_e[1])
     #     and (vars.dput >= params.dput_r1_e[0] and vars.dput < params.dput_r1_e[1])
     #     and (vars.doput >= params.doput_r1_e[0] and vars.doput < params.doput_r1_e[1])
-    #     and (vars.label==params.labelPut_r1_e )  and vars.flag_Put_reset_r1_e
+    #     and (varsLb.label==params.labelPut_r1_e )  and vars.flag_Put_reset_r1_e
 
     # ):
     #     flag_buy = buy(
@@ -361,7 +361,7 @@ def buy_Put(app,varsBc,varsLb,vars,params):
         (timeNow >= params.timePut_r1_c[0] and timeNow < params.timePut_r1_c[1])
         and (vars.dput >= params.dput_r1_c[0] and vars.dput < params.dput_r1_c[1])
         and (vars.doput >= params.doput_r1_c[0] and vars.doput < params.doput_r1_c[1])
-        and (vars.label==params.labelPut_r1_c ) 
+        and (varsLb.label==params.labelPut_r1_c ) 
     ):
         flag_buy = buy(
             app,varsBc,varsLb,vars,params,
@@ -383,7 +383,7 @@ def buy_Put(app,varsBc,varsLb,vars,params):
     #     (timeNow >= params.timePut_r1_fast[0] and timeNow < params.timePut_r1_fast[1])
     #     and (vars.dput >= params.dput_r1_fast[0] and vars.dput < params.dput_r1_fast[1])
     #     and (vars.doput >= params.doput_r1_fast[0] and vars.doput < params.doput_r1_fast[1])
-    #     and (vars.label==params.labelPut_r1_fast ) 
+    #     and (varsLb.label==params.labelPut_r1_fast ) 
 
     # ):
     #     flag_buy = buy(
@@ -406,7 +406,7 @@ def buy_Put(app,varsBc,varsLb,vars,params):
         (timeNow >= params.timePut_r1_i[0] and timeNow < params.timePut_r1_i[1])
         and (vars.dput >= params.dput_r1_i[0] and vars.dput < params.dput_r1_i[1])
         and (vars.doput >= params.doput_r1_i[0] and vars.doput < params.doput_r1_i[1])
-        and (vars.label==params.labelPut_r1_i ) and vars.flag_Call_R2 ==False and vars.flag_Put_reset_r1_i
+        and (varsLb.label==params.labelPut_r1_i ) and vars.flag_Call_R2 ==False and vars.flag_Put_reset_r1_i
 
     ):
         flag_buy = buy(
@@ -431,7 +431,7 @@ def buy_Put(app,varsBc,varsLb,vars,params):
         (timeNow >= params.timePut_r1_f[0] and timeNow < params.timePut_r1_f[1])
         and (vars.dput >= params.dput_r1_f[0] and vars.dput < params.dput_r1_f[1])
         and (vars.doput >= params.doput_r1_f[0] and vars.doput < params.doput_r1_f[1])
-        and (vars.label==params.labelPut_r1_f ) 
+        and (varsLb.label==params.labelPut_r1_f ) 
 
     ):
         flag_buy = buy(
@@ -454,7 +454,7 @@ def buy_Put(app,varsBc,varsLb,vars,params):
         (timeNow >= params.timePut_r1_f2[0] and timeNow < params.timePut_r1_f2[1])
         and (vars.dput >= params.dput_r1_f2[0] and vars.dput < params.dput_r1_f2[1])
         and (vars.doput >= params.doput_r1_f2[0] and vars.doput < params.doput_r1_f2[1])
-        and (vars.label==params.labelPut_r1_f2 ) 
+        and (varsLb.label==params.labelPut_r1_f2 ) 
 
     ):
         flag_buy = buy(

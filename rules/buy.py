@@ -488,7 +488,7 @@ def buy(app,varsBc,varsLb,vars,params, tipo, regla, ask, contract, symbol):
 
     from rules.routine import calculations
     #BROADCASTING
-    if vars.buy_broadcasting ==False:
+    if varsBc.buy_broadcasting ==False:
         asyncio.run(send_buy(app, varsBc, params, tipo,regla))
     # LECTURA PREVIA
     readIBData_action(app, vars, tipo, regla)

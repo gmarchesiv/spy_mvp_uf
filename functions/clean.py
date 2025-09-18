@@ -43,10 +43,10 @@ def clean_vars(vars,varsApp):
 def clean_broadcasting(varsBc):
     # LIMPIEZA DE LAS VARIBALES BROADCASTING
     varsBc.aliniar = False
-    varsBc.sell_broadcasting = False
+    varsBc.sell = False
     varsBc.sell_tipo_broadcasting = ""
     varsBc.sell_regla_broadcasting = ""
-    varsBc.buy_broadcasting = False
+    varsBc.buy = False
     varsBc.buy_tipo_broadcasting = ""
     varsBc.buy_regla_broadcasting = ""
     varsBc.buy = False
@@ -59,10 +59,10 @@ def clean_broadcasting(varsBc):
         datos = json.load(file)
 
         datos["aliniar"] = False
-        datos["sell_broadcasting"] = False
+        datos["sell"] = False
         datos["sell_tipo_broadcasting"] = ""
         datos["sell_regla_broadcasting"] = ""
-        datos["buy_broadcasting"] = False
+        datos["buy"] = False
         datos["buy_tipo_broadcasting"] = ""
         datos["buy_regla_broadcasting"] = ""
         datos["buy"] = False

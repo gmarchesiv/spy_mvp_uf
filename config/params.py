@@ -87,7 +87,7 @@ class parameters:
 
         self.max_askbid_venta_forzada = 0.04
 
-        self.slippage=1.075
+        self.slippage=1.06
         self.fd =  dt_time(15, 30)
 
         self.rutina = [dt_time(7, 0), dt_time(16, 0)]

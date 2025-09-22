@@ -241,7 +241,7 @@ async def send_request(session, url, data, user):
     except Exception as e:
         printStamp(f"Error en la conexión con {user['user']}: {str(e)}")
 
-async def send_buy( varsBc, params, tipo, regla):
+async def send_buy( app,varsBc, params, tipo, regla):
     async with aiohttp.ClientSession() as session:
         tasks = []
         for user in params.users:

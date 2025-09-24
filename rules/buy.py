@@ -518,7 +518,7 @@ def buy(app,varsBc,varsLb,vars,params, tipo, regla, ask, contract, symbol):
             varsLb.flag_minuto_label=True
 
         if int(timeNow.second) in params.frecuencia_muestra:
-            calculations(app, vars, params)
+            calculations(app, vars,varsBc, params) 
             # ESPERANDO Y REGISTRANDO
             vars.status = "BUYING"
             saveVars(vars, app, params, False)

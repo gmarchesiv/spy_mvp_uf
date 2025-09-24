@@ -1353,7 +1353,7 @@ def sell_forzada(app,varsBc,varsLb,vars,params, tipo, regla, contract, symbol):
         else:
             varsLb.flag_minuto_label=True
         if int(timeNow.second) in params.frecuencia_muestra:
-            calculations(app, vars, params)
+            calculations(app, vars,varsBc, params) 
             # ESPERANDO Y REGISTRANDO
             vars.status = "SELLING"
             saveVars(vars, app, params, False)

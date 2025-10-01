@@ -62,10 +62,14 @@ def main():
 
         # VARIABLES
         vars = varsRutina()
+        print("1TESTS:",vars.call_close , vars.put_close)
         varsBc = varsBroadcasting()
+        print("2TESTS:",vars.call_close , vars.put_close)
         varsLb=varsLabel()
+        print("3TESTS:",vars.call_close , vars.put_close)
         varsApp=varsApps()
-
+        print("4TESTS:",vars.call_close , vars.put_close)
+        
         # PARAMETROS
         params = parameters()
 
@@ -117,6 +121,7 @@ def main():
         #---------------------------------------------------
 
         app, api_thread, status = ibkr_connection(params)
+        print("5TESTS:",vars.call_close , vars.put_close)
         if status: # FIN en caso no conecte.
             return
 
@@ -125,7 +130,7 @@ def main():
 
         # Registro de sesion.
         writeRegister(params.name, params.zone)
-
+        print("6TESTS:",vars.call_close , vars.put_close)
         # ==========================
         #  - SUSCRIPCIONES A DATOS -
         # ==========================
@@ -138,7 +143,7 @@ def main():
         #---------------------------------------------------
 
         data_susciption(app, params, vars)
-
+        print("7TESTS:",vars.call_close , vars.put_close)
         # ====================
         #  -   AL INICIAR   -
         # ====================
@@ -172,6 +177,7 @@ def main():
             generar_label(params, varsLb,app)
 
             timeNow = datetime.now(params.zone).time()
+            print("8TESTS:",vars.call_close , vars.put_close)
             # Bloqueo por sesion tardia
             if (timeNow.hour >= 9 and timeNow.minute >= 33):
                varsApp.flag_bloqueo_tiempo=True
@@ -183,7 +189,7 @@ def main():
         sendStart(app, params)
 
         printStamp(" - INICIO DE RUTINA - ")
-
+        print("9TESTS:",vars.call_close , vars.put_close)
         # ====================
         #      - Rutina -
         # ====================

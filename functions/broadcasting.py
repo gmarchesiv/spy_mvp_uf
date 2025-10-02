@@ -49,6 +49,9 @@ def broadcasting_Aliniar(varsBc,vars):
                     vars.put_open = data["put_open"]
                     vars.flag_Call_R2 = data["flag_Call_R2"]
                     vars.flag_Put_R2 = data["flag_Put_R2"]
+                    data["aliniar"] = False
+                    with open(file_name, "w") as file:
+                        json.dump(data, file, indent=4)
 
 def broadcasting_sell(varsBc,varsLb,vars,params,app):
 
@@ -223,8 +226,13 @@ def broadcasting_buy(varsBc,varsLb,vars,params,app):
                         )
 
                         if flag_buy == False:
+                            
+                            varsBc.buy=False
+
+                            data["buy"] = False 
+                            with open(file_name, "w") as file:
+                                json.dump(data, file, indent=4)
                             return
-                        varsBc.buy=False
                         return
     except:pass             
 

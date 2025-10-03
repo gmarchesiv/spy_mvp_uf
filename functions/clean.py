@@ -37,6 +37,7 @@ def clean_vars(vars,varsApp):
     vars.rule = True
     vars.bloqueo = True
     varsApp.flag_bloqueo_tiempo=False
+    vars.flag_Call_reset_r3 = False
 
 
 

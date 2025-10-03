@@ -59,31 +59,7 @@ def create_contract_OPT(
     return contract
 
 
-# revision de fechas de expiracion
-def checkExpirations(app, etf, params, vars, add):
-    name = f"{vars.exchange}_{etf}"
-    # print(app.option_chains[name])
-    listExpire = list(app.option_chains[name]["expirations"])
-    fecha_actual = datetime.now()
-
-    format_str = "%Y%m%d"
-    listExpire_dates = [datetime.strptime(date, format_str) for date in listExpire]
-
-    # Ordenar la lista en orden descendente
-    listExpire_dates.sort(reverse=False)
-
-    for expiry_date in listExpire_dates:
-        if expiry_date >= fecha_actual + timedelta(days=(params.diff_days_exp + add)):
-            fecha_seleccionada = expiry_date
-
-            vars.dif_exp = (
-                expiry_date - (fecha_actual + timedelta(days=params.diff_days_exp))
-            ).days
-            break
-
-    return fecha_seleccionada.strftime(format_str)
-
-
+ 
 # Funcion que busca el strike mas proximo
 def strikeNear(numero, lista):
     return min(lista, key=lambda x: abs(x - numero))
@@ -317,26 +293,7 @@ def snapshot(app, etf, strike, exp, exchange):
         }
 
 
-# def list_checkExpirations(app, etf, params, exchange):
-#     name = f"{exchange}_{etf}"
-
-#     listExpire = list(app.option_chains[name]["expirations"])
-#     fecha_actual = datetime.now()
-
-#     format_str = "%Y%m%d"
-#     listExpire_dates = [datetime.strptime(date, format_str) for date in listExpire]
-
-#     # Ordenar la lista en orden descendente
-#     listExpire_dates.sort(reverse=False)
-
-#     lista_exp = []
-#     for expiry_date in listExpire_dates:
-#         if expiry_date >= (
-#             fecha_actual + timedelta(days=params.days_max[0])
-#         ) and expiry_date <= (fecha_actual + timedelta(days=params.days_max[1])):
-#             lista_exp.append(expiry_date.strftime(format_str))
-#             # return lista_exp
-#     return lista_exp
+ 
 
 def list_checkExpirations(app, etf, params, exchange):
     name = f"{exchange}_{etf}"
@@ -353,7 +310,7 @@ def list_checkExpirations(app, etf, params, exchange):
     lista_exp = []
     for expiry_date in listExpire_dates:
         if expiry_date >= (
-            fecha_actual + timedelta(days=params.days_max[0])
+            fecha_actual + timedelta(days=params.days_min_exp)
         ) :
             lista_exp.append(expiry_date.strftime(format_str))
             if n>=5:

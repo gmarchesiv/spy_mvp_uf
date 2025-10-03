@@ -311,7 +311,8 @@ def list_checkExpirations(app, etf, params, exchange):
     for expiry_date in listExpire_dates:
         if expiry_date >= (
             fecha_actual + timedelta(days=params.days_min_exp)
-        ) :
+        ) : 
+            
             lista_exp.append(expiry_date.strftime(format_str))
             if n>=5:
                 return lista_exp

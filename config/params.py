@@ -79,7 +79,7 @@ class parameters:
         self.rangos_strikes = [[2, 2.5] ]
  
     
-        self.days_min_exp = 20  # DIAS para el exp minimo de busqueda
+        self.days_min_exp = 25  # DIAS para el exp minimo de busqueda
 
 
 

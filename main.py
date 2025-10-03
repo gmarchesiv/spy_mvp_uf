@@ -171,14 +171,14 @@ def main():
                     if vars.bloqueo == False and vars.flag_bloqueo_tiempo==False:
                         # ================================
                         #  -VENTA-
-                        # ================================
-                        if vars.call or vars.put:
-                            sellOptions(app, vars, params)
-                        # ================================
-                        #  -COMPRA-
-                        # ================================
-                        if vars.compra:
-                            buyOptions(app, vars, params)
+                        # # ================================
+                        # if vars.call or vars.put:
+                        #     sellOptions(app, vars, params)
+                        # # ================================
+                        # #  -COMPRA-
+                        # # ================================
+                        # if vars.compra:
+                        #     buyOptions(app, vars, params)
                         pass
                     
                     # ================================

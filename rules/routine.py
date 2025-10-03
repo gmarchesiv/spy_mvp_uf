@@ -28,7 +28,37 @@ from functions.saveJson import saveJson
 # ====================
 #  - Funciones -
 # ====================
+# GUARDAR OPEN DE OPCIONES
+def data_option_open(app,   vars,params):
 
+    #---------------------------------------------------
+    '''
+    Extraccion de los precios de Open de las opciones.
+    '''
+    #---------------------------------------------------
+    
+    vars.call_open = -1
+    vars.put_open = -1
+
+    while (vars.call_open==-1 or vars.put_open == -1):
+        timeNow = datetime.now(params.zone).time()
+        c_ask=app.options[1]["ASK"]
+        c_bid=app.options[1]["BID"]
+        p_ask=app.options[2]["ASK"]
+        p_bid=app.options[2]["BID"]
+        if vars.call_open==-1 and ((c_ask/c_bid)-1)<params.max_askbid_open:
+            vars.call_open = app.options[1]["BID"]
+
+        if vars.put_open==-1 and ((p_ask/p_bid)-1)<params.max_askbid_open:
+            vars.put_open = app.options[2]["BID"]
+      
+        if   params.max_askbid_hora_open <= timeNow:
+            vars.call_open = app.options[1]["BID"]
+            vars.put_open = app.options[2]["BID"]
+            vars.flag_bloqueo_tiempo =True
+            break
+        time.sleep(0.5)
+        
 
 # REALIZA LA SUSCIPCION DE DATOS
 def data_susciption(app, params, vars):

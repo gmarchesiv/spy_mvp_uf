@@ -34,6 +34,7 @@ from functions.saveJson import saveJson
 from rules.buy import buyOptions
 from rules.routine import (
     calculations,
+    data_option_open,
     data_susciption,
     registration,
     registro_strike,
@@ -116,8 +117,7 @@ def main():
 
         if vars.fecha != now:
             clean_vars(vars)
-            vars.call_open = app.options[1]["BID"]
-            vars.put_open = app.options[2]["BID"]
+            data_option_open(app,   vars,params)
             generar_label(params, vars,app)
 
             timeNow = datetime.now(params.zone).time()

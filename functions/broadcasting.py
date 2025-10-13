@@ -135,12 +135,12 @@ def broadcasting_sell_auto(varsBc,varsLb,vars,params,app):
             if 'sell' in data:
                 if data["sell"] == True  :
                     params.max_askbid_venta_abs=data["max_askbid_venta_abs"]
-                    if varsBc.call:
+                    if vars.call:
                         val = 1
                         tipo="C"
                         if vars.askbid_call > params.max_askbid_venta_abs or vars.cbid <= 0:
                             return False
-                    elif varsBc.put:
+                    elif vars.put:
                         val = 2
                         tipo="P"
                         if vars.askbid_put > params.max_askbid_venta_abs or vars.pbid <= 0:

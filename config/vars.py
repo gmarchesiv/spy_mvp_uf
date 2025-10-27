@@ -10,7 +10,7 @@ from collections import deque
 #                  VARIABLES
 ###############################################
 class variables:
-    def __init__(self):
+    def __init__(self,debug_mode ):
 
         file_name = "/usr/src/app/data/vars.json"
 

@@ -13,7 +13,8 @@ from functions.logs import printStamp
 #                  PARAMETROS
 ###############################################
 class parameters:
-    def __init__(self ):
+ 
+    def __init__(self,debug_mode ):
         ###############################################
         #               PARAMETROS -  GENERALES
         ###############################################

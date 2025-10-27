@@ -93,7 +93,7 @@ def writeDayTrade(app, vars, params):
     Session = sessionmaker(bind=engine)
     session = Session()
     try:
-
+        
         datetime_now = datetime.now(params.zone)
         new_data = dayTrade(
             date=datetime_now,
@@ -102,28 +102,38 @@ def writeDayTrade(app, vars, params):
             underlying=float(app.etfs[5]["price"]),
             cStrike=app.options[1]["strike"],
             pStrike=app.options[2]["strike"],
-            exp=app.options[1]["expirations"],
+            exp=vars.exp,
             cask=vars.cask,
             cbid=vars.cbid,
             pask=vars.pask,
             pbid=vars.pbid,
-            cask_Size=app.options[1]["ASK_SIZE"],
-            cbid_Size=app.options[1]["BID_SIZE"],
-            pask_Size=app.options[2]["ASK_SIZE"],
-            pbid_Size=app.options[2]["BID_SIZE"],
+ 
             cAskBid=vars.askbid_call,
             pAskBid=vars.askbid_put,
             dCall=vars.dcall,
             dPut=vars.dput,
             doCall=vars.docall,
             doPut=vars.doput,
+
+            cStrike_2=app.options[3]["strike"],
+            pStrike_2=app.options[4]["strike"],
+            exp_2=vars.exp_2,
+            cask_2=vars.cask_2,
+            cbid_2=vars.cbid_2,
+            pask_2=vars.pask_2,
+            pbid_2=vars.pbid_2,
+ 
+            cAskBid_2=vars.askbid_call_2,
+            pAskBid_2=vars.askbid_put_2,
+            dCall_2=vars.dcall_2,
+            dPut_2=vars.dput_2,
+            doCall_2=vars.docall_2,
+            doPut_2=vars.doput_2,
+
+
+
             label=int(vars.label),
-            rentabilidad=vars.rentabilidad,
-            pico=vars.pico,
-            caida=vars.caida,
-            rule=vars.regla,
-            cAskBid_prom = vars.promedio_call,
-            pAskBid_prom = vars.promedio_put
+             
         )
 
         session.add(new_data)

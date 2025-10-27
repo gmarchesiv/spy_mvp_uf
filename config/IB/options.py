@@ -20,29 +20,13 @@ from functions.logs import printStamp
 def req_Options(app, params, vars, etf):
 
     requestContract(app, etf, vars.strike_c, vars.exp, "C", vars.exchange)
-    # while True:
-    #     readyOpt = 0
-    #     if app.options[id]["ASK"] > 0:
-    #         readyOpt += 1
-    #     if app.options[id]["BID"] > 0:
-    #         readyOpt += 1
-    #     if readyOpt == 2:
-    #         break
-
-    #     time.sleep(0.5)
-
+ 
     requestContract(app, etf, vars.strike_p, vars.exp, "P", vars.exchange)
-    # while True:
-    #     readyOpt = 0
-    #     if app.options[id]["ASK"] > 0:
-    #         readyOpt += 1
-    #     if app.options[id]["BID"] > 0:
-    #         readyOpt += 1
-    #     if readyOpt == 2:
-    #         break
 
-    #     time.sleep(0.5)
-
+    requestContract(app, etf, vars.strike_c_2, vars.exp_2, "C", vars.exchange)
+ 
+    requestContract(app, etf, vars.strike_p_2, vars.exp_2, "P", vars.exchange)
+ 
 
 # Creacion de contratos de Opciones
 def create_contract_OPT(
@@ -332,6 +316,30 @@ def list_checkExpirations(app, etf, params, exchange):
         ) :
             if n!=0:
                 lista_exp.append(expiry_date.strftime(format_str))
+            if n>=5:
+                return lista_exp
+            n+=1
+    return lista_exp
+
+
+def list_checkExpirations_2(app, etf, params, exchange):
+    name = f"{exchange}_{etf}"
+
+    listExpire = list(app.option_chains[name]["expirations"])
+    fecha_actual = datetime.now()
+
+    format_str = "%Y%m%d"
+    listExpire_dates = [datetime.strptime(date, format_str) for date in listExpire]
+
+    # Ordenar la lista en orden descendente
+    listExpire_dates.sort(reverse=False)
+    n=0
+    lista_exp = []
+    for expiry_date in listExpire_dates:
+        if expiry_date >= (
+            fecha_actual + timedelta(days=params.days_min_exp )
+        ) :
+            lista_exp.append(expiry_date.strftime(format_str))
             if n>=5:
                 return lista_exp
             n+=1

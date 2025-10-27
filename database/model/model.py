@@ -70,23 +70,30 @@ class dayTrade(Base):
     cbid = Column(Float)
     pask = Column(Float)
     pbid = Column(Float)
-    cask_Size = Column(Integer)
-    cbid_Size = Column(Integer)
-    pask_Size = Column(Integer)
-    pbid_Size = Column(Integer)
     cAskBid = Column(Float)
     pAskBid = Column(Float)
     dCall = Column(Float)
     dPut = Column(Float)
     doCall = Column(Float)
     doPut = Column(Float)
+
+
+    cStrike_2 = Column(Float)
+    pStrike_2 = Column(Float)
+    exp_2 = Column(String)
+    cask_2 = Column(Float)
+    cbid_2 = Column(Float)
+    pask_2 = Column(Float)
+    pbid_2 = Column(Float)
+    cAskBid_2 = Column(Float)
+    pAskBid_2 = Column(Float)
+    dCall_2 = Column(Float)
+    dPut_2 = Column(Float)
+    doCall_2 = Column(Float)
+    doPut_2 = Column(Float)
+
+
     label= Column(Integer)
-    rentabilidad = Column(Float)
-    pico = Column(Float)
-    caida = Column(Float)
-    rule = Column(String)
-    cAskBid_prom = Column(Float)
-    pAskBid_prom = Column(Float)
 
 class label(Base):
     __tablename__ = "label"

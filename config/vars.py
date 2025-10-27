@@ -49,6 +49,12 @@ class variables:
         self.call_open = self.data.get("call_open", 0)
         self.put_open = self.data.get("put_open", 0)
 
+        self.call_close_2 = self.data.get("call_close_2", 0)
+        self.put_close_2 = self.data.get("put_close_2", 0)
+        self.call_open_2 = self.data.get("call_open_2", 0)
+        self.put_open_2 = self.data.get("put_open_2", 0)
+
+
         ###############################################
         # VARIABLES DE FLAGS
         ###############################################
@@ -93,6 +99,20 @@ class variables:
         self.askbid_call_prom = self.data.get("askbid_call_prom ", [])
         self.askbid_put_prom  = self.data.get("askbid_put_prom ",[])
         
+
+
+        self.dcall_2 = self.data.get("dcall_2", 0)
+        self.dput_2 = self.data.get("dput_2", 0)
+        self.docall_2 = self.data.get("docall_2", 0)
+        self.doput_2 = self.data.get("doput_2", 0)
+        self.askbid_call_2 = self.data.get("askbid_call_2", 0)
+        self.askbid_put_2 = self.data.get("askbid_put_2", 0)
+
+        self.strike_c_2 = self.data.get("strike_c_2", 0)
+        self.strike_p_2 = self.data.get("strike_p_2", 0)
+        self.exp_2 = self.data.get("exp_2", "")
+
+
         self.quantity = self.data.get("quantity", 0)
         self.rentabilidad = self.data.get("rentabilidad", 0)
         self.rentabilidad_ant = self.data.get("rentabilidad_ant", 0)
@@ -115,6 +135,11 @@ class variables:
         self.cbid = 0
         self.pask = 0
         self.pbid = 0
+
+        self.cask_2 = 0
+        self.cbid_2 = 0
+        self.pask_2 = 0
+        self.pbid_2 = 0
         self.regla_ant = ""
         self.trade_hour = ""
         self.accion_mensaje = self.data.get("accion_mensaje", 0)

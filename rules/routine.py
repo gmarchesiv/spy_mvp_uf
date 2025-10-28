@@ -138,18 +138,18 @@ def calculations(app, vars, params):
     # ================================
     timeNow = datetime.now(params.zone).time()
 
-    if int(timeNow.second) == 0:
-        vars.minutos += 1
-        vars.n_minutos += 1
-        vars.minutos_trade += 1
+ 
 
     # DATOS
     vars.cask = app.options[1]["ASK"]
     vars.cbid = app.options[1]["BID"]
     vars.pask = app.options[2]["ASK"]
     vars.pbid = app.options[2]["BID"]
+
+ 
+
     vars.vix= app.etfs[6]['price']
-    broadcasting_Aliniar(vars)
+ 
 
     # CALCULOS
     vars.askbid_call = vars.cask / vars.cbid - 1
@@ -158,22 +158,20 @@ def calculations(app, vars, params):
     vars.dput = vars.pbid / vars.put_close - 1
     vars.docall = vars.cbid / vars.call_open - 1
     vars.doput = vars.pbid / vars.put_open - 1
-    if vars.askbid_call >0 and params.umbral_askbid>vars.askbid_call:
-        vars.askbid_call_prom.append(vars.askbid_call)
-
-    if vars.askbid_put >0 and params.umbral_askbid>vars.askbid_put:
-        vars.askbid_put_prom.append(vars.askbid_put)
-
-     
-    if vars.rule:
-        if vars.dcall >= params.umbral_cr2:
-            vars.flag_Call_R2 = True
-        if vars.dput >= params.umbral_pr2:
-            vars.flag_Put_R2 = True
  
-        vars.rule = False
-        vars.hora_inicio = str(timeNow)
- 
+    vars.cask_2 = app.options[3]["ASK"]
+    vars.cbid_2 = app.options[3]["BID"]
+    vars.pask_2 = app.options[4]["ASK"]
+    vars.pbid_2 = app.options[4]["BID"]
+
+
+    # CALCULOS
+    vars.askbid_call_2 = vars.cask_2 / vars.cbid_2 - 1
+    vars.askbid_put_2 = vars.pask_2 / vars.pbid_2 - 1
+    vars.dcall_2 = vars.cbid_2 / vars.call_close_2 - 1
+    vars.dput_2 = vars.pbid_2 / vars.put_close_2 - 1
+    vars.docall_2= vars.cbid_2 / vars.call_open_2 - 1
+    vars.doput_2 = vars.pbid_2 / vars.put_open_2 - 1
 
 
 # GUARDADO DE TRANSACCIONES

@@ -11,6 +11,7 @@ from config.IB.options import (
     list_checkExpirations_2,
     req_Options,
     snapshot,
+    snapshot_2,
 )
 from config.IB.wallet import wallet_cash, wallet_load
 from database.repository.repository import writeDayTrade, writeTransactions, writeWallet

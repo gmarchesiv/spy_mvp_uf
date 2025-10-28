@@ -127,7 +127,7 @@ def main():
 
         wallet_config(app, params, vars)
 
-        sendStart(app, params)
+        # sendStart(app, params)
         
         printStamp(" - INICIO DE RUTINA - ")
         # # ====================
@@ -144,12 +144,14 @@ def main():
                         generar_label(params, vars,app)
                         vars.flag_minuto_label=False
                         time.sleep(0.5)
+                        calculations(app, vars, params)
+                        readIBData(app, vars) 
                 else:
                     vars.flag_minuto_label=True
             
                 if int(timeNow.second) in params.frecuencia_accion:
                     calculations(app, vars, params)  # CALCULOS DE RUTINA
-                    readIBData(app, vars)  # LOGS DE LOS CALCULOS
+                    # readIBData(app, vars)  # LOGS DE LOS CALCULOS
                   
 
                     registration(app, vars, params)
@@ -237,7 +239,7 @@ def main():
                 vars.status = "ERROR"
                 saveJson(vars, app, params, False)
                 error=f"{e}"
-                sendError(params, error)
+                # sendError(params, error)
             except:
                 pass
             app.stop()

@@ -218,7 +218,6 @@ def saveTransaction(app, params, vars):
                     app.execution_details[idreq]["shares"] = vars.quantity
                     writeWallet(app)
 
-
 # REGISTRO DE STRIKES
 def registro_strike(app, vars, params):
 
@@ -277,7 +276,7 @@ def registro_strike(app, vars, params):
     app.cancelMarketData(2)
     time.sleep(1)
     del app.options[2]
-
+    # app.options={}
     snapshot(app, app.etfs[5]["symbol"], [put_strike, call_strike], exp, vars.exchange)
     printStamp(f"EXTRAYENDO DATOS DE LA OPCION")
     while True:
@@ -367,15 +366,16 @@ def registro_strike_2(app, vars, params):
  
     printStamp(f"RANGOS SELECCIONADOS --> PUT: {put_strike} /  CALL: {call_strike}")
 
-    app.cancelMarketData(1)
+    app.cancelMarketData(3)
     time.sleep(1)
-    del app.options[1]
+    del app.options[3]
 
-    app.cancelMarketData(2)
+    app.cancelMarketData(4)
     time.sleep(1)
-    del app.options[2]
-
-    snapshot(app, app.etfs[5]["symbol"], [put_strike, call_strike], exp, vars.exchange)
+    del app.options[4]
+    time.sleep(1)
+    # print("LLEGUE HASTA AQUI")
+    snapshot_2(app, app.etfs[5]["symbol"], [put_strike, call_strike], exp, vars.exchange)
     printStamp(f"EXTRAYENDO DATOS DE LA OPCION")
     while True:
         timeNow = datetime.now(params.zone).time()
@@ -386,10 +386,10 @@ def registro_strike_2(app, vars, params):
             print("===============================================")
             printStamp(f"CASK: {app.options[3]['ASK'] } | CBID: {app.options[3]['BID'] }")
             printStamp(f"PASK: {app.options[4]['ASK'] } | PBID: {app.options[4]['BID'] }")
-        if app.options[1]["BID"] > 0 and params.max_askbid_venta_abs > (app.options[3]["ASK"] / app.options[3]["BID"] - 1):
+        if app.options[3]["BID"] > 0 and params.max_askbid_venta_abs > (app.options[3]["ASK"] / app.options[3]["BID"] - 1):
             readyOpt += 1
      
-        if app.options[2]["BID"] > 0 and params.max_askbid_venta_abs > (app.options[4]["ASK"] / app.options[4]["BID"] - 1):
+        if app.options[4]["BID"] > 0 and params.max_askbid_venta_abs > (app.options[4]["ASK"] / app.options[4]["BID"] - 1):
             readyOpt += 1
             
    

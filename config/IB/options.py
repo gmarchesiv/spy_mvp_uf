@@ -245,15 +245,31 @@ def buyOptionContract(app, params, vars, price, tipo, contract, tiker):
     vars.trade_hour = datetime.now(params.zone)
     return True
 
+def snapshot_2(app, etf, strike, exp, exchange):
 
+    contracts = [
+        create_contract_OPT(etf, "OPT", exchange, "USD", strike[1], exp, "C"),
+        create_contract_OPT(etf, "OPT", exchange, "USD", strike[0], exp, "P"),
+    ]
+   
+    for i, contract in enumerate(contracts, start=3):
+
+        app.reqMktData(i, contract, "", False, False, [])
+        time.sleep(3)
+        app.options[i] = {
+            "strike": contract.strike,
+            "expirations": contract.lastTradeDateOrContractMonth,
+            "ASK": 0,
+            "BID": 0,
+        }
 def snapshot(app, etf, strike, exp, exchange):
 
     contracts = [
         create_contract_OPT(etf, "OPT", exchange, "USD", strike[1], exp, "C"),
         create_contract_OPT(etf, "OPT", exchange, "USD", strike[0], exp, "P"),
     ]
-
-    for i, contract in enumerate(contracts, start=(len(app.options) + 1)):
+   
+    for i, contract in enumerate(contracts, start=1):
 
         app.reqMktData(i, contract, "", False, False, [])
         time.sleep(3)

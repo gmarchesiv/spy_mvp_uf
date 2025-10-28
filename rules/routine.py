@@ -91,7 +91,19 @@ def data_susciption(app, params, vars):
             break
 
         time.sleep(0.5)
+    while True:
+        ready  = 0
+  
+        if app.options[3]["ASK"] > 0 and app.options[3]["BID"] > 0:
+            ready += 1
 
+        if app.options[4]["ASK"] > 0 and app.options[4]["BID"] > 0:
+            ready += 1
+ 
+        if ready == 2:
+            break
+
+        time.sleep(0.5)
     printStamp(" - Datos Recibidos - ")
 
 
@@ -240,7 +252,7 @@ def registro_strike(app, vars, params):
     
     printStamp(f"RANGOS --> PUT : {put} - {put_inf} | CALL :{call_inf} - {call}")
 
-
+ 
     for exp in list_exp:
         strikes = checkStrike(
         app, exp, app.etfs[5]["symbol"], "C", vars.exchange
@@ -257,6 +269,8 @@ def registro_strike(app, vars, params):
         printStamp(f"EXP: {exp} - PUTs:{put_list} / CALLs:{call_list}")
         if len(put_list)==0 or len(call_list)==0:
             continue 
+        print("CALLS:",call_list)
+        print("PUTS:",put_list)
         put_strike = put_list[-2]  
         call_strike = call_list[1] 
         exp_escogido = exp
@@ -354,6 +368,8 @@ def registro_strike_2(app, vars, params):
         printStamp(f"EXP: {exp} - PUTs:{put_list} / CALLs:{call_list}")
         if len(put_list)==0 or len(call_list)==0:
             continue 
+        print("CALLS:",call_list)
+        print("PUTS:",put_list)
         put_strike = put_list[-1]  
         call_strike = call_list[0] 
         exp_escogido = exp

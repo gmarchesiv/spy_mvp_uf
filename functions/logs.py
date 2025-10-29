@@ -12,13 +12,29 @@ import pytz  # Importa el módulo pytz para manejar zonas horarias
 
 # Función para imprimir con marca de tiempo de Nueva York
 def printStamp(msg):
+
+    #---------------------------------------------------
+    '''
+    Genera un log con la hora de New York.
+    '''
+    #---------------------------------------------------
+
     zone = pytz.timezone("America/New_York")
     # Obtiene la marca de tiempo actual en Nueva York
     timestamp = datetime.now(zone).strftime("[%Y-%m-%d %H:%M:%S.%f]")[:-4] + "]"
     # Imprime la marca de tiempo y el mensaje proporcionado
     print(timestamp, msg)
 
-def readIBData(app, vars):
+def readIBData(app, vars,varsLb):
+
+    #---------------------------------------------------
+    '''
+    Genera un Log de lo que esta pasando alli mismo.
+    '''
+    #---------------------------------------------------
+
+
+
     vars.promedio_call = sum(vars.askbid_call_prom) / len(vars.askbid_call_prom) if len(vars.askbid_call_prom)!=0 else 0
     vars.promedio_put = sum(vars.askbid_put_prom) / len(vars.askbid_put_prom) if len(vars.askbid_put_prom)!=0 else 0
 
@@ -26,7 +42,7 @@ def readIBData(app, vars):
  
     printStamp(f"{app.etfs[5]['symbol']} : $ {app.etfs[5]['price']}")
     printStamp(f"{app.etfs[6]['symbol']} :   {app.etfs[6]['price']}")
-    printStamp(f"LABEL:   {vars.label}")
+    printStamp(f"LABEL:   {varsLb.label}")
 
     print("-----------------------------------------------")
 

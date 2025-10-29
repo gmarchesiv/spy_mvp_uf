@@ -24,6 +24,12 @@ def sendTelegram(params, msg):
 
 
 def sendStart(app, params):
+    #---------------------------------------------------
+    '''
+    Envio de mensaje de Inicio de sesión.
+    '''
+    #---------------------------------------------------
+ 
     msg = f"""
 ======================
 - INICIO DE RUTINA -
@@ -40,6 +46,13 @@ TRADING MODE: {params.typeIB}
 
 
 def sendEnd(app, params):
+
+    #---------------------------------------------------
+    '''
+    Envio de mensaje de Fin de sesión.
+    '''
+    #---------------------------------------------------
+
     msg = f"""
 ======================
 - FIN DE RUTINA -
@@ -56,6 +69,12 @@ TOTAL CASH : $ {app.wallet["TotalCashValue"]}
 
 
 def sendBuy(app, params, detail, vars):
+
+    #---------------------------------------------------
+    '''
+    Envio de mensaje de Compra de opciones.
+    '''
+    #---------------------------------------------------
 
     msg = f"""
 ======================
@@ -76,6 +95,14 @@ REGLA : {vars.regla_ant}
 
 
 def sendSell(app, params, detail, vars):
+
+    #---------------------------------------------------
+    '''
+    Envio de mensaje de Venta de opciones.
+    '''
+    #---------------------------------------------------
+
+
     msg = f"""
 ======================
 - Notificación -
@@ -95,6 +122,13 @@ REGLA : {vars.regla_ant}
 
 
 def sendError(params, razon):
+
+    #---------------------------------------------------
+    '''
+    Envio de mensaje de Alerta de Error.
+    '''
+    #---------------------------------------------------
+
     msg = f"""
 ======================
 - Alerta de Error -

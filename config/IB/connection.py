@@ -23,6 +23,16 @@ def run_loop(app):
 
 # Conexión
 def ibkr_connection(params):
+
+    #---------------------------------------------------
+    '''
+    Intentara conectarse una N cantidad de veces a 
+    interactive Broker Gateway y luego de generar la 
+    conexión, pedira informacion del cliente 
+    ( # de cuenta , cash ,etc).
+    '''
+    #---------------------------------------------------
+    
     connection_record(params, False)
     for attempt in range(params.time_connection):
         app = IBapi()
@@ -57,6 +67,15 @@ def ibkr_connection(params):
 
 
 def test_ibkr_connection(params):
+
+    #---------------------------------------------------
+    '''
+    Intentara conectarse una N cantidad de veces a 
+    interactive Broker Gateway para hacer un test 
+    de conexión.
+    '''
+    #---------------------------------------------------
+
     connection_record(params, False)
     for attempt in range(params.time_connection):
         app = IBapi()
@@ -90,6 +109,13 @@ def test_ibkr_connection(params):
 
 # REGISTRO DE CONEXION EXITOSA
 def connection_record(params, val):
+
+    #---------------------------------------------------
+    '''
+    Guardara informacion de los test de conexión 
+    '''
+    #---------------------------------------------------
+
     file_name = "/usr/src/app/data/vars.json"
     with open(file_name, "r") as file:
         datos = json.load(file)
@@ -103,13 +129,20 @@ def connection_record(params, val):
 
 
 # CARGA DE DATOS PERDIDOS
-def load_app_vars(app, vars):
+def load_app_vars(app, varsApp):
 
-    app.cash = vars.cash
-    app.statusIB = vars.statusIB
-    app.execution_details = vars.execution_details
-    app.commissions = vars.commissions
+    #---------------------------------------------------
+    '''
+    Carga de las variables de APP de las funciones
+    internas del IB-Gateway, para recuperar estados de
+    transacciones en un nuevo reinicio.
+    '''
+    #---------------------------------------------------
 
-    app.sendError = vars.sendError
-    app.Error = vars.Error
-    app.Error_buy = vars.Error_buy
+    app.cash = varsApp.cash
+    app.statusIB = varsApp.statusIB
+    app.execution_details = varsApp.execution_details
+    app.commissions = varsApp.commissions
+    app.sendError = varsApp.sendError
+    app.Error = varsApp.Error
+    app.Error_buy = varsApp.Error_buy

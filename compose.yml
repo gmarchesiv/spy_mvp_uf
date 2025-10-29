@@ -16,6 +16,8 @@ services:
       - ./app/app.py:/usr/src/app.py
       - ./data/vars.json:/usr/src/vars.json
       - ./data/broadcasting.json:/usr/src/broadcasting.json
+      - ./data/app.json:/usr/src/app.json
+      - ./data/label.json:/usr/src/label.json
       - ./dataBase.db:/usr/src/dataBase.db
       - /var/run/docker.sock:/var/run/docker.sock
     ports:

@@ -13,7 +13,7 @@ from functions.broadcasting import comparar_precios, send_sell, verificar_regla
 from functions.labels import generar_label
 from functions.logs import printStamp, read_rentabilidad, read_sell, readIBData_action
 from functions.notifications import sendError
-from functions.saveJson import saveJson
+from functions.saveVars import saveVars
 
 # ====================
 #  - Funciones -
@@ -21,23 +21,39 @@ from functions.saveJson import saveJson
 
 
 # INICIO DE LAS REGLAS DE VENTA
-def sellOptions(app, vars, params):
+def sellOptions(app,varsBc,varsLb,vars,params):
+
+    #---------------------------------------------------
+    '''
+    En la venta de opciones va verificando los precios 
+    de las demas maquinas para alinearlas a que salgan
+    por las mismas reglas.Depende del tipo de opcion
+    pueden ser de tipo CALL o PUT.
+
+    '''
+    #---------------------------------------------------
+
     if vars.minutos_trade <=params.tiempo_contulta :
 
         asyncio.run(comparar_precios(vars, params))
  
     if vars.call:
-        # sell_obligatoria(app, vars, params,"C")
-        sellCall(app, params, vars)
+        # sell_obligatoria(app,varsBc,varsLb,vars,params,"C")
+        sellCall(app,varsBc,varsLb,vars,params)
         return
     elif vars.put:
-        # sell_obligatoria(app, vars, params,"P")
-        sellPut(app, params, vars)
+        # sell_obligatoria(app,varsBc,varsLb,vars,params,"P")
+        sellPut(app,varsBc,varsLb,vars,params)
         return
     else:
         return
 
-def sell_obligatoria(app, vars, params,tipo):
+def sell_obligatoria(app,varsBc,varsLb,vars,params,tipo):
+    #---------------------------------------------------
+    '''
+    Fuerza la Venta de la opcion.
+    '''
+    #---------------------------------------------------
     params.max_askbid_venta_abs=params.max_askbid_venta_forzada
     if tipo == "C":
         val = 1
@@ -52,9 +68,7 @@ def sell_obligatoria(app, vars, params,tipo):
         return
     vars.venta_intentos=params.intentos
     sell_forzada(
-            app,
-            vars,
-            params,
+            app,varsBc,varsLb,vars,params,
             tipo,
             "FORZADO",
             app.options[val]["contract"],
@@ -63,7 +77,15 @@ def sell_obligatoria(app, vars, params,tipo):
     return
  
 
-def sellCall(app, params, vars):
+def sellCall(app,varsBc,varsLb,vars,params):
+
+    #---------------------------------------------------
+    '''
+    Ventas de tipo CALL.
+    Realiza calculos de rentabilidad, verifica reglas 
+    de proteccion y verifica reglas de salida .
+    '''
+    #---------------------------------------------------
 
     timeNow = datetime.now(params.zone).time()
 
@@ -101,9 +123,7 @@ def sellCall(app, params, vars):
       
         name = "FD"
         sell(
-            app,
-            vars,
-            params,
+            app,varsBc,varsLb,vars,params,
             "C",
             name,
             app.options[1]["contract"],
@@ -118,9 +138,7 @@ def sellCall(app, params, vars):
         and vars.manifesto == False and vars.tipo == "R2" 
     ):
         sell(
-            app,
-            vars,
-            params,
+            app,varsBc,varsLb,vars,params,
             "C",
             "PROTECCION",
             app.options[1]["contract"],
@@ -137,9 +155,7 @@ def sellCall(app, params, vars):
         and vars.manifesto == False and vars.tipo != "R2" 
     ):
         sell(
-            app,
-            vars,
-            params,
+            app,varsBc,varsLb,vars,params,
             "C",
             "PROTECCION",
             app.options[1]["contract"],
@@ -169,9 +185,7 @@ def sellCall(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     name,
                     app.options[1]["contract"],
@@ -194,9 +208,7 @@ def sellCall(app, params, vars):
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr1:
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     "SL",
                     app.options[1]["contract"],
@@ -226,9 +238,7 @@ def sellCall(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     name,
                     app.options[1]["contract"],
@@ -251,9 +261,7 @@ def sellCall(app, params, vars):
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr1_e:
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     "SL",
                     app.options[1]["contract"],
@@ -283,9 +291,7 @@ def sellCall(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     name,
                     app.options[1]["contract"],
@@ -308,9 +314,7 @@ def sellCall(app, params, vars):
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr3:
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     "SL",
                     app.options[1]["contract"],
@@ -340,9 +344,7 @@ def sellCall(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     name,
                     app.options[1]["contract"],
@@ -365,9 +367,7 @@ def sellCall(app, params, vars):
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr1_e2:
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     "SL",
                     app.options[1]["contract"],
@@ -398,9 +398,7 @@ def sellCall(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     name,
                     app.options[1]["contract"],
@@ -423,9 +421,7 @@ def sellCall(app, params, vars):
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr1_fast:
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     "SL",
                     app.options[1]["contract"],
@@ -454,9 +450,7 @@ def sellCall(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     name,
                     app.options[1]["contract"],
@@ -479,9 +473,7 @@ def sellCall(app, params, vars):
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr2:
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     "SL",
                     app.options[1]["contract"],
@@ -512,9 +504,7 @@ def sellCall(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     name,
                     app.options[1]["contract"],
@@ -537,9 +527,7 @@ def sellCall(app, params, vars):
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr1_fast:
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     "SL",
                     app.options[1]["contract"],
@@ -569,9 +557,7 @@ def sellCall(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     name,
                     app.options[1]["contract"],
@@ -594,9 +580,7 @@ def sellCall(app, params, vars):
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr1_c:
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     "SL",
                     app.options[1]["contract"],
@@ -628,9 +612,7 @@ def sellCall(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     name,
                     app.options[1]["contract"],
@@ -653,9 +635,7 @@ def sellCall(app, params, vars):
             # STOP LOSS
             elif vars.rentabilidad <= params.sl_cr1_f:
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "C",
                     "SL",
                     app.options[1]["contract"],
@@ -671,7 +651,15 @@ def sellCall(app, params, vars):
     vars.venta_intentos=0
     vars.regla_broadcasting=""
 
-def sellPut(app, params, vars):
+def sellPut(app,varsBc,varsLb,vars,params):
+
+    #---------------------------------------------------
+    '''
+    Ventas de tipo PUT.
+    Realiza calculos de rentabilidad, verifica reglas 
+    de proteccion y verifica reglas de salida .
+    '''
+    #---------------------------------------------------
 
     timeNow = datetime.now(params.zone).time()
 
@@ -707,9 +695,7 @@ def sellPut(app, params, vars):
     if timeNow >= params.fd:
          
         sell(
-            app,
-            vars,
-            params,
+            app,varsBc,varsLb,vars,params,
             "P",
             "FD",
             app.options[2]["contract"],
@@ -725,9 +711,7 @@ def sellPut(app, params, vars):
         and vars.manifesto == False and vars.tipo == "R2"
     ):
         sell(
-            app,
-            vars,
-            params,
+            app,varsBc,varsLb,vars,params,
             "P",
             "PROTECCION",
             app.options[2]["contract"],
@@ -743,9 +727,7 @@ def sellPut(app, params, vars):
         and vars.manifesto == False and vars.tipo != "R2"
     ):
         sell(
-            app,
-            vars,
-            params,
+            app,varsBc,varsLb,vars,params,
             "P",
             "PROTECCION",
             app.options[2]["contract"],
@@ -776,9 +758,7 @@ def sellPut(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     name,
                     app.options[2]["contract"],
@@ -802,9 +782,7 @@ def sellPut(app, params, vars):
             elif vars.rentabilidad <= params.sl_pr1:
 
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     "SL",
                     app.options[2]["contract"],
@@ -834,9 +812,7 @@ def sellPut(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     name,
                     app.options[2]["contract"],
@@ -860,9 +836,7 @@ def sellPut(app, params, vars):
             elif vars.rentabilidad <= params.sl_pr1_i:
 
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     "SL",
                     app.options[2]["contract"],
@@ -893,9 +867,7 @@ def sellPut(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     name,
                     app.options[2]["contract"],
@@ -919,9 +891,7 @@ def sellPut(app, params, vars):
             elif vars.rentabilidad <= params.sl_pr1_c:
 
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     "SL",
                     app.options[2]["contract"],
@@ -952,9 +922,7 @@ def sellPut(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     name,
                     app.options[2]["contract"],
@@ -978,9 +946,7 @@ def sellPut(app, params, vars):
             elif vars.rentabilidad <= params.sl_pr1_e:
 
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     "SL",
                     app.options[2]["contract"],
@@ -1011,9 +977,7 @@ def sellPut(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     name,
                     app.options[2]["contract"],
@@ -1037,9 +1001,7 @@ def sellPut(app, params, vars):
             elif vars.rentabilidad <= params.sl_pr1_fast:
 
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     "SL",
                     app.options[2]["contract"],
@@ -1070,9 +1032,7 @@ def sellPut(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     name,
                     app.options[2]["contract"],
@@ -1097,9 +1057,7 @@ def sellPut(app, params, vars):
             elif vars.rentabilidad <= params.sl_pr2:
 
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     "SL",
                     app.options[2]["contract"],
@@ -1130,9 +1088,7 @@ def sellPut(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     name,
                     app.options[2]["contract"],
@@ -1156,9 +1112,7 @@ def sellPut(app, params, vars):
             elif vars.rentabilidad <= params.sl_pr2_e:
 
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     "SL",
                     app.options[2]["contract"],
@@ -1191,9 +1145,7 @@ def sellPut(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     name,
                     app.options[2]["contract"],
@@ -1217,9 +1169,7 @@ def sellPut(app, params, vars):
             elif vars.rentabilidad <= params.sl_pr1_f:
 
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     "SL",
                     app.options[2]["contract"],
@@ -1250,9 +1200,7 @@ def sellPut(app, params, vars):
 
                 name = f"T{vars.ugs_n}"
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     name,
                     app.options[2]["contract"],
@@ -1276,9 +1224,7 @@ def sellPut(app, params, vars):
             elif vars.rentabilidad <= params.sl_pr1_f2:
 
                 sell(
-                    app,
-                    vars,
-                    params,
+                    app,varsBc,varsLb,vars,params,
                     "P",
                     "SL",
                     app.options[2]["contract"],
@@ -1291,9 +1237,27 @@ def sellPut(app, params, vars):
     vars.venta_intentos=0
     vars.regla_broadcasting=""
      
-def sell(app, vars, params, tipo, regla, contract, symbol):
+def sell(app,varsBc,varsLb,vars,params, tipo, regla, contract, symbol):
+    #---------------------------------------------------
+    '''
+    Venta de la opcion, La rutina consta de lo siguiente:
+        1) Verifica si la rentabilidad es negativa para
+            intentar hacer un rebote.
+        2) Realiza Broadcasting de la Regla de venta.
+        3) Verifica que la venta se pueda dar sin 
+           problemas de ASKBID.
+        4) Ejecuta la orden de Venta.
+        5)Espera que la transaccion se complete,mientras
+          sigue calculando variables.
+        6) Al finalizar modifica variables de estado de 
+           venta.
+    '''
+    #---------------------------------------------------
+ 
     from rules.routine import calculations
-    
+
+    # REBOTE
+
     if vars.rentabilidad<0:
         
         if vars.venta_intentos>=params.intentos:
@@ -1301,14 +1265,13 @@ def sell(app, vars, params, tipo, regla, contract, symbol):
         else:
             vars.venta_intentos+=1
             return
- 
+  
+    varsBc.sell_regla = regla
 
-    vars.regla_broadcasting = regla
-    if vars.sell_broadcasting ==False:
-        asyncio.run(send_sell(app, vars, params, tipo,regla))
- 
- 
-
+    # BROADCASTING
+    if varsBc.sell ==False:
+        asyncio.run(send_sell(  varsBc, params, tipo,regla))
+  
     # LECTURA PREVIA
     readIBData_action(app, vars, tipo, regla)
 
@@ -1328,18 +1291,18 @@ def sell(app, vars, params, tipo, regla, contract, symbol):
 
         timeNow = datetime.now(params.zone).time()
         if (timeNow.minute % 10 == 0 or timeNow.minute % 10 == 5):
-            if vars.flag_minuto_label:
-                generar_label(params, vars,app)
-                vars.flag_minuto_label=False
+            if varsLb.flag_minuto_label:
+                generar_label(params, varsLb,app)
+                varsLb.flag_minuto_label=False
                 time.sleep(0.5)
         else:
-            vars.flag_minuto_label=True
+            varsLb.flag_minuto_label=True
         if int(timeNow.second) in params.frecuencia_muestra:
-            calculations(app, vars, params)
+            calculations(app, vars,varsBc, params)
             # ESPERANDO Y REGISTRANDO
             vars.status = "SELLING"
-            saveJson(vars, app, params, False)
-            writeDayTrade(app, vars, params)
+            saveVars(vars, app, params, False)
+            writeDayTrade(app, vars,varsLb, params)
 
         if app.Error:
             break
@@ -1361,7 +1324,7 @@ def sell(app, vars, params, tipo, regla, contract, symbol):
     read_sell(vars, tipo)
     return True
 
-def sell_forzada(app, vars, params, tipo, regla, contract, symbol):
+def sell_forzada(app,varsBc,varsLb,vars,params, tipo, regla, contract, symbol):
     from rules.routine import calculations
  
     # LECTURA PREVIA
@@ -1383,18 +1346,18 @@ def sell_forzada(app, vars, params, tipo, regla, contract, symbol):
 
         timeNow = datetime.now(params.zone).time()
         if (timeNow.minute % 10 == 0 or timeNow.minute % 10 == 5):
-            if vars.flag_minuto_label:
-                generar_label(params, vars,app)
-                vars.flag_minuto_label=False
+            if varsLb.flag_minuto_label:
+                generar_label(params,varsLb, app)
+                varsLb.flag_minuto_label=False
                 time.sleep(0.5)
         else:
-            vars.flag_minuto_label=True
+            varsLb.flag_minuto_label=True
         if int(timeNow.second) in params.frecuencia_muestra:
-            calculations(app, vars, params)
+            calculations(app, vars,varsBc, params) 
             # ESPERANDO Y REGISTRANDO
             vars.status = "SELLING"
-            saveJson(vars, app, params, False)
-            writeDayTrade(app, vars, params)
+            saveVars(vars, app, params, False)
+            writeDayTrade(app, vars,varsLb, params)
 
         if app.Error:
             break

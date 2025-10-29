@@ -45,10 +45,19 @@ def get_db_connection():
 
 @app.route("/get-data", methods=["GET"])
 def get_json():
-    file_name = "/usr/src/vars.json"
+    
     try:
+        file_name = "/usr/src/vars.json"
         with open(file_name, "r") as f:
-            data = json.load(f)
+            data_vars = json.load(f)
+        file_name = "/usr/src/app.json"
+        with open(file_name, "r") as f:
+            data_app = json.load(f)
+        file_name = "/usr/src/label.json"
+        with open(file_name, "r") as f:
+            data_label = json.load(f)
+
+        data = {**data_vars, **data_app,**data_label}
         return jsonify(data)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -202,7 +211,7 @@ def get_conection():
 
 @app.route("/broadCasting-aliniar", methods=["POST"])
 def post_broadCasting_aliniar():
-    file_name = "/usr/src/vars.json"
+    file_name = "/usr/src/broadcasting.json"
     try:
         # Obtener el body de la solicitud
         body = request.json
@@ -265,7 +274,7 @@ def post_broadCasting_strike():
 
 @app.route("/broadCasting-sell", methods=["POST"])
 def post_broadCasting_sell():
-    file_name = "/usr/src/vars.json"
+    file_name = "/usr/src/broadcasting.json"
     try:
         # Obtener el body de la solicitud
         body = request.json
@@ -275,13 +284,13 @@ def post_broadCasting_sell():
             data = json.load(f)
 
         # Actualizar los datos con los valores del body
-        data["sell_tipo_broadcasting"] = body.get(
-            "sell_tipo_broadcasting", data.get("sell_tipo_broadcasting")
+        data["sell_tipo"] = body.get(
+            "sell_tipo", data.get("sell_tipo")
         )
-        data["sell_regla_broadcasting"] = body.get(
-            "sell_regla_broadcasting", data.get("sell_regla_broadcasting")
+        data["sell_regla"] = body.get(
+            "sell_regla", data.get("sell_regla")
         )
-        data["sell_broadcasting"] = True
+        data["sell"] = True
 
         # Guardar los datos actualizados de nuevo en el archivo
         with open(file_name, "w") as file:
@@ -332,13 +341,13 @@ def post_broadCasting_buy():
             data = json.load(f)
 
         # Actualizar los datos con los valores del body
-        data["buy_tipo_broadcasting"] = body.get(
-            "buy_tipo_broadcasting", data.get("buy_tipo_broadcasting")
+        data["buy_tipo"] = body.get(
+            "buy_tipo", data.get("buy_tipo")
         )
-        data["buy_regla_broadcasting"] = body.get(
-            "buy_regla_broadcasting", data.get("buy_regla_broadcasting")
+        data["buy_regla"] = body.get(
+            "buy_regla", data.get("buy_regla")
         )
-        data["buy_broadcasting"] = True
+        data["buy"] = True
 
         # Guardar los datos actualizados de nuevo en el archivo
         with open(file_name, "w") as file:
@@ -385,7 +394,7 @@ def get_regla():
             status = bool(data.get("call") or data.get("put"))
  
             respuesta={
-                "regla_broadcasting": data["regla_broadcasting"],
+                "sell_regla": data["sell_regla"],
                 "rentabilidad": data["rentabilidad"],
                 "status":status
        

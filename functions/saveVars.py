@@ -5,33 +5,20 @@ from datetime import datetime
 import json
 import os
 import pytz
-
+import asyncio
 
 # =======================
 #  - GUARDAR VAIRBALES -
 # =======================
-def saveJson(vars, app,  params, estado):
+def saveVars(vars, app,  params, estado):
+    #---------------------------------------------------
+    '''
+    Guardado de los datos en json.
+    '''
+    #---------------------------------------------------
     file_name = "/usr/src/app/data/vars.json"
     now = datetime.now(params.zone)
-    if os.path.exists(file_name):
- 
-        with open(file_name, "r") as json_file:
-            data = json.load(json_file)
-
-            # vars.aliniar=data["aliniar"]
-            if  vars.sell_broadcasting ==False:
-                vars.sell_broadcasting=data["sell_broadcasting"]
-                vars.sell_tipo_broadcasting=data["sell_tipo_broadcasting"]
-                vars.sell_regla_broadcasting=data["sell_regla_broadcasting"]
-                vars.user_broadcasting = data["user_broadcasting"]
-            if  vars.buy_broadcasting ==False:
-                vars.buy_broadcasting=data["buy_broadcasting"]
-                vars.buy_tipo_broadcasting=data["buy_tipo_broadcasting"]
-                vars.buy_regla_broadcasting=data["buy_regla_broadcasting"]
-                vars.user_broadcasting = data["user_broadcasting"]
- 
- 
-
+  
     if estado:
 
         call_dic = {
@@ -88,7 +75,7 @@ def saveJson(vars, app,  params, estado):
         "wallet": app.wallet,
         "call_option": call_dic,
         "put_option": put_dic,
-        "flag_bloqueo_tiempo":vars.flag_bloqueo_tiempo,
+ 
         ###############################################
         # VARIABLES DE TIEMPO
         ###############################################
@@ -151,54 +138,8 @@ def saveJson(vars, app,  params, estado):
         "accion_mensaje": vars.accion_mensaje,
         "bloqueo": vars.bloqueo,
         "status": vars.status,
-        ###############################################
-        # BROADCASTING
-        ###############################################
         "hora_inicio": vars.hora_inicio,
-        "aliniar": vars.aliniar,
-        "sell_broadcasting": vars.sell_broadcasting,
-        "sell_tipo_broadcasting": vars.sell_tipo_broadcasting,
-        "sell_regla_broadcasting": vars.sell_regla_broadcasting,
-        "buy_broadcasting": vars.buy_broadcasting,
-        "buy_tipo_broadcasting": vars.buy_tipo_broadcasting,
-        "buy_regla_broadcasting": vars.buy_regla_broadcasting,
-        "buy": vars.buy,
-        "sell": vars.sell,
-        "conexion": True,
-        "venta_intentos":vars.venta_intentos,
-        "user_broadcasting": vars.user_broadcasting,
-        "regla_broadcasting":vars.regla_broadcasting,
-        ###############################################
-        # VARIABLES DE APP
-        ###############################################
-        "cash": app.cash,
-        "statusIB": app.statusIB,
-        "execution_details": app.execution_details,
-        "commissions": app.commissions,
-        "sendError": app.sendError,
-        "Error": app.Error,
-        "Error_buy": app.Error_buy,
-        ###############################################
-        # LABEL
-        ###############################################
-        "flag_minuto_label": vars.flag_minuto_label,
-        "label": int(vars.label),
-        "retorno_lista":[float(x) for x in vars.retorno_lista],
-        "retorno": vars.retorno,
-        "signo": vars.signo,
-        "varianza": vars.varianza,
-        "pico_etf": vars.pico_etf,
-        "d_pico": vars.d_pico,
-        "ret_1H_back":[float(x) for x in vars.ret_1H_back],
-        "ret_3H_back": [float(x) for x in vars.ret_3H_back],
-        "ret_6H_back": [float(x) for x in vars.ret_6H_back],
-        "ret_12H_back":[float(x) for x in vars.ret_12H_back],
-        "ret_24H_back": [float(x) for x in vars.ret_24H_back],
-        "ret_96H_back": [float(x) for x in vars.ret_96H_back],
-        "etf_price_lista":[float(x) for x in vars.etf_price_lista],
-        "rsi": vars.rsi,
-        "mu": vars.mu,
-        "mu_conteo": vars.mu_conteo ,
+     
         "promedio_call": vars.promedio_call,
         "promedio_put": vars.promedio_put 
     
@@ -206,3 +147,62 @@ def saveJson(vars, app,  params, estado):
 
     with open(file_name, "w") as json_file:
         json.dump(datos, json_file, indent=4)
+
+
+async def saveApp(varsApp, app,  params  ):
+    #---------------------------------------------------
+    '''
+    Guardado de los datos en json.
+    '''
+    #---------------------------------------------------
+    file_name = "/usr/src/app/data/app.json"
+    now = datetime.now(params.zone)
+  
+    
+    datos = {
+        "cash": app.cash,
+        "statusIB": app.statusIB,
+        "execution_details": app.execution_details,
+        "commissions": app.commissions,
+        "sendError": app.sendError,
+        "Error": app.Error,
+        "Error_buy": app.Error_buy,
+        "flag_bloqueo_tiempo":varsApp.flag_bloqueo_tiempo
+        
+    }
+
+    with open(file_name, "w") as json_file:
+        json.dump(datos, json_file, indent=4)
+
+
+
+async def saveLabel(varsLb):
+    file_name = "/usr/src/app/data/label.json"
+    datos_lb = {
+        ###############################################
+        # LABEL
+        ###############################################
+        "flag_minuto_label": varsLb.flag_minuto_label,
+        "label": int(varsLb.label),
+        "retorno": varsLb.retorno,
+        "signo": varsLb.signo,
+        "varianza": varsLb.varianza,
+        "pico_etf": varsLb.pico_etf,
+        "d_pico": varsLb.d_pico,
+        "rsi": varsLb.rsi,
+        "mu": varsLb.mu,
+        "mu_conteo": varsLb.mu_conteo ,
+
+        # Listas y Deques
+        "retorno_lista":[float(x) for x in varsLb.retorno_lista],
+        "ret_1H_back":[float(x) for x in varsLb.ret_1H_back],
+        "ret_3H_back": [float(x) for x in varsLb.ret_3H_back],
+        "ret_6H_back": [float(x) for x in varsLb.ret_6H_back],
+        "ret_12H_back":[float(x) for x in varsLb.ret_12H_back],
+        "ret_24H_back": [float(x) for x in varsLb.ret_24H_back],
+        "ret_96H_back": [float(x) for x in varsLb.ret_96H_back],
+        "etf_price_lista":[float(x) for x in varsLb.etf_price_lista]
+    
+    }
+    with open(file_name, "w") as json_file:
+        json.dump(datos_lb, json_file, indent=4)

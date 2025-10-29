@@ -12,6 +12,7 @@ build/
 develop-eggs/
 dist/
 downloads/
+resultados_test/
 eggs/
 .eggs/
 lib/
@@ -21,6 +22,7 @@ sdist/
 var/
 wheels/
 share/python-wheels/
+debug_code.py
 *.egg-info/
 .installed.cfg
 *.egg

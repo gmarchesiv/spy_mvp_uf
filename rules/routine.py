@@ -2,6 +2,7 @@
 ################### LIBRERIAS  ####################
 ###################################################
  
+import asyncio
 import random
 from config.IB.etf import req_ETFs
 from config.IB.options import (
@@ -23,7 +24,7 @@ import random
 
 import time
 
-from functions.saveJson import saveJson
+from functions.saveVars import saveApp, saveVars
 
 # ====================
 #  - Funciones -
@@ -63,13 +64,21 @@ def data_option_open(app,   vars,params):
 # REALIZA LA SUSCIPCION DE DATOS
 def data_susciption(app, params, vars):
 
+    #---------------------------------------------------
+    '''
+    Suscripcion de datos de ETFs, y 
+    contratos de opciones , finalmente esperamos a que 
+    los datos esten recibiendoce llenos y sin errores.
+    '''
+    #---------------------------------------------------
+
     printStamp(" - Cargando Data de ETFs - ")
     req_ETFs(app, params.etf)
-    # printStamp(" - FIN de Cargando Data de ETFs - ")
+ 
 
     printStamp(" - Cargando Data de Opciones - ")
-    req_Options(app, params, vars, params.etf)
-    # printStamp(" - FIN de Cargando Data de Opciones - ")
+    req_Options(app, vars, params.etf)
+  
 
     printStamp(" - Esperando Datos - ")
 
@@ -94,7 +103,13 @@ def data_susciption(app, params, vars):
 
 
 # ACTUALIZA LOS STATUS
-def update_status(app, vars,params):
+def update_status(app, vars,varsApp, params):
+    #---------------------------------------------------
+    '''
+    Actualiza la etiqueta de status en el dashboard
+    segun sea el caso.
+    '''
+    #---------------------------------------------------
     if app.alerta:
         vars.status = "DESCONEXION"
     else:
@@ -107,7 +122,7 @@ def update_status(app, vars,params):
 
         elif vars.call == False and vars.put == False and vars.compra == False:
             vars.status = "SLEEP"
-        elif  vars.flag_bloqueo_tiempo :
+        elif  varsApp.flag_bloqueo_tiempo :
             vars.status = "BLOQUEO T."
         elif  vars.bloqueo:
             vars.status = "BLOQUEO"
@@ -119,11 +134,19 @@ def update_status(app, vars,params):
 
 
 # ACTUALIZACION Y y REGISTRO DE JSON Y DB
-def registration(app, vars, params):
+def registration(app, vars,varsApp, varsLb,params):
+    #---------------------------------------------------
+    '''
+    Registra y actualiza estados de la maquina.
+    '''
+    #---------------------------------------------------
+
     wallet_load(app, params)
-    update_status(app, vars,params)
-    saveJson(vars, app, params, False)
-    writeDayTrade(app, vars, params)
+    update_status(app, vars,varsApp, params)
+    
+    saveVars(vars, app, params, False)
+    asyncio.run(saveApp(varsApp, app,  params  ))
+    writeDayTrade(app, vars,varsLb, params)
     vars.regla = ""
     if vars.call == False and vars.put == False:
         vars.pico = 0
@@ -134,7 +157,16 @@ def registration(app, vars, params):
 # Calculos
 
 
-def calculations(app, vars, params):
+def calculations(app, vars,varsBc, params):
+
+    #---------------------------------------------------
+    '''
+    Extrae una muestra de los precios actuales de los 
+    ETFs y opciones , tambien puede alinear en caso 
+    detecte entrada de datos y realiza algunas 
+    operaciones de rutina.
+    '''
+    #---------------------------------------------------
 
     # ================================
     #  -CALCULOS-
@@ -152,7 +184,7 @@ def calculations(app, vars, params):
     vars.pask = app.options[2]["ASK"]
     vars.pbid = app.options[2]["BID"]
     vars.vix= app.etfs[6]['price']
-    broadcasting_Aliniar(vars)
+    broadcasting_Aliniar(varsBc,vars)
 
     # CALCULOS
     vars.askbid_call = vars.cask / vars.cbid - 1
@@ -181,6 +213,16 @@ def calculations(app, vars, params):
 
 # GUARDADO DE TRANSACCIONES
 def saveTransaction(app, params, vars):
+
+    #---------------------------------------------------
+    '''
+    Verifica si hubo un cambio de el diccionario de 
+    transacciones para poder enviar notificacion y
+    guardar los datos reales de la transaccion como
+    son el precio real.
+    '''
+    #---------------------------------------------------
+
     for idreq in app.execution_details:
 
         if (

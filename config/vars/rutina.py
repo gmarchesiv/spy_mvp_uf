@@ -9,8 +9,16 @@ from collections import deque
 ###############################################
 #                  VARIABLES
 ###############################################
-class variables:
+class varsRutina:
     def __init__(self):
+
+        #---------------------------------------------------
+        '''
+        Abriremos el archivo json Correspondientes 
+        (vars.json) y en caso no exista la variable la genera,
+        finalmente la carga en memoria.
+        '''
+        #---------------------------------------------------
 
         file_name = "/usr/src/app/data/vars.json"
 
@@ -22,18 +30,7 @@ class variables:
         else:
             printStamp(" - No se encuentra archivo de variables - ")
             exit()
-        ###############################################
-        # VARIABLES DE APP
-        ###############################################
-
-        self.cash = self.data.get("cash", 0)
-        self.statusIB = self.data.get("statusIB", False)
-        self.execution_details = self.data.get("execution_details", {})
-        self.commissions = self.data.get("commissions", {})
-        self.sendError = self.data.get("sendError", False)
-        self.Error = self.data.get("Error", False)
-        self.Error_buy = self.data.get("Error_buy", False)
-        self.flag_bloqueo_tiempo= self.data.get("flag_bloqueo_tiempo", False)
+       
         ###############################################
         # VARIABLES DE TIEMPO
         ###############################################
@@ -64,12 +61,10 @@ class variables:
         self.flag_Put_reset_r1=self.data.get("flag_Put_reset_r1", False)
         self.flag_Put_reset_r1_c =self.data.get("flag_Put_reset_r1_c", False)
         self.flag_Call_reset_r1_e =self.data.get("flag_Call_reset_r1_e", False)
-
         self.flag_Call_reset_r1_e2 =self.data.get("flag_Call_reset_r1_e2", False)
         self.flag_Put_reset_r1_i =self.data.get("flag_Put_reset_r1_i", False)
-
-        self.flag_Call_reset_r3=self.data.get("flag_Call_reset_r3", False)
-        self.flag_Put_reset_r1_c=self.data.get("flag_Put_reset_r1_c", False)
+        self.flag_Call_reset_r3 =self.data.get("flag_Put_reset_r1_i", False)
+    
         ###############################################
         # VARIABLES DE RUTINA
         ###############################################
@@ -79,7 +74,7 @@ class variables:
         self.ugs_n_ant = self.data.get("ugs_n_ant", 0)
         self.pico = self.data.get("pico", 0)
         self.tipo = self.data.get("tipo", "")
-
+        self.hora_inicio = self.data.get("hora_inicio", "")
         ###############################################
         # VARIABLES DE TRADING
         ###############################################
@@ -121,69 +116,10 @@ class variables:
         self.bloqueo = self.data.get("bloqueo", True)
         self.exchange = self.data.get("exchange", "CBOE")
         self.status = self.data.get("status", "ON")
-
-        ###############################################
-        # BROADCASTING
-        ###############################################
-        self.hora_inicio = self.data.get("hora_inicio", "")
-        self.aliniar = self.data.get("aliniar", False)
-        self.sell_broadcasting = self.data.get("sell_broadcasting", False)
-        self.sell_tipo_broadcasting = self.data.get("sell_tipo_broadcasting", "")
-        self.sell_regla_broadcasting = self.data.get("sell_regla_broadcasting", "")
-        self.buy_broadcasting = self.data.get("buy_broadcasting", False)
-        self.buy_tipo_broadcasting = self.data.get("buy_tipo_broadcasting", "")
-        self.buy_regla_broadcasting = self.data.get("buy_regla_broadcasting", "")
-        self.buy = self.data.get("buy", False)
-        self.sell = self.data.get("sell", False)
-        self.user_broadcasting = self.data.get("user_broadcasting", "")
-        self.conexion = self.data.get("conexion", True)
-        self.venta_intentos= self.data.get("venta_intentos", 0)
-        self.regla_broadcasting = self.data.get("regla_broadcasting", "")
-
-
-
-        ###############################################
-        # LABEL
-        ###############################################
-        self.flag_minuto_label=self.data.get("flag_minuto_label", False)
-        self.label = self.data.get("label", 0)
-        self.retorno_lista = self.data.get("retorno_lista", [])
-        self.retorno = self.data.get("retorno", 0)
-        self.signo  = self.data.get("signo", 0)
-        self.varianza  = self.data.get("varianza", 0)
-
-
-        self.pico_etf=self.data.get("pico_etf", 608.48)
-        
-        self.d_pico  = self.data.get("d_pico", 0)   
-
-        self.ret_1H_back= self.data.get("ret_1H_back", [])
-        self.ret_3H_back= self.data.get("ret_3H_back", [])
-        self.ret_6H_back= self.data.get("ret_6H_back", [])
-        self.ret_12H_back= self.data.get("ret_12H_back", [])
-        self.ret_24H_back= self.data.get("ret_24H_back", [])
-        self.ret_96H_back= self.data.get("ret_96H_back", [])
-
-        self.etf_price_lista=self.data.get("etf_price_lista", [])
-
-        self.rsi=self.data.get("rsi",0)
-        # DEQUES
-        self.askbid_call_prom=deque(self.askbid_call_prom, maxlen=90)
-        self.askbid_put_prom=deque(self.askbid_put_prom, maxlen=90)
-
-        self.retorno_lista =  deque(self.retorno_lista, maxlen=79)
-
-        self.ret_1H_back= deque(self.ret_1H_back, maxlen=1)
-        self.ret_3H_back= deque(self.ret_3H_back, maxlen=3)
-        self.ret_6H_back= deque(self.ret_6H_back, maxlen=6)
-        self.ret_12H_back= deque(self.ret_12H_back, maxlen=12)
-        self.ret_24H_back= deque(self.ret_24H_back, maxlen=24)
-        self.ret_96H_back= deque(self.ret_96H_back, maxlen=96)
-        self.etf_price_lista=deque(self.etf_price_lista, maxlen=200)
-
-
-        self.mu=self.data.get("mu", 0.000371948)
-        self.mu_conteo=self.data.get("mu_conteo", 358124)
+  
 
         self.promedio_call=self.data.get("promedio_call",0)
-        self.promedio_put=self.data.get("promedio_put",0)
+        self.promedio_put=self.data.get("promedio_put",0)   
+
+        self.askbid_call_prom=deque(self.askbid_call_prom, maxlen=90)
+        self.askbid_put_prom=deque(self.askbid_put_prom, maxlen=90)

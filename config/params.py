@@ -14,6 +14,13 @@ from functions.logs import printStamp
 ###############################################
 class parameters:
     def __init__(self ):
+        
+        #---------------------------------------------------
+        '''
+        Cargamos los parametros del modelo a memoria.
+        '''
+        #---------------------------------------------------
+
         ###############################################
         #               PARAMETROS -  GENERALES
         ###############################################
@@ -70,9 +77,10 @@ class parameters:
  
 
         self.rangos_strikes = [[2, 2.5] ]
-        # self.rangos_strikes = [[2, 2.3], [2.15, 2.55], [2.4, 3]]
-  
+ 
+    
         self.days_min_exp = 25  # DIAS para el exp minimo de busqueda
+
 
 
         self.max_askbid_venta_prom = 0.03
@@ -83,7 +91,7 @@ class parameters:
         self.max_askbid_open = 0.03
         self.max_askbid_hora_open =  dt_time(9, 33)
         self.umbral_askbid=0.08
-        # self.askbid_len_lista=91
+  
 
         self.max_askbid_venta_forzada = 0.04
 
@@ -560,4 +568,3 @@ class parameters:
         self.gamma=0.17930000
 
         self.days_year=252
-

@@ -8,6 +8,7 @@ import os
 import requests
  
 
+from config.vars.broadcasting import varsBroadcasting
 from functions.logs import printStamp
 
 
@@ -18,18 +19,29 @@ import asyncio
 # =======================
 
 
-def broadcasting_Aliniar(vars):
+def broadcasting_Aliniar(varsBc,vars):
+
+    #---------------------------------------------------
+    '''
+    Alineamiento de los precios.
+    '''
+    #---------------------------------------------------
+
     # Lectura del Archivo
-    file_name = "/usr/src/app/data/vars.json"
+    file_name = "/usr/src/app/data/broadcasting.json"
 
     if os.path.exists(file_name):
 
         with open(file_name, "r") as json_file:
-            data = json.load(json_file)
+            try:
+                data = json.load(json_file)
+            except:
+                varsBc = varsBroadcasting()
+                data = json.load(json_file)
 
             if "aliniar" in data:
                 if data["aliniar"] == True:
-                    vars.aliniar = False
+                    varsBc.aliniar = False
 
                     vars.call_close = data["call_close"]
                     vars.put_close = data["put_close"]
@@ -37,22 +49,37 @@ def broadcasting_Aliniar(vars):
                     vars.put_open = data["put_open"]
                     vars.flag_Call_R2 = data["flag_Call_R2"]
                     vars.flag_Put_R2 = data["flag_Put_R2"]
+                    data["aliniar"] = False
+                    with open(file_name, "w") as file:
+                        json.dump(data, file, indent=4)
 
-def broadcasting_sell(vars,params,app):
+def broadcasting_sell(varsBc,varsLb,vars,params,app):
+
+    #---------------------------------------------------
+    '''
+    Realiza una Venta por Broadcasting, va a revisar
+    la informacion recibida y forzara la regla de venta.
+    '''
+    #---------------------------------------------------
+
     from rules.sell import sell
     # Lectura del Archivo
-    file_name = "/usr/src/app/data/vars.json"
+    file_name = "/usr/src/app/data/broadcasting.json"
  
 
     if os.path.exists(file_name):
- 
+        
         with open(file_name, "r") as json_file:
-            data = json.load(json_file)
+            try:
+                data = json.load(json_file)
+            except:
+                varsBc = varsBroadcasting()
+                data = json.load(json_file)
  
-            if 'sell_broadcasting' in data:
-                if data["sell_broadcasting"] == True or vars.sell_broadcasting == True:
-                    vars.sell_broadcasting = True
-                    vars.sell_regla_broadcasting =  data["sell_regla_broadcasting"]
+            if 'sell' in data:
+                if data["sell"] == True or varsBc.sell == True:
+                    varsBc.sell = True
+                    varsBc.sell_regla =  data["sell_regla"]
          
                     if vars.call:
                         val = 1
@@ -67,24 +94,31 @@ def broadcasting_sell(vars,params,app):
                     else:
                         printStamp("-ERROR VENTA BROADCASTING-")
                         return False
-                    printStamp(f"-VENTA BROADCASTING POR :{vars.user_broadcasting } - {vars.sell_regla_broadcasting}")
+                    printStamp(f"-VENTA BROADCASTING POR :{varsBc.user } - {varsBc.sell_regla}")
          
-                    venta=sell(
-                            app,
-                            vars,
+                    venta=sell(app,
+                               varsBc,
+                               varsLb,  
+                            vars ,
                             params,
                             tipo,
-                            vars.sell_regla_broadcasting,
+                            varsBc.sell_regla,
                             app.options[val]["contract"],
                             app.options[val]["symbol"],
                         )
                     if venta:
-                        vars.sell_broadcasting =False
+                        varsBc.sell =False
                         return
                   
                     return
-def broadcasting_sell_auto(vars,params,app,bc):
-    
+
+def broadcasting_sell_auto(varsBc,varsLb,vars,params,app):
+
+    #---------------------------------------------------
+    '''
+    Realiza una Venta Broadcasting Forzada.
+    '''
+    #---------------------------------------------------
     # Lectura del Archivo
     file_name = "/usr/src/app/data/broadcasting.json"
  
@@ -92,7 +126,11 @@ def broadcasting_sell_auto(vars,params,app,bc):
     if os.path.exists(file_name):
  
         with open(file_name, "r") as json_file:
-            data = json.load(json_file)
+            try:
+                data = json.load(json_file)
+            except:
+                varsBc = varsBroadcasting()
+                data = json.load(json_file)
  
             if 'sell' in data:
                 if data["sell"] == True  :
@@ -114,9 +152,10 @@ def broadcasting_sell_auto(vars,params,app,bc):
                     
                     from rules.sell import sell_forzada
 
-                    venta=sell_forzada(
-                            app,
-                            vars,
+                    venta=sell_forzada(app,
+                               varsBc,
+                               varsLb,  
+                            vars ,
                             params,
                             tipo,
                             "FORZADA",
@@ -124,7 +163,7 @@ def broadcasting_sell_auto(vars,params,app,bc):
                             app.options[val]["symbol"],
                         )
                     if venta:
-                        bc.sell=False
+                        varsBc.sell=False
                         data["sell"] =  False 
 
                         with open(file_name, "w") as file:
@@ -133,12 +172,18 @@ def broadcasting_sell_auto(vars,params,app,bc):
                   
                     return
 
+def broadcasting_buy(varsBc,varsLb,vars,params,app):
 
+    #---------------------------------------------------
+    '''
+    Realiza una compra por Broadcasting, va a revisar
+    la informacion recibida y forzara la regla de venta.
+    '''
+    #---------------------------------------------------
 
-def broadcasting_buy(vars,params,app):
     from rules.buy import buy
     # Lectura del Archivo
-    file_name = "/usr/src/app/data/vars.json"
+    file_name = "/usr/src/app/data/broadcasting.json"
  
     try:
         if os.path.exists(file_name):
@@ -146,43 +191,52 @@ def broadcasting_buy(vars,params,app):
             with open(file_name, "r") as json_file:
                 data = json.load(json_file)
     
-                if 'buy_broadcasting' in data:
-                    if data["buy_broadcasting"] == True or vars.buy_broadcasting == True:
-                        vars.buy_broadcasting = True
+                if 'buy' in data:
+                    if data["buy"] == True or varsBc.buy == True:
+                        varsBc.buy = True
                 
-                        vars.buy_tipo_broadcasting = data["buy_tipo_broadcasting"]
-                        vars.buy_regla_broadcasting = data["buy_regla_broadcasting"]
-                        vars.user_broadcasting = data["user_broadcasting"]
-                        if vars.buy_tipo_broadcasting == "C":
+                        varsBc.buy_tipo = data["buy_tipo"]
+                        varsBc.buy_regla = data["buy_regla"]
+                        varsBc.user = data["user"]
+                        if varsBc.buy_tipo == "C":
                             val = 1
                             if vars.askbid_call > params.max_askbid_compra_abs or vars.cask <= 0:
                                 return False
-                            precio=vars.cask
-                        elif vars.buy_tipo_broadcasting == "P":
+                            precio=varsBc.cask
+                        elif varsBc.buy_tipo == "P":
                             val = 2
                             if vars.askbid_put > params.max_askbid_compra_abs or vars.pask <= 0:
                                 return False
-                            precio=vars.pask
+                            precio=varsBc.pask
                         else:
                             printStamp("-ERROR COMPRA BROADCASTING-")
                             return False
-                        printStamp(f"-COMPRA BROADCASTING POR :{vars.user_broadcasting } - {vars.buy_tipo_broadcasting} - {vars.buy_regla_broadcasting}")
+                        printStamp(f"-COMPRA BROADCASTING POR :{varsBc.user } - {varsBc.buy_tipo} - {varsBc.buy_regla}")
                         flag_buy = buy(
+                           app,
+                               varsBc,
+                               varsLb,  
+                            vars ,
                             params,
-                            app,
-                            vars,
-                            vars.buy_tipo_broadcasting ,
-                            vars.buy_regla_broadcasting,
+                            varsBc.buy_tipo ,
+                            varsBc.buy_regla,
                             precio,
                             app.options[val]["contract"],
                             app.options[val]["symbol"],
                         )
 
                         if flag_buy == False:
+                            
+                            varsBc.buy=False
+
+                            data["buy"] = False 
+                            with open(file_name, "w") as file:
+                                json.dump(data, file, indent=4)
                             return
-                        vars.buy_broadcasting=False
                         return
     except:pass             
+
+
 async def send_request(session, url, data, user):
     try:
         async with session.post(url, json=data, timeout=2) as response:
@@ -195,29 +249,29 @@ async def send_request(session, url, data, user):
     except Exception as e:
         printStamp(f"Error en la conexión con {user['user']}: {str(e)}")
 
-async def send_buy(app, vars, params, tipo, regla):
+async def send_buy( app,varsBc, params, tipo, regla):
     async with aiohttp.ClientSession() as session:
         tasks = []
         for user in params.users:
             url = f"http://{user['ip']}/broadCasting-buy"
-            data = {"buy_tipo_broadcasting": tipo, "buy_regla_broadcasting": regla,"user_broadcasting":params.name}
+            data = {"buy_tipo": tipo, "buy_regla": regla,"user":params.name}
             tasks.append(send_request(session, url, data, user))
         await asyncio.gather(*tasks)
     
-    vars.buy_tipo_broadcasting = tipo
-    vars.buy_regla_broadcasting = regla
+    varsBc.buy_tipo = tipo
+    varsBc.buy_regla = regla
 
-async def send_sell(app, vars, params, tipo, regla):
+async def send_sell(  varsBc, params, tipo, regla):
     async with aiohttp.ClientSession() as session:
         tasks = []
         for user in params.users:
             url = f"http://{user['ip']}/broadCasting-sell"
-            data = {"sell_tipo_broadcasting": tipo, "sell_regla_broadcasting": regla,"user_broadcasting":params.name}
+            data = {"sell_tipo": tipo, "sell_regla": regla,"user":params.name}
             tasks.append(send_request(session, url, data, user))
         await asyncio.gather(*tasks)
     
-    vars.sell_tipo_broadcasting = tipo
-    vars.sell_regla_broadcasting = regla
+    varsBc.sell_tipo_broadcasting = tipo
+    varsBc.sell_regla = regla
 
 async def fetch_price(session, url,user):
     try:
@@ -232,9 +286,9 @@ async def fetch_price(session, url,user):
         # printStamp(f"Error obteniendo datos de {url}: {str(e)}")
     return None
 
-async def comparar_precios(vars, params):
+async def comparar_precios(vars , params):
     async with aiohttp.ClientSession() as session:
-        tasks = [fetch_price(session, f"http://{user['ip']}/get-price",user["user"]) for user in params.users if user["rama"] == False]
+        tasks = [fetch_price(session, f"http://{user['ip']}/get-price",user["user"])for user in params.users if user["rama"] == False]
         prices = await asyncio.gather(*tasks)
     
     # Filtrar valores None

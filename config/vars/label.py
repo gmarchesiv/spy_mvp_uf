@@ -10,7 +10,7 @@ from collections import deque
 #                  VARIABLES
 ###############################################
 class varsLabel:
-    def __init__(self):
+    def __init__(self,debug_mode ):
 
         #---------------------------------------------------
         '''
@@ -19,18 +19,20 @@ class varsLabel:
         la carga en memoria.
         '''
         #---------------------------------------------------
-        file_name = "/usr/src/app/data/label.json"
+        if debug_mode ==False:
+            file_name = "/usr/src/app/data/label.json"
 
-        if os.path.exists(file_name):
-            # Leer el archivo JSON
-            with open(file_name, "r") as json_file:
-                self.data = json.load(json_file)
-                printStamp(" - Lectura de archivo de variables - ")
-        else:
-            printStamp(" - No se encuentra archivo de variables - ")
-            exit()
+            if os.path.exists(file_name):
+                # Leer el archivo JSON
+                with open(file_name, "r") as json_file:
+                    self.data = json.load(json_file)
+                    printStamp(" - Lectura de archivo de variables - ")
+            else:
+                printStamp(" - No se encuentra archivo de variables - ")
+                exit()
   
-
+        else:
+            self.data={}
         ###############################################
         # LABEL
         ###############################################

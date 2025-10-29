@@ -10,7 +10,7 @@ from collections import deque
 #                  VARIABLES
 ###############################################
 class varsApps:
-    def __init__(self):
+    def __init__(self,debug_mode ):
         
         #---------------------------------------------------
         '''
@@ -19,17 +19,19 @@ class varsApps:
         la carga en memoria.
         '''
         #---------------------------------------------------
+        if debug_mode ==False:
+            file_name = "/usr/src/app/data/app.json"
 
-        file_name = "/usr/src/app/data/app.json"
-
-        if os.path.exists(file_name):
-            # Leer el archivo JSON
-            with open(file_name, "r") as json_file:
-                self.data = json.load(json_file)
-                printStamp(" - Lectura de archivo de variables - ")
+            if os.path.exists(file_name):
+                # Leer el archivo JSON
+                with open(file_name, "r") as json_file:
+                    self.data = json.load(json_file)
+                    printStamp(" - Lectura de archivo de variables - ")
+            else:
+                printStamp(" - No se encuentra archivo de variables - ")
+                exit()
         else:
-            printStamp(" - No se encuentra archivo de variables - ")
-            exit()
+            self.data={}
         ###############################################
         # VARIABLES DE APP
         ###############################################

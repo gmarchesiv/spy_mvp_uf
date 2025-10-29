@@ -84,16 +84,14 @@ def data_susciption(app, params, vars):
 
     while True:
         ready  = 0
-        if app.etfs[5]["price"] > 0:
+        if app.etfs[5]["price"] > 0:  # ETF
             ready += 1
-        if app.etfs[6]["price"] > 0:
+        if app.etfs[6]["price"] > 0:  # VIX
             ready += 1
         if app.options[1]["ASK"] > 0 and app.options[1]["BID"] > 0:
             ready += 1
-
         if app.options[2]["ASK"] > 0 and app.options[2]["BID"] > 0:
             ready += 1
- 
         if ready == 4:
             break
 

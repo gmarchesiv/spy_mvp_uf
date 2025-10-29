@@ -57,18 +57,12 @@ def create_contract_OPT(
     contract.strike = strike  # Precio de ejercicio
 
     return contract
-
-
  
-
-
 # Funcion que busca el strike mas proximo
 def strikeNear(numero, lista):
     return min(lista, key=lambda x: abs(x - numero))
 
-
  
-
 # peticion de data de un contrato
 def requestContract(app, etf, strikes, expirations, tipo, exchange):
 

@@ -91,20 +91,25 @@ def saveVars(vars, app,  params, estado):
         "manifesto": vars.manifesto,
         "flag_Call_R2": vars.flag_Call_R2,
         "flag_Put_R2": vars.flag_Put_R2,
-        "flag_Put_reset_r2_e": vars.flag_Put_reset_r2_e,
-        "flag_Put_reset_r1_e": vars.flag_Put_reset_r1_e,
-        "flag_Put_reset_r1 ": vars.flag_Put_reset_r1,
-        "flag_Put_reset_r1_c":vars.flag_Put_reset_r1_c,
+
+        "flag_Call_reset_r1":vars.flag_Call_reset_r1,
+        "flag_Call_reset_r3":vars.flag_Call_reset_r3,
         "flag_Call_reset_r1_e":vars.flag_Call_reset_r1_e,
         "flag_Call_reset_r1_e2":vars.flag_Call_reset_r1_e2,
-        "flag_Put_reset_r1_i":vars.flag_Put_reset_r1_i,
-        "flag_Call_reset_r3":vars.flag_Call_reset_r3,
+
+        "flag_Put_reset_r2_e": vars.flag_Put_reset_r2_e,
+        "flag_Put_reset_r1 ": vars.flag_Put_reset_r1,
         "flag_Put_reset_r1_c":vars.flag_Put_reset_r1_c,
+        "flag_Put_reset_r1_c2":vars.flag_Put_reset_r1_c2,
+        "flag_Put_reset_r1_fast":vars.flag_Put_reset_r1_fast,
+        "flag_Put_reset_r1_i":vars.flag_Put_reset_r1_i,
+        "flag_Put_reset_f2":vars.flag_Put_reset_f2,
+        "flag_Put_reset_r3":vars.flag_Put_reset_r3,
+        
         ###############################################
         # VARIABLES DE RUTINA
         ###############################################
-        # "min_extras": vars.min_extras,
-        # "min_desicion": vars.min_desicion,
+      
         "ugs_n": vars.ugs_n,
         "ugs_n_ant": vars.ugs_n_ant,
         "pico": vars.pico,

@@ -27,16 +27,21 @@ def clean_vars(vars,varsApp):
     vars.manifesto = False
     vars.flag_Call_R2 = False
     vars.flag_Put_R2 = False
-    vars.flag_Put_reset_r2_e = False
-    vars.flag_Put_reset_r1_e = False
-    vars.flag_Put_reset_r1 = False
-    vars.flag_Put_reset_r1_c = False
-    vars.flag_Call_reset_r1_e=False
-    vars.flag_Call_reset_r1_e2 = False
-    vars.flag_Put_reset_r1_i=False
+    
+    vars.flag_Call_reset_r1=False
     vars.flag_Call_reset_r3=False
-    vars.flag_Put_reset_r1_c=False
+    vars.flag_Call_reset_r1_e =False
+    vars.flag_Call_reset_r1_e2 =False
 
+    vars.flag_Put_reset_r2_e=False
+    vars.flag_Put_reset_r1=False
+    vars.flag_Put_reset_r1_c =False
+    vars.flag_Put_reset_r1_c2 =False
+    vars.flag_Put_reset_r1_fast=False
+    vars.flag_Put_reset_r1_i =False
+    vars.flag_Put_reset_f2 =False
+    vars.flag_Put_reset_r3 =False
+    
 
     vars.rule = True
     vars.bloqueo = True

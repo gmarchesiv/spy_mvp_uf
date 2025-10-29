@@ -62,17 +62,16 @@ def main():
         #---------------------------------------------------
 
         # VARIABLES
-        vars = varsRutina()
+        vars = varsRutina(debug_mode=False)
  
-        varsBc = varsBroadcasting()
+        varsBc = varsBroadcasting(debug_mode=False)
  
-        varsLb=varsLabel()
+        varsLb=varsLabel(debug_mode=False)
    
-        varsApp=varsApps()
+        varsApp=varsApps(debug_mode=False)
    
-        
         # PARAMETROS
-        params = parameters()
+        params = parameters(debug_mode=False)
 
         # ====================
         #  - TEST CONNECTION -
@@ -292,12 +291,12 @@ def main():
                         #            -VENTA-
                         # ================================
                         if vars.call or vars.put:
-                            sellOptions(app,varsBc,varsLb,vars,params)
+                            sellOptions(app,varsBc,varsLb,vars,params,debug_mode=False )
                         # ================================
                         #            -COMPRA-
                         # ================================
                         if vars.compra and params.fd >= timeNow:
-                            buyOptions(app,varsBc,varsLb,vars,params)
+                            buyOptions(app,varsBc,varsLb,vars,params,debug_mode=False )
                         pass
                     
                     # ================================

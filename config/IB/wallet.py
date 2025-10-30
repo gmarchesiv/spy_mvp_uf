@@ -1,9 +1,5 @@
 from datetime import datetime
-
-
-
-
-
+ 
 def wallet_config(app, params, vars):
 
     #---------------------------------------------------

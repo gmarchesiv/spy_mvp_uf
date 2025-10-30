@@ -326,7 +326,7 @@ def registro_strike(app, vars, params):
     printStamp(f"EXTRAYENDO DATOS DE LA OPCION")
     while True:
         timeNow = datetime.now(params.zone).time()
-        if dt_time(16, 30) < timeNow:
+        if dt_time(15, 59) < timeNow:
             break
         readyOpt = 0
         if int(timeNow.second) in params.frecuencia_accion:

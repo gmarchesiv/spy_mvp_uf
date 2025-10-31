@@ -96,15 +96,8 @@ def broadcasting_sell(varsBc,varsLb,vars,params,app):
                         return False
                     printStamp(f"-VENTA BROADCASTING POR :{varsBc.user } - {varsBc.sell_regla}")
          
-                    venta=sell(app,
-                               varsBc,
-                               varsLb,  
-                            vars ,
-                            params,
-                            tipo,
-                            varsBc.sell_regla,
-                            app.options[val]["contract"],
-                            app.options[val]["symbol"],
+                    venta=sell(app,varsBc,varsLb,vars,params,
+                            tipo, varsBc.sell_regla, debug_mode=False
                         )
                     if venta:
                         varsBc.sell =False

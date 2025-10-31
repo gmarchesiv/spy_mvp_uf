@@ -205,18 +205,8 @@ def broadcasting_buy(varsBc,varsLb,vars,params,app):
                             printStamp("-ERROR COMPRA BROADCASTING-")
                             return False
                         printStamp(f"-COMPRA BROADCASTING POR :{varsBc.user } - {varsBc.buy_tipo} - {varsBc.buy_regla}")
-                        flag_buy = buy(
-                           app,
-                               varsBc,
-                               varsLb,  
-                            vars ,
-                            params,
-                            varsBc.buy_tipo ,
-                            varsBc.buy_regla,
-                            precio,
-                            app.options[val]["contract"],
-                            app.options[val]["symbol"],
-                        )
+                        flag_buy = buy (app,varsBc,varsLb,vars,params,
+                           varsBc.buy_tipo , varsBc.buy_regla ,debug_mode=False)
 
                         if flag_buy == False:
                             

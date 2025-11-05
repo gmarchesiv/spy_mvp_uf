@@ -91,7 +91,7 @@ class parameters:
         self.slippage=1.06
         self.fd =  dt_time(15, 30)
 
-        self.rutina = [dt_time(7, 0), dt_time(16, 0)]
+        self.rutina = [dt_time(6, 50), dt_time(16, 0)]
         self.frecuencia_muestra =[i for i in range(0, 60, 2)]
         self.frecuencia_accion = [i for i in range(0, 60, 2)]
  

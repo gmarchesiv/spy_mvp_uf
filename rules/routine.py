@@ -60,6 +60,29 @@ def data_option_open(app,   vars,params):
             vars.flag_bloqueo_tiempo =True
             break
         time.sleep(0.5)
+
+
+    vars.call_open_2 = -1
+    vars.put_open_2 = -1
+
+    while (vars.call_open_2==-1 or vars.put_open_2 == -1):
+        timeNow = datetime.now(params.zone).time()
+        c_ask=app.options[3]["ASK"]
+        c_bid=app.options[3]["BID"]
+        p_ask=app.options[4]["ASK"]
+        p_bid=app.options[4]["BID"]
+        if vars.call_open_2==-1 and ((c_ask/c_bid)-1)<params.max_askbid_open:
+            vars.call_open_2 = app.options[3]["BID"]
+
+        if vars.put_open_2==-1 and ((p_ask/p_bid)-1)<params.max_askbid_open:
+            vars.put_open_2 = app.options[4]["BID"]
+      
+        if   params.max_askbid_hora_open <= timeNow:
+            vars.call_open_2 = app.options[3]["BID"]
+            vars.put_open_2 = app.options[4]["BID"]
+            vars.flag_bloqueo_tiempo =True
+            break
+        time.sleep(0.5)
         
 
 # REALIZA LA SUSCIPCION DE DATOS

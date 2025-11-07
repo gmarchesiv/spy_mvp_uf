@@ -70,7 +70,11 @@ class varsRutina:
         self.flag_Put_reset_r1_i =self.data.get("flag_Put_reset_r1_i", False)
         self.flag_Put_reset_f2 =self.data.get("flag_Put_reset_f2", False)
         self.flag_Put_reset_r3 =self.data.get("flag_Put_reset_r3", False)
-    
+
+        self.flag_Call_reset_r3_2 =self.data.get("flag_Call_reset_r3_2", False)
+        self.flag_Put_reset_r1_label =self.data.get("flag_Put_reset_r1_label", False)
+        self.flag_cambio_R1_label =self.data.get("flag_cambio_R1_label", False)
+  
         ###############################################
         # VARIABLES DE RUTINA
         ###############################################
@@ -87,6 +91,8 @@ class varsRutina:
         self.vix= self.data.get("vix", 0)
         self.dcall = self.data.get("dcall", 0)
         self.dput = self.data.get("dput", 0)
+        self.doput_ant = self.data.get("doput_ant", 0)
+ 
         self.docall = self.data.get("docall", 0)
         self.doput = self.data.get("doput", 0)
         self.askbid_call = self.data.get("askbid_call", 0)

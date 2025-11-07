@@ -105,6 +105,10 @@ def saveVars(vars, app,  params, estado):
         "flag_Put_reset_r1_i":vars.flag_Put_reset_r1_i,
         "flag_Put_reset_f2":vars.flag_Put_reset_f2,
         "flag_Put_reset_r3":vars.flag_Put_reset_r3,
+
+        "flag_Call_reset_r3_2":vars.flag_Call_reset_r3_2,
+        "flag_Put_reset_r1_label":vars.flag_Put_reset_r1_label,
+        "flag_cambio_R1_label":vars.flag_cambio_R1_label,
         
         ###############################################
         # VARIABLES DE RUTINA
@@ -122,6 +126,7 @@ def saveVars(vars, app,  params, estado):
         "dput": vars.dput,
         "docall": vars.docall,
         "doput": vars.doput,
+        "doput_ant": vars.doput_ant,
         "askbid_call": vars.askbid_call,
         "askbid_put": vars.askbid_put,
         "askbid_call_prom": [float(x) for x in vars.askbid_call_prom],

@@ -142,7 +142,7 @@ def sellCall(app,varsBc,varsLb,vars,params,debug_mode):
     if (
         vars.pico > params.umbral_no_perdida_c
         and vars.rentabilidad < (vars.pico - params.perdida_maxima_c)
-        and vars.manifesto == False and vars.tipo == "R2" 
+        and vars.manifesto == False and (vars.tipo == "R2" or vars.tipo =="R2-2" )
     ):
         sell(
             app,varsBc,varsLb,vars,params,
@@ -156,7 +156,7 @@ def sellCall(app,varsBc,varsLb,vars,params,debug_mode):
     if (
         vars.pico < params.umbral_no_perdida_c
          and vars.rentabilidad < (vars.pico - params.perdida_maxima_c_dinamico_r2)
-        and vars.manifesto == False  and vars.pico>0 and  vars.tipo == "R2" 
+        and vars.manifesto == False  and vars.pico>0 and  (vars.tipo == "R2" or vars.tipo =="R2-2" )
     ):
         sell(
             app,varsBc,varsLb,vars,params,
@@ -169,7 +169,7 @@ def sellCall(app,varsBc,varsLb,vars,params,debug_mode):
     if (
         vars.pico > params.umbral_no_perdida_c
         and vars.rentabilidad < params.perdida_maxima_c_abs
-        and vars.manifesto == False and vars.tipo != "R2" 
+        and vars.manifesto == False and (vars.tipo != "R2" and vars.tipo != "R2-2" )
     ):
         sell(
             app,varsBc,varsLb,vars,params,
@@ -189,6 +189,16 @@ def sellCall(app,varsBc,varsLb,vars,params,debug_mode):
         nmt=params.inf
 
     #########################################################
+    ################      CALL - R1 -2        ############### 
+    #########################################################
+    elif vars.tipo == "R1-2"  : 
+        diamante=params.diamante_cr1_2
+        resta=params.resta_cr1_2
+        sl=params.sl_cr1_2
+        manifestacion=params.umbral_manifestacion_cR1_2
+        nmt=params.inf
+
+    #########################################################
     ################      CALL  R3         ##################
     #########################################################
     elif vars.tipo == "R3"  : 
@@ -196,6 +206,16 @@ def sellCall(app,varsBc,varsLb,vars,params,debug_mode):
         resta=params.resta_cr3
         sl=params.sl_cr3
         manifestacion=params.umbral_manifestacion_cR3
+        nmt=params.inf
+
+    #########################################################
+    ################      CALL  R3-2         ##################
+    #########################################################
+    elif vars.tipo == "R3-2": 
+        diamante=params.diamante_cr3_2
+        resta=params.resta_cr3_2
+        sl=params.sl_cr3_2
+        manifestacion=params.umbral_manifestacion_cR3_2
         nmt=params.inf
     #########################################################
     ################      CALL  R1  E      ##################
@@ -264,6 +284,16 @@ def sellCall(app,varsBc,varsLb,vars,params,debug_mode):
         resta=params.resta_cr2
         sl=params.sl_cr2
         manifestacion=params.umbral_manifestacion_cR2
+        nmt=params.inf
+    
+    #########################################################
+    ################      CALL    R2-2    ##################
+    #########################################################
+    elif vars.tipo == "R2-2": 
+        diamante=params.diamante_cr2_2
+        resta=params.resta_cr2_2
+        sl=params.sl_cr2_2
+        manifestacion=params.umbral_manifestacion_cR2_2
         nmt=params.inf
     
     
@@ -582,6 +612,17 @@ def sellPut(app,varsBc,varsLb,vars,params,debug_mode):
         sl=params.sl_pr3
         manifestacion=params.umbral_manifestacion_pR3
         nmt=params.inf
+
+    #########################################################
+    ####################     PUT Label    ###################
+    #########################################################
+    elif vars.tipo == "LABEL-I": 
+        diamante=params.diamante_pr1_label
+        resta=params.resta_pr1_label
+        sl=params.sl_pr1_label
+        manifestacion=params.umbral_manifestacion_pR1_label
+        nmt=params.inf
+
 
     #########################################################
     ####################      VENTA       ###################

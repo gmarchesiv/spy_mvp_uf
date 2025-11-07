@@ -41,7 +41,13 @@ def clean_vars(vars,varsApp):
     vars.flag_Put_reset_r1_i =False
     vars.flag_Put_reset_f2 =False
     vars.flag_Put_reset_r3 =False
+
+    vars.flag_Call_reset_r3_2 = False
+    vars.flag_Put_reset_r1_label = False
+    vars.flag_cambio_R1_label=False
+    vars.doput_ant = 0 
     
+        
 
     vars.rule = True
     vars.bloqueo = True

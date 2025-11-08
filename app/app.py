@@ -331,7 +331,7 @@ def post_broadCasting_sell_auto():
 
 @app.route("/broadCasting-buy", methods=["POST"])
 def post_broadCasting_buy():
-    file_name = "/usr/src/vars.json"
+    file_name = "/usr/src/broadcasting.json"
     try:
         # Obtener el body de la solicitud
         body = request.json

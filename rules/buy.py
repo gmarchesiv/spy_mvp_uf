@@ -105,10 +105,10 @@ def buy_Call(app,varsBc,varsLb,vars,params,debug_mode):
     ######################################################### 
     elif (not (timeNow >= params.proteccion_compra_call_r1[0] and timeNow < params.proteccion_compra_call_r1[1]) and 
                         not (timeNow >= params.proteccion_compra_2[0] and timeNow < params.proteccion_compra_2[1]) )and(
-        (timeNow >= params.timeCall_r1[0] and timeNow < params.timeCall_r1[1])
-        and (vars.dcall >= params.dcall_r1[0] and vars.dcall < params.dcall_r1[1])
-        and (vars.docall >= params.docall_r1[0] and vars.docall <= params.docall_r1[1])
-        and  (varsLb.label==params.labelCall_r1 )and vars.flag_Call_reset_r1
+        (timeNow >= params.timeCall_r1_2[0] and timeNow < params.timeCall_r1_2[1])
+        and (vars.dcall >= params.dcall_r1_2[0] and vars.dcall < params.dcall_r1_2[1])
+        and (vars.docall >= params.docall_r1_2[0] and vars.docall <= params.docall_r1_2[1])
+        and  (varsLb.label==params.labelCall_r1_2 ) 
     ):
         buy(
             app,varsBc,varsLb,vars,params,

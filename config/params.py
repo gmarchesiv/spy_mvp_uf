@@ -82,7 +82,7 @@ class parameters:
         # PARAMETROS DE ASKBID DE ACCIONES
         self.max_askbid_venta_prom = 0.03
         self.max_askbid_compra_prom = 0.028
-        self.max_askbid_venta_abs = 0.0275
+        self.max_askbid_venta_abs = 0.0255
         self.max_askbid_compra_abs = 0.0185
         self.max_askbid_venta_forzada = 0.04
 
@@ -108,7 +108,7 @@ class parameters:
         self.proteccion_ask_bid=[[dt_time(9, 45,0), dt_time(9, 45,18)],[dt_time(10, 0,0), dt_time(10,0,18 )]]
         self.proteccion_compra=[ dt_time(9, 44,30), dt_time(9, 45,30) ]
         self.proteccion_compra_2=[ dt_time(9, 59,0), dt_time(10, 0,15) ]
-        self.proteccion_compra_call_r1=[ dt_time(9, 44,0), dt_time(9, 45,30)  ]
+        self.proteccion_compra_call_r1=[ dt_time(9, 44,0), dt_time(9, 45,12)  ]
 
         #########################################################
         ####################      CALL        ###################

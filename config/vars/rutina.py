@@ -88,6 +88,7 @@ class varsRutina:
         ###############################################
         # VARIABLES DE TRADING
         ###############################################
+        self.label_ant = self.data.get("label_ant", 0)
         self.vix= self.data.get("vix", 0)
         self.dcall = self.data.get("dcall", 0)
         self.dput = self.data.get("dput", 0)

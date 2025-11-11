@@ -107,7 +107,7 @@ class parameters:
         #PARAMETROS DE PROTECCION
         self.proteccion_ask_bid=[[dt_time(9, 45,0), dt_time(9, 45,18)],[dt_time(10, 0,0), dt_time(10,0,18 )]]
         self.proteccion_compra=[ dt_time(9, 44,30), dt_time(9, 45,30) ]
-        self.proteccion_compra_2=[ dt_time(9, 59,0), dt_time(10, 0,15) ]
+        self.proteccion_compra_2=[ dt_time(9, 59,20), dt_time(10, 0,15) ]
         self.proteccion_compra_call_r1=[ dt_time(9, 44,0), dt_time(9, 45,12)  ]
 
         #########################################################
@@ -118,7 +118,7 @@ class parameters:
         # ==================================
     
         self.umbral_no_perdida_c = 0.016
-        self.perdida_maxima_c = 0.045
+        self.perdida_maxima_c = 0.05
         self.perdida_maxima_c_dinamico_r2 = 0.043
         self.perdida_maxima_c_abs = -0.021
         
@@ -206,8 +206,8 @@ class parameters:
         # =========== CALL - R1-E2 ========== 
         # ==================================
         
-        self.dcall_r1_e2 = [0, 0.2]
-        self.docall_r1_e2 = [0.103, 0.115]
+        self.dcall_r1_e2 = [0, 0.135]
+        self.docall_r1_e2 =  [0.103, 0.115]
         self.timeCall_r1_e2 = [dt_time(10, 10), dt_time(11, 20)]
         self.labelCall_r1_e2 =0
         
@@ -239,7 +239,7 @@ class parameters:
         # ==================================
         
         self.dcall_r1_i =[-0.31, 0]
-        self.docall_r1_i =  [0.106, 0.111]
+        self.docall_r1_i = [0.095, 0.099]
         self.timeCall_r1_i = [dt_time(9, 35), dt_time(9, 46)]
         self.labelCall_r1_i=1
         
@@ -286,7 +286,7 @@ class parameters:
         # ==================================
 
         # COMPRA
-        self.dcall_r2 = [0.3, 0.61]
+        self.dcall_r2 =[0.28, 0.61]
         self.docall_r2 = [0.042, 0.057]  
         self.timeCall_r2 = [dt_time(9, 35), dt_time(9, 56)]
         self.labelCall_r2=0
@@ -298,7 +298,7 @@ class parameters:
         # self.min_desicion_cr2  = 60
         self.umbral_manifestacion_cR2 =0.02 
         self.diamante_cr2 = [self.umbral_manifestacion_cR2,0.027,0.038]   # DIAMANTE DE COMPRA
-        self.resta_cr2= [0.018,0.01,0.001]  # RETROCESO DEL DIAMANTE 
+        self.resta_cr2= [0.018,0.005,0.001] # RETROCESO DEL DIAMANTE 
         # target_cr2 =0.0379
         
         # retroceso_cr2=0.05 
@@ -320,7 +320,7 @@ class parameters:
         # min_desicion_cr2  = 60
         self.umbral_manifestacion_cR2_2 =0.02
         self.diamante_cr2_2 = [self.umbral_manifestacion_cR2_2,0.027,0.038]  # DIAMANTE DE COMPRA
-        self.resta_cr2_2= [0.018,0.01,0.001] # RETROCESO DEL DIAMANTE 
+        self.resta_cr2_2= [0.018,0.005,0.001] # RETROCESO DEL DIAMANTE 
 
 
         # ==================================
@@ -373,7 +373,7 @@ class parameters:
         
         self.dcall_r1_f3 = [-0.03, 0.16]
         self.docall_r1_f3 = [0.033, 0.04]
-        self.timeCall_r1_f3 = [dt_time(14, 0), dt_time(14, 30)]
+        self.timeCall_r1_f3 = [dt_time(14, 0), dt_time(14,  8)]
         self.labelCall_r1_f3=0
 
         # VENTA
@@ -417,7 +417,7 @@ class parameters:
         # ==================================
 
         self.umbral_no_perdida_p = 0.016
-        self.perdida_maxima_p = 0.045
+        self.perdida_maxima_p = 0.05
         self.perdida_maxima_p_abs = -0.021
         self.perdida_maxima_p_dinamico_r2 = 0.043
 
@@ -426,13 +426,13 @@ class parameters:
         # ==================================
         # COMPRA
         
-        self.dput_r1 = [0.09, 0.15]
-        self.doput_r1 = [0.059, 0.065]
+        self.dput_r1 = [0.069, 0.15]
+        self.doput_r1 = [0.065, 0.069]
         self.timePut_r1 = [dt_time(9, 50), dt_time(10, 5)]
         self.labelPut_r1=1
 
         # VENTA
-        self.sl_pr1=-0.03  # STOP LOSS
+        self.sl_pr1=-0.035  # STOP LOSS
         # self.min_desicion_pr1  = 60
         self.umbral_manifestacion_pR1=0.018
         self.diamante_pr1 = [self.umbral_manifestacion_pR1, 0.026,0.034,0.065] # DIAMANTE DE COMPRA
@@ -442,8 +442,8 @@ class parameters:
         # =======   PUT - R1-INV ==========  
         # ==================================
         
-        self.dput_r1_i =[-0.075, 0.01]
-        self.doput_r1_i = [0.1, 0.115]
+        self.dput_r1_i =[-0.075, 0]
+        self.doput_r1_i = [0.09, 0.115]
         self.timePut_r1_i = [dt_time(9, 40), dt_time(10,7)]
         self.labelPut_r1_i=0
         

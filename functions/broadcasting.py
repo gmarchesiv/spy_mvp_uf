@@ -192,15 +192,15 @@ def broadcasting_buy(varsBc,varsLb,vars,params,app):
                         varsBc.buy_regla = data["buy_regla"]
                         varsBc.user = data["user"]
                         if varsBc.buy_tipo == "C":
-                            val = 1
+                           
                             if vars.askbid_call > params.max_askbid_compra_abs or vars.cask <= 0:
                                 return False
-                            precio=varsBc.cask
+                         
                         elif varsBc.buy_tipo == "P":
-                            val = 2
+                         
                             if vars.askbid_put > params.max_askbid_compra_abs or vars.pask <= 0:
                                 return False
-                            precio=varsBc.pask
+                     
                         else:
                             printStamp("-ERROR COMPRA BROADCASTING-")
                             return False

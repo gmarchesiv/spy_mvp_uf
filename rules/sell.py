@@ -100,7 +100,7 @@ def sellCall(app,varsBc,varsLb,vars,params,debug_mode):
         else:
             vars.df.loc[vars.i, "RENT"]=vars.rentabilidad
         return
-    if vars.cbid <= 0:
+    if vars.cbid <= 0 or vars.askbid_call<0:
         return
     
  
@@ -139,24 +139,24 @@ def sellCall(app,varsBc,varsLb,vars,params,debug_mode):
         return
 
     # REGLA DE PROTECCION
-    if (
-        vars.pico > params.umbral_no_perdida_c
-        and vars.rentabilidad < (vars.pico - params.perdida_maxima_c)
-        and vars.manifesto == False and (vars.tipo == "R2" or vars.tipo =="R2-2" )
-    ):
-        sell(
-            app,varsBc,varsLb,vars,params,
-            "C",  "PROTECCION" ,debug_mode
-        )
+    # if (
+    #     vars.pico > params.umbral_no_perdida_c
+    #     and vars.rentabilidad < (vars.pico - params.perdida_maxima_c)
+    #     and vars.manifesto == False and (vars.tipo == "R2" or vars.tipo =="R2-2" )
+    # ):
+    #     sell(
+    #         app,varsBc,varsLb,vars,params,
+    #         "C",  "PROTECCION" ,debug_mode
+    #     )
 
-        return
+    #     return
 
     
     # REGLA DE PROTECCION
     if (
-        vars.pico < params.umbral_no_perdida_c
-         and vars.rentabilidad < (vars.pico - params.perdida_maxima_c_dinamico_r2)
-        and vars.manifesto == False  and vars.pico>0 and  (vars.tipo == "R2" or vars.tipo =="R2-2" )
+        # vars.pico < params.umbral_no_perdida_c
+           vars.rentabilidad < (vars.pico - params.perdida_maxima_c)
+        and vars.manifesto == False  and vars.pico>0 
     ):
         sell(
             app,varsBc,varsLb,vars,params,
@@ -166,17 +166,17 @@ def sellCall(app,varsBc,varsLb,vars,params,debug_mode):
         return
 
     # REGLA DE PROTECCION
-    if (
-        vars.pico > params.umbral_no_perdida_c
-        and vars.rentabilidad < params.perdida_maxima_c_abs
-        and vars.manifesto == False and (vars.tipo != "R2" and vars.tipo != "R2-2" )
-    ):
-        sell(
-            app,varsBc,varsLb,vars,params,
-            "C",  "PROTECCION" ,debug_mode
-        )
+    # if (
+    #     vars.pico > params.umbral_no_perdida_c
+    #     and vars.rentabilidad < params.perdida_maxima_c_abs
+    #     and vars.manifesto == False and (vars.tipo != "R2" and vars.tipo != "R2-2" )
+    # ):
+    #     sell(
+    #         app,varsBc,varsLb,vars,params,
+    #         "C",  "PROTECCION" ,debug_mode
+    #     )
 
-        return
+    #     return
 
     #########################################################
     ################      CALL  R1    ##################
@@ -432,7 +432,7 @@ def sellPut(app,varsBc,varsLb,vars,params,debug_mode):
         else:
             vars.df.loc[vars.i, "RENT"]=vars.rentabilidad
         return
-    if vars.pbid <= 0:
+    if vars.pbid <= 0 or vars.askbid_put<0: 
         return
      
     vars.rentabilidad = vars.pbid / vars.priceBuy - 1
@@ -467,23 +467,22 @@ def sellPut(app,varsBc,varsLb,vars,params,debug_mode):
         return
 
     # REGLA PROTECCION
-    if (
-        vars.pico > params.umbral_no_perdida_p
-        and vars.rentabilidad < (vars.pico - params.perdida_maxima_p)
-        and vars.manifesto == False and vars.tipo == "R2"
-    ):
-        sell(
-            app,varsBc,varsLb,vars,params,
-            "P",  "PROTECCION" ,debug_mode
-        )
+    # if (
+    #     vars.pico > params.umbral_no_perdida_p
+    #     and vars.rentabilidad < (vars.pico - params.perdida_maxima_p)
+    #     and vars.manifesto == False and vars.tipo == "R2"
+    # ):
+    #     sell(
+    #         app,varsBc,varsLb,vars,params,
+    #         "P",  "PROTECCION" ,debug_mode
+    #     )
 
-        return
+    #     return
 
     # REGLA PROTECCION
     if (
-        vars.pico < params.umbral_no_perdida_p
-        and vars.rentabilidad <  (vars.pico - params.perdida_maxima_p_dinamico_r2)
-        and vars.manifesto == False  and vars.pico >0 and  (vars.tipo == "R2" or vars.tipo == "R2-E" or vars.tipo == "R1-FAST" )
+          vars.rentabilidad <  (vars.pico - params.perdida_maxima_p)
+        and vars.manifesto == False  and vars.pico >0 
     ):
         sell(
             app,varsBc,varsLb,vars,params,
@@ -494,17 +493,17 @@ def sellPut(app,varsBc,varsLb,vars,params,debug_mode):
 
 
     # REGLA PROTECCION
-    if (
-        vars.pico > params.umbral_no_perdida_p
-        and vars.rentabilidad < params.perdida_maxima_p_abs
-        and vars.manifesto == False and vars.tipo != "R2"
-    ):
-        sell(
-            app,varsBc,varsLb,vars,params,
-            "P",  "PROTECCION" ,debug_mode
-        )
+    # if (
+    #     vars.pico > params.umbral_no_perdida_p
+    #     and vars.rentabilidad < params.perdida_maxima_p_abs
+    #     and vars.manifesto == False and vars.tipo != "R2"
+    # ):
+    #     sell(
+    #         app,varsBc,varsLb,vars,params,
+    #         "P",  "PROTECCION" ,debug_mode
+    #     )
 
-        return
+    #     return
     
     #########################################################
     ####################      PUT  R1     ###################

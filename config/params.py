@@ -77,7 +77,8 @@ class parameters:
         # SELECCION DE STRIKES 
         self.rangos_strikes = [[2, 2.5] ]
         self.days_min_exp = 30  # DIAS para el exp minimo de busqueda
-
+        self.days_max_exp = 39 
+        self.except_days_min_exp = 28
 
         # PARAMETROS DE ASKBID DE ACCIONES
         self.max_askbid_venta_prom = 0.03

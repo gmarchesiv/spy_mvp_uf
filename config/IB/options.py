@@ -295,13 +295,23 @@ def list_checkExpirations(app, etf, params, exchange):
     n=0
     lista_exp = []
     for expiry_date in listExpire_dates:
-        if expiry_date >= (
+        if (expiry_date >= (
             fecha_actual + timedelta(days=params.days_min_exp)
-        ) : 
+        ) and expiry_date <= (
+            fecha_actual + timedelta(days=params.days_max_exp)
+        )  ): 
             lista_exp.append(expiry_date.strftime(format_str))
-            if n>=5:
-                return lista_exp
-            n+=1
+
+    if len (lista_exp)==0:
+        lista_exp = []
+        for expiry_date in listExpire_dates:
+            if (expiry_date >= (
+                fecha_actual + timedelta(days=params.except_days_min_exp)
+            ) and expiry_date <= (
+                fecha_actual + timedelta(days=params.days_max_exp)
+            )  ): 
+                lista_exp.append(expiry_date.strftime(format_str))
+
     return lista_exp
 
 

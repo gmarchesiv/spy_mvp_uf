@@ -66,44 +66,47 @@ def broadcasting_sell(varsBc,varsLb,vars,params,app):
     # Lectura del Archivo
     file_name = "/usr/src/app/data/broadcasting.json"
  
-
-    if os.path.exists(file_name):
-        
-        with open(file_name, "r") as json_file:
-            try:
-                data = json.load(json_file)
-            except:
-                varsBc = varsBroadcasting()
-                data = json.load(json_file)
- 
-            if 'sell' in data:
-                if data["sell"] == True or varsBc.sell == True:
-                    varsBc.sell = True
-                    varsBc.sell_regla =  data["sell_regla"]
-         
-                    if vars.call:
-                        val = 1
-                        tipo="C"
-                        if vars.askbid_call > params.max_askbid_venta_abs or vars.cbid <= 0:
+    try:
+        if os.path.exists(file_name):
+            
+            with open(file_name, "r") as json_file:
+                try:
+                    data = json.load(json_file)
+                except:
+                    varsBc = varsBroadcasting()
+                    data = json.load(json_file)
+    
+                if 'sell' in data:
+                    if data["sell"] == True or varsBc.sell == True:
+                        varsBc.sell = True
+                        varsBc.sell_regla =  data["sell_regla"]
+            
+                        if vars.call:
+                        
+                            tipo="C"
+                            if vars.askbid_call > params.max_askbid_venta_abs or vars.cbid <= 0:
+                                return False
+                        elif vars.put:
+                        
+                            tipo="P"
+                            if vars.askbid_put > params.max_askbid_venta_abs or vars.pbid <= 0:
+                                return False
+                        else:
+                            printStamp("-ERROR VENTA BROADCASTING-")
                             return False
-                    elif vars.put:
-                        val = 2
-                        tipo="P"
-                        if vars.askbid_put > params.max_askbid_venta_abs or vars.pbid <= 0:
-                            return False
-                    else:
-                        printStamp("-ERROR VENTA BROADCASTING-")
-                        return False
-                    printStamp(f"-VENTA BROADCASTING POR :{varsBc.user } - {varsBc.sell_regla}")
-         
-                    venta=sell(app,varsBc,varsLb,vars,params,
-                            tipo, varsBc.sell_regla, debug_mode=False
-                        )
-                    if venta:
-                        varsBc.sell =False
+                        printStamp(f"-VENTA BROADCASTING POR :{varsBc.user } - {varsBc.sell_regla}")
+            
+                        venta=sell(app,varsBc,varsLb,vars,params,
+                                tipo, varsBc.sell_regla, debug_mode=False
+                            )
+                        if venta:
+                            varsBc.sell =False
+                            return
+                    
                         return
-                  
-                    return
+        
+    except:
+        printStamp("-ERROR VENTA BROADCASTING EN TRY-")      
 
 def broadcasting_sell_auto(varsBc,varsLb,vars,params,app):
 
@@ -217,7 +220,8 @@ def broadcasting_buy(varsBc,varsLb,vars,params,app):
                                 json.dump(data, file, indent=4)
                             return
                         return
-    except:pass             
+    except:
+        printStamp("-ERROR COMPRA BROADCASTING EN TRY-")                
 
 
 async def send_request(session, url, data, user):

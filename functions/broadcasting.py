@@ -35,7 +35,8 @@ def broadcasting_Aliniar(varsBc,vars):
         with open(file_name, "r") as json_file:
             try:
                 data = json.load(json_file)
-            except:
+            except Exception as e:
+                print(type(e).__name__, ":", e)
                 varsBc = varsBroadcasting()
                 data = json.load(json_file)
 
@@ -72,7 +73,8 @@ def broadcasting_sell(varsBc,varsLb,vars,params,app):
             with open(file_name, "r") as json_file:
                 try:
                     data = json.load(json_file)
-                except:
+                except Exception as e:
+                    print(type(e).__name__, ":", e)
                     varsBc = varsBroadcasting()
                     data = json.load(json_file)
     
@@ -105,8 +107,9 @@ def broadcasting_sell(varsBc,varsLb,vars,params,app):
                     
                         return
         
-    except:
-        printStamp("-ERROR VENTA BROADCASTING EN TRY-")      
+    except Exception as e:
+        print(type(e).__name__, ":", e)
+        printStamp("-ERROR VENTA BROADCASTING EN TRY-")  
 
 def broadcasting_sell_auto(varsBc,varsLb,vars,params,app):
 
@@ -124,7 +127,8 @@ def broadcasting_sell_auto(varsBc,varsLb,vars,params,app):
         with open(file_name, "r") as json_file:
             try:
                 data = json.load(json_file)
-            except:
+            except Exception as e:
+                print(type(e).__name__, ":", e)
                 varsBc = varsBroadcasting()
                 data = json.load(json_file)
  
@@ -195,15 +199,15 @@ def broadcasting_buy(varsBc,varsLb,vars,params,app):
                         varsBc.buy_regla = data["buy_regla"]
                         varsBc.user = data["user"]
                         if varsBc.buy_tipo == "C":
-                           
+                          
                             if vars.askbid_call > params.max_askbid_compra_abs or vars.cask <= 0:
                                 return False
-                         
+                          
                         elif varsBc.buy_tipo == "P":
-                         
+                           
                             if vars.askbid_put > params.max_askbid_compra_abs or vars.pask <= 0:
                                 return False
-                     
+                            
                         else:
                             printStamp("-ERROR COMPRA BROADCASTING-")
                             return False
@@ -220,8 +224,9 @@ def broadcasting_buy(varsBc,varsLb,vars,params,app):
                                 json.dump(data, file, indent=4)
                             return
                         return
-    except:
-        printStamp("-ERROR COMPRA BROADCASTING EN TRY-")                
+    except Exception as e:
+        print(type(e).__name__, ":", e)
+        printStamp("-ERROR COMPRA BROADCASTING EN TRY-")             
 
 
 async def send_request(session, url, data, user):

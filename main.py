@@ -362,13 +362,13 @@ def main():
                 vars.status = "ERROR"
                 
                 saveVars(vars, app, params, False)
-            except:
-                pass
+            except Exception as e:
+                print(type(e).__name__, ":", e)
             app.stop()
             api_thread.join()
             printStamp(" - Desconexión completada - ")
-        except:
-            pass
+        except Exception as e:
+            print(type(e).__name__, ":", e)
         return
 
     # ----- ERROR DE CODIGO -----
@@ -398,13 +398,13 @@ def main():
                 saveVars(vars, app, params, False)
                 error=f"{e}"
                 sendError(params, error)
-            except:
-                pass
+            except Exception as e:
+                print(type(e).__name__, ":", e)
             app.stop()
             api_thread.join()
             printStamp(" - Desconexión completada - ")
-        except:
-            pass
+        except Exception as e:
+            print(type(e).__name__, ":", e)
         return
 
 

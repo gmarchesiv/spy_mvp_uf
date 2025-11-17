@@ -31,7 +31,8 @@ def writeRegister(name, zone):
         session.add(new_data)
         session.commit()
 
-    except:
+    except Exception as e:
+        print(type(e).__name__, ":", e)
         printStamp("Error al escribir en Base de datos register")
     finally:
         session.close()
@@ -50,7 +51,8 @@ def writeRoutineFault(Fault, codeIB, id, msg):
         session.add(new_data)
         session.commit()
 
-    except:
+    except Exception as e:
+        print(type(e).__name__, ":", e)
         printStamp("Error al escribir en Base de datos routineFault")
     finally:
         session.close()
@@ -91,7 +93,8 @@ def readWallet():
         if data == None:
             return None
         return data.__dict__
-    except:
+    except Exception as e:
+        print(type(e).__name__, ":", e)
         printStamp("Error al leer en Base de datos Wallet")
         session.close()
 
@@ -168,7 +171,8 @@ def writeTransactions(app, id, vars):
         session.add(new_transaction)
         session.commit()
 
-    except:
+    except Exception as e:
+        print(type(e).__name__, ":", e)
         printStamp("Error al escribir en Base de datos transactions")
     finally:
         session.close()
@@ -207,7 +211,8 @@ def writeLabel(app, varsLb,params):
         session.add(new_data)
         session.commit()
 
-    except:
+    except Exception as e:
+        print(type(e).__name__, ":", e)
         printStamp("Error al escribir en Base de datos transactions")
     finally:
         session.close()
@@ -225,7 +230,8 @@ def writeRoutineFault(Fault, codeIB, id, msg):
         session.add(new_data)
         session.commit()
 
-    except:
+    except Exception as e:
+        print(type(e).__name__, ":", e)
         printStamp("Error al escribir en Base de datos routineFault")
     finally:
         session.close()

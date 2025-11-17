@@ -41,7 +41,8 @@ TRADING MODE: {params.typeIB}
     try:
       
         sendTelegram(params, msg)
-    except:
+    except Exception as e:
+        print(type(e).__name__, ":", e)
         printStamp("-ERROR AL ENVIAR TELEGRAM: sendStart-")
 
 
@@ -64,7 +65,8 @@ TOTAL CASH : $ {app.wallet["TotalCashValue"]}
     try:
         
         sendTelegram(params, msg)
-    except:
+    except Exception as e:
+        print(type(e).__name__, ":", e)
         printStamp("-ERROR AL ENVIAR TELEGRAM: sendEnd-")
 
 
@@ -90,7 +92,8 @@ REGLA : {vars.regla_ant}
     try:
   
         sendTelegram(params, msg)
-    except:
+    except Exception as e:
+        print(type(e).__name__, ":", e)
         printStamp("-ERROR AL ENVIAR TELEGRAM: sendBuy-")
 
 
@@ -117,7 +120,8 @@ REGLA : {vars.regla_ant}
     try:
         
         sendTelegram(params, msg)
-    except:
+    except Exception as e:
+        print(type(e).__name__, ":", e)
         printStamp("-ERROR AL ENVIAR TELEGRAM: sendSell-")
 
 
@@ -140,5 +144,6 @@ TIPO: {razon}
     try:
          
         sendTelegram(params, msg)
-    except:
+    except Exception as e:
+        print(type(e).__name__, ":", e)
         printStamp("-ERROR AL ENVIAR TELEGRAM: sendError-")

@@ -26,7 +26,7 @@ class parameters:
         ###############################################
 
         self.etf = "SPY"
-        self.exchange = ["CBOE"]
+        self.exchange = ["SMART"]
         self.zone = pytz.timezone("America/New_York")
 
         ###############################################

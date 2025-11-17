@@ -290,6 +290,9 @@ def post_broadCasting_sell():
         data["sell_regla"] = body.get(
             "sell_regla", data.get("sell_regla")
         )
+        data["user"] = body.get(
+            "user", data.get("user")
+        )
         data["sell"] = True
 
         # Guardar los datos actualizados de nuevo en el archivo
@@ -317,6 +320,8 @@ def post_broadCasting_sell_auto():
         data["max_askbid_venta_abs"] = body.get(
             "max_askbid_venta_abs", data.get("max_askbid_venta_abs")
         )
+
+        data["user"] = "FORZADA"
  
 
         # Guardar los datos actualizados de nuevo en el archivo
@@ -346,6 +351,9 @@ def post_broadCasting_buy():
         )
         data["buy_regla"] = body.get(
             "buy_regla", data.get("buy_regla")
+        )
+        data["user"] = body.get(
+            "user", data.get("user")
         )
         data["buy"] = True
 

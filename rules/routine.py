@@ -192,10 +192,10 @@ def calculations(app, vars,varsBc, params):
     vars.docall = vars.cbid / vars.call_open - 1
     vars.doput = vars.pbid / vars.put_open - 1
     if vars.askbid_call >0 and params.umbral_askbid>vars.askbid_call:
-        vars.askbid_call_prom.append(vars.askbid_call)
+        vars.askbid_call_prom.append(round(vars.askbid_call,6))
 
     if vars.askbid_put >0 and params.umbral_askbid>vars.askbid_put:
-        vars.askbid_put_prom.append(vars.askbid_put)
+        vars.askbid_put_prom.append(round(vars.askbid_put,6))
 
      
     if vars.rule:

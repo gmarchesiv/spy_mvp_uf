@@ -75,6 +75,15 @@ class varsRutina:
         self.flag_Put_reset_r1_label =self.data.get("flag_Put_reset_r1_label", False)
         self.flag_cambio_R1_label =self.data.get("flag_cambio_R1_label", False)
   
+     
+        self.flag_Call_reset_r2 =self.data.get("flag_Call_reset_r2", False)
+        self.flag_Call_reset_r2_2 =self.data.get("flag_Call_reset_r2_2", False)
+        self.flag_Call_reset_r1_i_2 =self.data.get("flag_Call_reset_r1_i_2", False)
+        self.flag_Call_reset_r1_c =self.data.get("flag_Call_reset_r1_c", False)
+        self.flag_Call_reset_r1_f =self.data.get("flag_Call_reset_r1_f", False)
+        self.flag_Call_reset_r1_f2 =self.data.get("flag_Call_reset_r1_f2", False)
+        self.flag_Put_reset_r2 =self.data.get("flag_Put_reset_r2", False)
+
         ###############################################
         # VARIABLES DE RUTINA
         ###############################################

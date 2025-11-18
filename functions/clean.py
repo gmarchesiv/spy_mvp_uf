@@ -54,6 +54,14 @@ def clean_vars(vars,varsApp):
     varsApp.flag_bloqueo_tiempo=False
     vars.flag_Call_reset_r3 = False
 
+    vars.flag_Call_reset_r2 =False
+    vars.flag_Call_reset_r2_2 =False
+    vars.flag_Call_reset_r1_i_2 =False
+    vars.flag_Call_reset_r1_c =False
+    vars.flag_Call_reset_r1_f =False
+    vars.flag_Call_reset_r1_f2 =False
+    vars.flag_Put_reset_r2 =False
+
     
 
 

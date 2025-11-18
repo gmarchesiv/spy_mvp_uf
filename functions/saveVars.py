@@ -109,6 +109,15 @@ def saveVars(vars, app,  params, estado):
         "flag_Call_reset_r3_2":vars.flag_Call_reset_r3_2,
         "flag_Put_reset_r1_label":vars.flag_Put_reset_r1_label,
         "flag_cambio_R1_label":vars.flag_cambio_R1_label,
+
+        "flag_Call_reset_r2":vars.flag_Call_reset_r2,
+        "flag_Call_reset_r2_2":vars.flag_Call_reset_r2_2,
+        "flag_Call_reset_r1_i_2":vars.flag_Call_reset_r1_i_2,
+        "flag_Call_reset_r1_c":vars.flag_Call_reset_r1_c,
+        "flag_Call_reset_r1_f":vars.flag_Call_reset_r1_f,
+        "flag_Call_reset_r1_f2":vars.flag_Call_reset_r1_f2,
+        "flag_Put_reset_r2": vars.flag_Put_reset_r2,
+
         
         ###############################################
         # VARIABLES DE RUTINA

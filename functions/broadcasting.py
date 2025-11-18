@@ -231,7 +231,7 @@ def broadcasting_buy(varsBc,varsLb,vars,params,app):
 
 async def send_request(session, url, data, user):
     try:
-        async with session.post(url, json=data, timeout=2) as response:
+        async with session.post(url, json=data, timeout=1) as response:
             if response.status == 200:
                 printStamp(f"Orden enviada a {user['user']} exitosamente")
                 print(await response.json())

@@ -148,7 +148,7 @@ class IBapi(EWrapper, EClient):
 
             elif tickType == TickTypeEnum.OPTION_CALL_OPEN_INTEREST:
                 self.options[reqId]["OPTION_CALL_OPEN_INTEREST"] = size
-            elif tickType == TickTypeEnum.OPTION_CALL_OPEN_INTEREST:
+            elif tickType == TickTypeEnum.OPTION_PUT_OPEN_INTEREST:
                 self.options[reqId]["OPTION_PUT_OPEN_INTEREST"] = size
     # ================= IB OPTIONS =================
 

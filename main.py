@@ -88,9 +88,9 @@ def main():
 
         timeNow = datetime.now(params.zone).time()
 
-        # if timeNow < params.rutina[0] or timeNow >= params.rutina[1]:
-        #     test_ibkr_connection(params)
-        #     return
+        if timeNow < params.rutina[0] or timeNow >= params.rutina[1]:
+            test_ibkr_connection(params)
+            return
 
         # ====================
         #  - Feriados -
@@ -127,7 +127,7 @@ def main():
             return
 
         # Cuenta regresiva para iniciar.
-        # countdown(params.zone)
+        countdown(params.zone)
 
         # Registro de sesion.
         writeRegister(params.name, params.zone)

@@ -291,7 +291,7 @@ def snapshot_OI(app, etf, strike, exp, exchange,tipo):
     for i, contract in enumerate(contracts, start=(len(app.options) + 1)):
 
         app.reqMktData(app.id_IO, contract, "101", False, False, [])
-        time.sleep(2)
+        
         app.options[i] = {
             "strike": contract.strike,
             "expirations": contract.lastTradeDateOrContractMonth,
@@ -300,6 +300,7 @@ def snapshot_OI(app, etf, strike, exp, exchange,tipo):
             "OPTION_CALL_OPEN_INTEREST": 0,
             "OPTION_PUT_OPEN_INTEREST": 0,
         }
+        time.sleep(3)
         
 
 
@@ -376,14 +377,14 @@ def revisar_OI(app,vars,call_list,put_list,exp):
 
     app.cancelMarketData(1)
       
-    del app.options[1]
+    # del app.options[1]
     
     
     for call in call_list:
         
         
         snapshot_OI(app, app.etfs[5]["symbol"], call, exp, vars.exchange,"C")
-        time.sleep(1)
+         
         while app.options[app.id_IO ]['OPTION_CALL_OPEN_INTEREST'] ==0:
             printStamp(f"ESPERANDO CALL {exp}")
 
@@ -402,13 +403,13 @@ def revisar_OI(app,vars,call_list,put_list,exp):
     dic_put_OI={}
     app.cancelMarketData(2)
     
-    del app.options[2]
+    # del app.options[2]
   
     for put in put_list:
         
         
         snapshot_OI(app, app.etfs[5]["symbol"], put, exp, vars.exchange,"P")
-        time.sleep(1)
+         
         while app.options[app.id_IO]['OPTION_PUT_OPEN_INTEREST'] ==0:
             printStamp(f"ESPERANDO PUT {exp}")
 

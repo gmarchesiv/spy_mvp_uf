@@ -377,7 +377,7 @@ def revisar_OI(app,vars,call_list,put_list,exp):
         app.cancelMarketData(1)
         time.sleep(1)
         del app.options[1]
-        
+        time.sleep(1)
         snapshot_OI(app, app.etfs[5]["symbol"], call, exp, vars.exchange,"C")
         time.sleep(1)
         while app.options[1]['OPTION_CALL_OPEN_INTEREST'] ==0:
@@ -394,6 +394,7 @@ def revisar_OI(app,vars,call_list,put_list,exp):
         app.cancelMarketData(2)
         time.sleep(1)
         del app.options[2]
+        time.sleep(1)
         snapshot_OI(app, app.etfs[5]["symbol"], put, exp, vars.exchange,"P")
         time.sleep(1)
         while app.options[2]['OPTION_PUT_OPEN_INTEREST'] ==0:
@@ -403,7 +404,7 @@ def revisar_OI(app,vars,call_list,put_list,exp):
 
         dic_put_OI[call]=app.options[2]['OPTION_PUT_OPEN_INTEREST'] 
 
-
+        
     dic_OI={"CALL":dic_call_OI,
             "PUT":dic_put_OI }
     return dic_OI

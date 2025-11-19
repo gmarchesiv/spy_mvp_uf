@@ -68,7 +68,8 @@ class IBapi(EWrapper, EClient):
             7: "LOW",
             8: "VOLUME",
             9: "CLOSE",
-            22: "OI",
+            27: "OPTION_CALL_OPEN_INTEREST",
+            28: "OPTION_PUT_OPEN_INTEREST",
         }
         self.execution_details = {}
         self.commissions = {}
@@ -134,7 +135,7 @@ class IBapi(EWrapper, EClient):
                 self.etfs[reqId]["price"] = price
 
         elif reqId in self.options:
-            if tickType in [4, 1, 2,86]:
+            if tickType in [4, 1, 2]:
                 self.options[reqId][str(self.tick_types[tickType])] = price
 
     def tickSize(self, reqId, tickType, size):
@@ -144,10 +145,11 @@ class IBapi(EWrapper, EClient):
 
             elif tickType == TickTypeEnum.ASK_SIZE:
                 self.options[reqId]["ASK_SIZE"] = size
-            elif tickType in [22]:
-                self.options[reqId][str(self.tick_types[tickType])] = size
 
-    
+            elif tickType == TickTypeEnum.OPTION_CALL_OPEN_INTEREST:
+                self.options[reqId]["OPTION_CALL_OPEN_INTEREST"] = size
+            elif tickType == TickTypeEnum.OPTION_CALL_OPEN_INTEREST:
+                self.options[reqId]["OPTION_PUT_OPEN_INTEREST"] = size
     # ================= IB OPTIONS =================
 
     def tikerOption(self, contract, reqId):

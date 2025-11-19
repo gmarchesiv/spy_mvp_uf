@@ -35,6 +35,7 @@ from rules.routine import (
     data_susciption,
     registration,
     registro_strike,
+    registro_strike_OI,
     saveTransaction 
 )
 

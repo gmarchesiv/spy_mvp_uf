@@ -292,7 +292,7 @@ def snapshot_OI(app, etf, strike, exp, exchange,tipo):
 
         app.reqMktData(app.id_IO, contract, "101", False, False, [])
         
-        app.options[i] = {
+        app.options[app.id_IO] = {
             "strike": contract.strike,
             "expirations": contract.lastTradeDateOrContractMonth,
             "ASK": 0,
@@ -301,6 +301,8 @@ def snapshot_OI(app, etf, strike, exp, exchange,tipo):
             "OPTION_PUT_OPEN_INTEREST": 0,
         }
         time.sleep(3)
+
+        
         
 
 

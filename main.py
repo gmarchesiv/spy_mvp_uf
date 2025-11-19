@@ -127,7 +127,7 @@ def main():
             return
 
         # Cuenta regresiva para iniciar.
-        countdown(params.zone)
+        # countdown(params.zone)
 
         # Registro de sesion.
         writeRegister(params.name, params.zone)

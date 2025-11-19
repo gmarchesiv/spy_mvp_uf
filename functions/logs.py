@@ -48,7 +48,7 @@ def readIBData(app, vars,varsLb):
 
     printStamp(f"{app.options[1]['symbol']}")
     printStamp(f"OI-C :{app.options[1]['OPTION_CALL_OPEN_INTEREST']}")
-    printStamp(f"OI-P :{app.options[1]['OPTION_PUT_OPEN_INTEREST']}")
+    # printStamp(f"OI-P :{app.options[1]['OPTION_PUT_OPEN_INTEREST']}")
     printStamp(f"ASK :{vars.cask } | DCALL :{round(vars.dcall*100,2)}%")
     printStamp(f"BID :{vars.cbid} | DOCALL :{round(vars.docall*100,2)}%")
     printStamp(f"ASK/BID-CALL : {round(vars.askbid_call*100,2)}%")
@@ -56,7 +56,7 @@ def readIBData(app, vars,varsLb):
     print("-----------------------------------------------")
 
     printStamp(f"{app.options[2]['symbol']}")
-    printStamp(f"OI-C :{app.options[2]['OPTION_CALL_OPEN_INTEREST']}")
+    # printStamp(f"OI-C :{app.options[2]['OPTION_CALL_OPEN_INTEREST']}")
     printStamp(f"OI-P :{app.options[2]['OPTION_PUT_OPEN_INTEREST']}")
     printStamp(f"ASK :{vars.pask} | DPUT :{round(vars.dput*100,2)}%")
     printStamp(f"BID :{vars.pbid} | DOPUT :{round(vars.doput*100,2)}%")

@@ -281,6 +281,26 @@ def snapshot(app, etf, strike, exp, exchange):
             "BID": 0,
         }
 
+def snapshot_OI(app, etf, strike, exp, exchange,tipo):
+
+    contracts = [
+        create_contract_OPT(etf, "OPT", exchange, "USD", strike, exp, tipo),
+ 
+    ]
+
+    for i, contract in enumerate(contracts, start=(len(app.options) + 1)):
+
+        app.reqMktData(i, contract, "101", False, False, [])
+        time.sleep(2)
+        app.options[i] = {
+            "strike": contract.strike,
+            "expirations": contract.lastTradeDateOrContractMonth,
+            "ASK": 0,
+            "BID": 0,
+            "OPTION_CALL_OPEN_INTEREST": 0,
+            "OPTION_PUT_OPEN_INTEREST": 0,
+        }
+
 
  
 
@@ -347,3 +367,40 @@ def checkStrike(app, exp, etf, tipo, exchange):
 
     app.listStrikes.sort()
     return app.listStrikes
+
+
+
+def revisar_OI(app,vars,call_list,put_list,exp):
+    dic_call_OI={}
+    for call in call_list:
+        
+        app.cancelMarketData(1)
+        time.sleep(1)
+        del app.options[1]
+        snapshot_OI(app, app.etfs[5]["symbol"], call, exp, vars.exchange,"C")
+        while app.options[1]['OPTION_CALL_OPEN_INTEREST'] ==0:
+            printStamp(f"ESPERANDO CALL {exp}")
+
+            time.sleep(0.5)
+        
+        dic_call_OI[call]=app.options[1]['OPTION_CALL_OPEN_INTEREST'] 
+    
+
+    dic_put_OI={}
+    for put in put_list:
+        
+        app.cancelMarketData(2)
+        time.sleep(1)
+        del app.options[2]
+        snapshot_OI(app, app.etfs[5]["symbol"], put, exp, vars.exchange,"P")
+        while app.options[2]['OPTION_PUT_OPEN_INTEREST'] ==0:
+            printStamp(f"ESPERANDO PUT {exp}")
+
+            time.sleep(0.5)
+
+        dic_put_OI[call]=app.options[2]['OPTION_PUT_OPEN_INTEREST'] 
+
+
+    dic_OI={"CALL":dic_call_OI,
+            "PUT":dic_put_OI }
+    return dic_OI

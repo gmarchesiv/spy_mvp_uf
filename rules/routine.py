@@ -10,6 +10,7 @@ from config.IB.options import (
     dic_checkStrike,
     list_checkExpirations,
     req_Options,
+    revisar_OI,
     snapshot,
 )
 from config.IB.wallet import wallet_cash, wallet_load
@@ -346,6 +347,110 @@ def registro_strike(app, vars, params):
         time.sleep(0.5)
 
     
+    vars.exp = exp
+    vars.strike_p = put_strike
+    vars.strike_c = call_strike
+    vars.put_close = app.options[2]["BID"]
+    vars.call_close = app.options[1]["BID"]
+    print("===============================================")
+    printStamp(
+        f"GUARDADO: {vars.exp} | PUT-STRIKE: {vars.strike_p} PUT-CLOSE: {vars.put_close} | CALL-STRIKE: {vars.strike_c} CALL-CLOSE: {vars.call_close}  "
+    )
+    timeNow = datetime.now(params.zone).time()
+    vars.hora_inicio = str(timeNow)
+
+
+
+def registro_strike_OI(app, vars, params):
+
+    # PEDIMOS LA CADENA DE OPCIONES
+    app.request_option_chain(app.etfs[5]["symbol"])
+
+ 
+    vars.exchange = params.exchange[0]  # SELECCION DEL EXCEHANGE
+
+    list_exp = list_checkExpirations(app, app.etfs[5]["symbol"], params, vars.exchange)
+
+
+    precio = app.etfs[5]["price"]
+    printStamp(f"PRECIO: {app.etfs[5]['price']} $")
+
+    call = int(precio * ((100 + params.rangos_strikes[0][1]) / 100))
+    put = int(precio * ((100 - params.rangos_strikes[0][1]) / 100))
+
+    call_inf = int(precio * ((100 + params.rangos_strikes[0][0]) / 100))
+    put_inf = int(precio * ((100 - params.rangos_strikes[0][0]) / 100))
+    
+    printStamp(f"RANGOS --> PUT : {put} - {put_inf} | CALL :{call_inf} - {call}")
+
+
+    for exp in list_exp:
+        strikes = checkStrike(
+        app, exp, app.etfs[5]["symbol"], "C", vars.exchange
+        )
+        put_list = [
+            float(x) for x in strikes if put <= float(x) <= put_inf
+        ]
+        call_list = [
+            float(x) for x in strikes if call_inf <= float(x) <= call
+        ]
+        # Ordenar listas
+        put_list.sort()
+        call_list.sort()
+        printStamp(f"EXP: {exp} - PUTs:{put_list} / CALLs:{call_list}")
+        if len(put_list)==0 or len(call_list)==0:
+            continue 
+
+        dic_OI=revisar_OI(app,vars,call_list,put_list,exp)
+        print(dic_OI)
+
+        max_call_strike = max(dic_OI["CALL"], key=dic_OI["CALL"].get)
+        max_put_strike  = max(dic_OI["PUT"], key=dic_OI["PUT"].get)
+
+        print("CALL máximo-OI:", dic_OI["CALL"][max_call_strike], "en strike", max_call_strike)
+        print("PUT máximo-OI:", dic_OI["PUT"][max_put_strike], "en strike", max_put_strike)
+        break
+
+    put_strike = max_put_strike 
+    call_strike = max_call_strike
+    exp_escogido = exp
+
+    printStamp(f"EXP: {exp_escogido}")
+
+    printStamp(f"RANGOS SELECCIONADOS --> PUT: {put_strike} /  CALL: {call_strike}")
+
+    app.cancelMarketData(1)
+    time.sleep(1)
+    del app.options[1]
+
+    app.cancelMarketData(2)
+    time.sleep(1)
+    del app.options[2]
+
+    snapshot(app, app.etfs[5]["symbol"], [put_strike, call_strike], exp, vars.exchange)
+    printStamp(f"EXTRAYENDO DATOS DE LA OPCION")
+    while True:
+        timeNow = datetime.now(params.zone).time()
+        if dt_time(15, 59) < timeNow:
+            break
+        readyOpt = 0
+        if int(timeNow.second) in params.frecuencia_accion:
+            print("===============================================")
+            printStamp(f"CASK: {app.options[1]['ASK'] } | CBID: {app.options[1]['BID'] }")
+            printStamp(f"PASK: {app.options[2]['ASK'] } | PBID: {app.options[2]['BID'] }")
+        if app.options[1]["BID"] > 0 and params.max_askbid_venta_abs > (app.options[1]["ASK"] / app.options[1]["BID"] - 1):
+            readyOpt += 1
+        
+        if app.options[2]["BID"] > 0 and params.max_askbid_venta_abs > (app.options[2]["ASK"] / app.options[2]["BID"] - 1):
+            readyOpt += 1
+            
+
+        if readyOpt == 2:
+            break
+
+        time.sleep(0.5)
+
+
     vars.exp = exp
     vars.strike_p = put_strike
     vars.strike_c = call_strike

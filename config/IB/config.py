@@ -146,7 +146,7 @@ class IBapi(EWrapper, EClient):
                 self.options[reqId]["ASK_SIZE"] = size
 
     def tickGeneric(self, reqId, tickType, value):
-        if tickType == 100:
+        if tickType == 101:
             self.options[reqId][str(self.tick_types[tickType])] = value
  
 

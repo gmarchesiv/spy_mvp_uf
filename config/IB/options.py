@@ -395,6 +395,7 @@ def revisar_OI(app,vars,call_list,put_list,exp):
         time.sleep(1)
         del app.options[2]
         snapshot_OI(app, app.etfs[5]["symbol"], put, exp, vars.exchange,"P")
+        time.sleep(1)
         while app.options[2]['OPTION_PUT_OPEN_INTEREST'] ==0:
             printStamp(f"ESPERANDO PUT {exp}")
 

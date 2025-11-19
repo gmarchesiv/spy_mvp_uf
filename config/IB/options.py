@@ -290,7 +290,7 @@ def snapshot_OI(app, etf, strike, exp, exchange,tipo):
 
     for i, contract in enumerate(contracts, start=(len(app.options) + 1)):
 
-        app.reqMktData(i, contract, "101", False, False, [])
+        app.reqMktData(app.id_IO, contract, "101", False, False, [])
         time.sleep(2)
         app.options[i] = {
             "strike": contract.strike,
@@ -300,6 +300,7 @@ def snapshot_OI(app, etf, strike, exp, exchange,tipo):
             "OPTION_CALL_OPEN_INTEREST": 0,
             "OPTION_PUT_OPEN_INTEREST": 0,
         }
+        
 
 
  
@@ -372,37 +373,55 @@ def checkStrike(app, exp, etf, tipo, exchange):
 
 def revisar_OI(app,vars,call_list,put_list,exp):
     dic_call_OI={}
+
+    app.cancelMarketData(1)
+      
+    del app.options[1]
+    
+    
     for call in call_list:
         
-        app.cancelMarketData(1)
-        time.sleep(1)
-        del app.options[1]
-        time.sleep(1)
+        
         snapshot_OI(app, app.etfs[5]["symbol"], call, exp, vars.exchange,"C")
         time.sleep(1)
-        while app.options[1]['OPTION_CALL_OPEN_INTEREST'] ==0:
+        while app.options[app.id_IO ]['OPTION_CALL_OPEN_INTEREST'] ==0:
             printStamp(f"ESPERANDO CALL {exp}")
 
             time.sleep(0.5)
         
-        dic_call_OI[call]=app.options[1]['OPTION_CALL_OPEN_INTEREST'] 
+        dic_call_OI[call]=app.options[app.id_IO]['OPTION_CALL_OPEN_INTEREST'] 
+
+        app.cancelMarketData(app.id_IO)
+        del app.options[app.id_IO]
+
+        
+
+        app.id_IO=app.id_IO+1
     
 
     dic_put_OI={}
+    app.cancelMarketData(2)
+    
+    del app.options[2]
+  
     for put in put_list:
         
-        app.cancelMarketData(2)
-        time.sleep(1)
-        del app.options[2]
-        time.sleep(1)
+        
         snapshot_OI(app, app.etfs[5]["symbol"], put, exp, vars.exchange,"P")
         time.sleep(1)
-        while app.options[2]['OPTION_PUT_OPEN_INTEREST'] ==0:
+        while app.options[app.id_IO]['OPTION_PUT_OPEN_INTEREST'] ==0:
             printStamp(f"ESPERANDO PUT {exp}")
 
             time.sleep(0.5)
 
-        dic_put_OI[call]=app.options[2]['OPTION_PUT_OPEN_INTEREST'] 
+        dic_put_OI[put]=app.options[app.id_IO]['OPTION_PUT_OPEN_INTEREST'] 
+
+        app.cancelMarketData(app.id_IO)
+        del app.options[app.id_IO]
+
+        
+
+        app.id_IO=app.id_IO+1
 
         
     dic_OI={"CALL":dic_call_OI,

@@ -146,9 +146,13 @@ class IBapi(EWrapper, EClient):
                 self.options[reqId]["ASK_SIZE"] = size
 
     def tickGeneric(self, reqId, tickType, value):
+        print(f"[tickGeneric] reqId={reqId} tickType={tickType} value={value}")
+
         if tickType == 101:
-            self.options[reqId][str(self.tick_types[tickType])] = value
- 
+            print(f"OPEN INTEREST RECIBIDO - {value}")
+
+    def tickString(self, reqId, tickType, value):
+        print(f"[tickString] reqId={reqId} tickType={tickType} value={value}")
 
     # ================= IB OPTIONS =================
 

@@ -134,7 +134,7 @@ class IBapi(EWrapper, EClient):
                 self.etfs[reqId]["price"] = price
 
         elif reqId in self.options:
-            if tickType in [4, 1, 2,86]:
+            if tickType in [4, 1, 2 ]:
                 self.options[reqId][str(self.tick_types[tickType])] = price
 
     def tickSize(self, reqId, tickType, size):
@@ -144,6 +144,11 @@ class IBapi(EWrapper, EClient):
 
             elif tickType == TickTypeEnum.ASK_SIZE:
                 self.options[reqId]["ASK_SIZE"] = size
+
+    def tickGeneric(self, reqId, tickType, value):
+        if tickType == 100:
+            self.options[reqId][str(self.tick_types[tickType])] = value
+ 
 
     # ================= IB OPTIONS =================
 

@@ -68,7 +68,7 @@ class IBapi(EWrapper, EClient):
             7: "LOW",
             8: "VOLUME",
             9: "CLOSE",
-            86: "OI",
+            22: "OI",
         }
         self.execution_details = {}
         self.commissions = {}
@@ -134,7 +134,7 @@ class IBapi(EWrapper, EClient):
                 self.etfs[reqId]["price"] = price
 
         elif reqId in self.options:
-            if tickType in [4, 1, 2 ]:
+            if tickType in [4, 1, 2,86]:
                 self.options[reqId][str(self.tick_types[tickType])] = price
 
     def tickSize(self, reqId, tickType, size):
@@ -144,16 +144,10 @@ class IBapi(EWrapper, EClient):
 
             elif tickType == TickTypeEnum.ASK_SIZE:
                 self.options[reqId]["ASK_SIZE"] = size
+            elif tickType in [22]:
+                self.options[reqId][str(self.tick_types[tickType])] = size
 
-    def tickGeneric(self, reqId, tickType, value):
-        print(f"[tickGeneric] reqId={reqId} tickType={tickType} value={value}")
-
-        if tickType == 101:
-            print(f"OPEN INTEREST RECIBIDO - {value}")
-
-    def tickString(self, reqId, tickType, value):
-        print(f"[tickString] reqId={reqId} tickType={tickType} value={value}")
-
+    
     # ================= IB OPTIONS =================
 
     def tikerOption(self, contract, reqId):

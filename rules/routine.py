@@ -294,8 +294,12 @@ def registro_strike(app, vars, params):
             continue 
         print("CALLS:",call_list)
         print("PUTS:",put_list)
-        put_strike = put_list[-2]  
-        call_strike = call_list[1] 
+        # put_strike = put_list[-2]  
+        # call_strike = call_list[1] 
+
+        put_strike = put_list[-1]  
+        call_strike = call_list[0] 
+        
         exp_escogido = exp
         break
      

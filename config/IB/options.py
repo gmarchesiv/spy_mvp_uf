@@ -99,6 +99,7 @@ def requestContract(app, etf, strikes, expirations, tipo, exchange):
             "ASK_SIZE": 0,
             "etf": contract.symbol,
             "tipo": contract.right,
+            "OI": 0,
         }
     return i
 

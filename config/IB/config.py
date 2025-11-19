@@ -68,6 +68,7 @@ class IBapi(EWrapper, EClient):
             7: "LOW",
             8: "VOLUME",
             9: "CLOSE",
+            22: "OI",
         }
         self.execution_details = {}
         self.commissions = {}
@@ -133,7 +134,7 @@ class IBapi(EWrapper, EClient):
                 self.etfs[reqId]["price"] = price
 
         elif reqId in self.options:
-            if tickType in [4, 1, 2]:
+            if tickType in [4, 1, 2,22]:
                 self.options[reqId][str(self.tick_types[tickType])] = price
 
     def tickSize(self, reqId, tickType, size):

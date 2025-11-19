@@ -186,7 +186,7 @@ def main():
   
         wallet_config(app, params, vars)
 
-        sendStart(app, params)
+        # sendStart(app, params)
 
         printStamp(" - INICIO DE RUTINA - ")
          

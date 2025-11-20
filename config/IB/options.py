@@ -388,7 +388,7 @@ def revisar_OI(app,vars,call_list,put_list,exp):
         snapshot_OI(app, app.etfs[5]["symbol"], call, exp, vars.exchange,"C")
          
         while app.options[app.id_IO ]['OPTION_CALL_OPEN_INTEREST'] ==0:
-            printStamp(f"ESPERANDO CALL {exp}")
+            printStamp(f"ESPERANDO CALL {exp} ,  {call} , OI: {app.options[app.id_IO ]['OPTION_CALL_OPEN_INTEREST']}")
 
             time.sleep(0.5)
         
@@ -413,7 +413,7 @@ def revisar_OI(app,vars,call_list,put_list,exp):
         snapshot_OI(app, app.etfs[5]["symbol"], put, exp, vars.exchange,"P")
          
         while app.options[app.id_IO]['OPTION_PUT_OPEN_INTEREST'] ==0:
-            printStamp(f"ESPERANDO PUT {exp}")
+            printStamp(f"ESPERANDO PUT {exp} ,  {put} , OI: {app.options[app.id_IO ]['OPTION_PUT_OPEN_INTEREST']}")
 
             time.sleep(0.5)
 
@@ -430,3 +430,4 @@ def revisar_OI(app,vars,call_list,put_list,exp):
     dic_OI={"CALL":dic_call_OI,
             "PUT":dic_put_OI }
     return dic_OI
+

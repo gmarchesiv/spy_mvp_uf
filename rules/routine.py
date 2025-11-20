@@ -462,3 +462,6 @@ def registro_strike_OI(app, vars, params):
     )
     timeNow = datetime.now(params.zone).time()
     vars.hora_inicio = str(timeNow)
+
+
+    

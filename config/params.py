@@ -207,9 +207,9 @@ class parameters:
         # =========== CALL - R1-E2 ========== 
         # ==================================
         
-        self.dcall_r1_e2 = [0, 0.135]
+        self.dcall_r1_e2 = [0.009, 0.135]
         self.docall_r1_e2 =  [0.103, 0.115]
-        self.timeCall_r1_e2 = [dt_time(10, 10), dt_time(11, 20)]
+        self.timeCall_r1_e2 = [dt_time(10, 10), dt_time(10, 55)]
         self.labelCall_r1_e2 =0
         
         # VENTA
@@ -271,7 +271,7 @@ class parameters:
         # =======  CALL - C       ==========  
         # ==================================
         
-        self.dcall_r1_c =[-0.14, 0]
+        self.dcall_r1_c =[-0.14, -0.008]
         self.docall_r1_c = [0.05, 0.0842]
         self.timeCall_r1_c = [dt_time(11, 35), dt_time(11, 50)]
         self.labelCall_r1_c=0
@@ -287,7 +287,7 @@ class parameters:
         # ==================================
 
         # COMPRA
-        self.dcall_r2 =[0.28, 0.61]
+        self.dcall_r2 =[0.265, 0.61]
         self.docall_r2 = [0.042, 0.057]  
         self.timeCall_r2 = [dt_time(9, 35), dt_time(9, 56)]
         self.labelCall_r2=0
@@ -353,7 +353,7 @@ class parameters:
         
         self.dcall_r1_f2 = [0.158, 0.335]
         self.docall_r1_f2 = [0.1, 0.11]
-        self.timeCall_r1_f2 = [dt_time(12, 0), dt_time(14, 0)]
+        self.timeCall_r1_f2 = [dt_time(12, 0), dt_time(12, 30)]
         self.labelCall_r1_f2=0
 
         # VENTA
@@ -372,7 +372,7 @@ class parameters:
         # ==================================
         # COMPRA
         
-        self.dcall_r1_f3 = [-0.03, 0.16]
+        self.dcall_r1_f3 = [0, 0.16]
         self.docall_r1_f3 = [0.033, 0.04]
         self.timeCall_r1_f3 = [dt_time(14, 0), dt_time(14,  8)]
         self.labelCall_r1_f3=0
@@ -394,8 +394,8 @@ class parameters:
         # COMPRA
         
         self.dcall_r1_f4 = [-0.25, -0.05]
-        self.docall_r1_f4 = [0.03, 0.04]
-        self.timeCall_r1_f4 = [dt_time(12, 10), dt_time(12, 15)]
+        self.docall_r1_f4 = [0.03, 0.035]
+        self.timeCall_r1_f4 = [dt_time(12, 9), dt_time(12, 15)]
         self.labelCall_r1_f4=0
 
         # VENTA

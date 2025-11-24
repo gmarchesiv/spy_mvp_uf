@@ -454,9 +454,7 @@ def buy_Put(app,varsBc,varsLb,vars,params,debug_mode):
     #########################################################
     ####################       PUT R1 I2   ################## 
     #########################################################
-    elif (not (timeNow >= params.proteccion_compra[0] and timeNow < params.proteccion_compra[1]) and 
-                        not (timeNow >= params.proteccion_compra_2[0] and timeNow < params.proteccion_compra_2[1]) )and(
-        (timeNow >= params.timePut_r1_i2[0] and timeNow < params.timePut_r1_i2[1])
+    elif ( (timeNow >= params.timePut_r1_i2[0] and timeNow < params.timePut_r1_i2[1])
         and (vars.dput >= params.dput_r1_i2[0] and vars.dput < params.dput_r1_i2[1])
         and (vars.doput >= params.doput_r1_i2[0] and vars.doput < params.doput_r1_i2[1])
         and (varsLb.label==params.labelPut_r1_i2 ) and vars.flag_Call_R2 ==False 

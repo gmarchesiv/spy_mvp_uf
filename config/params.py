@@ -89,8 +89,8 @@ class parameters:
         self.max_askbid_venta_forzada = 0.04
 
         self.slippage=1.06
-        self.fd =  dt_time(10, 40)
-        self.fin_rutina = dt_time(10, 40)
+        self.fd =  dt_time(15, 30)
+        self.fin_rutina = dt_time(15, 55)
 
         self.rutina = [dt_time(6, 50), dt_time(16, 0)]
         self.frecuencia_muestra =[i for i in range(0, 60, 2)]

@@ -93,7 +93,7 @@ class parameters:
         self.umbral_askbid=0.08
 
         # PARAMETROS DE COMPRA VENTA SLIPPAGE
-        self.slippage=1.05
+        self.slippage=1.04
 
         #PARAMETROS DE TIEMPO DE RUTINA Y MUESTRAS
         self.fin_rutina = dt_time(15, 55)

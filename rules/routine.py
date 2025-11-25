@@ -343,7 +343,7 @@ def registro_strike(app, vars, params):
         time.sleep(0.5)
 
     
-    vars.exp = exp
+    vars.exp = exp_escogido
     vars.strike_p = put_strike
     vars.strike_c = call_strike
     vars.put_close = app.options[2]["BID"]
@@ -446,7 +446,7 @@ def registro_strike_2(app, vars, params):
         time.sleep(0.5)
 
     
-    vars.exp_2 = exp
+    vars.exp_2 = exp_escogido
     vars.strike_p_2 = put_strike
     vars.strike_c_2 = call_strike
     vars.put_close_2 = app.options[4]["BID"]

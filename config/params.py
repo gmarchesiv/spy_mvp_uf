@@ -255,7 +255,7 @@ class parameters:
         # =======  CALL - R1 -INV 2==========  
         # ==================================
         
-        self.dcall_r1_i_2 =[-0.36, -0.228]
+        self.dcall_r1_i_2 =[-0.36, -0.21]
         self.docall_r1_i_2 =  [0.03, 0.38]
         self.timeCall_r1_i_2 = [dt_time(9, 35), dt_time(9, 50)]
         self.labelCall_r1_i_2=1
@@ -459,9 +459,9 @@ class parameters:
         # =======   PUT - R1-INV 2==========  
         # ==================================
         
-        self.dput_r1_i2 =[-0.0215, 0.015]
-        self.doput_r1_i2 = [0.03, 0.037]
-        self.timePut_r1_i2 = [dt_time(9, 35), dt_time(9,45)]
+        self.dput_r1_i2 =[-0.02, 0.015]
+        self.doput_r1_i2 = [0.03, 0.035]
+        self.timePut_r1_i2 = [dt_time(9, 34,30), dt_time(9,45)]
         self.labelPut_r1_i2=0
         
         # VENTA
@@ -606,9 +606,9 @@ class parameters:
         # ==================================
         # COMPRA
         
-        self.dput_r3 =  [ 0.18, 0.23]
-        self.doput_r3 =[0.03, 0.035]
-        self.timePut_r3 = [dt_time(9, 35), dt_time(9, 40)]
+        self.dput_r3 =  [ 0.175, 0.23]
+        self.doput_r3 =[0.03, 0.036]
+        self.timePut_r3 = [dt_time(9, 34), dt_time(9, 40)]
         self.labelPut_r3=1
 
         # VENTA

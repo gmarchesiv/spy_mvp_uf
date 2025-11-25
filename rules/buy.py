@@ -504,7 +504,8 @@ def buy_Put(app,varsBc,varsLb,vars,params,debug_mode):
     elif ( (timeNow >= params.timePut_r3[0] and timeNow < params.timePut_r3[1])
         and (vars.dput >= params.dput_r3[0] and vars.dput < params.dput_r3[1])
         and (vars.doput >= params.doput_r3[0] and vars.doput < params.doput_r3[1])
-        and (varsLb.label==params.labelPut_r3 )and vars.flag_Put_reset_r3
+        and (varsLb.label==params.labelPut_r3 )
+        # and vars.flag_Put_reset_r3
 
     ):
         buy(

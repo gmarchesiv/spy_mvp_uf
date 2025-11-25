@@ -22,7 +22,7 @@ sdist/
 var/
 wheels/
 share/python-wheels/
-debug_code.py
+# debug_code.py
 *.egg-info/
 .installed.cfg
 *.egg

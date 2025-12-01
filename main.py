@@ -340,7 +340,7 @@ def main():
                 registro_strike_OI(app, vars, params)
                 
                 vars.status = "OFF"
-          
+                vars.ready=False
                 saveVars(vars, app, params, True) 
          
                 break

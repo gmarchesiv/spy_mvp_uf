@@ -160,7 +160,9 @@ def saveVars(vars, app,  params, estado):
         "hora_inicio": vars.hora_inicio,
      
         "promedio_call": vars.promedio_call,
-        "promedio_put": vars.promedio_put 
+        "promedio_put": vars.promedio_put ,
+        "conexion":vars.conexion,
+        "ready":vars.ready 
     
     }
 

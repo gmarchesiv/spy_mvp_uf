@@ -192,7 +192,7 @@ def get_conection():
                     # Si la fecha no es hoy ni ayer, cambiar "conexion" a False
                     if fecha_data not in {hoy, ayer}:
                         data["conexion"] = False
-                        
+                        data["ready"]= False
                         # Guardar los cambios en el archivo
                         with open(file_name, "w") as f:
                             json.dump(data, f, indent=4)
@@ -202,7 +202,9 @@ def get_conection():
             respuesta={
                 "is_online": data["conexion"],
                 "date": data["date"],
-                "time": data["time"]
+                "time": data["time"],
+                "ready": data["ready"]
+
             }
         return respuesta, 200
     except subprocess.CalledProcessError as e:

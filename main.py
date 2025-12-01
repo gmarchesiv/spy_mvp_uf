@@ -184,7 +184,7 @@ def main():
                varsApp.flag_bloqueo_tiempo=True
         else:
             load_app_vars(app, varsApp)
-  
+        
         wallet_config(app, params, vars)
 
         sendStart(app, params)
@@ -202,6 +202,7 @@ def main():
         '''
         #---------------------------------------------------
 
+        vars.ready=True
         while True:
 
             timeNow = datetime.now(params.zone).time()
@@ -361,7 +362,8 @@ def main():
             # Corte de conexión con IB
             try:
                 vars.status = "ERROR"
-                
+                vars.conexion=False
+                vars.ready=False
                 saveVars(vars, app, params, False)
             except Exception as e:
                 print(type(e).__name__, ":", e)
@@ -395,7 +397,8 @@ def main():
         try:
             try:
                 vars.status = "ERROR"
-              
+                vars.conexion=False
+                vars.ready=False
                 saveVars(vars, app, params, False)
                 error=f"{e}"
                 sendError(params, error)

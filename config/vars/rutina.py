@@ -139,7 +139,8 @@ class varsRutina:
         self.exchange = self.data.get("exchange", "CBOE")
         self.status = self.data.get("status", "ON")
   
-
+        self.conexion = self.data.get("conexion", True)
+        self.ready = self.data.get("ready", False)
         self.promedio_call=self.data.get("promedio_call",0)
         self.promedio_put=self.data.get("promedio_put",0)   
 

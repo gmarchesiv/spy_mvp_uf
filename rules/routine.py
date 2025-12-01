@@ -278,6 +278,17 @@ def registro_strike(app, vars, params):
     exp_escogido=list_exp[0]
     put_strike= math.floor(precio / 5) * 5
     call_strike=math.ceil(precio / 5) * 5
+
+    dist_put  = abs(precio - put_strike)
+    dist_call = abs(call_strike - precio)
+
+    if dist_call < dist_put:
+        # El CALL está más cerca → subir 5 puntos
+        call_strike += 5
+    elif dist_put < dist_call:
+        # El PUT está más cerca → bajar 5 puntos
+        put_strike -= 5
+
     # for exp in list_exp:
     #     strikes = checkStrike(
     #     app, exp, app.etfs[5]["symbol"], "C", vars.exchange
@@ -383,6 +394,17 @@ def registro_strike_2(app, vars, params):
     exp_escogido=list_exp[0]
     put_strike= math.floor(precio / 5) * 5
     call_strike=math.ceil(precio / 5) * 5
+
+    dist_put  = abs(precio - put_strike)
+    dist_call = abs(call_strike - precio)
+
+    if dist_call < dist_put:
+        # El CALL está más cerca → subir 5 puntos
+        call_strike += 5
+    elif dist_put < dist_call:
+        # El PUT está más cerca → bajar 5 puntos
+        put_strike -= 5
+        
 
     # for exp in list_exp:
     #     strikes = checkStrike(

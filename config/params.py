@@ -76,9 +76,9 @@ class parameters:
  
         # SELECCION DE STRIKES 
         self.rangos_strikes = [[1.9, 2.6] ]
-        self.days_min_exp = 30  # DIAS para el exp minimo de busqueda
+        self.days_min_exp = 27  # DIAS para el exp minimo de busqueda
         self.days_max_exp = 39 
-        self.except_days_min_exp = 28
+        self.except_days_min_exp = 26
 
         # PARAMETROS DE ASKBID DE ACCIONES
         self.max_askbid_venta_prom = 0.03
@@ -93,7 +93,7 @@ class parameters:
         self.umbral_askbid=0.08
 
         # PARAMETROS DE COMPRA VENTA SLIPPAGE
-        self.slippage=1.04
+        self.slippage=1.045
 
         #PARAMETROS DE TIEMPO DE RUTINA Y MUESTRAS
         self.fin_rutina = dt_time(15, 55)

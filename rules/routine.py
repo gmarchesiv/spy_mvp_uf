@@ -510,7 +510,7 @@ def registro_strike_proximo(app, vars, params):
     printStamp(f"EXTRAYENDO DATOS DE LA OPCION")
     while True:
         timeNow = datetime.now(params.zone).time()
-        if dt_time(15, 59) < timeNow:
+        if dt_time(16, 0) < timeNow:
             break
         readyOpt = 0
         if int(timeNow.second) in params.frecuencia_accion:

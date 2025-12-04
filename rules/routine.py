@@ -16,7 +16,7 @@ from config.IB.options import (
 )
 from config.IB.wallet import wallet_cash, wallet_load
 from database.repository.repository import writeDayTrade, writeTransactions, writeWallet
-from functions.broadcasting import broadcasting_Aliniar
+from functions.broadcasting import broadcasting_Alinear
 from functions.logs import printStamp
 from datetime import datetime
 
@@ -184,7 +184,7 @@ def calculations(app, vars,varsBc, params):
     vars.pask = app.options[2]["ASK"]
     vars.pbid = app.options[2]["BID"]
     vars.vix= app.etfs[6]['price']
-    broadcasting_Aliniar(varsBc,vars)
+    broadcasting_Alinear(varsBc,vars)
 
     # CALCULOS
     vars.askbid_call = vars.cask / vars.cbid - 1

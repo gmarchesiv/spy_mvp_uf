@@ -176,6 +176,7 @@ def main():
         if vars.fecha != now:
             clean_vars(vars,varsApp)
             data_option_open(app,vars,params)
+            
             generar_label(params, varsLb,app)
 
             timeNow = datetime.now(params.zone).time()
@@ -202,7 +203,7 @@ def main():
         del dia y se rompe al finalizar el trading day. 
         '''
         #---------------------------------------------------
-
+        broadcasting_Alinear_label(varsLb,params) 
         vars.ready=True
         while True:
 
@@ -213,7 +214,7 @@ def main():
             # ==================================
             #  -        GENERAR LABEL          -
             # ==================================
-
+ 
             #---------------------------------------------------
             '''
             Generamos el Label cada 5 minutos para tener una 

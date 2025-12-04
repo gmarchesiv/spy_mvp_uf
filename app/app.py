@@ -33,6 +33,7 @@ CORS(
         r"/broadCasting-buy": origin,
         r"/get-price": origin,
         r"/get-regla": origin,
+        r"/get-label": origin,
     },
 )
 
@@ -212,7 +213,7 @@ def get_conection():
 
 
 @app.route("/broadCasting-aliniar", methods=["POST"])
-def post_broadCasting_aliniar():
+def post_broadcasting_Alinear():
     file_name = "/usr/src/broadcasting.json"
     try:
         # Obtener el body de la solicitud
@@ -243,7 +244,20 @@ def post_broadCasting_aliniar():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+@app.route("/get-label", methods=["GET"])
+def get_label():
+    
+    try:
+     
+        file_name = "/usr/src/label.json"
+        with open(file_name, "r") as f:
+            data_label = json.load(f)
 
+        data = { **data_label}
+        return jsonify(data) , 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/broadCasting-strike", methods=["POST"])
 def post_broadCasting_strike():

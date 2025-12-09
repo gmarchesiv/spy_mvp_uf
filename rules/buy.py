@@ -603,16 +603,16 @@ def buy(app,varsBc,varsLb,vars,params, tipo, regla ,debug_mode):
             else:
                 varsLb.flag_minuto_label=True
 
-            if int(timeNow.second) in params.frecuencia_accion:
-                calculations(app, vars,varsBc, params) 
-                # ESPERANDO Y REGISTRANDO
-                vars.status = "BUYING"
-                saveVars(vars, app, params, False)
-                writeDayTrade(app, vars,varsLb, params)
+            # if int(timeNow.second) in params.frecuencia_accion:
+            calculations(app, vars,varsBc, params) 
+            # ESPERANDO Y REGISTRANDO
+            vars.status = "BUYING"
+            saveVars(vars, app, params, False)
+            writeDayTrade(app, vars,varsLb, params)
                 
             if app.Error:
                 break
-            time.sleep(1)
+            time.sleep(0.5)
         if app.Error:
             printStamp(f"-COMPRA NO PROCESADA-")
             sendError(params, "COMPRA NO PROCESADA")

@@ -793,16 +793,16 @@ def sell(app,varsBc,varsLb,vars,params, tipo, regla,debug_mode ):
                     time.sleep(0.5)
             else:
                 varsLb.flag_minuto_label=True
-            if int(timeNow.second) in params.frecuencia_accion:
-                calculations(app, vars,varsBc, params)
-                # ESPERANDO Y REGISTRANDO
-                vars.status = "SELLING"
-                saveVars(vars, app, params, False)
-                writeDayTrade(app, vars,varsLb, params)
+            # if int(timeNow.second) in params.frecuencia_accion:
+            calculations(app, vars,varsBc, params)
+            # ESPERANDO Y REGISTRANDO
+            vars.status = "SELLING"
+            saveVars(vars, app, params, False)
+            writeDayTrade(app, vars,varsLb, params)
 
             if app.Error:
                 break
-            time.sleep(1)
+            time.sleep(0.5)
         if app.Error:
             printStamp(f"-VENTA NO PROCESADA-")
             sendError(params, "VENTA NO PROCESADA")
@@ -848,16 +848,16 @@ def sell_forzada(app,varsBc,varsLb,vars,params, tipo, regla, contract, symbol):
                 time.sleep(0.5)
         else:
             varsLb.flag_minuto_label=True
-        if int(timeNow.second) in params.frecuencia_accion:
-            calculations(app, vars,varsBc, params) 
-            # ESPERANDO Y REGISTRANDO
-            vars.status = "SELLING"
-            saveVars(vars, app, params, False)
-            writeDayTrade(app, vars,varsLb, params)
+        # if int(timeNow.second) in params.frecuencia_accion:
+        calculations(app, vars,varsBc, params) 
+        # ESPERANDO Y REGISTRANDO
+        vars.status = "SELLING"
+        saveVars(vars, app, params, False)
+        writeDayTrade(app, vars,varsLb, params)
 
         if app.Error:
             break
-        time.sleep(1)
+        time.sleep(0.5)
     if app.Error:
         printStamp(f"-VENTA NO PROCESADA-")
         sendError(params, "VENTA NO PROCESADA")

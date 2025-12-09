@@ -126,7 +126,7 @@ def main():
   
         if status: # FIN en caso no conecte.
             return
-
+        vars.conexion=True
         # Cuenta regresiva para iniciar.
         countdown(params.zone)
 
@@ -287,33 +287,33 @@ def main():
                     5) Registrar el dia
                 '''
                 #---------------------------------------------------
-                if int(timeNow.second) in params.frecuencia_accion:
+                # if int(timeNow.second) in params.frecuencia_accion:
                     
-                    saveTransaction(app, params, vars)  # VERIFICADOR DE TRANSACCIONES
-                    calculations(app, vars,varsBc, params)  # CALCULOS DE RUTINA
-                    readIBData(app, vars,varsLb)  # LOGS DE LOS CALCULOS
+                saveTransaction(app, params, vars)  # VERIFICADOR DE TRANSACCIONES
+                calculations(app, vars,varsBc, params)  # CALCULOS DE RUTINA
+                readIBData(app, vars,varsLb)  # LOGS DE LOS CALCULOS
 
-                    # Se Bloquea en caso la configuracion de la wallet te indique
-                    if vars.bloqueo == False and varsApp.flag_bloqueo_tiempo==False:
-                        # ================================
-                        #            -VENTA-
-                        # ================================
-                        if vars.call or vars.put:
-                            sellOptions(app,varsBc,varsLb,vars,params,debug_mode=False )
-                        # ================================
-                        #            -COMPRA-
-                        # ================================
-                        if vars.compra and params.fd >= timeNow:
-                            buyOptions(app,varsBc,varsLb,vars,params,debug_mode=False )
-                        pass
-                    
+                # Se Bloquea en caso la configuracion de la wallet te indique
+                if vars.bloqueo == False and varsApp.flag_bloqueo_tiempo==False:
                     # ================================
-                    #          - Registro -
+                    #            -VENTA-
                     # ================================
- 
-                    registration(app, vars,varsApp, varsLb,params)
+                    if vars.call or vars.put:
+                        sellOptions(app,varsBc,varsLb,vars,params,debug_mode=False )
+                    # ================================
+                    #            -COMPRA-
+                    # ================================
+                    if vars.compra and params.fd >= timeNow:
+                        buyOptions(app,varsBc,varsLb,vars,params,debug_mode=False )
+                    pass
                 
-                    time.sleep(0.5)
+                # ================================
+                #          - Registro -
+                # ================================
+
+                registration(app, vars,varsApp, varsLb,params)
+            
+                time.sleep(0.5)
     
                 # ==================================
                 #  -          ESPERA               -

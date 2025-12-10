@@ -128,6 +128,7 @@ def main():
             return
         vars.conexion=True
         # Cuenta regresiva para iniciar.
+        broadcasting_Alinear_label(varsLb,params) 
         countdown(params.zone)
 
         # Registro de sesion.
@@ -176,10 +177,7 @@ def main():
         if vars.fecha != now:
             clean_vars(vars,varsApp)
             data_option_open(app,vars,params)
-            
-            broadcasting_Alinear_label(varsLb,params) 
-            time.sleep(5)
-
+          
             generar_label(params, varsLb,app)
 
             timeNow = datetime.now(params.zone).time()
@@ -189,7 +187,7 @@ def main():
                varsApp.flag_bloqueo_tiempo=True
         else:
             load_app_vars(app, varsApp)
-            broadcasting_Alinear_label(varsLb,params) 
+            
         
         wallet_config(app, params, vars)
 
@@ -209,6 +207,7 @@ def main():
         #---------------------------------------------------
         
         vars.ready=True
+        flag_label_BC=True
         while True:
 
             timeNow = datetime.now(params.zone).time()
@@ -226,6 +225,9 @@ def main():
             '''
             #---------------------------------------------------
             # GENERAR LABEL
+            if   (timeNow.hour==9 and timeNow.minute ==32) and flag_label_BC:
+                broadcasting_Alinear_label(varsLb,params) 
+                flag_label_BC=False
             if (timeNow.minute % 10 == 0 or timeNow.minute % 10 == 5):
                 if varsLb.flag_minuto_label:
                     generar_label(params, varsLb,app)

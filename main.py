@@ -35,9 +35,8 @@ from rules.routine import (
     data_susciption,
     registration,
     registro_strike,
-    registro_strike_OI,
-    registro_strike_proximo,
-    saveTransaction 
+    registro_strike_2,
+    registro_strike_3 
 )
 
 # database/
@@ -126,11 +125,8 @@ def main():
   
         if status: # FIN en caso no conecte.
             return
-        vars.conexion=True
+
         # Cuenta regresiva para iniciar.
-        try:
-            broadcasting_Alinear_label(varsLb,params) 
-        except:pass
         countdown(params.zone)
 
         # Registro de sesion.
@@ -179,7 +175,6 @@ def main():
         if vars.fecha != now:
             clean_vars(vars,varsApp)
             data_option_open(app,vars,params)
-          
             generar_label(params, varsLb,app)
 
             timeNow = datetime.now(params.zone).time()
@@ -189,11 +184,10 @@ def main():
                varsApp.flag_bloqueo_tiempo=True
         else:
             load_app_vars(app, varsApp)
-            
-        
+  
         wallet_config(app, params, vars)
 
-        sendStart(app, params)
+        # sendStart(app, params)
 
         printStamp(" - INICIO DE RUTINA - ")
          
@@ -207,9 +201,7 @@ def main():
         del dia y se rompe al finalizar el trading day. 
         '''
         #---------------------------------------------------
-        
-        vars.ready=True
-        flag_label_BC=True
+
         while True:
 
             timeNow = datetime.now(params.zone).time()
@@ -219,7 +211,7 @@ def main():
             # ==================================
             #  -        GENERAR LABEL          -
             # ==================================
- 
+
             #---------------------------------------------------
             '''
             Generamos el Label cada 5 minutos para tener una 
@@ -227,13 +219,13 @@ def main():
             '''
             #---------------------------------------------------
             # GENERAR LABEL
-            if   (timeNow.hour==9 and timeNow.minute ==32) and flag_label_BC:
-                broadcasting_Alinear_label(varsLb,params) 
-                flag_label_BC=False
             if (timeNow.minute % 10 == 0 or timeNow.minute % 10 == 5):
                 if varsLb.flag_minuto_label:
                     generar_label(params, varsLb,app)
-                    varsLb.flag_minuto_label=False
+                    vars.flag_minuto_label=False
+                    time.sleep(0.5)
+                    calculations(app, vars,varsBc, params) 
+                    readIBData(app, vars,varsLb)
 
             else:
                 varsLb.flag_minuto_label=True
@@ -264,14 +256,14 @@ def main():
                 '''
                 #---------------------------------------------------
                 # RUTINA DE COMPRA Y VENTA BROADCASTING
-                if vars.bloqueo == False and varsApp.flag_bloqueo_tiempo==False:
+                # if vars.bloqueo == False and varsApp.flag_bloqueo_tiempo==False:
                     
-                    # if vars.call or vars.put:
-                    #     broadcasting_sell(varsBc,varsLb,vars,params,app)
-                    #     broadcasting_sell_auto(varsBc,varsLb,vars,params,app)
-                    # if vars.compra:
-                    #     broadcasting_buy(varsBc,varsLb,vars,params,app)
-                    pass
+                #     if vars.call or vars.put:
+                #         broadcasting_sell(varsBc,varsLb,vars,params,app)
+                #         broadcasting_sell_auto(varsBc,varsLb,vars,params,app)
+                #     if vars.compra:
+                #         broadcasting_buy(varsBc,varsLb,vars,params,app)
+                #     pass
                 
                 
 
@@ -291,33 +283,33 @@ def main():
                     5) Registrar el dia
                 '''
                 #---------------------------------------------------
-                # if int(timeNow.second) in params.frecuencia_accion:
+                if int(timeNow.second) in params.frecuencia_accion:
                     
-                saveTransaction(app, params, vars)  # VERIFICADOR DE TRANSACCIONES
-                calculations(app, vars,varsBc, params)  # CALCULOS DE RUTINA
-                readIBData(app, vars,varsLb)  # LOGS DE LOS CALCULOS
+                    # saveTransaction(app, params, vars)  # VERIFICADOR DE TRANSACCIONES
+                    calculations(app, vars,varsBc, params)  # CALCULOS DE RUTINA
+                    readIBData(app, vars,varsLb)  # LOGS DE LOS CALCULOS
 
-                # Se Bloquea en caso la configuracion de la wallet te indique
-                if vars.bloqueo == False and varsApp.flag_bloqueo_tiempo==False:
+                    # Se Bloquea en caso la configuracion de la wallet te indique
+                    # if vars.bloqueo == False and varsApp.flag_bloqueo_tiempo==False:
+                    #     # ================================
+                    #     #            -VENTA-
+                    #     # ================================
+                    #     if vars.call or vars.put:
+                    #         sellOptions(app,varsBc,varsLb,vars,params,debug_mode=False )
+                    #     # ================================
+                    #     #            -COMPRA-
+                    #     # ================================
+                    #     if vars.compra and params.fd >= timeNow:
+                    #         buyOptions(app,varsBc,varsLb,vars,params,debug_mode=False )
+                    #     pass
+                    
                     # ================================
-                    #            -VENTA-
+                    #          - Registro -
                     # ================================
-                    # if vars.call or vars.put:
-                    #     sellOptions(app,varsBc,varsLb,vars,params,debug_mode=False )
-                    # # ================================
-                    # #            -COMPRA-
-                    # # ================================
-                    # if vars.compra and params.fd >= timeNow:
-                    #     buyOptions(app,varsBc,varsLb,vars,params,debug_mode=False )
-                    pass
+ 
+                    registration(app, vars,varsApp, varsLb,params)
                 
-                # ================================
-                #          - Registro -
-                # ================================
-
-                registration(app, vars,varsApp, varsLb,params)
-            
-                time.sleep(0.5)
+                    time.sleep(0.5)
     
                 # ==================================
                 #  -          ESPERA               -
@@ -347,10 +339,37 @@ def main():
                 #---------------------------------------------------
 
                 printStamp(" - Registrando Nuevo Strike - ")
-                registro_strike_proximo(app, vars, params)
+
+                app.cancelMarketData(1)
+                time.sleep(1)
+                del app.options[1]
+
+                app.cancelMarketData(2)
+                time.sleep(1)
+                del app.options[2]
+
+                app.cancelMarketData(3)
+                time.sleep(1)
+                del app.options[3]
+
+                app.cancelMarketData(4)
+                time.sleep(1)
+                del app.options[4]
+
+                # app.cancelMarketData(5)
+                # time.sleep(1)
+                # del app.options[5]
+
+                # app.cancelMarketData(6)
+                # time.sleep(1)
+                # del app.options[6]
+
+                registro_strike(app, vars, params)
+                registro_strike_2(app, vars, params)
+                # registro_strike_3(app, vars, params)
                 
                 vars.status = "OFF"
-                vars.ready=False
+          
                 saveVars(vars, app, params, True) 
          
                 break
@@ -372,8 +391,7 @@ def main():
             # Corte de conexión con IB
             try:
                 vars.status = "ERROR"
-                vars.conexion=False
-                vars.ready=False
+                
                 saveVars(vars, app, params, False)
             except Exception as e:
                 print(type(e).__name__, ":", e)
@@ -407,8 +425,7 @@ def main():
         try:
             try:
                 vars.status = "ERROR"
-                vars.conexion=False
-                vars.ready=False
+              
                 saveVars(vars, app, params, False)
                 error=f"{e}"
                 sendError(params, error)

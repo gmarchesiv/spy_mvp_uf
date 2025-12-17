@@ -45,9 +45,9 @@ def generar_garch(params, varsLb,app):
     
     varsLb.signo=0 if (varsLb.retorno-varsLb.mu)>0 else 1
  
-    varsLb.retorno_lista.append(app.etfs[5]['price'])
+    varsLb.retorno_lista.append(app.etfs[10]['price'])
  
-    varsLb.retorno=app.etfs[5]['price'] / varsLb.retorno_lista[0] -1
+    varsLb.retorno=app.etfs[10]['price'] / varsLb.retorno_lista[0] -1
     
 
     varsLb.mu= ((varsLb.mu*varsLb.mu_conteo) + varsLb.retorno)/(varsLb.mu_conteo+1)
@@ -56,16 +56,18 @@ def generar_garch(params, varsLb,app):
  
 
 def generar_hour_back(params, varsLb,app):
-    varsLb.ret_1H_back.append(app.etfs[5]['price'])
-    varsLb.ret_3H_back.append(app.etfs[5]['price'])
-    varsLb.ret_6H_back.append(app.etfs[5]['price'])
-    varsLb.ret_12H_back.append(app.etfs[5]['price'])
-    varsLb.ret_24H_back.append(app.etfs[5]['price'])
-    varsLb.ret_96H_back.append(app.etfs[5]['price'])
+    # print("generar")
+    # print(varsLb.ret_1H_back)
+    varsLb.ret_1H_back.append(app.etfs[10]['price'])
+    varsLb.ret_3H_back.append(app.etfs[10]['price'])
+    varsLb.ret_6H_back.append(app.etfs[10]['price'])
+    varsLb.ret_12H_back.append(app.etfs[10]['price'])
+    varsLb.ret_24H_back.append(app.etfs[10]['price'])
+    varsLb.ret_96H_back.append(app.etfs[10]['price'])
     pass
 
 def generar_rsi(params, varsLb,app):
-    varsLb.etf_price_lista.append(app.etfs[5]['price'])
+    varsLb.etf_price_lista.append(app.etfs[10]['price'])
    
     if len(varsLb.etf_price_lista)<4:
         varsLb.rsi=0
@@ -79,10 +81,10 @@ def generar_rsi(params, varsLb,app):
     pass
 
 def generar_d_pico(params, varsLb,app):
-    if app.etfs[5]['price'] > varsLb.pico_etf:
-        varsLb.pico_etf=app.etfs[5]['price']
+    if app.etfs[10]['price'] > varsLb.pico_etf:
+        varsLb.pico_etf=app.etfs[10]['price']
 
-    varsLb.d_pico=app.etfs[5]['price']/varsLb.pico_etf -1
+    varsLb.d_pico=app.etfs[10]['price']/varsLb.pico_etf -1
 
     pass
 
@@ -92,18 +94,18 @@ def clusterizar(params, varsLb,app):
     
     scaler = joblib.load('/usr/src/app/functions/scaler.joblib')
     km = joblib.load('/usr/src/app/functions/model.joblib')
-
+   
     df=pd.DataFrame(
 
         {
-            "VIX_CLOSE":[app.etfs[6]['price']],
+            "VIX_CLOSE":[app.etfs[11]['price']],
             "SPY_GARCH":[varsLb.garch],
-            "ret_1H_back":[(app.etfs[5]['price']/ varsLb.ret_1H_back[0] -1)*100],
-            "ret_3H_back":[(app.etfs[5]['price']/ varsLb.ret_3H_back[0] -1)*100],
-            "ret_6H_back":[(app.etfs[5]['price']/ varsLb.ret_6H_back[0] -1)*100],
-            "ret_12H_back":[(app.etfs[5]['price']/ varsLb.ret_12H_back[0] -1)*100],
-            "ret_24H_back":[(app.etfs[5]['price']/ varsLb.ret_24H_back[0] -1)*100],
-            "ret_96H_back":[(app.etfs[5]['price']/ varsLb.ret_96H_back[0] -1)*100],
+            "ret_1H_back":[(app.etfs[10]['price']/ varsLb.ret_1H_back[0] -1)*100],
+            "ret_3H_back":[(app.etfs[10]['price']/ varsLb.ret_3H_back[0] -1)*100],
+            "ret_6H_back":[(app.etfs[10]['price']/ varsLb.ret_6H_back[0] -1)*100],
+            "ret_12H_back":[(app.etfs[10]['price']/ varsLb.ret_12H_back[0] -1)*100],
+            "ret_24H_back":[(app.etfs[10]['price']/ varsLb.ret_24H_back[0] -1)*100],
+            "ret_96H_back":[(app.etfs[10]['price']/ varsLb.ret_96H_back[0] -1)*100],
             "rsi_prom_3":[varsLb.rsi],
             "D_PICO":[varsLb.d_pico]
         }

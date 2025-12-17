@@ -9,16 +9,12 @@ from collections import deque
 ###############################################
 #                  VARIABLES
 ###############################################
-class varsRutina:
+class variables:
     def __init__(self,debug_mode ):
+        ###############################################
+        # LECTURA DEL ARCHIVO DE VARIABLES
+        ###############################################
 
-        #---------------------------------------------------
-        '''
-        Abriremos el archivo json Correspondientes 
-        (vars.json) y en caso no exista la variable la genera,
-        finalmente la carga en memoria.
-        '''
-        #---------------------------------------------------
         if debug_mode ==False:
             file_name = "/usr/src/app/data/vars.json"
 
@@ -28,12 +24,13 @@ class varsRutina:
                     self.data = json.load(json_file)
                     printStamp(" - Lectura de archivo de variables - ")
             else:
+                
                 printStamp(" - No se encuentra archivo de variables - ")
                 exit()
+                
+
         else:
             self.data={}
-
-            
         ###############################################
         # VARIABLES DE APP
         ###############################################
@@ -73,27 +70,15 @@ class varsRutina:
 
         self.flag_Call_R2 = self.data.get("flag_Call_R2", False)
         self.flag_Put_R2 = self.data.get("flag_Put_R2", False)
-        self.flag_Call_reset_r2=self.data.get("flag_Call_reset_r2", False)
-        self.flag_Call_reset_r1= self.data.get("flag_Put_R2", False)
-        self.flag_Call_reset_r1_e  = self.data.get("flag_Put_R2", False)   
-        self.flag_Call_reset_r1_e2= self.data.get("flag_Put_R2", False)
-        self.flag_bloqueo_r1_e= self.data.get("flag_Put_R2", False)
-        self.flag_cambio_fast= self.data.get("flag_Put_R2", False)
-        self.flag_Put_reset_r3= self.data.get("flag_Put_R2", False)
-        self.flag_cambio_R1_label= self.data.get("flag_Put_R2", False)
-        self.flag_Put_reset_r1_label= self.data.get("flag_Put_R2", False)
-        self.flag_cambio_f= self.data.get("flag_Put_R2", False)
-        self.flag_Call_reset_r1_c=self.data.get("flag_Call_reset_r1_c", False)
-
-
-        self.flag_Call_reset_r1_inv=self.data.get("flag_Call_reset_r1_inv", False)
-        self.flag_Call_F_1=self.data.get("flag_Call_F_1", False)
-        self.flag_Call_F_2=self.data.get("flag_Call_F_2", False)
-        self.flag_Put_reset_R2=self.data.get("flag_Put_reset_R2", False)
-        self.flag_Put_reset_R2e=self.data.get("flag_Put_reset_R2e", False)
-        self.flag_Put_reset_r2_fast=self.data.get("flag_Put_reset_r2_fast", False)
-        self.flag_Put_reset_r1_fast=self.data.get("flag_Put_reset_r1_fast", False)
-        self.flag_Put_reset_r1_label_2=self.data.get("flag_Put_reset_r1_label_2", False)
+        self.flag_Call_reset_r1 = self.data.get("flag_Call_reset_r1", False)
+        self.flag_Call_reset_r1_c = self.data.get("flag_Call_reset_r1_c", False)
+        self.flag_Put_reset_r1 = self.data.get("flag_Put_reset_r1", False)
+        self.flag_Call_reset_r1_e = self.data.get("flag_Call_reset_r1_e", False)
+        self.flag_cambio_fast= self.data.get("flag_cambio_fast", False)
+        self.flag_Call_reset_r2 = self.data.get("flag_Call_reset_r2", False)
+        self.flag_bloqueo_r1_e = self.data.get("flag_bloqueo_r1_e", False)
+        self.flag_Call_reset_r1_e2 = self.data.get("flag_Call_reset_r1_e2", False)
+        self.flag_cambio_R1_label=False
         
         ###############################################
         # VARIABLES DE RUTINA
@@ -113,7 +98,6 @@ class varsRutina:
         self.dput = self.data.get("dput", 0)
         self.docall = self.data.get("docall", 0)
         self.doput = self.data.get("doput", 0)
-        self.doput_ant = self.data.get("doput_ant", 0)
         self.askbid_call = self.data.get("askbid_call", 0)
         self.askbid_put = self.data.get("askbid_put", 0)
         

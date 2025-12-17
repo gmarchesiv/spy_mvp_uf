@@ -10,7 +10,7 @@ import requests
 
 from config.vars.broadcasting import varsBroadcasting
 from functions.logs import printStamp
-import statistics
+
 
 import aiohttp
 import asyncio
@@ -19,11 +19,11 @@ import asyncio
 # =======================
 
 
-def broadcasting_Alinear(varsBc,vars):
+def broadcasting_Aliniar(varsBc,vars):
 
     #---------------------------------------------------
     '''
-    Alineamiento del Label.
+    Alineamiento de los precios.
     '''
     #---------------------------------------------------
 
@@ -54,86 +54,6 @@ def broadcasting_Alinear(varsBc,vars):
                     with open(file_name, "w") as file:
                         json.dump(data, file, indent=4)
 
-
-def broadcasting_Alinear_label( varsLb,params):
-
-    #---------------------------------------------------
-    '''
-    Alineamiento del Label.
-    '''
-    #---------------------------------------------------
-    data = []
-    for user in params.users:
-        url = f"http://{user['ip']}/get-label"
-        response = requests.get(url)
-        if response.status_code == 200:
-            data.append(response.json())  
-      
-    comparar_label(data,varsLb)
-
-def comparar_label(data,varsLb):
-    agrupados = {}
-    agrupados_list = {}
-    resultado_no_listas={}
-    for d in data:
-        for k, v in d.items():
-            if not   isinstance(v, list):
-                agrupados.setdefault(k, []).append(v)
-            else:
-                agrupados_list.setdefault(k, []).append(v)
-
-    print(agrupados)
-    print(agrupados_list)
-    # Calcular la mediana por cada llave
-    resultado_no_listas  = {k: statistics.median(v) for k, v in agrupados.items() if    isinstance(v, list) }
-    print(resultado_no_listas)
-    resultado_listas = {}
-    for k, listas in agrupados_list.items():
-        print(k)
-        sumas = [sum(lst) for lst in listas]
-        print(sumas)
-        mediana = statistics.median(sumas)
-
-        # Buscar la lista cuya suma esté más cerca a la mediana
-        dif_min = float("inf")
-        lista_mediana = None
-        for lst in listas:
-            s = sum(lst)
-            if abs(s - mediana) < dif_min:
-                dif_min = abs(s - mediana)
-                lista_mediana = lst
-
-        resultado_listas[k] = lista_mediana
-    print(resultado_listas)
- 
-    varsLb.label=resultado_no_listas["label"]
-    varsLb.retorno = int( resultado_no_listas["retorno"] )
-    varsLb.signo  = int( resultado_no_listas["signo"])
-    varsLb.varianza  = resultado_no_listas["varianza"]
-    varsLb.pico_etf= resultado_no_listas["pico_etf"]
-    varsLb.d_pico  = resultado_no_listas["d_pico"] 
-    varsLb.rsi= resultado_no_listas["rsi"]
-    varsLb.mu= resultado_no_listas["mu"]
-    varsLb.mu_conteo= resultado_no_listas["mu_conteo"]
-
-    varsLb.retorno_lista.clear()
-    varsLb.ret_1H_back.clear()
-    varsLb.ret_3H_back.clear()
-    varsLb.ret_6H_back.clear()
-    varsLb.ret_12H_back.clear()
-    varsLb.ret_24H_back.clear()
-    varsLb.ret_96H_back.clear()
-    varsLb.etf_price_lista.clear()
-
-    varsLb.retorno_lista.extend(resultado_listas["retorno_lista"])
-    varsLb.ret_1H_back.extend(resultado_listas["ret_1H_back"])
-    varsLb.ret_3H_back.extend(resultado_listas["ret_3H_back"])
-    varsLb.ret_6H_back.extend(resultado_listas["ret_6H_back"])
-    varsLb.ret_12H_back.extend(resultado_listas["ret_12H_back"])
-    varsLb.ret_24H_back.extend(resultado_listas["ret_24H_back"])
-    varsLb.ret_96H_back.extend(resultado_listas["ret_96H_back"])
-    varsLb.etf_price_lista.extend(resultado_listas["etf_price_lista"])
-
 def broadcasting_sell(varsBc,varsLb,vars,params,app):
 
     #---------------------------------------------------
@@ -157,7 +77,7 @@ def broadcasting_sell(varsBc,varsLb,vars,params,app):
                     print(type(e).__name__, ":", e)
                     varsBc = varsBroadcasting()
                     data = json.load(json_file)
-    
+                    
                 if 'sell' in data:
                     if data["sell"] == True or varsBc.sell == True:
                         varsBc.sell = True

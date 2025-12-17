@@ -33,6 +33,7 @@ class varsLabel:
   
         else:
             self.data={}
+        # print(self.data )
         ###############################################
         # LABEL
         ###############################################
@@ -72,3 +73,4 @@ class varsLabel:
         self.etf_price_lista=deque(self.etf_price_lista, maxlen=200)
 
   
+        # print(self.ret_1H_back)

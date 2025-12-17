@@ -29,6 +29,14 @@ def req_Options(app, vars, etf):
     requestContract(app, etf, vars.strike_c, vars.exp, "C", vars.exchange)
   
     requestContract(app, etf, vars.strike_p, vars.exp, "P", vars.exchange)
+
+    requestContract(app, etf, vars.strike_c_2, vars.exp_2, "C", vars.exchange)
+  
+    requestContract(app, etf, vars.strike_p_2, vars.exp_2, "P", vars.exchange)
+
+    # requestContract(app, etf, vars.strike_c_3, vars.exp_3, "C", vars.exchange)
+  
+    # requestContract(app, etf, vars.strike_p_3, vars.exp_3, "P", vars.exchange)
     
 
 
@@ -87,7 +95,6 @@ def requestContract(app, etf, strikes, expirations, tipo, exchange):
         tiker = tiker.replace(" ", "")
 
         app.reqMktData(i, contract,  '101', False, False, [])
-        
          
         app.options[i] = {
             "symbol": tiker,
@@ -100,11 +107,11 @@ def requestContract(app, etf, strikes, expirations, tipo, exchange):
             "ASK_SIZE": 0,
             "etf": contract.symbol,
             "tipo": contract.right,
+            
             "OPTION_CALL_OPEN_INTEREST": 0,
             "OPTION_PUT_OPEN_INTEREST": 0,
         }
     return i
-
 
 # ==================================
 #  - Funciones de Compra y Venta -
@@ -270,7 +277,7 @@ def snapshot(app, etf, strike, exp, exchange):
         create_contract_OPT(etf, "OPT", exchange, "USD", strike[0], exp, "P"),
     ]
 
-    for i, contract in enumerate(contracts, start=(len(app.options) + 1)):
+    for i, contract in enumerate(contracts, start=app.id_IO) :
 
         app.reqMktData(i, contract, "", False, False, [])
         time.sleep(3)
@@ -280,34 +287,8 @@ def snapshot(app, etf, strike, exp, exchange):
             "ASK": 0,
             "BID": 0,
         }
-
-def snapshot_OI(app, etf, strike, exp, exchange,tipo):
-
-    contracts = [
-        create_contract_OPT(etf, "OPT", exchange, "USD", strike, exp, tipo),
+    app.id_IO=app.id_IO+2
  
-    ]
-
-    for i, contract in enumerate(contracts, start=(len(app.options) + 1)):
-
-        app.reqMktData(app.id_IO, contract, "101", False, False, [])
-        
-        app.options[app.id_IO] = {
-            "strike": contract.strike,
-            "expirations": contract.lastTradeDateOrContractMonth,
-            "ASK": 0,
-            "BID": 0,
-            "OPTION_CALL_OPEN_INTEREST": 0,
-            "OPTION_PUT_OPEN_INTEREST": 0,
-        }
-        time.sleep(3)
-
-        
-        
-
-
- 
-
 def list_checkExpirations(app, etf, params, exchange):
     name = f"{exchange}_{etf}"
 
@@ -329,18 +310,37 @@ def list_checkExpirations(app, etf, params, exchange):
         )  ): 
             lista_exp.append(expiry_date.strftime(format_str))
 
-    if len (lista_exp)==0:
-        lista_exp = []
-        for expiry_date in listExpire_dates:
-            if (expiry_date >= (
-                fecha_actual + timedelta(days=params.except_days_min_exp)
-            ) and expiry_date <= (
-                fecha_actual + timedelta(days=params.days_max_exp)
-            )  ): 
-                lista_exp.append(expiry_date.strftime(format_str))
+ 
 
     return lista_exp
 
+
+def list_checkExpirations_2(app, etf, params, exchange):
+    name = f"{exchange}_{etf}"
+
+    listExpire = list(app.option_chains[name]["expirations"])
+    fecha_actual = datetime.now()
+
+    format_str = "%Y%m%d"
+    listExpire_dates = [datetime.strptime(date, format_str) for date in listExpire]
+
+    # Ordenar la lista en orden descendente
+    listExpire_dates.sort(reverse=False)
+    n=0
+    lista_exp = []
+    for expiry_date in listExpire_dates:
+        if (expiry_date >= (
+            fecha_actual + timedelta(days=params.days_min_exp)
+        ) and expiry_date <= (
+            fecha_actual + timedelta(days=params.days_max_exp)
+        )  ): 
+            if n==0:
+                n=n+1
+                continue
+            lista_exp.append(expiry_date.strftime(format_str))
+
+   
+    return lista_exp
 
 # revision del strike disponible
 def dic_checkStrike(app, expiri, etf, tipo, exhange):
@@ -360,7 +360,6 @@ def dic_checkStrike(app, expiri, etf, tipo, exhange):
     return dic_strike
 
 
-
 def checkStrike(app, exp, etf, tipo, exchange):
 
     contract = create_contract_OPT(etf, "OPT", exchange, "USD", "", exp, tipo)
@@ -371,7 +370,6 @@ def checkStrike(app, exp, etf, tipo, exchange):
 
     app.listStrikes.sort()
     return app.listStrikes
-
 
 
 def revisar_OI(app,vars,call_list,put_list,exp):
@@ -431,3 +429,23 @@ def revisar_OI(app,vars,call_list,put_list,exp):
             "PUT":dic_put_OI }
     return dic_OI
 
+def snapshot_OI(app, etf, strike, exp, exchange,tipo):
+
+    contracts = [
+        create_contract_OPT(etf, "OPT", exchange, "USD", strike, exp, tipo),
+ 
+    ]
+
+    for i, contract in enumerate(contracts, start=(len(app.options) + 1)):
+
+        app.reqMktData(app.id_IO, contract, "101", False, False, [])
+        
+        app.options[app.id_IO] = {
+            "strike": contract.strike,
+            "expirations": contract.lastTradeDateOrContractMonth,
+            "ASK": 0,
+            "BID": 0,
+            "OPTION_CALL_OPEN_INTEREST": 0,
+            "OPTION_PUT_OPEN_INTEREST": 0,
+        }
+        time.sleep(3)

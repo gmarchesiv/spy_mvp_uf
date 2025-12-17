@@ -5,17 +5,12 @@ from datetime import datetime
 import json
 import os
 import pytz
-import asyncio
+
 
 # =======================
 #  - GUARDAR VAIRBALES -
 # =======================
-def saveVars(vars, app,  params, estado):
-    #---------------------------------------------------
-    '''
-    Guardado de los datos en json.
-    '''
-    #---------------------------------------------------
+def saveVars(vars, app, params, estado):
     file_name = "/usr/src/app/data/vars.json"
     now = datetime.now(params.zone)
   
@@ -57,7 +52,7 @@ def saveVars(vars, app,  params, estado):
             "strike": app.options[2]["strike"],
         }
 
-        price = app.etfs[5]["price"]
+        price = app.etfs[10]["price"]
 
     datos = {
         "name": params.name,
@@ -75,7 +70,45 @@ def saveVars(vars, app,  params, estado):
         "wallet": app.wallet,
         "call_option": call_dic,
         "put_option": put_dic,
- 
+
+        "call_close_2":vars.call_close_2,
+        "put_close_2":vars.put_close_2,
+        "call_open_2":vars.call_open_2,
+        "put_open_2":vars.put_open_2,
+        "dcall_2":vars.dcall_2,
+        "dput_2":vars.dput_2,
+        "docall_2":vars.docall_2,
+        "doput_2":vars.doput_2,
+        "askbid_call_2":vars.askbid_call_2,
+        "askbid_put_2":vars.askbid_put_2,
+        "strike_c_2":vars.strike_c_2,
+        "strike_p_2":vars.strike_p_2,
+        "exp_2":vars.exp_2,
+        "cask_2":vars.cask_2,
+        "cbid_2":vars.cbid_2,
+        "pask_2":vars.pask_2,
+        "pbid_2":vars.pbid_2,
+
+
+        "call_close_3":vars.call_close_3,
+        "put_close_3":vars.put_close_3,
+        "call_open_3":vars.call_open_3,
+        "put_open_3":vars.put_open_3,
+        "dcall_3":vars.dcall_3,
+        "dput_3":vars.dput_3,
+        "docall_3":vars.docall_3,
+        "doput_3":vars.doput_3,
+        "askbid_call_3":vars.askbid_call_3,
+        "askbid_put_3":vars.askbid_put_3,
+        "strike_c_3":vars.strike_c_3,
+        "strike_p_3":vars.strike_p_3,
+        "exp_3":vars.exp_3,
+        "cask_3":vars.cask_3,
+        "cbid_3":vars.cbid_3,
+        "pask_3":vars.pask_3,
+        "pbid_3":vars.pbid_3,
+
+     
         ###############################################
         # VARIABLES DE TIEMPO
         ###############################################
@@ -91,34 +124,28 @@ def saveVars(vars, app,  params, estado):
         "manifesto": vars.manifesto,
         "flag_Call_R2": vars.flag_Call_R2,
         "flag_Put_R2": vars.flag_Put_R2,
-
-        "flag_Call_reset_r1":vars.flag_Call_reset_r1,
-        "flag_Call_reset_r3":vars.flag_Call_reset_r3,
-        "flag_Call_reset_r1_e":vars.flag_Call_reset_r1_e,
-        "flag_Call_reset_r1_e2":vars.flag_Call_reset_r1_e2,
-
-        "flag_Put_reset_r2_e": vars.flag_Put_reset_r2_e,
-        "flag_Put_reset_r1 ": vars.flag_Put_reset_r1,
-        "flag_Put_reset_r1_c":vars.flag_Put_reset_r1_c,
-        "flag_Put_reset_r1_c2":vars.flag_Put_reset_r1_c2,
-        "flag_Put_reset_r1_fast":vars.flag_Put_reset_r1_fast,
-        "flag_Put_reset_r1_i":vars.flag_Put_reset_r1_i,
-        "flag_Put_reset_f2":vars.flag_Put_reset_f2,
-        "flag_Put_reset_r3":vars.flag_Put_reset_r3,
-
-        "flag_Call_reset_r3_2":vars.flag_Call_reset_r3_2,
-        "flag_Put_reset_r1_label":vars.flag_Put_reset_r1_label,
-        "flag_cambio_R1_label":vars.flag_cambio_R1_label,
-
         "flag_Call_reset_r2":vars.flag_Call_reset_r2,
-        "flag_Call_reset_r2_2":vars.flag_Call_reset_r2_2,
-        "flag_Call_reset_r1_i_2":vars.flag_Call_reset_r1_i_2,
+        "flag_Call_reset_r1":vars.flag_Call_reset_r1 ,
+        "flag_Call_reset_r1_e":vars.flag_Call_reset_r1_e ,    
+        "flag_Call_reset_r1_e2":vars.flag_Call_reset_r1_e2 , 
+        "flag_bloqueo_r1_e":vars.flag_bloqueo_r1_e,
+        "flag_cambio_fast":vars.flag_cambio_fast,
+        "flag_Put_reset_r3":vars.flag_Put_reset_r3,
+        "flag_cambio_R1_label":vars.flag_cambio_R1_label,
+        "flag_Put_reset_r1_label":vars.flag_Put_reset_r1_label,
+        "flag_cambio_f":vars.flag_cambio_f,
         "flag_Call_reset_r1_c":vars.flag_Call_reset_r1_c,
-        "flag_Call_reset_r1_f":vars.flag_Call_reset_r1_f,
-        "flag_Call_reset_r1_f2":vars.flag_Call_reset_r1_f2,
-        "flag_Put_reset_r2": vars.flag_Put_reset_r2,
 
-        
+        "flag_Call_reset_r1_inv":vars.flag_Call_reset_r1_inv,
+        "flag_Call_F_1":vars.flag_Call_F_1,
+        "flag_Call_F_2":vars.flag_Call_F_2,
+        "flag_Put_reset_R2":vars.flag_Put_reset_R2,
+        "flag_Put_reset_R2e":vars.flag_Put_reset_R2e,
+        "flag_Put_reset_r2_fast":vars.flag_Put_reset_r2_fast,
+        "flag_Put_reset_r1_fast":vars.flag_Put_reset_r1_fast,
+        "flag_Put_reset_r1_label_2":vars.flag_Put_reset_r1_label_2,
+
+
         ###############################################
         # VARIABLES DE RUTINA
         ###############################################
@@ -135,7 +162,6 @@ def saveVars(vars, app,  params, estado):
         "dput": vars.dput,
         "docall": vars.docall,
         "doput": vars.doput,
-        "doput_ant": vars.doput_ant,
         "askbid_call": vars.askbid_call,
         "askbid_put": vars.askbid_put,
         "askbid_call_prom": [float(x) for x in vars.askbid_call_prom],
@@ -160,9 +186,7 @@ def saveVars(vars, app,  params, estado):
         "hora_inicio": vars.hora_inicio,
      
         "promedio_call": vars.promedio_call,
-        "promedio_put": vars.promedio_put ,
-        "conexion":vars.conexion,
-        "ready":vars.ready 
+        "promedio_put": vars.promedio_put 
     
     }
 

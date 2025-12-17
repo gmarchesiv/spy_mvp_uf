@@ -83,7 +83,7 @@ class IBapi(EWrapper, EClient):
         self.alerta = False
 
         self.executions = []
-        self.id_IO=10
+        self.id_IO=21
 
     # ================= IB CONTROL =================
     def error(
@@ -146,11 +146,11 @@ class IBapi(EWrapper, EClient):
 
             elif tickType == TickTypeEnum.ASK_SIZE:
                 self.options[reqId]["ASK_SIZE"] = size
-
             elif tickType == TickTypeEnum.OPTION_CALL_OPEN_INTEREST:
                 self.options[reqId]["OPTION_CALL_OPEN_INTEREST"] = size
             elif tickType == TickTypeEnum.OPTION_PUT_OPEN_INTEREST:
                 self.options[reqId]["OPTION_PUT_OPEN_INTEREST"] = size
+
     # ================= IB OPTIONS =================
 
     def tikerOption(self, contract, reqId):

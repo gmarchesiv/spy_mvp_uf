@@ -112,9 +112,9 @@ def writeDayTrade(app, vars,varsLb, params):
         datetime_now = datetime.now(params.zone)
         new_data = dayTrade(
             date=datetime_now,
-            etf=app.etfs[5]["symbol"],
-            vix = float(app.etfs[6]["price"]),
-            underlying=float(app.etfs[5]["price"]),
+            etf=app.etfs[10]["symbol"],
+            vix = float(app.etfs[11]["price"]),
+            underlying=float(app.etfs[10]["price"]),
             cStrike=app.options[1]["strike"],
             pStrike=app.options[2]["strike"],
             exp=app.options[1]["expirations"],
@@ -138,7 +138,39 @@ def writeDayTrade(app, vars,varsLb, params):
             caida=vars.caida,
             rule=vars.regla,
             cAskBid_prom = vars.promedio_call,
-            pAskBid_prom = vars.promedio_put
+            pAskBid_prom = vars.promedio_put,
+
+
+            cStrike_2=app.options[3]["strike"],
+            pStrike_2=app.options[4]["strike"],
+            exp_2=vars.exp_2,
+            cask_2=vars.cask_2,
+            cbid_2=vars.cbid_2,
+            pask_2=vars.pask_2,
+            pbid_2=vars.pbid_2,
+ 
+            cAskBid_2=vars.askbid_call_2,
+            pAskBid_2=vars.askbid_put_2,
+            dCall_2=vars.dcall_2,
+            dPut_2=vars.dput_2,
+            doCall_2=vars.docall_2,
+            doPut_2=vars.doput_2,
+            
+            # cStrike_3=app.options[5]["strike"],
+            # pStrike_3=app.options[6]["strike"],
+            # exp_3=vars.exp_3,
+            # cask_3=vars.cask_3,
+            # cbid_3=vars.cbid_3,
+            # pask_3=vars.pask_3,
+            # pbid_3=vars.pbid_3,
+ 
+            # cAskBid_3=vars.askbid_call_3,
+            # pAskBid_3=vars.askbid_put_3,
+            # dCall_3=vars.dcall_3,
+            # dPut_3=vars.dput_3,
+            # doCall_3=vars.docall_3,
+            # doPut_3=vars.doput_3
+
         )
 
         session.add(new_data)
@@ -185,8 +217,8 @@ def writeLabel(app, varsLb,params):
         datetime_now = datetime.now(params.zone)
         new_data = label(
             date=datetime_now,
-            underlying = app.etfs[5]["price"],
-            vix =app.etfs[6]['price'],
+            underlying = app.etfs[10]["price"],
+            vix =app.etfs[11]['price'],
             
             mu =  float(varsLb.mu),
             mu_conteo = int(varsLb.mu_conteo),
@@ -194,13 +226,13 @@ def writeLabel(app, varsLb,params):
             signo = varsLb.signo,
             varianza = varsLb.varianza,
             garch=varsLb.garch,
-
-            ret_1H_back= float(app.etfs[5]['price']/ varsLb.ret_1H_back[0] -1)*100,
-            ret_3H_back=float(app.etfs[5]['price']/ varsLb.ret_3H_back[0] -1)*100,
-            ret_6H_back= float(app.etfs[5]['price']/ varsLb.ret_6H_back[0] -1)*100,
-            ret_12H_back= float(app.etfs[5]['price']/ varsLb.ret_12H_back[0] -1)*100,
-            ret_24H_back= float(app.etfs[5]['price']/ varsLb.ret_24H_back[0] -1)*100,
-            ret_96H_back= float(app.etfs[5]['price']/ varsLb.ret_96H_back[0] -1)*100,
+            
+            ret_1H_back= float(app.etfs[10]['price']/ varsLb.ret_1H_back[0] -1)*100,
+            ret_3H_back=float(app.etfs[10]['price']/ varsLb.ret_3H_back[0] -1)*100,
+            ret_6H_back= float(app.etfs[10]['price']/ varsLb.ret_6H_back[0] -1)*100,
+            ret_12H_back= float(app.etfs[10]['price']/ varsLb.ret_12H_back[0] -1)*100,
+            ret_24H_back= float(app.etfs[10]['price']/ varsLb.ret_24H_back[0] -1)*100,
+            ret_96H_back= float(app.etfs[10]['price']/ varsLb.ret_96H_back[0] -1)*100,
 
             rsi_prom= varsLb.rsi,
             d_pico= float(varsLb.d_pico),

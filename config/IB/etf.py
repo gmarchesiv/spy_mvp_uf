@@ -46,7 +46,7 @@ def req_ETFs(app, etf):
     ]
     app.reqMarketDataType(1)
 
-    for i, contract in enumerate(contracts, start=5):
+    for i, contract in enumerate(contracts, start=10):
         app.reqMktData(i, contract, "", False, False, [])
         # time.sleep(2)
         app.etfs[i] = {

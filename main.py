@@ -222,7 +222,7 @@ def main():
             if (timeNow.minute % 10 == 0 or timeNow.minute % 10 == 5):
                 if varsLb.flag_minuto_label:
                     generar_label(params, varsLb,app)
-                    vars.flag_minuto_label=False
+                    varsLb.flag_minuto_label=False
                     time.sleep(0.5)
                     calculations(app, vars,varsBc, params) 
                     readIBData(app, vars,varsLb)

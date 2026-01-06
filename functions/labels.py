@@ -3,7 +3,7 @@
 
 import math
 from collections import deque
-import pandas_ta as ta 
+import pandas_ta_classic as ta
 import pandas as pd   
 import joblib
 from sklearn.cluster import KMeans

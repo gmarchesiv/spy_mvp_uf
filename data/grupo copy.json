@@ -1,48 +1,56 @@
 {
     "red": [
        
-        {
-            "ip": "10.8.0.35:8001",
-            "user": "Carlos Labarthe"
-        },
       
-        
  
         {
             "ip": "10.8.0.37:8001",
-            "user": "Jackie Andren"
+            "user": "Jackie Andren",
+            "rama":false
         },
  
         {
             "ip": "10.8.0.39:8001",
-            "user": "Raul Gutierrez"
+            "user": "Raul Gutierrez",
+            "rama":false
         },
  
         {
             "ip": "10.8.0.44:8001",
-            "user": "David Fu Chang"
+            "user": "David Fu Chang",
+            "rama":false
         },
  
         {
             "ip": "10.8.0.40:8001",
-            "user": "Augusto Reyna"
+            "user": "Augusto Reyna",
+            "rama":false
         },
  
         {
             "ip": "10.8.0.36:8001",
-            "user": "Gloria Velasco"
+            "user": "Gloria Velasco",
+            "rama":false
         },
         {
             "ip": "10.8.0.38:8001",
-            "user": "Karin Granda"
+            "user": "Karin Granda",
+            "rama":false
         },
         {
             "ip": "10.8.0.34:8001",
-            "user": "Marissa Chiappe"
+            "user": "Marissa Chiappe",
+            "rama":false
+        },
+        {
+            "ip": "10.8.0.35:8001",
+            "user": "Carlos Labarthe",
+            "rama":false
         },
         {
             "ip": "10.8.0.45:8001",
-            "user": "Antonio Garcia "
+            "user": "Antonio Garcia",
+            "rama":false
         }
     ]
 }

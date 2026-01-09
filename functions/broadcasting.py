@@ -82,11 +82,11 @@ def comparar_label(data,varsLb):
             else:
                 agrupados_list.setdefault(k, []).append(v)
 
-    print(agrupados)
-    print(agrupados_list)
+    # print(agrupados)
+    # print(agrupados_list)
     # Calcular la mediana por cada llave
     resultado_no_listas  = {k: statistics.median(v) for k, v in agrupados.items() if    isinstance(v, list) }
-    print(resultado_no_listas)
+    # print(resultado_no_listas)
     resultado_listas = {}
     for k, listas in agrupados_list.items():
         print(k)
@@ -104,7 +104,7 @@ def comparar_label(data,varsLb):
                 lista_mediana = lst
 
         resultado_listas[k] = lista_mediana
-    print(resultado_listas)
+    # print(resultado_listas)
  
     varsLb.label=resultado_no_listas["label"]
     varsLb.retorno = int( resultado_no_listas["retorno"] )

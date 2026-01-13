@@ -90,13 +90,13 @@ def debug_code(archivos):
 
     df["FECHA"] = pd.to_datetime(df["FECHA"], format="%Y-%m-%d")
 
-    # # Verificamos el mes
-    # if (df["FECHA"].dt.month == 1).any():
-    #     pass
+    # Verificamos el mes
+    if (df["FECHA"].dt.month == 1).any() and (df["FECHA"].dt.year == 2026).any():
+        pass
     
         
-    # else:
-    #     return  
+    else:
+        return  
 
     df["HORA"] = pd.to_datetime(df["HORA"], format="%H:%M:%S").dt.time
     df["MINUTO_HORA"] = pd.to_datetime(df["HORA"], format="%H:%M:%S").dt.minute

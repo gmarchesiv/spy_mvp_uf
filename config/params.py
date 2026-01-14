@@ -271,16 +271,17 @@ class parameters:
         # =======  CALL - C       ==========  
         # ==================================
         
-        self.dcall_r1_c =[-0.14, -0.008]
-        self.docall_r1_c = [0.05, 0.0842]
-        self.timeCall_r1_c = [dt_time(11, 35), dt_time(11, 50)]
+        self.dcall_r1_c =[-0.095, 0.1]
+        self.docall_r1_c =[0.0325, 0.035]
+        self.dput_Call_r1_c =[-0.084, 0.05]
+        self.timeCall_r1_c = [dt_time(11, 30), dt_time(12, 5)]
         self.labelCall_r1_c=0
         # VENTA
-        self.sl_cr1_c =-0.04  # STOP LOSS
+        self.sl_cr1_c =-0.046  # STOP LOSS
         # self.min_desicion_cr1_c   = 60
         self.umbral_manifestacion_cR1_c =0.02
-        self.diamante_cr1_c = [self.umbral_manifestacion_cR1_c,0.027,0.038,0.06,0.08] # DIAMANTE DE COMPRA
-        self.resta_cr1_c=  [0.016,0.01,0.01,0.005,0.001] 
+        self.diamante_cr1_c = [self.umbral_manifestacion_cR1_c ,0.027,0.038,0.06,0.08] # DIAMANTE DE COMPRA
+        self.resta_cr1_c= [0.016,0.01,0.01 ,0.005,0.001]
 
         # ==================================
         # =========== CALL - R2 ============
@@ -329,20 +330,20 @@ class parameters:
         # ==================================
         # COMPRA
         
-        self.dcall_r1_f = [0.06, 0.12]
-        self.docall_r1_f = [0.095, 0.11]
-        self.timeCall_r1_f = [dt_time(12, 30), dt_time(12, 32)]
+        self.dcall_r1_f = [-0.56, 0.15]
+        self.docall_r1_f = [0.0325, 0.036]
+        self.timeCall_r1_f = [dt_time(13, 30), dt_time(14, 0)]
         self.labelCall_r1_f=0
 
         # VENTA
-        self.sl_cr1_f=-0.03  # STOP LOSS
+        self.sl_cr1_f=-0.035  # STOP LOSS
         # self.min_desicion_pr1_f  = 60
         # target_pR1_f =0.04
 
-        self.umbral_manifestacion_cR1_f=0.0165
+        self.umbral_manifestacion_cR1_f=0.015
         self.diamante_cr1_f = [
-        self.umbral_manifestacion_cR1_f,  0.027,0.038]  # DIAMANTE DE COMPRA
-        self.resta_cr1_f = [0.015,0.01,0.001]   # RETROCESO DEL DIAMANTE
+        self.umbral_manifestacion_cR1_f,  0.02,0.03] # DIAMANTE DE COMPRA
+        self.resta_cr1_f =  [0.01 ,0.005,0.001]   # RETROCESO DEL DIAMANTE
 
 
 

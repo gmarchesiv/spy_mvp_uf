@@ -152,18 +152,7 @@ def sellCall(app,varsBc,varsLb,vars,params,debug_mode):
     #     return
 
     
-    # REGLA DE PROTECCION
-    if (
-        # vars.pico < params.umbral_no_perdida_c
-           vars.rentabilidad < (vars.pico - params.perdida_maxima_c)
-        and vars.manifesto == False  and vars.pico>0 
-    ):
-        sell(
-            app,varsBc,varsLb,vars,params,
-            "C",  "PROTECCION_D" ,debug_mode
-        )
-
-        return
+    
 
     # REGLA DE PROTECCION
     # if (
@@ -334,6 +323,21 @@ def sellCall(app,varsBc,varsLb,vars,params,debug_mode):
         manifestacion=params.umbral_manifestacion_cR1_f4
         nmt=params.inf
 
+
+
+    # REGLA DE PROTECCION
+    if (
+        # vars.pico < params.umbral_no_perdida_c
+           vars.rentabilidad < (vars.pico - params.perdida_maxima_c)
+        and vars.manifesto == False  and vars.pico>0 
+        and vars.tipo not in ["R1-C"]
+    ):
+        sell(
+            app,varsBc,varsLb,vars,params,
+            "C",  "PROTECCION_D" ,debug_mode
+        )
+
+        return
     #########################################################
     ####################      VENTA       ###################
     #########################################################

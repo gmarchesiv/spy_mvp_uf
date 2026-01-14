@@ -52,14 +52,14 @@ def buy_Call(app,varsBc,varsLb,vars,params,debug_mode):
     Reglas de compras de CALL.
     '''
     #---------------------------------------------------
-    print(vars.df["FECHA"][vars.i],vars.df["HORA"][vars.i],not (timeNow >= params.proteccion_compra[0] and timeNow < params.proteccion_compra[1]) , 
-                        not (timeNow >= params.proteccion_compra_2[0] and timeNow < params.proteccion_compra_2[1]) , 
-        (timeNow >= params.timeCall_r2[0] and timeNow < params.timeCall_r2[1])
-        , (vars.dcall >= params.dcall_r2[0] and vars.dcall < params.dcall_r2[1])
-        , (vars.docall >= params.docall_r2[0] and vars.docall <= params.docall_r2[1])
-        ,  (varsLb.label==params.labelCall_r2 )  
-          , vars.flag_Call_reset_r2
-    )
+    # print(vars.df["FECHA"][vars.i],vars.df["HORA"][vars.i],not (timeNow >= params.proteccion_compra[0] and timeNow < params.proteccion_compra[1]) , 
+    #                     not (timeNow >= params.proteccion_compra_2[0] and timeNow < params.proteccion_compra_2[1]) , 
+    #     (timeNow >= params.timeCall_r2[0] and timeNow < params.timeCall_r2[1])
+    #     , (vars.dcall >= params.dcall_r2[0] and vars.dcall < params.dcall_r2[1])
+    #     , (vars.docall >= params.docall_r2[0] and vars.docall <= params.docall_r2[1])
+    #     ,  (varsLb.label==params.labelCall_r2 )  
+    #       , vars.flag_Call_reset_r2
+    # )
     #########################################################
     ####################      CALL R2     ###################
     #########################################################

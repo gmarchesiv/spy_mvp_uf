@@ -478,18 +478,17 @@ def buy_Put(app,varsBc,varsLb,vars,params,debug_mode):
     ########################################################
     ###################       PUT R1 F   ###################
     ########################################################
-    # elif (not (timeNow >= params.proteccion_compra[0] and timeNow < params.proteccion_compra[1]) and 
-    #                     not (timeNow >= params.proteccion_compra_2[0] and timeNow < params.proteccion_compra_2[1]) )and(
-    #     (timeNow >= params.timePut_r1_f[0] and timeNow < params.timePut_r1_f[1])
-    #     and (vars.dput >= params.dput_r1_f[0] and vars.dput < params.dput_r1_f[1])
-    #     and (vars.doput >= params.doput_r1_f[0] and vars.doput < params.doput_r1_f[1])
-    #     and (varsLb.label==params.labelPut_r1_f ) 
+    elif ( 
+        (timeNow >= params.timePut_r1_f[0] and timeNow < params.timePut_r1_f[1])
+        and (vars.dput >= params.dput_r1_f[0] and vars.dput < params.dput_r1_f[1])
+        and (vars.doput >= params.doput_r1_f[0] and vars.doput < params.doput_r1_f[1])
+        # and (varsLb.label==params.labelPut_r1_f ) 
 
-    # ):
-    #     buy(
-    #         app,varsBc,varsLb,vars,params,
-    #         "P",  "F" ,debug_mode
-    #     )
+    ):
+        buy(
+            app,varsBc,varsLb,vars,params,
+            "P",  "F" ,debug_mode
+        )
 
    
         

@@ -97,7 +97,7 @@ class parameters:
 
         #PARAMETROS DE TIEMPO DE RUTINA Y MUESTRAS
         self.fin_rutina = dt_time(15, 55)
-        self.fd =  dt_time(15, 30)
+        self.fd =  dt_time(15, 45)
         self.rutina = [dt_time(6, 50), dt_time(16, 0)]
         self.frecuencia_accion =[i for i in range(0, 60, 2)]
         
@@ -561,24 +561,24 @@ class parameters:
 
 
         # ==================================
-        # =========== PUT R1 F ============= COMENTADA
+        # =========== PUT R1 F =============  
         # ==================================
         # COMPRA
         
-        self.dput_r1_f = [-0.05, 0.08]
-        self.doput_r1_f = [0.07, 0.115]
-        self.timePut_r1_f = [dt_time(14, 0), dt_time(14, 10)]
+        self.dput_r1_f = [ -0.025, 0.124] 
+        self.doput_r1_f = [0.05, 0.065]
+        self.timePut_r1_f = [dt_time(14, 30), dt_time(14, 45)]
         self.labelPut_r1_f=1
 
         # VENTA
-        self.sl_pr1_f=-0.042  # STOP LOSS
+        self.sl_pr1_f=-0.05  # STOP LOSS
         # self.min_desicion_pr1_f  = 60
         # target_pR1_f =0.04
 
-        self.umbral_manifestacion_pR1_f=0.02
+        self.umbral_manifestacion_pR1_f=0.019
         self.diamante_pr1_f = [
-        self.umbral_manifestacion_pR1_f,0.026,0.034]  # DIAMANTE DE COMPRA
-        self.resta_pr1_f = [0.018,0.01,0.001]   # RETROCESO DEL DIAMANTE
+        self.umbral_manifestacion_pR1_f,0.03 ,0.04 ]  # DIAMANTE DE COMPRA
+        self.resta_pr1_f = [0.01 ,0.005  ,0.001 ]  # RETROCESO DEL DIAMANTE
 
 
         # ==================================

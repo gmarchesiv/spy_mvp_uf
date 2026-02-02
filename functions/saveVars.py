@@ -93,6 +93,7 @@ def saveVars(vars, app,  params, estado):
         "flag_Put_R2": vars.flag_Put_R2,
 
         "flag_Call_reset_r1":vars.flag_Call_reset_r1,
+        "flag_Call_reset_r1_2":vars.flag_Call_reset_r1_2,
         "flag_Call_reset_r3":vars.flag_Call_reset_r3,
         "flag_Call_reset_r1_e":vars.flag_Call_reset_r1_e,
         "flag_Call_reset_r1_e2":vars.flag_Call_reset_r1_e2,

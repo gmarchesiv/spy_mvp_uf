@@ -121,6 +121,7 @@ def buy_Call(app,varsBc,varsLb,vars,params,debug_mode):
         and (vars.docall >= params.docall_r1_2[0] and vars.docall <= params.docall_r1_2[1])
         and (vars.dput >= params.dput_Call_r1_2[0] and vars.dput < params.dput_Call_r1_2[1])
         and  (varsLb.label==params.labelCall_r1_2 ) 
+        and vars.flag_Call_reset_r1_2
     ):
         buy(
             app,varsBc,varsLb,vars,params,
@@ -691,7 +692,14 @@ def calculos_call(vars, params):
     else:
         pass
 
-
+    # RESET CALL R1 2
+    if vars.docall>= params.docall_r1_2[1]:
+        vars.flag_Call_reset_r1_2 = False
+    elif vars.docall < params.docall_r1_2[0]:
+        vars.flag_Call_reset_r1_2 = True
+    else:
+        pass
+        
     # RESET CALL R1
     if vars.docall>= params.docall_r1_e[1]:
         vars.flag_Call_reset_r1_e = False

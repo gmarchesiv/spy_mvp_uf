@@ -143,18 +143,18 @@ class parameters:
         # =========== CALL - R1 -2 ========= 
         # ==================================
         
-        self.dcall_r1_2 =[-0.0625, 0.046 ]
-        self.docall_r1_2 = [0.03, 0.0335]
-        self.timeCall_r1_2 = [ dt_time(9, 35) , dt_time(9, 40)]
-        self.dput_Call_r1_2 =[-0.12, 0.06]
+        self.dcall_r1_2 =[-0.052 , 0.046 ]
+        self.docall_r1_2 = [0.03, 0.04]
+        self.timeCall_r1_2 = [ dt_time(9, 47) , dt_time(9, 51,15)]
+        self.dput_Call_r1_2 =[-0.14, 0.04]
         self.labelCall_r1_2 =0
         
         # VENTA
-        self.sl_cr1_2=-0.03  # STOP LOSS
+        self.sl_cr1_2=-0.035  # STOP LOSS
         # min_desicion_cr1  = 60
         self.umbral_manifestacion_cR1_2=0.02
-        self.diamante_cr1_2 = [self.umbral_manifestacion_cR1_2 ,0.03,0.05] # DIAMANTE DE COMPRA
-        self.resta_cr1_2 =[0.001,0.008,0.001] # RETROCESO DEL DIAMANTE 
+        self.diamante_cr1_2 = [self.umbral_manifestacion_cR1_2 ,0.028,0.04 ] # DIAMANTE DE COMPRA
+        self.resta_cr1_2 =[  0.015,0.005 ,0.001 ] # RETROCESO DEL DIAMANTE 
 
         # ==================================
         # =========== CALL - R3 =======

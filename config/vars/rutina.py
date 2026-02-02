@@ -58,6 +58,7 @@ class varsRutina:
         self.flag_Put_R2 = self.data.get("flag_Put_R2", False)
 
         self.flag_Call_reset_r1=self.data.get("flag_Call_reset_r1", False)
+        self.flag_Call_reset_r1_2=self.data.get("flag_Call_reset_r1_2", False)
         self.flag_Call_reset_r3=self.data.get("flag_Call_reset_r3", False)
         self.flag_Call_reset_r1_e =self.data.get("flag_Call_reset_r1_e", False)
         self.flag_Call_reset_r1_e2 =self.data.get("flag_Call_reset_r1_e2", False)

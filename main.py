@@ -356,17 +356,17 @@ def main():
                 time.sleep(1)
                 del app.options[4]
 
-                # app.cancelMarketData(5)
-                # time.sleep(1)
-                # del app.options[5]
+                app.cancelMarketData(5)
+                time.sleep(1)
+                del app.options[5]
 
-                # app.cancelMarketData(6)
-                # time.sleep(1)
-                # del app.options[6]
+                app.cancelMarketData(6)
+                time.sleep(1)
+                del app.options[6]
 
                 registro_strike(app, vars, params)
                 registro_strike_2(app, vars, params)
-                # registro_strike_3(app, vars, params)
+                registro_strike_3(app, vars, params)
                 
                 vars.status = "OFF"
           

@@ -34,9 +34,9 @@ def req_Options(app, vars, etf):
   
     requestContract(app, etf, vars.strike_p_2, vars.exp_2, "P", vars.exchange)
 
-    # requestContract(app, etf, vars.strike_c_3, vars.exp_3, "C", vars.exchange)
+    requestContract(app, etf, vars.strike_c_3, vars.exp_3, "C", vars.exchange)
   
-    # requestContract(app, etf, vars.strike_p_3, vars.exp_3, "P", vars.exchange)
+    requestContract(app, etf, vars.strike_p_3, vars.exp_3, "P", vars.exchange)
     
 
 

@@ -84,27 +84,27 @@ def data_option_open(app,   vars,params):
             break
         time.sleep(0.5)
         
-    # vars.call_open_3 = -1
-    # vars.put_open_3 = -1
+    vars.call_open_3 = -1
+    vars.put_open_3 = -1
 
-    # while (vars.call_open_3==-1 or vars.put_open_3 == -1):
-    #     timeNow = datetime.now(params.zone).time()
-    #     c_ask=app.options[5]["ASK"]
-    #     c_bid=app.options[5]["BID"]
-    #     p_ask=app.options[6]["ASK"]
-    #     p_bid=app.options[6]["BID"]
-    #     if vars.call_open_3==-1 and ((c_ask/c_bid)-1)<params.max_askbid_open:
-    #         vars.call_open_3 = app.options[5]["BID"]
+    while (vars.call_open_3==-1 or vars.put_open_3 == -1):
+        timeNow = datetime.now(params.zone).time()
+        c_ask=app.options[5]["ASK"]
+        c_bid=app.options[5]["BID"]
+        p_ask=app.options[6]["ASK"]
+        p_bid=app.options[6]["BID"]
+        if vars.call_open_3==-1 and ((c_ask/c_bid)-1)<params.max_askbid_open:
+            vars.call_open_3 = app.options[5]["BID"]
 
-    #     if vars.put_open_3==-1 and ((p_ask/p_bid)-1)<params.max_askbid_open:
-    #         vars.put_open_3 = app.options[6]["BID"]
+        if vars.put_open_3==-1 and ((p_ask/p_bid)-1)<params.max_askbid_open:
+            vars.put_open_3 = app.options[6]["BID"]
       
-    #     if   params.max_askbid_hora_open <= timeNow:
-    #         vars.call_open_3 = app.options[5]["BID"]
-    #         vars.put_open_3 = app.options[6]["BID"]
-    #         vars.flag_bloqueo_tiempo =True
-    #         break
-    #     time.sleep(0.5)
+        if   params.max_askbid_hora_open <= timeNow:
+            vars.call_open_3 = app.options[5]["BID"]
+            vars.put_open_3 = app.options[6]["BID"]
+            vars.flag_bloqueo_tiempo =True
+            break
+        time.sleep(0.5)
 # REALIZA LA SUSCIPCION DE DATOS
 def data_susciption(app, params, vars):
 
@@ -142,11 +142,12 @@ def data_susciption(app, params, vars):
         if app.options[4]["ASK"] > 0 and app.options[4]["BID"] > 0:
             ready += 1
 
-        # if app.options[5]["ASK"] > 0 and app.options[5]["BID"] > 0:
-        #     ready += 1
-        # if app.options[6]["ASK"] > 0 and app.options[6]["BID"] > 0:
-        #     ready += 1
-        if ready == 6:
+        if app.options[5]["ASK"] > 0 and app.options[5]["BID"] > 0:
+            ready += 1
+        if app.options[6]["ASK"] > 0 and app.options[6]["BID"] > 0:
+            ready += 1
+
+        if ready == 8:
             break
 
         time.sleep(0.5)
@@ -258,19 +259,19 @@ def calculations(app, vars,varsBc, params):
     vars.docall_2= vars.cbid_2 / vars.call_open_2 - 1
     vars.doput_2 = vars.pbid_2 / vars.put_open_2 - 1
 
-    # vars.cask_3 = app.options[5]["ASK"]
-    # vars.cbid_3 = app.options[5]["BID"]
-    # vars.pask_3 = app.options[6]["ASK"]
-    # vars.pbid_3 = app.options[6]["BID"]
+    vars.cask_3 = app.options[5]["ASK"]
+    vars.cbid_3 = app.options[5]["BID"]
+    vars.pask_3 = app.options[6]["ASK"]
+    vars.pbid_3 = app.options[6]["BID"]
 
 
-    # # CALCULOS
-    # vars.askbid_call_3 = vars.cask_3 / vars.cbid_3 - 1
-    # vars.askbid_put_3 = vars.pask_3 / vars.pbid_3 - 1
-    # vars.dcall_3 = vars.cbid_3 / vars.call_close_3 - 1
-    # vars.dput_3 = vars.pbid_3 / vars.put_close_3 - 1
-    # vars.docall_3= vars.cbid_3 / vars.call_open_3 - 1
-    # vars.doput_3 = vars.pbid_3 / vars.put_open_3 - 1    
+    # CALCULOS
+    vars.askbid_call_3 = vars.cask_3 / vars.cbid_3 - 1
+    vars.askbid_put_3 = vars.pask_3 / vars.pbid_3 - 1
+    vars.dcall_3 = vars.cbid_3 / vars.call_close_3 - 1
+    vars.dput_3 = vars.pbid_3 / vars.put_close_3 - 1
+    vars.docall_3= vars.cbid_3 / vars.call_open_3 - 1
+    vars.doput_3 = vars.pbid_3 / vars.put_open_3 - 1    
 
     # if vars.askbid_call >0 and params.umbral_askbid>vars.askbid_call:
     #     vars.askbid_call_prom.append(round(vars.askbid_call,6))
@@ -363,7 +364,6 @@ def registro_strike(app, vars, params):
 
     # call = int(precio * ((100 + params.strike_escenario+0.5) / 100))
     # put = int(precio * ((100 - params.strike_escenario-0.5) / 100))
-
     # call_inf = (round(int(precio * ((100 + params.strike_escenario) / 100))/ 5) * 5)+params.strike_unidad
     # put_inf = (round(int(precio * ((100 - params.strike_escenario) / 100))/ 5) * 5 )-params.strike_unidad
     call_inf = (
@@ -377,7 +377,7 @@ def registro_strike(app, vars, params):
             precio * ((100 - params.strike_escenario) / 100) / 5
         ) * 5
     ) - params.strike_unidad
-
+    
     call = call_inf+10
     put = put_inf-10
 
@@ -471,7 +471,7 @@ def registro_strike_2(app, vars, params):
  
     vars.exchange = params.exchange[0]  # SELECCION DEL EXCEHANGE
 
-    list_exp = list_checkExpirations(app, app.etfs[10]["symbol"], params, vars.exchange)
+    list_exp = list_checkExpirations_2(app, app.etfs[10]["symbol"], params, vars.exchange)
 
 
     precio = vars.precio
@@ -482,13 +482,13 @@ def registro_strike_2(app, vars, params):
 
     call_inf = (
     math.ceil(
-        precio * ((100 + params.strike_escenario) / 100) / 5
+        precio * ((100 - params.strike_escenario) / 100) / 5
         ) * 5
     ) + params.strike_unidad
 
     put_inf = (
         math.floor(
-            precio * ((100 - params.strike_escenario) / 100) / 5
+            precio * ((100 + params.strike_escenario) / 100) / 5
         ) * 5
     ) - params.strike_unidad
     
@@ -577,6 +577,8 @@ def registro_strike_2(app, vars, params):
 
 # REGISTRO DE STRIKES
 def registro_strike_3(app, vars, params):
+
+     
 
     # PEDIMOS LA CADENA DE OPCIONES
     app.request_option_chain(app.etfs[10]["symbol"])

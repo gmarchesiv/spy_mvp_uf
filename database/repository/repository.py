@@ -155,6 +155,21 @@ def writeDayTrade(app, vars,varsLb, params):
             dPut_2=vars.dput_2,
             doCall_2=vars.docall_2,
             doPut_2=vars.doput_2,
+
+            cStrike_3=app.options[5]["strike"],
+            pStrike_3=app.options[6]["strike"],
+            exp_3=vars.exp_3,
+            cask_3=vars.cask_3,
+            cbid_3=vars.cbid_3,
+            pask_3=vars.pask_3,
+            pbid_3=vars.pbid_3,
+ 
+            cAskBid_3=vars.askbid_call_3,
+            pAskBid_3=vars.askbid_put_3,
+            dCall_3=vars.dcall_3,
+            dPut_3=vars.dput_3,
+            doCall_3=vars.docall_3,
+            doPut_3=vars.doput_3
             
          
 

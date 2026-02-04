@@ -86,6 +86,7 @@ class parameters:
         self.max_askbid_venta_abs = 0.0255
         self.max_askbid_compra_abs = 0.0185
         self.max_askbid_venta_forzada = 0.04
+        self.max_askbid_compra_alt = 0.02
 
         # PARAMETROS LIMITES DE OPEN ASKBID
         self.max_askbid_open = 0.03
@@ -225,20 +226,21 @@ class parameters:
         self.resta_cr1_e2 =[0.005,0.001] # RETROCESO DEL DIAMANTE 
 
         # ==================================
-        # =========== CALL - R1-FAST =======  COMENTADA
+        # =========== CALL - R1-FAST =======   
         # ==================================
         
-        self.dcall_r1_fast = [-0.13, 0.05]
-        self.docall_r1_fast =  [0.106, 0.115]
-        self.timeCall_r1_fast = [dt_time(9, 35), dt_time(10, 0)]
+        self.dcall_r1_fast = [-0.015, 0.09]
+        self.docall_r1_fast = [0.05, 0.055]
+        self.dput_Call_r1_fast =[ -0.16,0.2]
+        self.timeCall_r1_fast = [dt_time(9, 37), dt_time(9, 45 )]
         self.labelCall_r1_fast =0
         
         # VENTA
-        self.sl_cr1_fast =-0.03  # STOP LOSS
+        self.sl_cr1_fast =-0.042  # STOP LOSS
         # self.min_desicion_cr1_fast   = 60
-        self.umbral_manifestacion_cR1_fast =0.018
-        self.diamante_cr1_fast  = [self.umbral_manifestacion_cR1_fast  ,0.027,0.038 ] # DIAMANTE DE COMPRA
-        self.resta_cr1_fast  = [0.015,0.007,0.001]# RETROCESO DEL DIAMANTE 
+        self.umbral_manifestacion_cR1_fast =0.02
+        self.diamante_cr1_fast  = [self.umbral_manifestacion_cR1_fast,0.025, 0.03 ,0.04] # DIAMANTE DE COMPRA
+        self.resta_cr1_fast  = [ 0.005,0.01,0.005,0.001 ] # RETROCESO DEL DIAMANTE 
 
         # ==================================
         # =======  CALL - R1 -INV ==========  

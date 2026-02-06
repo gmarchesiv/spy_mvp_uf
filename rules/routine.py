@@ -473,24 +473,25 @@ def registro_strike_2(app, vars, params):
 
     list_exp = list_checkExpirations_2(app, app.etfs[10]["symbol"], params, vars.exchange)
 
-
-    precio = vars.precio
-    printStamp(f"PRECIO: {precio} $")
+ 
+    precio=vars.precio 
+    printStamp(f"PRECIO: {app.etfs[10]['price']} $")
 
     # call = int(precio * ((100 + params.strike_escenario+0.5) / 100))
     # put = int(precio * ((100 - params.strike_escenario-0.5) / 100))
-
+    # call_inf = (round(int(precio * ((100 + params.strike_escenario) / 100))/ 5) * 5)+params.strike_unidad
+    # put_inf = (round(int(precio * ((100 - params.strike_escenario) / 100))/ 5) * 5 )-params.strike_unidad
     call_inf = (
     math.ceil(
-        precio * ((100 - params.strike_escenario) / 100) / 5
+        precio * ((100 + params.strike_escenario) / 100) / 5
         ) * 5
-    ) + params.strike_unidad
+    ) - params.strike_unidad
 
     put_inf = (
         math.floor(
-            precio * ((100 + params.strike_escenario) / 100) / 5
+            precio * ((100 - params.strike_escenario) / 100) / 5
         ) * 5
-    ) - params.strike_unidad
+    ) + params.strike_unidad
     
     call = call_inf+10
     put = put_inf-10
@@ -533,8 +534,6 @@ def registro_strike_2(app, vars, params):
     printStamp(f"EXP: {exp_escogido}")
 
     printStamp(f"RANGOS SELECCIONADOS --> PUT: {put_strike} /  CALL: {call_strike}")
-
-
 
     
 

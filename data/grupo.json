@@ -12,11 +12,6 @@
             "ip": "10.8.0.36:8001",
             "user": "Gloria Velasco",
             "rama":false
-        },
-        {
-            "ip": "10.8.0.38:8001",
-            "user": "Karin Granda",
-            "rama":false
         } 
     ]
 }

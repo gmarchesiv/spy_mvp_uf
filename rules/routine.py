@@ -367,13 +367,13 @@ def registro_strike(app, vars, params):
     # call_inf = (round(int(precio * ((100 + params.strike_escenario) / 100))/ 5) * 5)+params.strike_unidad
     # put_inf = (round(int(precio * ((100 - params.strike_escenario) / 100))/ 5) * 5 )-params.strike_unidad
     call_inf = (
-    math.ceil(
+    round(
         precio * ((100 + params.strike_escenario) / 100) / 5
         ) * 5
     ) + params.strike_unidad
 
     put_inf = (
-        math.floor(
+        round(
             precio * ((100 - params.strike_escenario) / 100) / 5
         ) * 5
     ) - params.strike_unidad
@@ -482,13 +482,13 @@ def registro_strike_2(app, vars, params):
     # call_inf = (round(int(precio * ((100 + params.strike_escenario) / 100))/ 5) * 5)+params.strike_unidad
     # put_inf = (round(int(precio * ((100 - params.strike_escenario) / 100))/ 5) * 5 )-params.strike_unidad
     call_inf = (
-    math.ceil(
+    round(
         precio * ((100 + params.strike_escenario) / 100) / 5
         ) * 5
     ) - params.strike_unidad
 
     put_inf = (
-        math.floor(
+        round(
             precio * ((100 - params.strike_escenario) / 100) / 5
         ) * 5
     ) + params.strike_unidad
@@ -600,27 +600,30 @@ def registro_strike_3(app, vars, params):
     
     printStamp(f"RANGOS --> PUT : {put} - {put_inf} | CALL :{call_inf} - {call}")
 
+    exp_escogido=list_exp[0]
+    put_strike=  round(put_inf / 5) * 5
+    call_strike= round(call_inf / 5) * 5
 
-    for exp in list_exp:
-        strikes = checkStrike(
-        app, exp, app.etfs[10]["symbol"], "C", vars.exchange
-    )
-        put_list = [
-            float(x) for x in strikes if put <= float(x) <= put_inf
-        ]
-        call_list = [
-            float(x) for x in strikes if call_inf <= float(x) <= call
-        ]
-        # Ordenar listas
-        put_list.sort()
-        call_list.sort()
-        printStamp(f"EXP: {exp} - PUTs:{put_list} / CALLs:{call_list}")
-        if len(put_list)==0 or len(call_list)==0:
-            continue 
-        put_strike = put_list[-1]  
-        call_strike = call_list[0] 
-        exp_escogido = exp
-        break
+    # for exp in list_exp:
+    #     strikes = checkStrike(
+    #     app, exp, app.etfs[10]["symbol"], "C", vars.exchange
+    # )
+    #     put_list = [
+    #         float(x) for x in strikes if put <= float(x) <= put_inf
+    #     ]
+    #     call_list = [
+    #         float(x) for x in strikes if call_inf <= float(x) <= call
+    #     ]
+    #     # Ordenar listas
+    #     put_list.sort()
+    #     call_list.sort()
+    #     printStamp(f"EXP: {exp} - PUTs:{put_list} / CALLs:{call_list}")
+    #     if len(put_list)==0 or len(call_list)==0:
+    #         continue 
+    #     put_strike = put_list[-1]  
+    #     call_strike = call_list[0] 
+    #     exp_escogido = exp
+    #     break
      
     
 
@@ -630,7 +633,7 @@ def registro_strike_3(app, vars, params):
 
     
 
-    snapshot(app, app.etfs[10]["symbol"], [put_strike, call_strike], exp, vars.exchange)
+    snapshot(app, app.etfs[10]["symbol"], [put_strike, call_strike], exp_escogido, vars.exchange)
     printStamp(f"EXTRAYENDO DATOS DE LA OPCION")
     while True:
         timeNow = datetime.now(params.zone).time()
@@ -654,7 +657,7 @@ def registro_strike_3(app, vars, params):
         time.sleep(0.5)
 
     
-    vars.exp_3 = exp
+    vars.exp_3 = exp_escogido
     vars.strike_p_3 = put_strike
     vars.strike_c_3 = call_strike
     vars.put_close_3 = app.options[26]["BID"]

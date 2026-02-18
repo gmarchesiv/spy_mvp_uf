@@ -42,7 +42,7 @@ def data_option_open(app,   vars,params):
     
     vars.call_open = -1
     vars.put_open = -1
-
+    printStamp("OPEN-1")
     while (vars.call_open==-1 or vars.put_open == -1):
         timeNow = datetime.now(params.zone).time()
         c_ask=app.options[1]["ASK"]
@@ -64,7 +64,7 @@ def data_option_open(app,   vars,params):
 
     vars.call_open_2 = -1
     vars.put_open_2 = -1
-
+    printStamp("OPEN-2")
     while (vars.call_open_2==-1 or vars.put_open_2 == -1):
         timeNow = datetime.now(params.zone).time()
         c_ask=app.options[3]["ASK"]
@@ -86,7 +86,7 @@ def data_option_open(app,   vars,params):
         
     vars.call_open_3 = -1
     vars.put_open_3 = -1
-
+    printStamp("OPEN-3")
     while (vars.call_open_3==-1 or vars.put_open_3 == -1):
         timeNow = datetime.now(params.zone).time()
         c_ask=app.options[5]["ASK"]

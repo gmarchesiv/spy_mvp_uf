@@ -116,6 +116,7 @@ class varsRutina:
         self.rentabilidad_ant = self.data.get("rentabilidad_ant", 0)
         self.priceBuy = self.data.get("priceBuy", 0)
         self.real_priceBuy= self.data.get("real_priceBuy", 0)
+        self.flag_real_priceBuy = self.data.get("flag_real_priceBuy", False)
         self.caida = self.data.get("caida", 0)
         self.regla = self.data.get("regla", "")
         self.trades = self.data.get("trades", [])

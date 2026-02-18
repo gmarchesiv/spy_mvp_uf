@@ -350,7 +350,11 @@ async def fetch_price(session, url,user):
         async with session.get(url, timeout=2) as response:
             if response.status == 200:
                 data = await response.json()
-                price = data.get("priceBuy", 9999)
+                flag = bool(data.get("flag_real_priceBuy", False))
+                if not flag:
+                    return None
+
+                price = data.get("real_priceBuy", 9999)
                 printStamp(f"{user} : {price} $")
                 return price if price > 0 else None
     except Exception as e:
@@ -377,6 +381,7 @@ async def comparar_precios(vars , params):
     printStamp(f"Mi Precio actualizado: {vars.priceBuy} $")
  
     print("===============================================")
+
     return vars.priceBuy
 
 def verificar_regla(params):

@@ -397,7 +397,9 @@ def get_price():
             
  
             respuesta={
-                "priceBuy": float(data["priceBuy"] )
+                "priceBuy": float(data["priceBuy"] ),
+                "real_priceBuy": float(data["real_priceBuy"] ),
+                "flag_real_priceBuy":bool(data["flag_real_priceBuy"])
        
             }
         return respuesta, 200

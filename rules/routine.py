@@ -266,6 +266,7 @@ def saveTransaction(app, params, vars):
                     app.execution_details[idreq]["save"] = True
                     vars.priceBuy = app.execution_details[idreq]["price"]
                     vars.real_priceBuy= app.execution_details[idreq]["price"]
+                    vars.flag_real_priceBuy=True
                     app.execution_details[idreq]["shares"] = vars.quantity
                     writeWallet(app)
 

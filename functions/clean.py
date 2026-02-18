@@ -46,6 +46,7 @@ def clean_vars(vars,varsApp):
     vars.flag_Put_reset_r1_label = False
     vars.flag_cambio_R1_label=False
     vars.doput_ant = 0 
+    vars.flag_real_priceBuy=False
     
         
 

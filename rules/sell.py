@@ -789,7 +789,7 @@ def sell(app,varsBc,varsLb,vars,params, tipo, regla,debug_mode ):
         app.Error = False
 
         printStamp("-wait Status-")
-
+        vars.regla = f"SELL" 
         while app.statusIB == False:
 
             timeNow = datetime.now(params.zone).time()
@@ -806,6 +806,7 @@ def sell(app,varsBc,varsLb,vars,params, tipo, regla,debug_mode ):
             vars.status = "SELLING"
             saveVars(vars, app, params, False)
             writeDayTrade(app, vars,varsLb, params)
+            vars.regla = f"" 
 
             if app.Error:
                 break

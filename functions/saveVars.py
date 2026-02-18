@@ -146,6 +146,7 @@ def saveVars(vars, app,  params, estado):
         "rentabilidad_ant": vars.rentabilidad_ant,
         "priceBuy": vars.priceBuy,
         "real_priceBuy":vars.real_priceBuy,
+        "flag_real_priceBuy":vars.flag_real_priceBuy,
         "caida": vars.caida,
         "regla": vars.regla,
         "trades": vars.trades,

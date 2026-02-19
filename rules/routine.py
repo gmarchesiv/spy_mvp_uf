@@ -49,10 +49,10 @@ def data_option_open(app,   vars,params):
         c_bid=app.options[1]["BID"]
         p_ask=app.options[2]["ASK"]
         p_bid=app.options[2]["BID"]
-        if vars.call_open==-1 and ((c_ask/c_bid)-1)<params.max_askbid_open:
+        if vars.call_open==-1 and c_ask>0 and c_bid>0 : #and ((c_ask/c_bid)-1)<params.max_askbid_open:
             vars.call_open = app.options[1]["BID"]
 
-        if vars.put_open==-1 and ((p_ask/p_bid)-1)<params.max_askbid_open:
+        if vars.put_open==-1  and p_ask>0 and p_bid>0 : #and ((p_ask/p_bid)-1)<params.max_askbid_open:
             vars.put_open = app.options[2]["BID"]
       
         if   params.max_askbid_hora_open <= timeNow:
@@ -71,10 +71,10 @@ def data_option_open(app,   vars,params):
         c_bid=app.options[3]["BID"]
         p_ask=app.options[4]["ASK"]
         p_bid=app.options[4]["BID"]
-        if vars.call_open_2==-1 and ((c_ask/c_bid)-1)<params.max_askbid_open:
+        if vars.call_open_2==-1 and c_ask>0 and c_bid>0: #and ((c_ask/c_bid)-1)<params.max_askbid_open:
             vars.call_open_2 = app.options[3]["BID"]
 
-        if vars.put_open_2==-1 and ((p_ask/p_bid)-1)<params.max_askbid_open:
+        if vars.put_open_2==-1 and p_ask>0 and p_bid>0: #and ((p_ask/p_bid)-1)<params.max_askbid_open:
             vars.put_open_2 = app.options[4]["BID"]
       
         if   params.max_askbid_hora_open <= timeNow:
@@ -93,10 +93,10 @@ def data_option_open(app,   vars,params):
         c_bid=app.options[5]["BID"]
         p_ask=app.options[6]["ASK"]
         p_bid=app.options[6]["BID"]
-        if vars.call_open_3==-1 and ((c_ask/c_bid)-1)<params.max_askbid_open:
+        if vars.call_open_3==-1 and c_ask>0 and c_bid>0: #and ((c_ask/c_bid)-1)<params.max_askbid_open:
             vars.call_open_3 = app.options[5]["BID"]
 
-        if vars.put_open_3==-1 and ((p_ask/p_bid)-1)<params.max_askbid_open:
+        if vars.put_open_3==-1 and p_ask>0 and p_bid>0: #and ((p_ask/p_bid)-1)<params.max_askbid_open:
             vars.put_open_3 = app.options[6]["BID"]
       
         if   params.max_askbid_hora_open <= timeNow:

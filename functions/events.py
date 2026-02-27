@@ -8,6 +8,7 @@ import holidays
 from datetime import time as dt_time
 
 from functions.logs import printStamp
+from functions.notifications import sendDisconnection
 
 
 # ====================
@@ -120,7 +121,7 @@ def isTradingDay(params):
         return False
 
 
-def countdown(zone):
+def countdown(zone,app,vars,params):
 
     #---------------------------------------------------
     '''
@@ -156,5 +157,14 @@ def countdown(zone):
             else:
                 printStamp(f"Faltan {int(minutes_left+1)} minutos para comenzar.")
             minuto_ante = now.minute
+
+
+
+        if app.alerta==True and vars.flag_alerta==False:
+            sendDisconnection(params )
+            vars.flag_alerta=True
+        if vars.flag_alerta and app.alerta==False :
+            vars.flag_alerta=False
+
 
         time.sleep(1)

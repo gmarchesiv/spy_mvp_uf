@@ -148,3 +148,6 @@ class varsRutina:
 
         self.askbid_call_prom=deque(self.askbid_call_prom, maxlen=90)
         self.askbid_put_prom=deque(self.askbid_put_prom, maxlen=90)
+
+
+        self.flag_alerta=False

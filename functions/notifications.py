@@ -147,3 +147,27 @@ TIPO: {razon}
     except Exception as e:
         print(type(e).__name__, ":", e)
         printStamp("-ERROR AL ENVIAR TELEGRAM: sendError-")
+
+
+def sendDisconnection(params ):
+
+    #---------------------------------------------------
+    '''
+    Envio de mensaje de Alerta de Error.
+    '''
+    #---------------------------------------------------
+
+    msg = f"""
+======================
+- Alerta de Desconexión -
+USER: {params.name}
+ETF:{params.etf}
+ALERTA: Revisar Maquina
+======================
+"""
+    try:
+         
+        sendTelegram(params, msg)
+    except Exception as e:
+        print(type(e).__name__, ":", e)
+        printStamp("-ERROR AL ENVIAR TELEGRAM: sendError-")

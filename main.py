@@ -131,7 +131,7 @@ def main():
         try:
             broadcasting_Alinear_label(varsLb,params) 
         except:pass
-        countdown(params.zone)
+        countdown(params.zone,app,vars,params)
 
         # Registro de sesion.
         writeRegister(params.name, params.zone)

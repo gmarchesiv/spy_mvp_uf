@@ -3,6 +3,7 @@
 ###################################################
  
 import asyncio
+import json
 import math
 import random
 from config.IB.etf import req_ETFs
@@ -110,6 +111,12 @@ def update_status(app, vars,varsApp, params):
     segun sea el caso.
     '''
     #---------------------------------------------------
+
+    with open("/usr/src/app/data/vars.json") as f:
+        config = json.load(f)
+
+    vars.bloqueo = config.get("bloqueo", False)
+    
     if app.alerta:
         vars.status = "DESCONEXION"
     else:

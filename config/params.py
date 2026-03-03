@@ -263,16 +263,16 @@ class parameters:
         # =======  CALL - R1 -INV 2==========  
         # ==================================
         
-        self.dcall_r1_i_2 =[-0.36, -0.21]
-        self.docall_r1_i_2 =  [0.03, 0.38]
+        self.dcall_r1_i_2 =[-0.36, -0.2]
+        self.docall_r1_i_2 =  [0.03, 0.038]
         self.timeCall_r1_i_2 = [dt_time(9, 35), dt_time(9, 50)]
-        self.dput_Call_r1_i_2 =[0.01, 0.46]
+        self.dput_Call_r1_i_2 =[0.01, 0.48]
         self.labelCall_r1_i_2=1
         
         # VENTA
         self.sl_cr1_i_2 =-0.04  # STOP LOSS
         # min_desicion_cr1_i  = 60
-        self.umbral_manifestacion_cR1_i_2 =0.03
+        self.umbral_manifestacion_cR1_i_2 =0.029
         self.diamante_cr1_i_2 = [self.umbral_manifestacion_cR1_i_2 ,0.04,0.06 ]# DIAMANTE DE COMPRA
         self.resta_cr1_i_2 = [0.015,0.005,0.001 ]# RETROCESO DEL DIAMANTE 
 

@@ -138,190 +138,13 @@ def sellCall(app,varsBc,varsLb,vars,params,debug_mode):
         )
         return
 
-    # REGLA DE PROTECCION
-    # if (
-    #     vars.pico > params.umbral_no_perdida_c
-    #     and vars.rentabilidad < (vars.pico - params.perdida_maxima_c)
-    #     and vars.manifesto == False and (vars.tipo == "R2" or vars.tipo =="R2-2" )
-    # ):
-    #     sell(
-    #         app,varsBc,varsLb,vars,params,
-    #         "C",  "PROTECCION" ,debug_mode
-    #     )
-
-    #     return
-
-    
-    
-
-    # REGLA DE PROTECCION
-    # if (
-    #     vars.pico > params.umbral_no_perdida_c
-    #     and vars.rentabilidad < params.perdida_maxima_c_abs
-    #     and vars.manifesto == False and (vars.tipo != "R2" and vars.tipo != "R2-2" )
-    # ):
-    #     sell(
-    #         app,varsBc,varsLb,vars,params,
-    #         "C",  "PROTECCION" ,debug_mode
-    #     )
-
-    #     return
-
-    #########################################################
-    ################      CALL  R1    ##################
-    #########################################################
-    if vars.tipo == "R1"  : 
-        diamante=params.diamante_cr1
-        resta=params.resta_cr1
-        sl=params.sl_cr1
-        manifestacion=params.umbral_manifestacion_cR1
-        nmt=params.inf
-
-    #########################################################
-    ################      CALL - R1 -2        ############### 
-    #########################################################
-    elif vars.tipo == "R1-2"  : 
-        diamante=params.diamante_cr1_2
-        resta=params.resta_cr1_2
-        sl=params.sl_cr1_2
-        manifestacion=params.umbral_manifestacion_cR1_2
-        nmt=params.inf
-
-    #########################################################
-    ################      CALL  R3         ##################
-    #########################################################
-    elif vars.tipo == "R3"  : 
-        diamante=params.diamante_cr3
-        resta=params.resta_cr3
-        sl=params.sl_cr3
-        manifestacion=params.umbral_manifestacion_cR3
-        nmt=params.inf
-
-    #########################################################
-    ################      CALL  R3-2         ##################
-    #########################################################
-    elif vars.tipo == "R3-2": 
-        diamante=params.diamante_cr3_2
-        resta=params.resta_cr3_2
-        sl=params.sl_cr3_2
-        manifestacion=params.umbral_manifestacion_cR3_2
-        nmt=params.inf
-    #########################################################
-    ################      CALL  R1  E      ##################
-    #########################################################
-    elif vars.tipo == "R1-E"  : 
-        diamante=params.diamante_cr1_e
-        resta=params.resta_cr1_e
-        sl=params.sl_cr1_e
-        manifestacion=params.umbral_manifestacion_cR1_e
-        nmt=params.inf
-    
-    #########################################################
-    ################      CALL  R1  E2      ##################
-    #########################################################
-    elif vars.tipo == "R1-E2"  : 
-        diamante=params.diamante_cr1_e2
-        resta=params.resta_cr1_e2
-        sl=params.sl_cr1_e2
-        manifestacion=params.umbral_manifestacion_cR1_e2
-        nmt=params.inf
-    #########################################################
-    ################      CALL  R1  FAST   ##################
-    #########################################################
-    elif vars.tipo == "R1-FAST":  
-        diamante=params.diamante_cr1_fast
-        resta=params.resta_cr1_fast
-        sl=params.sl_cr1_fast
-        manifestacion=params.umbral_manifestacion_cR1_fast
-        nmt=params.inf
-
-    #########################################################
-    ################      CALL  R1  INV    ##################
-    #########################################################
-    elif vars.tipo == "R1-I": 
-        diamante=params.diamante_cr1_i
-        resta=params.resta_cr1_i
-        sl=params.sl_cr1_i
-        manifestacion=params.umbral_manifestacion_cR1_i
-        nmt=params.inf
-
-    #########################################################
-    ################      CALL  R1  INV 2  ##################
-    #########################################################
-    elif vars.tipo == "R1-I2": 
-        diamante=params.diamante_cr1_i_2
-        resta=params.resta_cr1_i_2
-        sl=params.sl_cr1_i_2
-        manifestacion=params.umbral_manifestacion_cR1_i_2
-        nmt=params.inf
-
-    #########################################################
-    ################      CALL  R1  C      ##################
-    #########################################################
-    elif vars.tipo ==  "R1-C": 
-        diamante=params.diamante_cr1_c
-        resta=params.resta_cr1_c
-        sl=params.sl_cr1_c
-        manifestacion=params.umbral_manifestacion_cR1_c
-        nmt=params.inf
-
-    #########################################################
-    ################      CALL    R2    ##################
-    #########################################################
-    elif vars.tipo == "R2": 
-        diamante=params.diamante_cr2
-        resta=params.resta_cr2
-        sl=params.sl_cr2
-        manifestacion=params.umbral_manifestacion_cR2
-        nmt=params.inf
-    
-    #########################################################
-    ################      CALL    R2-2    ##################
-    #########################################################
-    elif vars.tipo == "R2-2": 
-        diamante=params.diamante_cr2_2
-        resta=params.resta_cr2_2
-        sl=params.sl_cr2_2
-        manifestacion=params.umbral_manifestacion_cR2_2
-        nmt=params.inf
-    
-    
-    #########################################################
-    ################      CALL  R1  F      ##################
-    #########################################################
-    elif vars.tipo == "F"  : 
-        diamante=params.diamante_cr1_f
-        resta=params.resta_cr1_f
-        sl=params.sl_cr1_f
-        manifestacion=params.umbral_manifestacion_cR1_f
-        nmt=params.inf
-    #########################################################
-    ################      CALL  R1  F2      ##################
-    #########################################################
-    elif vars.tipo == "F2"  : 
-        diamante=params.diamante_cr1_f2
-        resta=params.resta_cr1_f2
-        sl=params.sl_cr1_f2
-        manifestacion=params.umbral_manifestacion_cR1_f2
-        nmt=params.inf
-    #########################################################
-    ################      CALL  R1  F3      ##################
-    #########################################################
-    elif vars.tipo == "F3"  : 
-        diamante=params.diamante_cr1_f3
-        resta=params.resta_cr1_f3
-        sl=params.sl_cr1_f3
-        manifestacion=params.umbral_manifestacion_cR1_f3
-        nmt=params.inf
-    #########################################################
-    ################      CALL  R1  F4      ##################
-    #########################################################
-    elif vars.tipo == "F4"  : 
-        diamante=params.diamante_cr1_f4
-        resta=params.resta_cr1_f4
-        sl=params.sl_cr1_f4
-        manifestacion=params.umbral_manifestacion_cR1_f4
-        nmt=params.inf
+  
+    diamante=vars.params_regla["DIAMANTE"]
+    resta=vars.params_regla["RESTA"]
+    sl=vars.params_regla["SL"]
+    manifestacion=vars.params_regla["DIAMANTE"][0]
+    nmt=vars.params_regla["NMT"]
+    nmt_target=vars.params_regla["TARGET_NMT"]
 
 
 
@@ -394,7 +217,7 @@ def sellCall(app,varsBc,varsLb,vars,params,debug_mode):
 
                 return
 
-        elif vars.minutos >= nmt: 
+        elif vars.minutos >= nmt and vars.rentabilidad  >=nmt_target: 
             sell(
                 app,varsBc,varsLb,vars,params,
                 "C", "NMT" ,debug_mode
@@ -470,151 +293,12 @@ def sellPut(app,varsBc,varsLb,vars,params,debug_mode):
 
         return
 
-    # REGLA PROTECCION
-    # if (
-    #     vars.pico > params.umbral_no_perdida_p
-    #     and vars.rentabilidad < (vars.pico - params.perdida_maxima_p)
-    #     and vars.manifesto == False and vars.tipo == "R2"
-    # ):
-    #     sell(
-    #         app,varsBc,varsLb,vars,params,
-    #         "P",  "PROTECCION" ,debug_mode
-    #     )
-
-    #     return
-
-    
-
-
-    # REGLA PROTECCION
-    # if (
-    #     vars.pico > params.umbral_no_perdida_p
-    #     and vars.rentabilidad < params.perdida_maxima_p_abs
-    #     and vars.manifesto == False and vars.tipo != "R2"
-    # ):
-    #     sell(
-    #         app,varsBc,varsLb,vars,params,
-    #         "P",  "PROTECCION" ,debug_mode
-    #     )
-
-    #     return
-    
-    #########################################################
-    ####################      PUT  R1     ###################
-    #########################################################
-    if vars.tipo == "R1": 
-        diamante=params.diamante_pr1
-        resta=params.resta_pr1
-        sl=params.sl_pr1
-        manifestacion=params.umbral_manifestacion_pR1
-        nmt=params.inf
-    #########################################################
-    ####################      PUT  R1  I  ###################
-    #########################################################
-    elif vars.tipo == "R1-I": 
-        diamante=params.diamante_pr1_i
-        resta=params.resta_pr1_i
-        sl=params.sl_pr1_i
-        manifestacion=params.umbral_manifestacion_pR1_i
-        nmt=params.inf
-
-    #########################################################
-    ####################      PUT  R1  I2 ###################
-    #########################################################
-    elif vars.tipo == "R1-I2": 
-        diamante=params.diamante_pr1_i2
-        resta=params.resta_pr1_i2
-        sl=params.sl_pr1_i2
-        manifestacion=params.umbral_manifestacion_pR1_i2
-        nmt=params.inf
-    #########################################################
-    ####################      PUT  R1  C  ###################
-    #########################################################
-    elif vars.tipo == "R1-C":  
-        diamante=params.diamante_pr1_c
-        resta=params.resta_pr1_c
-        sl=params.sl_pr1_c
-        manifestacion=params.umbral_manifestacion_pR1_c
-        nmt=params.inf
-
-    #########################################################
-    ####################      PUT  R1  C2 ###################
-    #########################################################
-    elif vars.tipo == "R1-C2":  
-        diamante=params.diamante_pr1_c2
-        resta=params.resta_pr1_c2
-        sl=params.sl_pr1_c2
-        manifestacion=params.umbral_manifestacion_pR1_c2
-        nmt=params.inf
-
-    #########################################################
-    ####################      PUT  R1  FAST   ###############
-    #########################################################
-    elif vars.tipo == "R1-FAST": 
-        diamante=params.diamante_pr1_fast
-        resta=params.resta_pr1_fast
-        sl=params.sl_pr1_fast
-        manifestacion=params.umbral_manifestacion_pR1_fast
-        nmt=params.inf
-
-    #########################################################
-    ####################      PUT  R2         ###############
-    #########################################################
-    elif vars.tipo == "R2": 
-        diamante=params.diamante_pr2
-        resta=params.resta_pr2
-        sl=params.sl_pr2
-        manifestacion=params.umbral_manifestacion_pR2
-        nmt=params.inf
-
-    #########################################################
-    ####################      PUT  R2 E       ###############
-    #########################################################
-    elif vars.tipo == "R2-E": 
-        diamante=params.diamante_pr2_e
-        resta=params.resta_pr2_e
-        sl=params.sl_pr2_e
-        manifestacion=params.umbral_manifestacion_pR2_e
-        nmt=params.inf
-
-    #########################################################
-    ####################      PUT  R1  F      ###############
-    #########################################################
-    elif vars.tipo =="F":    
-        diamante=params.diamante_pr1_f
-        resta=params.resta_pr1_f
-        sl=params.sl_pr1_f
-        manifestacion=params.umbral_manifestacion_pR1_f
-        nmt=params.inf
-    #########################################################
-    ####################      PUT  R1  F2      ###############
-    #########################################################
-    elif vars.tipo =="F2":
-        diamante=params.diamante_pr1_f2
-        resta=params.resta_pr1_f2
-        sl=params.sl_pr1_f2
-        manifestacion=params.umbral_manifestacion_pR1_f2
-        nmt=params.inf
-
-    #########################################################
-    ####################      PUT  R3     ###################
-    #########################################################
-    elif vars.tipo == "R3": 
-        diamante=params.diamante_pr3
-        resta=params.resta_pr3
-        sl=params.sl_pr3
-        manifestacion=params.umbral_manifestacion_pR3
-        nmt=params.inf
-
-    #########################################################
-    ####################     PUT Label    ###################
-    #########################################################
-    elif vars.tipo == "LABEL-I": 
-        diamante=params.diamante_pr1_label
-        resta=params.resta_pr1_label
-        sl=params.sl_pr1_label
-        manifestacion=params.umbral_manifestacion_pR1_label
-        nmt=params.inf
+    diamante=vars.params_regla["DIAMANTE"]
+    resta=vars.params_regla["RESTA"]
+    sl=vars.params_regla["SL"]
+    manifestacion=vars.params_regla["DIAMANTE"][0]
+    nmt=vars.params_regla["NMT"]
+    nmt_target=vars.params_regla["TARGET_NMT"]
 
 
     # REGLA PROTECCION
@@ -689,7 +373,7 @@ def sellPut(app,varsBc,varsLb,vars,params,debug_mode):
                 pass
         
 
-        elif vars.minutos >= nmt: 
+        elif vars.minutos >= nmt and vars.rentabilidad  >=nmt_target: 
             sell(
                 app,varsBc,varsLb,vars,params,
                 "P", "NMT" ,debug_mode

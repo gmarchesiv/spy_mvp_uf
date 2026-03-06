@@ -92,32 +92,15 @@ def saveVars(vars, app,  params, estado):
         "flag_Call_R2": vars.flag_Call_R2,
         "flag_Put_R2": vars.flag_Put_R2,
 
-        "flag_Call_reset_r1":vars.flag_Call_reset_r1,
-        "flag_Call_reset_r1_2":vars.flag_Call_reset_r1_2,
-        "flag_Call_reset_r3":vars.flag_Call_reset_r3,
-        "flag_Call_reset_r1_e":vars.flag_Call_reset_r1_e,
-        "flag_Call_reset_r1_e2":vars.flag_Call_reset_r1_e2,
-
-        "flag_Put_reset_r2_e": vars.flag_Put_reset_r2_e,
-        "flag_Put_reset_r1 ": vars.flag_Put_reset_r1,
-        "flag_Put_reset_r1_c":vars.flag_Put_reset_r1_c,
-        "flag_Put_reset_r1_c2":vars.flag_Put_reset_r1_c2,
-        "flag_Put_reset_r1_fast":vars.flag_Put_reset_r1_fast,
-        "flag_Put_reset_r1_i":vars.flag_Put_reset_r1_i,
-        "flag_Put_reset_f2":vars.flag_Put_reset_f2,
-        "flag_Put_reset_r3":vars.flag_Put_reset_r3,
-
-        "flag_Call_reset_r3_2":vars.flag_Call_reset_r3_2,
-        "flag_Put_reset_r1_label":vars.flag_Put_reset_r1_label,
         "flag_cambio_R1_label":vars.flag_cambio_R1_label,
 
-        "flag_Call_reset_r2":vars.flag_Call_reset_r2,
-        "flag_Call_reset_r2_2":vars.flag_Call_reset_r2_2,
-        "flag_Call_reset_r1_i_2":vars.flag_Call_reset_r1_i_2,
-        "flag_Call_reset_r1_c":vars.flag_Call_reset_r1_c,
-        "flag_Call_reset_r1_f":vars.flag_Call_reset_r1_f,
-        "flag_Call_reset_r1_f2":vars.flag_Call_reset_r1_f2,
-        "flag_Put_reset_r2": vars.flag_Put_reset_r2,
+        "flag_Call_reset":vars.flag_Call_reset,
+
+        "flag_Put_reset":vars.flag_Put_reset,
+
+        "flag_Put_reset_esc":vars.flag_Put_reset_esc,
+
+         
 
         
         ###############################################
@@ -164,7 +147,8 @@ def saveVars(vars, app,  params, estado):
         "promedio_call": vars.promedio_call,
         "promedio_put": vars.promedio_put ,
         "conexion":vars.conexion,
-        "ready":vars.ready 
+        "ready":vars.ready ,
+        "params_regla":vars.params_regla 
     
     }
 

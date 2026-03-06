@@ -20,6 +20,7 @@ def clean_vars(vars,varsApp):
     vars.status = "ON"
     vars.tipo=""
     vars.venta_intentos=0
+    vars.doput_ant =0
     ###############################################
     # VARIABLES DE FLAGS
     ###############################################
@@ -63,7 +64,7 @@ def clean_vars(vars,varsApp):
     vars.flag_Call_reset_r1_f2 =False
     vars.flag_Put_reset_r2 =False
 
-    
+        
 
 
 

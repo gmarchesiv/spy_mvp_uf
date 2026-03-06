@@ -77,11 +77,13 @@ def debug_code(archivos):
 
     # PARAMETROS
     params = parameters(debug_mode=True)
+    vars.parametros_reglas = {k: v for k, v in params.__dict__.items() if isinstance(v, dict)}
+
 
     app = App()
     
 
-    file="C:/Users/Usuario/Desktop/modelos/alpha_spy_options/dataset_2s"
+    file="C:/Users/Usuario/Desktop/alpha_spy_options/dataset_2s"
     
     vars.archivo=os.path.basename(archivos)
     printStamp(f" - Archivo :{vars.archivo}- ")
@@ -142,9 +144,9 @@ def debug_code(archivos):
 
      
         if vars.rule:
-            if vars.dcall >= params.umbral_cr2:
+            if vars.dcall >= params.C_r2["UMBRAL_R2"]:
                 vars.flag_Call_R2 = True
-            if vars.dput >= params.umbral_pr2:
+            if vars.dput >= params.P_r2["UMBRAL_R2"]:
                 vars.flag_Put_R2 = True
     
             vars.rule = False
@@ -207,7 +209,7 @@ if __name__ == "__main__":
     # ###########################
  
 
-    file= "C:/Users/Usuario/Desktop/modelos/alpha_spy_options/dataset_2s/" 
+    file= "C:/Users/Usuario/Desktop/alpha_spy_options/dataset_2s/" 
     
     printStamp(f" - Carpeta de Origen : {file} - ")
     archivos = [

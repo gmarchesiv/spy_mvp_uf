@@ -54,36 +54,40 @@ class varsRutina:
         self.put = self.data.get("put", False)
         self.compra = self.data.get("compra", True)
         self.manifesto = self.data.get("manifesto", False)
+
         self.flag_Call_R2 = self.data.get("flag_Call_R2", False)
         self.flag_Put_R2 = self.data.get("flag_Put_R2", False)
-
-        self.flag_Call_reset_r1=self.data.get("flag_Call_reset_r1", False)
-        self.flag_Call_reset_r1_2=self.data.get("flag_Call_reset_r1_2", False)
-        self.flag_Call_reset_r3=self.data.get("flag_Call_reset_r3", False)
-        self.flag_Call_reset_r1_e =self.data.get("flag_Call_reset_r1_e", False)
-        self.flag_Call_reset_r1_e2 =self.data.get("flag_Call_reset_r1_e2", False)
-
-        self.flag_Put_reset_r2_e=self.data.get("flag_Put_reset_r2_e", False)
-        self.flag_Put_reset_r1=self.data.get("flag_Put_reset_r1", False)
-        self.flag_Put_reset_r1_c =self.data.get("flag_Put_reset_r1_c", False)
-        self.flag_Put_reset_r1_c2 =self.data.get("flag_Put_reset_r1_c2", False)
-        self.flag_Put_reset_r1_fast=self.data.get("flag_Put_reset_r1_fast", False)
-        self.flag_Put_reset_r1_i =self.data.get("flag_Put_reset_r1_i", False)
-        self.flag_Put_reset_f2 =self.data.get("flag_Put_reset_f2", False)
-        self.flag_Put_reset_r3 =self.data.get("flag_Put_reset_r3", False)
-
-        self.flag_Call_reset_r3_2 =self.data.get("flag_Call_reset_r3_2", False)
-        self.flag_Put_reset_r1_label =self.data.get("flag_Put_reset_r1_label", False)
+ 
         self.flag_cambio_R1_label =self.data.get("flag_cambio_R1_label", False)
-  
-     
-        self.flag_Call_reset_r2 =self.data.get("flag_Call_reset_r2", False)
-        self.flag_Call_reset_r2_2 =self.data.get("flag_Call_reset_r2_2", False)
-        self.flag_Call_reset_r1_i_2 =self.data.get("flag_Call_reset_r1_i_2", False)
-        self.flag_Call_reset_r1_c =self.data.get("flag_Call_reset_r1_c", False)
-        self.flag_Call_reset_r1_f =self.data.get("flag_Call_reset_r1_f", False)
-        self.flag_Call_reset_r1_f2 =self.data.get("flag_Call_reset_r1_f2", False)
-        self.flag_Put_reset_r2 =self.data.get("flag_Put_reset_r2", False)
+   
+        self.flag_Call_reset={
+            "R1":False,
+            "R3":False,
+            "R3-2":False,
+            "R1-E":False,
+            "FAST":False,
+            "INV-2":False,
+            "R1-C":False,
+            "R2":False,
+            "R2-2":False,
+            "R1-2":False,
+            "F1":False,
+            "F2":False
+        }
+
+ 
+        self.flag_Put_reset={
+            "R1":False,
+            "INV-1":False,
+            "INV-2":False,
+            "R2":False,
+            "R2-E":False,
+            "R3":False,
+        }
+
+        self.flag_Put_reset_esc={
+            "LABEL-1":False 
+        }
 
         ###############################################
         # VARIABLES DE RUTINA
@@ -151,3 +155,8 @@ class varsRutina:
 
 
         self.flag_alerta=False
+
+
+        self.params_regla=self.data.get("params_regla",{})
+
+        self.parametros_reglas={}

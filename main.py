@@ -74,6 +74,7 @@ def main():
    
         # PARAMETROS
         params = parameters(debug_mode=False)
+        vars.parametros_reglas = {k: v for k, v in params.__dict__.items() if isinstance(v, dict)}
 
         # ====================
         #  - TEST CONNECTION -
@@ -232,6 +233,7 @@ def main():
                 flag_label_BC=False
             if (timeNow.minute % 10 == 0 or timeNow.minute % 10 == 5):
                 if varsLb.flag_minuto_label:
+                    vars.label_ant=varsLb.label
                     generar_label(params, varsLb,app)
                     varsLb.flag_minuto_label=False
 

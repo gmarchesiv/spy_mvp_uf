@@ -74,7 +74,7 @@ def main():
    
         # PARAMETROS
         params = parameters(debug_mode=False)
-        
+        vars.parametros_reglas = {k: v for k, v in params.__dict__.items() if isinstance(v, dict)}
 
         # ====================
         #  - TEST CONNECTION -
@@ -211,9 +211,6 @@ def main():
         
         vars.ready=True
         flag_label_BC=True
-
-        # vars.parametros_reglas = {k: v for k, v in params.__dict__.items() if isinstance(v, dict)}
-
         while True:
 
             timeNow = datetime.now(params.zone).time()

@@ -653,9 +653,8 @@ def calculos_call(vars, params):
     ###################      CALCULOS      ##################
     #########################################################
    # RESET BASICO
-    parametros_reglas = {k: v for k, v in params.__dict__.items() if isinstance(v, dict)}
-    for variable,parametro in  parametros_reglas.items():
-   
+    for variable,parametro in vars.parametros_reglas.items():
+        print(parametro ,variable)
         regla=parametro['REGLA']
         if regla in vars.flag_Call_reset and parametro["TIPO"]=="CALL":
 
@@ -681,8 +680,7 @@ def calculos_put(vars, params):
     
    
     # RESET BASICO
-    parametros_reglas = {k: v for k, v in params.__dict__.items() if isinstance(v, dict)}
-    for variable,parametro in  parametros_reglas.items():
+    for variable,parametro in vars.parametros_reglas.items():
         regla=parametro['REGLA']
         if regla in vars.flag_Put_reset and parametro["TIPO"]=="PUT":
             if vars.doput >= parametro["DO"] [1]:
@@ -695,7 +693,7 @@ def calculos_put(vars, params):
 
     # RESET ESCALONADO
  
-    for variable,parametro in  parametros_reglas.items():
+    for variable,parametro in vars.parametros_reglas.items():
         regla=parametro['REGLA']
         if regla in vars.flag_Put_reset_esc and parametro["TIPO"]=="PUT":
 

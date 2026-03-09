@@ -5,6 +5,7 @@ import json
 import os
 from functions.logs import printStamp
 from collections import deque
+from datetime import datetime
 
 ###############################################
 #                  VARIABLES
@@ -158,5 +159,15 @@ class varsRutina:
 
 
         self.params_regla=self.data.get("params_regla",{})
+        # validar TIME
+        if "TIME" in self.params_regla and isinstance(self.params_regla["TIME"], list) and len(self.params_regla["TIME"]) == 2:
+            
+            t1, t2 = self.params_regla["TIME"]
 
+            # si vienen como string desde JSON
+            if isinstance(t1, str) and isinstance(t2, str):
+                self.params_regla["TIME"] = [
+                    datetime.strptime(t1, "%H:%M:%S").time(),
+                    datetime.strptime(t2, "%H:%M:%S").time()
+        ]
         self.parametros_reglas={}

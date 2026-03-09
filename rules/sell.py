@@ -445,13 +445,13 @@ def sell(app,varsBc,varsLb,vars,params, tipo, regla,debug_mode ):
 
         # REBOTE
 
-        if vars.rentabilidad<0:
+        # if vars.rentabilidad<0:
             
-            if vars.venta_intentos>=params.intentos:
-                pass   
-            else:
-                vars.venta_intentos+=1
-                return
+        #     if vars.venta_intentos>=params.intentos:
+        #         pass   
+        #     else:
+        #         vars.venta_intentos+=1
+        #         return
     
         varsBc.sell_regla = regla
 

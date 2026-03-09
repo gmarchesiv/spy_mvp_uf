@@ -216,9 +216,9 @@ def calculations(app, vars,varsBc, params):
 
      
     if vars.rule:
-        if vars.dcall >= params.umbral_cr2:
+        if vars.dcall >= params.P_r2["UMBRAL_R2"]:
             vars.flag_Call_R2 = True
-        if vars.dput >= params.umbral_pr2:
+        if vars.dput >=  params.C_r2["UMBRAL_R2"]:
             vars.flag_Put_R2 = True
  
         vars.rule = False

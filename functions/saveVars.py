@@ -153,7 +153,7 @@ def saveVars(vars, app,  params, estado):
     }
 
     with open(file_name, "w") as json_file:
-        json.dump(datos, json_file, indent=4)
+        json.dump(datos, json_file, indent=4, default=str)
 
 
 async def saveApp(varsApp, app,  params  ):
@@ -179,7 +179,7 @@ async def saveApp(varsApp, app,  params  ):
     }
 
     with open(file_name, "w") as json_file:
-        json.dump(datos, json_file, indent=4)
+        json.dump(datos, json_file, indent=4, default=str)
 
 
 

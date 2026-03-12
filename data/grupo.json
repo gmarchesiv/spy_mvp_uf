@@ -11,11 +11,6 @@
             "ip": "10.8.0.35:8001",
             "user": "Carlos Labarthe",
             "rama":false
-        },
-        {
-            "ip": "10.8.0.36:8001",
-            "user": "Gloria Velasco",
-            "rama":false
         } 
     ]
 }

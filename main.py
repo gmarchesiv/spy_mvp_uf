@@ -131,6 +131,7 @@ def main():
         # Cuenta regresiva para iniciar.
         try:
             broadcasting_Alinear_label(varsLb,params) 
+            printStamp(" - ERROR EN BROADCASTING LABEL - ")
         except:pass
         countdown(params.zone,app,vars,params)
 

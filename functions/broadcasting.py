@@ -89,9 +89,9 @@ def comparar_label(data,varsLb):
     # print(resultado_no_listas)
     resultado_listas = {}
     for k, listas in agrupados_list.items():
-        print(k)
+        # print(k)
         sumas = [sum(lst) for lst in listas]
-        print(sumas)
+        # print(sumas)
         mediana = statistics.median(sumas)
 
         # Buscar la lista cuya suma esté más cerca a la mediana
@@ -386,9 +386,9 @@ async def comparar_precios(vars , params):
     # Agregar el valor anterior de vars.priceBuy si existe
     if vars.priceBuy is not None:
         valid_prices.append(vars.priceBuy)
-    
-    # Obtener el precio más bajo
-    vars.priceBuy = min(valid_prices) if valid_prices else vars.priceBuy
+  
+    # Obtener el precio mediano
+    vars.priceBuy = statistics.median(valid_prices) if valid_prices else vars.priceBuy
  
     printStamp(f"Mi Precio Real: {vars.real_priceBuy} $")
     printStamp(f"Mi Precio actualizado: {vars.priceBuy} $")

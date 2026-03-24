@@ -157,6 +157,19 @@ class varsRutina:
 
         self.flag_alerta=False
 
+        self.price_Put_label=self.data.get("price_Put_label", 0)
+        self.d_Put_label=self.data.get("d_Put_label", 0)
+        self.flag_Put_label_cambio= self.data.get("flag_Put_label_cambio", False)
+        self.flag_Put_label_2_compra= self.data.get("flag_Put_label_2_compra", False)
+        self.flag_Put_label_3_compra= self.data.get("flag_Put_label_3_compra", False)
+        self.flag_Put_label_4_compra= self.data.get("flag_Put_label_4_compra", False)
+
+        self.price_Call_label=self.data.get("price_Call_label", 0)
+        self.d_Call_label=self.data.get("d_Call_label", 0)
+        self.flag_Call_label_cambio= self.data.get("flag_Call_label_cambio", False)
+        self.flag_Call_label_1_compra= self.data.get("flag_Call_label_1_compra", False) 
+        self.flag_Call_label_2_compra= self.data.get("flag_Call_label_2_compra", False) 
+
 
         self.params_regla=self.data.get("params_regla",{})
         # validar TIME

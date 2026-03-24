@@ -148,7 +148,21 @@ def saveVars(vars, app,  params, estado):
         "promedio_put": vars.promedio_put ,
         "conexion":vars.conexion,
         "ready":vars.ready ,
-        "params_regla":vars.params_regla 
+        "params_regla":vars.params_regla ,
+
+
+        "price_Put_label":vars.price_Put_label,
+        "d_Put_label":vars.d_Put_label,
+        "flag_Put_label_cambio":vars.flag_Put_label_cambio,
+        "flag_Put_label_3_compra":vars.flag_Put_label_2_compra,
+        "flag_Put_label_3_compra":vars.flag_Put_label_3_compra,
+        "flag_Put_label_4_compra":vars.flag_Put_label_4_compra,
+
+        "price_Call_label":vars.price_Call_label,
+        "d_Call_label":vars.d_Call_label,
+        "flag_Call_label_cambio":vars.flag_Call_label_cambio,
+        "flag_Call_label_1_compra":vars.flag_Call_label_1_compra,
+        "flag_Call_label_2_compra":vars.flag_Call_label_2_compra,
     
     }
 

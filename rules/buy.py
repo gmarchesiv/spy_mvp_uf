@@ -225,22 +225,22 @@ def buy_Call(app,varsBc,varsLb,vars,params,debug_mode):
     ####################      CALL INV    ###################
     #########################################################
 
-    elif(
-    ( not( 
-        (params.proteccion_compra[0]  <= timeNow  < params.proteccion_compra[1]) or
-        (params.proteccion_compra_2[0]  <= timeNow  < params.proteccion_compra_2[1]) ))
-    and(params.C_inv_1["TIME"][0] <= timeNow < params.C_inv_1["TIME"][1])
-    and (params.C_inv_1["D"][0] <=  vars.dcall < params.C_inv_1["D"][1])
-    and (params.C_inv_1["DO"][0] <= vars.docall < params.C_inv_1["DO"][1])
-    and ((params.C_inv_1["DPUT"][0] <= vars.dput < params.C_inv_1["DPUT"][1]) 
-    and (vars.askbid_put < params.max_askbid_compra_alt))
-    and  (varsLb.label==params.C_inv_1["LABEL"]   ) 
+    # elif(
+    # ( not( 
+    #     (params.proteccion_compra[0]  <= timeNow  < params.proteccion_compra[1]) or
+    #     (params.proteccion_compra_2[0]  <= timeNow  < params.proteccion_compra_2[1]) ))
+    # and(params.C_inv_1["TIME"][0] <= timeNow < params.C_inv_1["TIME"][1])
+    # and (params.C_inv_1["D"][0] <=  vars.dcall < params.C_inv_1["D"][1])
+    # and (params.C_inv_1["DO"][0] <= vars.docall < params.C_inv_1["DO"][1])
+    # and ((params.C_inv_1["DPUT"][0] <= vars.dput < params.C_inv_1["DPUT"][1]) 
+    # and (vars.askbid_put < params.max_askbid_compra_alt))
+    # and  (varsLb.label==params.C_inv_1["LABEL"]   ) 
  
-    ):
-        buy(
-            app,varsBc,varsLb,vars,params,
-            "C",params.C_inv_1 ,debug_mode
-        )
+    # ):
+    #     buy(
+    #         app,varsBc,varsLb,vars,params,
+    #         "C",params.C_inv_1 ,debug_mode
+    #     )
 
 
     
@@ -248,22 +248,22 @@ def buy_Call(app,varsBc,varsLb,vars,params,debug_mode):
     ####################      CALL INV-2  ###################
     #########################################################
 
-    elif(
-    ( not( 
-        (params.proteccion_compra[0]  <= timeNow  < params.proteccion_compra[1]) or
-        (params.proteccion_compra_2[0]  <= timeNow  < params.proteccion_compra_2[1]) ))
-    and(params.C_inv_2["TIME"][0] <= timeNow < params.C_inv_2["TIME"][1])
-    and (params.C_inv_2["D"][0] <=  vars.dcall < params.C_inv_2["D"][1])
-    and (params.C_inv_2["DO"][0] <= vars.docall < params.C_inv_2["DO"][1])
-    and ((params.C_inv_2["DPUT"][0] <= vars.dput < params.C_inv_2["DPUT"][1]) 
-    and (vars.askbid_put < params.max_askbid_compra_alt))
-    and  (varsLb.label==params.C_inv_2["LABEL"]   ) 
-    and vars.flag_Call_reset["INV-2"]
-    ):
-        buy(
-            app,varsBc,varsLb,vars,params,
-            "C",params.C_inv_2 ,debug_mode
-        )
+    # elif(
+    # ( not( 
+    #     (params.proteccion_compra[0]  <= timeNow  < params.proteccion_compra[1]) or
+    #     (params.proteccion_compra_2[0]  <= timeNow  < params.proteccion_compra_2[1]) ))
+    # and(params.C_inv_2["TIME"][0] <= timeNow < params.C_inv_2["TIME"][1])
+    # and (params.C_inv_2["D"][0] <=  vars.dcall < params.C_inv_2["D"][1])
+    # and (params.C_inv_2["DO"][0] <= vars.docall < params.C_inv_2["DO"][1])
+    # and ((params.C_inv_2["DPUT"][0] <= vars.dput < params.C_inv_2["DPUT"][1]) 
+    # and (vars.askbid_put < params.max_askbid_compra_alt))
+    # and  (varsLb.label==params.C_inv_2["LABEL"]   ) 
+    # and vars.flag_Call_reset["INV-2"]
+    # ):
+    #     buy(
+    #         app,varsBc,varsLb,vars,params,
+    #         "C",params.C_inv_2 ,debug_mode
+    #     )
 
     #########################################################
     ####################      CALL R1  C  ###################
@@ -402,20 +402,20 @@ def buy_Put(app,varsBc,varsLb,vars,params,debug_mode):
     ########################################################
     ###################       PUT INV 1   ##################
     ########################################################
-    elif ( 
-        (params.P_inv_1["TIME"][0] <=timeNow  < params.P_inv_1["TIME"][1])
-        and  (params.P_inv_1["D"][0] <= vars.dput   < params.P_inv_1["D"][1])
-        and   (params.P_inv_1["DO"][0] <=vars.doput   < params.P_inv_1["DO"][1])
-         and( (params.P_inv_1["DCALL"][0] <=vars.dcall   < params.P_inv_1["DCALL"][1])
-         and (vars.askbid_call < params.max_askbid_compra_alt))
-        and (varsLb.label==params.P_inv_1["LABEL"]  )
-        and vars.flag_Put_reset["INV-1"]
+    # elif ( 
+    #     (params.P_inv_1["TIME"][0] <=timeNow  < params.P_inv_1["TIME"][1])
+    #     and  (params.P_inv_1["D"][0] <= vars.dput   < params.P_inv_1["D"][1])
+    #     and   (params.P_inv_1["DO"][0] <=vars.doput   < params.P_inv_1["DO"][1])
+    #      and( (params.P_inv_1["DCALL"][0] <=vars.dcall   < params.P_inv_1["DCALL"][1])
+    #      and (vars.askbid_call < params.max_askbid_compra_alt))
+    #     and (varsLb.label==params.P_inv_1["LABEL"]  )
+    #     and vars.flag_Put_reset["INV-1"]
  
-    ):
-        buy(
-            app,varsBc,varsLb,vars,params,
-            "P",params.P_inv_1  ,debug_mode
-        )
+    # ):
+    #     buy(
+    #         app,varsBc,varsLb,vars,params,
+    #         "P",params.P_inv_1  ,debug_mode
+    #     )
 
 
 
@@ -423,19 +423,19 @@ def buy_Put(app,varsBc,varsLb,vars,params,debug_mode):
     ########################################################
     ###################       PUT INV 2   ##################
     ########################################################
-    elif ( 
-        (params.P_inv_2["TIME"][0] <=timeNow  < params.P_inv_2["TIME"][1])
-        and  (params.P_inv_2["D"][0] <= vars.dput   < params.P_inv_2["D"][1])
-        and   (params.P_inv_2["DO"][0] <=vars.doput   < params.P_inv_2["DO"][1])
-         and( (params.P_inv_2["DCALL"][0] <=vars.dcall   < params.P_inv_2["DCALL"][1])
-         and (vars.askbid_call < params.max_askbid_compra_alt))
-        and (varsLb.label==params.P_inv_2["LABEL"]  )
+    # elif ( 
+    #     (params.P_inv_2["TIME"][0] <=timeNow  < params.P_inv_2["TIME"][1])
+    #     and  (params.P_inv_2["D"][0] <= vars.dput   < params.P_inv_2["D"][1])
+    #     and   (params.P_inv_2["DO"][0] <=vars.doput   < params.P_inv_2["DO"][1])
+    #      and( (params.P_inv_2["DCALL"][0] <=vars.dcall   < params.P_inv_2["DCALL"][1])
+    #      and (vars.askbid_call < params.max_askbid_compra_alt))
+    #     and (varsLb.label==params.P_inv_2["LABEL"]  )
  
-    ):
-        buy(
-            app,varsBc,varsLb,vars,params,
-            "P",params.P_inv_2  ,debug_mode
-        )
+    # ):
+    #     buy(
+    #         app,varsBc,varsLb,vars,params,
+    #         "P",params.P_inv_2  ,debug_mode
+    #     )
 
 
 
@@ -443,38 +443,38 @@ def buy_Put(app,varsBc,varsLb,vars,params,debug_mode):
     ########################################################
     ###################       PUT INV 3   ##################
     ########################################################
-    elif ( 
-        (params.P_inv_3["TIME"][0] <=timeNow  < params.P_inv_3["TIME"][1])
-        and  (params.P_inv_3["D"][0] <= vars.dput   < params.P_inv_3["D"][1])
-        and   (params.P_inv_3["DO"][0] <=vars.doput   < params.P_inv_3["DO"][1])
-         and( (params.P_inv_3["DCALL"][0] <=vars.dcall   < params.P_inv_3["DCALL"][1])
-         and (vars.askbid_call < params.max_askbid_compra_alt))
-        and (varsLb.label==params.P_inv_3["LABEL"]  )
+    # elif ( 
+    #     (params.P_inv_3["TIME"][0] <=timeNow  < params.P_inv_3["TIME"][1])
+    #     and  (params.P_inv_3["D"][0] <= vars.dput   < params.P_inv_3["D"][1])
+    #     and   (params.P_inv_3["DO"][0] <=vars.doput   < params.P_inv_3["DO"][1])
+    #      and( (params.P_inv_3["DCALL"][0] <=vars.dcall   < params.P_inv_3["DCALL"][1])
+    #      and (vars.askbid_call < params.max_askbid_compra_alt))
+    #     and (varsLb.label==params.P_inv_3["LABEL"]  )
  
-    ):
-        buy(
-            app,varsBc,varsLb,vars,params,
-            "P",params.P_inv_3  ,debug_mode
-        )
+    # ):
+    #     buy(
+    #         app,varsBc,varsLb,vars,params,
+    #         "P",params.P_inv_3  ,debug_mode
+    #     )
 
     
 
     ########################################################
     ###################       PUT INV 4   ##################
     ########################################################
-    elif ( 
-        (params.P_inv_4["TIME"][0] <=timeNow  < params.P_inv_4["TIME"][1])
-        and  (params.P_inv_4["D"][0] <= vars.dput   < params.P_inv_4["D"][1])
-        and   (params.P_inv_4["DO"][0] <=vars.doput   < params.P_inv_4["DO"][1])
-         and( (params.P_inv_4["DCALL"][0] <=vars.dcall   < params.P_inv_4["DCALL"][1])
-         and (vars.askbid_call < params.max_askbid_compra_alt))
-        and (varsLb.label==params.P_inv_4["LABEL"]  )
+    # elif ( 
+    #     (params.P_inv_4["TIME"][0] <=timeNow  < params.P_inv_4["TIME"][1])
+    #     and  (params.P_inv_4["D"][0] <= vars.dput   < params.P_inv_4["D"][1])
+    #     and   (params.P_inv_4["DO"][0] <=vars.doput   < params.P_inv_4["DO"][1])
+    #      and( (params.P_inv_4["DCALL"][0] <=vars.dcall   < params.P_inv_4["DCALL"][1])
+    #      and (vars.askbid_call < params.max_askbid_compra_alt))
+    #     and (varsLb.label==params.P_inv_4["LABEL"]  )
  
-    ):
-        buy(
-            app,varsBc,varsLb,vars,params,
-            "P",params.P_inv_4  ,debug_mode
-        )
+    # ):
+    #     buy(
+    #         app,varsBc,varsLb,vars,params,
+    #         "P",params.P_inv_4  ,debug_mode
+    #     )
 
 
 
